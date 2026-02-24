@@ -1,14 +1,1108 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ryan Muratore — Photography</title>
-    <meta name="description" content="Travel photography prints and portfolio by Ryan Muratore.">
-    <link rel="icon" href="/favicon.ico" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ryan Muratore — Photography</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&family=Tenor+Sans&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --warm-white: #faf6f0;
+      --linen:      #f0e9de;
+      --sand:       #ddd0bc;
+      --clay:       #c4a882;
+      --tan:        #a8896a;
+      --bark:       #7a5c3a;
+      --earth:      #4e3820;
+      --ink:        #2a1f12;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--warm-white);
+      color: var(--ink);
+      font-family: 'Tenor Sans', sans-serif;
+      font-weight: 400;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.4rem 3rem;
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(250,246,240,0.96);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 1px 0 var(--sand);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: var(--warm-white);
+      text-decoration: none;
+      transition: color 0.4s;
+    }
+    nav.scrolled .nav-logo { color: var(--earth); }
+    .nav-links { display: flex; gap: 2.8rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.65rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      transition: color 0.3s;
+      position: relative;
+    }
+    nav.scrolled .nav-links a { color: var(--tan); }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0; right: 0;
+      height: 1px;
+      background: var(--clay);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
+    }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    nav.scrolled .nav-links a:hover { color: var(--bark); }
+
+    /* ── HERO ── */
+    #hero {
+      height: 100svh;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, #c4b49a 0%, #9a8a6e 35%, #6a7a58 70%, #4a5a38 100%);
+      transform: scale(1.05);
+      animation: heroZoom 8s ease forwards;
+    }
+    .hero-bg img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .hero-bg:not(:has(img))::before {
+      content: '';
+      position: absolute; inset: 2.5rem;
+      border: 1px dashed rgba(255,255,255,0.2);
+      pointer-events: none;
+    }
+    .hero-bg:not(:has(img))::after {
+      content: 'Add hero.jpg to your images folder';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      white-space: nowrap;
+    }
+    @keyframes heroZoom {
+      from { transform: scale(1.08); }
+      to   { transform: scale(1.0); }
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(15,10,4,0.82) 0%, rgba(15,10,4,0.3) 45%, rgba(15,10,4,0.05) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 3rem 4rem;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    .hero-text {}
+    .hero-eyebrow {
+      font-size: 0.62rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--clay);
+      margin-bottom: 0.9rem;
+      opacity: 0;
+      animation: fadeUp 1s 0.5s forwards;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 4.5vw, 4.2rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--warm-white);
+      opacity: 0;
+      animation: fadeUp 1s 0.7s forwards;
+    }
+    .hero-title em { font-style: italic; color: var(--clay); }
+    .hero-right {
+      text-align: right;
+      flex-shrink: 0;
+      opacity: 0;
+      animation: fadeUp 1s 1s forwards;
+    }
+    .hero-location {
+      font-size: 0.62rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 1.5rem;
+    }
+    .hero-cta { display: flex; gap: 1rem; justify-content: flex-end; }
+    .btn {
+      padding: 0.75rem 2rem;
+      font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+    .btn-light { background: var(--warm-white); color: var(--earth); border-color: var(--warm-white); }
+    .btn-light:hover { background: var(--clay); border-color: var(--clay); color: var(--warm-white); }
+    .btn-outline { background: transparent; color: var(--warm-white); border-color: rgba(255,255,255,0.4); }
+    .btn-outline:hover { border-color: var(--clay); color: var(--clay); }
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 2rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      opacity: 0; animation: fadeIn 1s 1.5s forwards;
+      z-index: 2;
+    }
+    .hero-scroll-hint span {
+      font-size: 0.55rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+    .scroll-line {
+      width: 1px; height: 35px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+      animation: scrollPulse 2s ease infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.8); }
+      50% { opacity: 1; transform: scaleY(1); }
+    }
+
+    /* ── SECTION BASE ── */
+    .section-wrap { padding: 7rem 3rem; }
+    .section-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--clay);
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--earth);
+    }
+    .section-title em { font-style: italic; color: var(--tan); }
+    .section-rule { width: 40px; height: 1px; background: var(--clay); margin: 1.8rem 0; }
+
+    /* ── PORTFOLIO ── */
+    #portfolio { background: var(--warm-white); }
+    .portfolio-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 4rem;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    /* ── WORLD MAP FILTER ── */
+    .map-filter-wrap { margin-bottom: 3.5rem; position: relative; }
+    .map-label {
+      font-size: 0.58rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--clay);
+      margin-bottom: 1rem;
+      display: block;
+    }
+    #world-map-container {
+      width: 100%;
+      background: var(--linen);
+      border: 1px solid var(--sand);
+      overflow: hidden;
+      position: relative;
+    }
+    #world-map-container svg { width: 100%; height: auto; display: block; }
+    .country-path {
+      fill: var(--sand);
+      stroke: var(--warm-white);
+      stroke-width: 0.4;
+      transition: fill 0.25s;
+      cursor: default;
+    }
+    .country-path.visited { fill: var(--clay); cursor: pointer; }
+    .country-path.visited:hover { fill: var(--bark); }
+    .country-path.map-active { fill: var(--earth) !important; }
+    .map-tooltip {
+      position: fixed;
+      background: var(--earth);
+      color: var(--warm-white);
+      font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.9rem;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.15s;
+      white-space: nowrap;
+      z-index: 999;
+    }
+    .map-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.2rem; }
+    .map-pill {
+      padding: 0.35rem 1rem;
+      font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      border: 1px solid var(--sand);
+      background: none;
+      color: var(--tan);
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .map-pill.active, .map-pill:hover { background: var(--earth); border-color: var(--earth); color: var(--warm-white); }
+    .wildlife-pill { border-color: var(--bark); color: var(--bark); }
+    .wildlife-pill.active, .wildlife-pill:hover { background: var(--bark); border-color: var(--bark); color: var(--warm-white); }
+    .map-loading {
+      padding: 3rem;
+      text-align: center;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--tan);
+    }
+    @media (max-width: 768px) { #world-map-container { min-height: 180px; } }
+
+    /* ── GALLERY GRID ── */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .gallery-item { position: relative; overflow: hidden; cursor: pointer; aspect-ratio: 4/3; }
+
+    .gallery-ph { width: 100%; height: 100%; transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .gallery-item:hover .gallery-ph { transform: scale(1.06); }
+    .ph1 { background: linear-gradient(145deg, #c8b898, #9a8a6a); }
+    .ph2 { background: linear-gradient(145deg, #a8b888, #7a9a68); }
+    .ph3 { background: linear-gradient(145deg, #b8a888, #8a7858); }
+    .ph4 { background: linear-gradient(145deg, #c0a878, #906840); }
+    .ph5 { background: linear-gradient(145deg, #98a878, #687848); }
+    .ph6 { background: linear-gradient(145deg, #d0b898, #a08858); }
+    .ph7 { background: linear-gradient(145deg, #b0c098, #809868); }
+    .ph8 { background: linear-gradient(145deg, #c8a878, #887048); }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .gallery-item:hover img { transform: scale(1.06); }
+    .gallery-hover {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(26,18,8,0.82) 0%, rgba(26,18,8,0.1) 50%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 1.4rem;
+    }
+    .gallery-item:hover .gallery-hover { opacity: 1; }
+    .gallery-hover-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 300; font-style: italic;
+      color: var(--warm-white);
+      transform: translateY(6px); transition: transform 0.4s;
+      line-height: 1.2;
+    }
+    .gallery-hover-location {
+      font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--clay); margin-top: 0.3rem;
+      transform: translateY(6px); transition: transform 0.4s 0.05s;
+    }
+    .gallery-item:hover .gallery-hover-title,
+    .gallery-item:hover .gallery-hover-location { transform: translateY(0); }
+
+    /* ── FULL PORTFOLIO BUTTON ── */
+    .btn-portfolio {
+      display: inline-block;
+      padding: 0.9rem 2.8rem;
+      font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--earth);
+      color: var(--earth);
+      background: transparent;
+      transition: all 0.3s;
+    }
+    .btn-portfolio:hover { background: var(--earth); color: var(--warm-white); }
+
+    /* ── SHOP COLLECTION LABEL ── */
+    .shop-note-wrap { display: flex; flex-direction: column; gap: 1rem; }
+    .shop-collection-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--bark);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── FIELD JOURNALS ── */
+    #journals { background: var(--warm-white); }
+    .journals-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.8rem;
+    }
+    .journal-card { background: var(--linen); border: 1px solid var(--sand); overflow: hidden; transition: transform 0.4s, box-shadow 0.4s; }
+    .journal-card:hover { transform: translateY(-5px); box-shadow: 0 18px 45px rgba(78,56,32,0.1); }
+    .journal-img-wrap { height: 320px; position: relative; overflow: hidden; }
+    .journal-ph { width: 100%; height: 100%; transition: transform 0.6s ease; }
+    .journal-card:hover .journal-ph { transform: scale(1.04); }
+    .journal-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
+    .journal-card:hover img { transform: scale(1.04); }
+    .jph1 { background: linear-gradient(160deg, #c0d0d8 0%, #7090a0 100%); }
+    .jph2 { background: linear-gradient(160deg, #a0b8a0 0%, #507060 100%); }
+    .jph3 { background: linear-gradient(160deg, #b0c890 0%, #608050 100%); }
+    .jph4 { background: linear-gradient(160deg, #c8b870 0%, #887830 100%); }
+    .journal-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(26,18,8,0.7) 0%, transparent 50%);
+      display: flex; align-items: flex-end; padding: 1.2rem;
+    }
+    .journal-location {
+      font-size: 0.58rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
+    }
+    .journal-info { padding: 1.4rem; }
+    .journal-name { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 300; color: var(--earth); margin-bottom: 0.5rem; }
+    .journal-desc { font-size: 0.8rem; line-height: 1.7; color: var(--tan); margin-bottom: 1.2rem; }
+    .journal-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 1rem; border-top: 1px solid var(--sand); }
+    .journal-price { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--bark); }
+
+    /* ── SHOP ── */
+    #shop { background: var(--linen); }
+    .shop-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: end; margin-bottom: 4rem; }
+    .shop-note-text { font-size: 0.88rem; line-height: 1.9; color: var(--tan); border-left: 1px solid var(--clay); padding-left: 1.5rem; }
+    .prints-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.8rem; }
+    .print-card { background: var(--warm-white); border: 1px solid var(--sand); overflow: hidden; transition: transform 0.4s, box-shadow 0.4s; }
+    .print-card:hover { transform: translateY(-5px); box-shadow: 0 18px 45px rgba(78,56,32,0.1); }
+    .print-img-wrap { height: 280px; position: relative; overflow: hidden; }
+    .print-ph { width: 100%; height: 100%; transition: transform 0.6s ease; }
+    .print-card:hover .print-ph { transform: scale(1.04); }
+    .print-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
+    .print-card:hover img { transform: scale(1.04); }
+    .pph1 { background: linear-gradient(160deg, #c8b898 0%, #9a7a50 100%); }
+    .pph2 { background: linear-gradient(160deg, #a8b888 0%, #688048 100%); }
+    .pph3 { background: linear-gradient(160deg, #d0b898 0%, #a07840 100%); }
+    .pph4 { background: linear-gradient(160deg, #b8c098 0%, #788848 100%); }
+    .print-badge { position: absolute; top: 1rem; left: 1rem; background: var(--bark); color: var(--warm-white); font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; padding: 0.28rem 0.7rem; }
+    .print-info { padding: 1.4rem; }
+    .print-name { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 300; color: var(--earth); margin-bottom: 0.25rem; }
+    .print-location { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 1rem; }
+    .print-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 1rem; border-top: 1px solid var(--linen); }
+    .print-price { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--bark); }
+    .btn-add { padding: 0.5rem 1.2rem; font-family: 'Tenor Sans', sans-serif; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; background: var(--earth); color: var(--warm-white); border: none; cursor: pointer; transition: background 0.25s; }
+    .btn-add:hover { background: var(--bark); }
+    .print-sizes { font-size: 0.62rem; color: var(--sand); letter-spacing: 0.1em; margin-bottom: 0.8rem; }
+
+    /* ── ABOUT ── */
+    #about { background: var(--warm-white); }
+    .about-grid { display: grid; grid-template-columns: 5fr 4fr; gap: 6rem; align-items: center; }
+    .about-image-wrap { position: relative; height: 640px; }
+    .about-img { width: 100%; height: 100%; background: linear-gradient(160deg, #c4b49a 0%, #a08a6a 60%, #7a6a4a 100%); }
+    .about-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .about-accent { position: absolute; top: -1.5rem; right: -1.5rem; width: 60%; height: 60%; border: 1px solid var(--sand); z-index: -1; }
+    .about-tag { position: absolute; bottom: 2rem; left: -2rem; background: var(--earth); color: var(--warm-white); padding: 1.2rem 1.5rem; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; line-height: 1.8; }
+    .about-tag strong { display: block; font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 300; font-style: italic; letter-spacing: 0; text-transform: none; margin-bottom: 0.3rem; color: var(--clay); }
+    .about-text .section-title { margin-bottom: 0; }
+    .about-body { margin-top: 1.5rem; font-size: 0.92rem; line-height: 2; color: var(--tan); }
+    .about-body p + p { margin-top: 1rem; }
+    .about-gear { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--sand); display: flex; gap: 2.5rem; }
+    .gear-label { font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.3rem; }
+    .gear-value { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-style: italic; color: var(--earth); }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--linen); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 6rem; margin-top: 3.5rem; }
+    .contact-left h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 300; color: var(--earth); margin-bottom: 1rem; line-height: 1.3; }
+    .contact-left p { font-size: 0.88rem; line-height: 1.9; color: var(--tan); margin-bottom: 2.5rem; }
+    .contact-detail { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; font-size: 0.8rem; color: var(--bark); }
+    .contact-icon { width: 34px; height: 34px; border: 1px solid var(--sand); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; color: var(--tan); }
+    .social-links { display: flex; gap: 0.8rem; margin-top: 2rem; }
+    .social-link { padding: 0.5rem 1.2rem; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; border: 1px solid var(--sand); color: var(--bark); text-decoration: none; transition: all 0.25s; }
+    .social-link:hover { background: var(--earth); border-color: var(--earth); color: var(--warm-white); }
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group label { font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--clay); }
+    .form-group input, .form-group select, .form-group textarea { background: var(--warm-white); border: 1px solid var(--sand); padding: 0.85rem 1rem; font-family: 'Tenor Sans', sans-serif; font-size: 0.85rem; color: var(--earth); outline: none; transition: border-color 0.25s; -webkit-appearance: none; border-radius: 0; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--clay); }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .btn-submit { padding: 0.9rem 2.5rem; background: var(--earth); color: var(--warm-white); border: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; cursor: pointer; align-self: flex-start; transition: background 0.3s; }
+    .btn-submit:hover { background: var(--bark); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--earth); color: rgba(250,246,240,0.4); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 300; font-style: italic; color: var(--clay); text-decoration: none; }
+    footer p { font-size: 0.65rem; letter-spacing: 0.1em; }
+    footer a { color: var(--clay); text-decoration: none; }
+
+    /* ── DIVIDER ── */
+    .divider { height: 1px; background: linear-gradient(to right, transparent, var(--sand), transparent); margin: 0 3rem; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.9s ease, transform 0.9s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.2rem; background: rgba(250,246,240,0.96); backdrop-filter: blur(8px); }
+      .nav-logo { color: var(--earth) !important; font-size: 0.95rem; }
+      .nav-links { gap: 1.2rem; overflow-x: auto; scrollbar-width: none; }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a { color: var(--tan) !important; font-size: 0.58rem; white-space: nowrap; }
+      #hero { height: 100svh; }
+      .hero-content { flex-direction: column; align-items: flex-start; padding: 0 1.5rem 5rem; gap: 1.5rem; }
+      .hero-title { font-size: 2.4rem; }
+      .hero-right { text-align: left; }
+      .hero-cta { justify-content: flex-start; flex-wrap: wrap; }
+      .btn { font-size: 0.58rem; padding: 0.7rem 1.5rem; }
+      .section-wrap { padding: 4rem 1.5rem; }
+      .portfolio-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+      .shop-intro { grid-template-columns: 1fr; gap: 2rem; }
+      .prints-grid { grid-template-columns: 1fr; }
+      .journals-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-image-wrap { height: 300px; }
+      .about-accent { display: none; }
+      .about-tag { left: 1rem; bottom: 1rem; }
+      .about-gear { flex-direction: column; gap: 1.2rem; }
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; margin-top: 2rem; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { flex-direction: column; align-items: flex-start; padding: 2rem 1.5rem; }
+      .divider { margin: 0 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#hero" class="nav-logo">Ryan Muratore</a>
+    <ul class="nav-links">
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="portfolio.html">Full Portfolio</a></li>
+      <li><a href="#shop">Prints</a></li>
+      <li><a href="#journals">Field Journals</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg">
+      <img src="images/hero.jpg" alt="Ryan Muratore Photography">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <p class="hero-eyebrow">Landscapes & Wildlife Photography</p>
+        <h1 class="hero-title">
+          The world<br>through <em>my</em><br>lens
+        </h1>
+      </div>
+      <div class="hero-right">
+        <p class="hero-location">New York City — Worldwide</p>
+        <div class="hero-cta">
+          <a href="#shop" class="btn btn-light">Shop Prints</a>
+          <a href="#portfolio" class="btn btn-outline">View Work</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section id="portfolio" class="section-wrap">
+    <div class="reveal">
+      <p class="section-label">Selected Work</p>
+      <h2 class="section-title">Landscapes & <em>Wildlife</em></h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="map-filter-wrap reveal">
+      <span class="map-label">Filter by destination or category</span>
+      <div id="map-tooltip" class="map-tooltip"></div>
+      <div id="world-map-container">
+        <div class="map-loading" id="map-loading">Loading map...</div>
+      </div>
+      <div class="map-pills">
+        <button class="map-pill active" data-filter="all">All</button>
+        <button class="map-pill wildlife-pill" data-filter="wildlife">Wildlife</button>
+        <button class="map-pill" data-filter="Canada">Canada</button>
+        <button class="map-pill" data-filter="Costa Rica">Costa Rica</button>
+        <button class="map-pill" data-filter="Denmark">Denmark</button>
+        <button class="map-pill" data-filter="Iceland">Iceland</button>
+        <button class="map-pill" data-filter="Ireland">Ireland</button>
+        <button class="map-pill" data-filter="Norway">Norway</button>
+        <button class="map-pill" data-filter="Portugal">Portugal</button>
+        <button class="map-pill" data-filter="Sweden">Sweden</button>
+        <button class="map-pill" data-filter="United States">United States</button>
+      </div>
+    </div>
+    <div class="gallery-grid reveal" id="gallery-grid">
+
+      <!-- LANDSCAPE PHOTOS -->
+      <div class="gallery-item" data-country="Iceland" data-type="landscape">
+        <img src="images/landscape1.jpg" alt="At The Edge of the North">
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">At The Edge of the North</div>
+          <div class="gallery-hover-location">Location: Iceland</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-country="Norway" data-type="landscape">
+        <div class="gallery-ph ph2"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">Forest Canopy</div>
+          <div class="gallery-hover-location">Location: Norway</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-country="Ireland" data-type="landscape">
+        <div class="gallery-ph ph3"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">Still Water</div>
+          <div class="gallery-hover-location">Location: Ireland</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-country="United States" data-type="landscape">
+        <div class="gallery-ph ph4"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">Golden Hour</div>
+          <div class="gallery-hover-location">Location: United States</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-country="Canada" data-type="landscape">
+        <div class="gallery-ph ph5"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">Open Tundra</div>
+          <div class="gallery-hover-location">Location: Canada</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-country="Portugal" data-type="landscape">
+        <div class="gallery-ph ph6"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">Coastal Cliffs</div>
+          <div class="gallery-hover-location">Location: Portugal</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-country="Sweden" data-type="landscape">
+        <div class="gallery-ph ph7"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">River Bend</div>
+          <div class="gallery-hover-location">Location: Sweden</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-country="Costa Rica" data-type="landscape">
+        <div class="gallery-ph ph8"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">Mountain Light</div>
+          <div class="gallery-hover-location">Location: Costa Rica</div>
+        </div>
+      </div>
+
+      <!-- WILDLIFE PHOTOS — hidden until Wildlife tab clicked -->
+      <div class="gallery-item" data-type="wildlife" style="display:none;">
+        <div class="gallery-ph ph1"></div>
+        <!-- Replace with: <img src="images/wildlife1.jpg" alt=""> -->
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">In the Field</div>
+          <div class="gallery-hover-location">Location: [Your Location]</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-type="wildlife" style="display:none;">
+        <div class="gallery-ph ph3"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">Close Encounter</div>
+          <div class="gallery-hover-location">Location: [Your Location]</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-type="wildlife" style="display:none;">
+        <div class="gallery-ph ph5"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">Still Moment</div>
+          <div class="gallery-hover-location">Location: [Your Location]</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-type="wildlife" style="display:none;">
+        <div class="gallery-ph ph2"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">On the Move</div>
+          <div class="gallery-hover-location">Location: [Your Location]</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-type="wildlife" style="display:none;">
+        <div class="gallery-ph ph6"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">Wild Eyes</div>
+          <div class="gallery-hover-location">Location: [Your Location]</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-type="wildlife" style="display:none;">
+        <div class="gallery-ph ph4"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">Untouched</div>
+          <div class="gallery-hover-location">Location: [Your Location]</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-type="wildlife" style="display:none;">
+        <div class="gallery-ph ph7"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">At Rest</div>
+          <div class="gallery-hover-location">Location: [Your Location]</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-type="wildlife" style="display:none;">
+        <div class="gallery-ph ph8"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">Into the Wild</div>
+          <div class="gallery-hover-location">Location: [Your Location]</div>
+        </div>
+      </div>
+
+    </div>
+    <div style="text-align: center; margin-top: 3rem;">
+      <a href="portfolio.html" class="btn-portfolio">View Full Portfolio</a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SHOP -->
+  <section id="shop" class="section-wrap">
+    <div class="shop-intro reveal">
+      <div>
+        <p class="section-label">Fine Art Prints</p>
+        <h2 class="section-title">This month's<br><em>collection</em></h2>
+        <div class="section-rule"></div>
+      </div>
+      <div class="shop-note-wrap">
+        <p class="shop-collection-label" id="collection-month"></p>
+        <p class="shop-note-text">Each month a new collection of five prints is released exclusively — once the month ends, they're gone. Every print is museum-quality, printed on 310gsm fine art paper with archival pigment inks. Shipped within 5–7 business days with a certificate of authenticity.</p>
+      </div>
+    </div>
+    <div class="prints-grid reveal">
+      <div class="print-card">
+        <div class="print-img-wrap">
+          <div class="print-ph pph1"></div>
+          <!-- Replace with: <img src="images/print1.jpg" alt=""> -->
+          <span class="print-badge">Best Seller</span>
+        </div>
+        <div class="print-info">
+          <p class="print-name">Morning Mist</p>
+          <p class="print-location">Location: [Your Location]</p>
+          <p class="print-sizes">8×10 · 12×16 · 16×24 · 24×36</p>
+          <div class="print-footer">
+            <span class="print-price">from $45</span>
+            <button class="btn-add">Order Print</button>
+          </div>
+        </div>
+      </div>
+      <div class="print-card">
+        <div class="print-img-wrap">
+          <div class="print-ph pph2"></div>
+          <!-- Replace with: <img src="images/print2.jpg" alt=""> -->
+        </div>
+        <div class="print-info">
+          <p class="print-name">Golden Hour</p>
+          <p class="print-location">Location: [Your Location]</p>
+          <p class="print-sizes">8×10 · 12×16 · 16×24 · 24×36</p>
+          <div class="print-footer">
+            <span class="print-price">from $45</span>
+            <button class="btn-add">Order Print</button>
+          </div>
+        </div>
+      </div>
+      <div class="print-card">
+        <div class="print-img-wrap">
+          <div class="print-ph pph3"></div>
+          <!-- Replace with: <img src="images/print3.jpg" alt=""> -->
+          <span class="print-badge">New</span>
+        </div>
+        <div class="print-info">
+          <p class="print-name">Wild Encounter</p>
+          <p class="print-location">Location: [Your Location]</p>
+          <p class="print-sizes">8×10 · 12×16 · 16×24 · 24×36</p>
+          <div class="print-footer">
+            <span class="print-price">from $45</span>
+            <button class="btn-add">Order Print</button>
+          </div>
+        </div>
+      </div>
+      <div class="print-card">
+        <div class="print-img-wrap">
+          <div class="print-ph pph4"></div>
+          <!-- Replace with: <img src="images/print4.jpg" alt=""> -->
+        </div>
+        <div class="print-info">
+          <p class="print-name">River Bend</p>
+          <p class="print-location">Location: [Your Location]</p>
+          <p class="print-sizes">8×10 · 12×16 · 16×24 · 24×36</p>
+          <div class="print-footer">
+            <span class="print-price">from $45</span>
+            <button class="btn-add">Order Print</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- FIELD JOURNALS -->
+  <section id="journals" class="section-wrap">
+    <div class="shop-intro reveal">
+      <div>
+        <p class="section-label">Field Journals</p>
+        <h2 class="section-title">Stories from<br><em>the field</em></h2>
+        <div class="section-rule"></div>
+      </div>
+      <p class="shop-note-text">Each Field Journal is a curated collection of photographs from a single destination — the landscapes, the wildlife, the light. Printed on premium paper and bound to last. A piece of the journey, made to keep.</p>
+    </div>
+    <div class="journals-grid reveal">
+
+      <div class="journal-card">
+        <div class="journal-img-wrap">
+          <div class="journal-ph jph1"></div>
+          <!-- Replace with: <img src="images/journal-iceland.jpg" alt="Iceland"> -->
+          <div class="journal-overlay">
+            <span class="journal-location">Iceland</span>
+          </div>
+        </div>
+        <div class="journal-info">
+          <p class="journal-name">Iceland Field Journal</p>
+          <p class="journal-desc">Glaciers, waterfalls, and volcanic landscapes — the raw edge of the north.</p>
+          <div class="journal-footer">
+            <span class="journal-price">$65</span>
+            <button class="btn-add">Order Journal</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="journal-card">
+        <div class="journal-img-wrap">
+          <div class="journal-ph jph2"></div>
+          <!-- Replace with: <img src="images/journal-norway.jpg" alt="Norway"> -->
+          <div class="journal-overlay">
+            <span class="journal-location">Norway</span>
+          </div>
+        </div>
+        <div class="journal-info">
+          <p class="journal-name">Norway Field Journal</p>
+          <p class="journal-desc">Fjords, forests, and the endless Nordic light.</p>
+          <div class="journal-footer">
+            <span class="journal-price">$65</span>
+            <button class="btn-add">Order Journal</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="journal-card">
+        <div class="journal-img-wrap">
+          <div class="journal-ph jph3"></div>
+          <!-- Replace with: <img src="images/journal-ireland.jpg" alt="Ireland"> -->
+          <div class="journal-overlay">
+            <span class="journal-location">Ireland</span>
+          </div>
+        </div>
+        <div class="journal-info">
+          <p class="journal-name">Ireland Field Journal</p>
+          <p class="journal-desc">Rolling green hills, dramatic coastlines, and ancient silence.</p>
+          <div class="journal-footer">
+            <span class="journal-price">$65</span>
+            <button class="btn-add">Order Journal</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="journal-card">
+        <div class="journal-img-wrap">
+          <div class="journal-ph jph4"></div>
+          <!-- Replace with: <img src="images/journal-costarica.jpg" alt="Costa Rica"> -->
+          <div class="journal-overlay">
+            <span class="journal-location">Costa Rica</span>
+          </div>
+        </div>
+        <div class="journal-info">
+          <p class="journal-name">Costa Rica Field Journal</p>
+          <p class="journal-desc">Dense jungle, vibrant wildlife, and golden Pacific light.</p>
+          <div class="journal-footer">
+            <span class="journal-price">$65</span>
+            <button class="btn-add">Order Journal</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ABOUT -->
+  <section id="about" class="section-wrap">
+    <div class="about-grid">
+      <div class="about-image-wrap reveal">
+        <div class="about-img">
+          <img src="images/about.jpg" alt="Ryan Muratore">
+        </div>
+        <div class="about-accent"></div>
+        <div class="about-tag">
+          <strong>Ryan Muratore</strong>
+          Sony a7iv · Fujifilm XT30ii
+        </div>
+      </div>
+      <div class="about-text reveal">
+        <p class="section-label">The Photographer</p>
+        <h2 class="section-title">Traveling the world,<br><em>one frame</em> at a time</h2>
+        <div class="section-rule"></div>
+        <div class="about-body">
+          <p>I'm Ryan Muratore, a photographer based in New York City. I travel as much as I can and bring everything I see back home through my photos.</p>
+          <p>I'm drawn to the small stuff — the things you'd walk right past. I shoot landscapes and wildlife exactly as they are, so people who weren't there can feel like they were right alongside me.</p>
+        </div>
+        <div class="about-gear">
+          <div class="gear-item">
+            <p class="gear-label">Primary Camera</p>
+            <p class="gear-value">Sony a7iv</p>
+          </div>
+          <div class="gear-item">
+            <p class="gear-label">Secondary Camera</p>
+            <p class="gear-value">Fujifilm XT30ii</p>
+          </div>
+          <div class="gear-item">
+            <p class="gear-label">Based In</p>
+            <p class="gear-value">New York City</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section-wrap">
+    <p class="section-label reveal">Get in Touch</p>
+    <h2 class="section-title reveal">Let's <em>connect</em></h2>
+    <div class="contact-grid">
+      <div class="contact-left reveal">
+        <div class="section-rule"></div>
+        <h3>Custom orders &amp; commissions welcome</h3>
+        <p>Looking for a specific size, a print not listed, or want to discuss a custom commission? Send a message and I'll get back to you within 48 hours.</p>
+        <div class="contact-detail">
+          <div class="contact-icon">✉</div>
+          <span>muratore1144@gmail.com</span>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">📍</div>
+          <span>New York City</span>
+        </div>
+        <div class="social-links">
+          <a href="#" class="social-link">TikTok</a>
+          <a href="#" class="social-link">Instagram</a>
+        </div>
+      </div>
+      <form class="contact-form reveal" action="https://formspree.io/f/mvzbvdzo" method="POST">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <select id="subject" name="subject">
+            <option value="">Select a topic</option>
+            <option>Print Order Inquiry</option>
+            <option>Custom Commission</option>
+            <option>Licensing / Commercial Use</option>
+            <option>General Question</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Tell me what you're looking for..." required></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="#hero" class="footer-logo">Ryan Muratore Photography</a>
+    <p>© 2025 Ryan Muratore — All rights reserved. Do not reproduce without permission.</p>
+  </footer>
+
+  <script>
+    // Set current month collection label
+    const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const currentMonth = monthNames[new Date().getMonth()];
+    const collectionEl = document.getElementById('collection-month');
+    if (collectionEl) collectionEl.textContent = currentMonth + ' Collection';
+
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    // ── WORLD MAP FILTER ──
+    const visited = {
+      "United States": "840", "Canada": "124", "Iceland": "352",
+      "Ireland": "372", "Norway": "578", "Sweden": "752",
+      "Denmark": "208", "Costa Rica": "188", "Portugal": "620"
+    };
+    const visitedByCode = {};
+    Object.entries(visited).forEach(([name, code]) => visitedByCode[code] = name);
+
+    const tooltip = document.getElementById('map-tooltip');
+    const galleryItems = document.querySelectorAll('.gallery-item[data-country]');
+
+    function filterGallery(country) {
+      galleryItems.forEach(item => {
+        const match = country === 'all' || item.dataset.country === country;
+        item.style.opacity = match ? '1' : '0.2';
+        item.style.pointerEvents = match ? 'auto' : 'none';
+        item.style.transition = 'opacity 0.4s';
+      });
+      document.querySelectorAll('.country-path').forEach(el => {
+        el.classList.toggle('map-active', el.dataset.name === country);
+      });
+      document.querySelectorAll('.map-pill').forEach(pill => {
+        pill.classList.toggle('active', pill.dataset.filter === country);
+      });
+    }
+
+    function loadScript(src) {
+      return new Promise((resolve, reject) => {
+        const s = document.createElement('script');
+        s.src = src; s.onload = resolve; s.onerror = reject;
+        document.head.appendChild(s);
+      });
+    }
+
+    Promise.all([
+      loadScript('https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js'),
+      loadScript('https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js')
+    ]).then(() => fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json'))
+    .then(r => r.json()).then(world => {
+      document.getElementById('map-loading').remove();
+      const container = document.getElementById('world-map-container');
+      const W = container.offsetWidth;
+      const H = Math.round(W * 0.52);
+      const svg = d3.select('#world-map-container').append('svg')
+        .attr('viewBox', `0 0 ${W} ${H}`).attr('preserveAspectRatio', 'xMidYMid meet');
+      svg.append('rect').attr('width', W).attr('height', H).attr('fill', 'var(--linen)');
+      const projection = d3.geoNaturalEarth1().scale(W / 6.5).translate([W / 2, H / 2]);
+      const path = d3.geoPath().projection(projection);
+      const countries = topojson.feature(world, world.objects.countries);
+      svg.selectAll('path').data(countries.features).enter().append('path')
+        .attr('d', path)
+        .attr('class', d => 'country-path' + (visitedByCode[d.id] ? ' visited' : ''))
+        .attr('data-name', d => visitedByCode[d.id] || '')
+        .on('click', function(event, d) {
+          const name = visitedByCode[d.id];
+          if (!name) return;
+          const current = document.querySelector('.map-pill.active')?.dataset.filter;
+          filterGallery(current === name ? 'all' : name);
+        })
+        .on('mousemove', function(event, d) {
+          const name = visitedByCode[d.id];
+          if (!name) return;
+          tooltip.textContent = name;
+          tooltip.style.opacity = '1';
+          tooltip.style.left = (event.clientX + 14) + 'px';
+          tooltip.style.top = (event.clientY - 32) + 'px';
+        })
+        .on('mouseleave', () => { tooltip.style.opacity = '0'; });
+      svg.append('path')
+        .datum(topojson.mesh(world, world.objects.countries, (a, b) => a !== b))
+        .attr('d', path).attr('fill', 'none')
+        .attr('stroke', 'var(--warm-white)').attr('stroke-width', '0.4');
+    }).catch(() => {
+      document.getElementById('map-loading').textContent = 'Use the buttons below to filter by location.';
+    });
+
+    document.querySelectorAll('.map-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        const f = pill.dataset.filter;
+        if (f === 'wildlife') {
+          document.querySelectorAll('.gallery-item[data-type="landscape"]').forEach(el => el.style.display = 'none');
+          document.querySelectorAll('.gallery-item[data-type="wildlife"]').forEach(el => { el.style.display = 'block'; el.style.opacity = '1'; });
+          document.getElementById('world-map-container').style.opacity = '0.35';
+          document.getElementById('world-map-container').style.pointerEvents = 'none';
+          document.querySelectorAll('.country-path').forEach(el => el.classList.remove('map-active'));
+          document.querySelectorAll('.map-pill').forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+        } else {
+          document.querySelectorAll('.gallery-item[data-type="landscape"]').forEach(el => el.style.display = 'block');
+          document.querySelectorAll('.gallery-item[data-type="wildlife"]').forEach(el => el.style.display = 'none');
+          document.getElementById('world-map-container').style.opacity = '1';
+          document.getElementById('world-map-container').style.pointerEvents = 'auto';
+          filterGallery(f);
+        }
+      });
+    });
+  </script>
+</body>
 </html>

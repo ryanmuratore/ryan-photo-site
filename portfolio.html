@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Full Portfolio — Ryan Muratore Photography</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&family=Tenor+Sans&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --warm-white: #faf6f0;
+      --linen:      #f0e9de;
+      --sand:       #ddd0bc;
+      --clay:       #c4a882;
+      --tan:        #a8896a;
+      --bark:       #7a5c3a;
+      --earth:      #4e3820;
+      --ink:        #2a1f12;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--warm-white); color: var(--ink); font-family: 'Tenor Sans', sans-serif; font-weight: 400; overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 3rem;
+      background: rgba(250,246,240,0.96);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 1px 0 var(--sand);
+    }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 300; letter-spacing: 0.12em; color: var(--earth); text-decoration: none; }
+    .nav-links { display: flex; gap: 2.8rem; list-style: none; }
+    .nav-links a { font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--tan); text-decoration: none; transition: color 0.3s; position: relative; }
+    .nav-links a.active { color: var(--earth); }
+    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 1px; background: var(--clay); transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease; }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+    .nav-links a:hover { color: var(--bark); }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 10rem 3rem 4rem;
+      background: var(--warm-white);
+    }
+    .page-header .section-label { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.8rem; }
+    .page-header .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; line-height: 1.15; color: var(--earth); }
+    .page-header .section-title em { font-style: italic; color: var(--tan); }
+    .section-rule { width: 40px; height: 1px; background: var(--clay); margin: 1.8rem 0; }
+
+    /* ── MAP FILTER ── */
+    .map-filter-wrap { padding: 0 3rem 2rem; }
+    .map-label { font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--clay); margin-bottom: 1rem; display: block; }
+    #world-map-container { width: 100%; background: var(--linen); border: 1px solid var(--sand); overflow: hidden; position: relative; }
+    #world-map-container svg { width: 100%; height: auto; display: block; }
+    .country-path { fill: var(--sand); stroke: var(--warm-white); stroke-width: 0.4; transition: fill 0.25s; cursor: default; }
+    .country-path.visited { fill: var(--clay); cursor: pointer; }
+    .country-path.visited:hover { fill: var(--bark); }
+    .country-path.map-active { fill: var(--earth) !important; }
+    .map-tooltip { position: fixed; background: var(--earth); color: var(--warm-white); font-family: 'Tenor Sans', sans-serif; font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.4rem 0.9rem; pointer-events: none; opacity: 0; transition: opacity 0.15s; white-space: nowrap; z-index: 999; }
+    .map-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.2rem; }
+    .map-pill { padding: 0.35rem 1rem; font-family: 'Tenor Sans', sans-serif; font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; border: 1px solid var(--sand); background: none; color: var(--tan); cursor: pointer; transition: all 0.25s; }
+    .map-pill.active, .map-pill:hover { background: var(--earth); border-color: var(--earth); color: var(--warm-white); }
+    .wildlife-pill { border-color: var(--bark); color: var(--bark); }
+    .wildlife-pill.active, .wildlife-pill:hover { background: var(--bark); border-color: var(--bark); color: var(--warm-white); }
+    .map-loading { padding: 3rem; text-align: center; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--tan); }
+
+    /* ── FULL PORTFOLIO GRID ── */
+    .portfolio-wrap { padding: 2rem 3rem 7rem; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .gallery-item { position: relative; overflow: hidden; cursor: pointer; aspect-ratio: 4/3; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .gallery-item:hover img { transform: scale(1.06); }
+    .gallery-ph { width: 100%; height: 100%; transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .gallery-item:hover .gallery-ph { transform: scale(1.06); }
+    .ph1 { background: linear-gradient(145deg, #c8b898, #9a8a6a); }
+    .ph2 { background: linear-gradient(145deg, #a8b888, #7a9a68); }
+    .ph3 { background: linear-gradient(145deg, #b8a888, #8a7858); }
+    .ph4 { background: linear-gradient(145deg, #c0a878, #906840); }
+    .ph5 { background: linear-gradient(145deg, #98a878, #687848); }
+    .ph6 { background: linear-gradient(145deg, #d0b898, #a08858); }
+    .ph7 { background: linear-gradient(145deg, #b0c098, #809868); }
+    .ph8 { background: linear-gradient(145deg, #c8a878, #887048); }
+    .gallery-hover { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,18,8,0.82) 0%, rgba(26,18,8,0.1) 50%, transparent 100%); opacity: 0; transition: opacity 0.4s; display: flex; flex-direction: column; justify-content: flex-end; padding: 1.4rem; }
+    .gallery-item:hover .gallery-hover { opacity: 1; }
+    .gallery-hover-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 300; font-style: italic; color: var(--warm-white); transform: translateY(6px); transition: transform 0.4s; line-height: 1.2; }
+    .gallery-hover-location { font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--clay); margin-top: 0.3rem; transform: translateY(6px); transition: transform 0.4s 0.05s; }
+    .gallery-item:hover .gallery-hover-title, .gallery-item:hover .gallery-hover-location { transform: translateY(0); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--earth); color: rgba(250,246,240,0.4); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 300; font-style: italic; color: var(--clay); text-decoration: none; }
+    footer p { font-size: 0.65rem; letter-spacing: 0.1em; }
+
+    /* ── ANIMATIONS ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.9s ease, transform 0.9s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { gap: 1.2rem; overflow-x: auto; scrollbar-width: none; }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a { font-size: 0.58rem; white-space: nowrap; }
+      .page-header { padding: 7rem 1.5rem 3rem; }
+      .map-filter-wrap { padding: 0 1.5rem 2rem; }
+      .portfolio-wrap { padding: 1.5rem 1.5rem 5rem; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">Ryan Muratore</a>
+    <ul class="nav-links">
+      <li><a href="index.html#portfolio">Portfolio</a></li>
+      <li><a href="portfolio.html" class="active">Full Portfolio</a></li>
+      <li><a href="index.html#shop">Prints</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header reveal">
+    <p class="section-label">Complete Work</p>
+    <h1 class="section-title">The full <em>collection</em></h1>
+    <div class="section-rule"></div>
+  </div>
+
+  <!-- MAP FILTER -->
+  <div class="map-filter-wrap reveal">
+    <span class="map-label">Filter by destination or category</span>
+    <div id="map-tooltip" class="map-tooltip"></div>
+    <div id="world-map-container">
+      <div class="map-loading" id="map-loading">Loading map...</div>
+    </div>
+    <div class="map-pills">
+      <button class="map-pill active" data-filter="all">All</button>
+      <button class="map-pill wildlife-pill" data-filter="wildlife">Wildlife</button>
+      <button class="map-pill" data-filter="Canada">Canada</button>
+      <button class="map-pill" data-filter="Costa Rica">Costa Rica</button>
+      <button class="map-pill" data-filter="Denmark">Denmark</button>
+      <button class="map-pill" data-filter="Iceland">Iceland</button>
+      <button class="map-pill" data-filter="Ireland">Ireland</button>
+      <button class="map-pill" data-filter="Norway">Norway</button>
+      <button class="map-pill" data-filter="Portugal">Portugal</button>
+      <button class="map-pill" data-filter="Sweden">Sweden</button>
+      <button class="map-pill" data-filter="United States">United States</button>
+    </div>
+  </div>
+
+  <!-- FULL GALLERY -->
+  <div class="portfolio-wrap">
+    <div class="gallery-grid" id="gallery-grid">
+
+      <!-- Add all your landscape photos here -->
+      <!-- Format: <div class="gallery-item" data-country="Iceland" data-type="landscape"> -->
+      <!--           <img src="images/landscape1.jpg" alt="Photo Title"> -->
+      <!--           <div class="gallery-hover"> -->
+      <!--             <div class="gallery-hover-title">Photo Title</div> -->
+      <!--             <div class="gallery-hover-location">Location: Iceland</div> -->
+      <!--           </div> -->
+      <!--         </div> -->
+
+      <div class="gallery-item" data-country="Iceland" data-type="landscape">
+        <img src="images/landscape1.jpg" alt="At The Edge of the North">
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">At The Edge of the North</div>
+          <div class="gallery-hover-location">Location: Iceland</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-country="Norway" data-type="landscape">
+        <div class="gallery-ph ph2"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">Forest Canopy</div>
+          <div class="gallery-hover-location">Location: Norway</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-country="Ireland" data-type="landscape">
+        <div class="gallery-ph ph3"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">Still Water</div>
+          <div class="gallery-hover-location">Location: Ireland</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-country="United States" data-type="landscape">
+        <div class="gallery-ph ph4"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">Golden Hour</div>
+          <div class="gallery-hover-location">Location: United States</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-country="Canada" data-type="landscape">
+        <div class="gallery-ph ph5"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">Open Tundra</div>
+          <div class="gallery-hover-location">Location: Canada</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-country="Portugal" data-type="landscape">
+        <div class="gallery-ph ph6"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">Coastal Cliffs</div>
+          <div class="gallery-hover-location">Location: Portugal</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-country="Sweden" data-type="landscape">
+        <div class="gallery-ph ph7"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">River Bend</div>
+          <div class="gallery-hover-location">Location: Sweden</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-country="Costa Rica" data-type="landscape">
+        <div class="gallery-ph ph8"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">Mountain Light</div>
+          <div class="gallery-hover-location">Location: Costa Rica</div>
+        </div>
+      </div>
+
+      <!-- WILDLIFE PHOTOS — hidden until Wildlife tab clicked -->
+      <div class="gallery-item" data-type="wildlife" style="display:none;">
+        <div class="gallery-ph ph1"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">In the Field</div>
+          <div class="gallery-hover-location">Location: [Your Location]</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-type="wildlife" style="display:none;">
+        <div class="gallery-ph ph3"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">Close Encounter</div>
+          <div class="gallery-hover-location">Location: [Your Location]</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-type="wildlife" style="display:none;">
+        <div class="gallery-ph ph5"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">Still Moment</div>
+          <div class="gallery-hover-location">Location: [Your Location]</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-type="wildlife" style="display:none;">
+        <div class="gallery-ph ph2"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">On the Move</div>
+          <div class="gallery-hover-location">Location: [Your Location]</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-type="wildlife" style="display:none;">
+        <div class="gallery-ph ph6"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">Wild Eyes</div>
+          <div class="gallery-hover-location">Location: [Your Location]</div>
+        </div>
+      </div>
+      <div class="gallery-item" data-type="wildlife" style="display:none;">
+        <div class="gallery-ph ph4"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">Untouched</div>
+          <div class="gallery-hover-location">Location: [Your Location]</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="index.html" class="footer-logo">Ryan Muratore Photography</a>
+    <p>© 2025 Ryan Muratore — All rights reserved. Do not reproduce without permission.</p>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    // ── WORLD MAP FILTER ──
+    const visited = {
+      "United States": "840", "Canada": "124", "Iceland": "352",
+      "Ireland": "372", "Norway": "578", "Sweden": "752",
+      "Denmark": "208", "Costa Rica": "188", "Portugal": "620"
+    };
+    const visitedByCode = {};
+    Object.entries(visited).forEach(([name, code]) => visitedByCode[code] = name);
+
+    const tooltip = document.getElementById('map-tooltip');
+    const galleryItems = document.querySelectorAll('.gallery-item[data-country]');
+
+    function filterGallery(country) {
+      galleryItems.forEach(item => {
+        const match = country === 'all' || item.dataset.country === country;
+        item.style.opacity = match ? '1' : '0.2';
+        item.style.pointerEvents = match ? 'auto' : 'none';
+        item.style.transition = 'opacity 0.4s';
+      });
+      document.querySelectorAll('.country-path').forEach(el => {
+        el.classList.toggle('map-active', el.dataset.name === country);
+      });
+      document.querySelectorAll('.map-pill').forEach(pill => {
+        pill.classList.toggle('active', pill.dataset.filter === country);
+      });
+    }
+
+    function loadScript(src) {
+      return new Promise((resolve, reject) => {
+        const s = document.createElement('script');
+        s.src = src; s.onload = resolve; s.onerror = reject;
+        document.head.appendChild(s);
+      });
+    }
+
+    Promise.all([
+      loadScript('https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js'),
+      loadScript('https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js')
+    ]).then(() => fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json'))
+    .then(r => r.json()).then(world => {
+      document.getElementById('map-loading').remove();
+      const container = document.getElementById('world-map-container');
+      const W = container.offsetWidth;
+      const H = Math.round(W * 0.52);
+      const svg = d3.select('#world-map-container').append('svg')
+        .attr('viewBox', `0 0 ${W} ${H}`).attr('preserveAspectRatio', 'xMidYMid meet');
+      svg.append('rect').attr('width', W).attr('height', H).attr('fill', 'var(--linen)');
+      const projection = d3.geoNaturalEarth1().scale(W / 6.5).translate([W / 2, H / 2]);
+      const path = d3.geoPath().projection(projection);
+      const countries = topojson.feature(world, world.objects.countries);
+      svg.selectAll('path').data(countries.features).enter().append('path')
+        .attr('d', path)
+        .attr('class', d => 'country-path' + (visitedByCode[d.id] ? ' visited' : ''))
+        .attr('data-name', d => visitedByCode[d.id] || '')
+        .on('click', function(event, d) {
+          const name = visitedByCode[d.id];
+          if (!name) return;
+          const current = document.querySelector('.map-pill.active')?.dataset.filter;
+          filterGallery(current === name ? 'all' : name);
+        })
+        .on('mousemove', function(event, d) {
+          const name = visitedByCode[d.id];
+          if (!name) return;
+          tooltip.textContent = name;
+          tooltip.style.opacity = '1';
+          tooltip.style.left = (event.clientX + 14) + 'px';
+          tooltip.style.top = (event.clientY - 32) + 'px';
+        })
+        .on('mouseleave', () => { tooltip.style.opacity = '0'; });
+      svg.append('path')
+        .datum(topojson.mesh(world, world.objects.countries, (a, b) => a !== b))
+        .attr('d', path).attr('fill', 'none')
+        .attr('stroke', 'var(--warm-white)').attr('stroke-width', '0.4');
+    }).catch(() => {
+      document.getElementById('map-loading').textContent = 'Use the buttons below to filter by location.';
+    });
+
+    document.querySelectorAll('.map-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        const f = pill.dataset.filter;
+        if (f === 'wildlife') {
+          document.querySelectorAll('.gallery-item[data-type="landscape"]').forEach(el => el.style.display = 'none');
+          document.querySelectorAll('.gallery-item[data-type="wildlife"]').forEach(el => { el.style.display = 'block'; el.style.opacity = '1'; });
+          document.getElementById('world-map-container').style.opacity = '0.35';
+          document.getElementById('world-map-container').style.pointerEvents = 'none';
+          document.querySelectorAll('.country-path').forEach(el => el.classList.remove('map-active'));
+          document.querySelectorAll('.map-pill').forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+        } else {
+          document.querySelectorAll('.gallery-item[data-type="landscape"]').forEach(el => el.style.display = 'block');
+          document.querySelectorAll('.gallery-item[data-type="wildlife"]').forEach(el => el.style.display = 'none');
+          document.getElementById('world-map-container').style.opacity = '1';
+          document.getElementById('world-map-container').style.pointerEvents = 'auto';
+          filterGallery(f);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
