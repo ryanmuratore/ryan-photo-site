@@ -203,7 +203,27 @@
       .nav-links li.cart-dropdown-wrap { display: none !important; }
       .nav-links a { font-size: 1.1rem !important; letter-spacing: 0.2em; color: var(--earth) !important; white-space: nowrap; }
     }
+
+    #cart-btn-mobile {
+      display: none;
+      align-items: center;
+      gap: 0.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      color: var(--tan);
+      position: relative;
+    }
+    #cart-btn-mobile svg { stroke: currentColor; }
+    #cart-total-mobile { color: var(--bark); font-size: 0.62rem; }
+    @media (max-width: 768px) {
+      #cart-btn-mobile { display: flex !important; }
+    }
   </style>
+  <script src="cart.js"></script>
 </head>
 <body>
 
@@ -260,357 +280,357 @@
   <div class="portfolio-wrap">
     <div class="gallery-grid" id="gallery-grid">
 
-      <div class="gallery-item ar-landscape" data-country="Iceland" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Iceland" data-type="landscape" data-index="0">
         <img src="iceland-1.jpg" alt="At The Edge of The North">
         <div class="gallery-hover">
           <div class="gallery-hover-title">At The Edge of The North</div>
           <div class="gallery-hover-location">Location: Iceland</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Costa Rica" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Costa Rica" data-type="landscape" data-index="1">
         <img src="costarica-1.jpg" alt="Descent">
         <div class="gallery-hover">
           <div class="gallery-hover-title">Descent</div>
           <div class="gallery-hover-location">Location: Costa Rica</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Costa Rica" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Costa Rica" data-type="landscape" data-index="2">
         <img src="costarica-2.jpg" alt="Emerald Passage">
         <div class="gallery-hover">
           <div class="gallery-hover-title">Emerald Passage</div>
           <div class="gallery-hover-location">Location: Costa Rica</div>
         </div>
       </div>
-      <div class="gallery-item ar-portrait" data-country="Costa Rica" data-type="landscape">
+      <div class="gallery-item ar-portrait" data-country="Costa Rica" data-type="landscape" data-index="3">
         <img src="costarica-3.jpg" alt="Bloom, Anyway">
         <div class="gallery-hover">
           <div class="gallery-hover-title">Bloom, Anyway</div>
           <div class="gallery-hover-location">Location: Costa Rica</div>
         </div>
       </div>
-      <div class="gallery-item ar-portrait" data-country="Canada" data-type="landscape">
+      <div class="gallery-item ar-portrait" data-country="Canada" data-type="landscape" data-index="4">
         <div class="gallery-ph ph5"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Canada</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Portugal" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Portugal" data-type="landscape" data-index="5">
         <div class="gallery-ph ph6"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Portugal</div>
         </div>
       </div>
-      <div class="gallery-item ar-portrait" data-country="Sweden" data-type="landscape">
+      <div class="gallery-item ar-portrait" data-country="Sweden" data-type="landscape" data-index="6">
         <div class="gallery-ph ph7"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Sweden</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Costa Rica" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Costa Rica" data-type="landscape" data-index="7">
         <div class="gallery-ph ph8"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Costa Rica</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Denmark" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Denmark" data-type="landscape" data-index="8">
         <div class="gallery-ph ph1"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Denmark</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Iceland" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Iceland" data-type="landscape" data-index="9">
         <div class="gallery-ph ph2"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Iceland</div>
         </div>
       </div>
-      <div class="gallery-item ar-portrait" data-country="Norway" data-type="landscape">
+      <div class="gallery-item ar-portrait" data-country="Norway" data-type="landscape" data-index="10">
         <div class="gallery-ph ph3"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Norway</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Ireland" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Ireland" data-type="landscape" data-index="11">
         <div class="gallery-ph ph4"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Ireland</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="United States" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="United States" data-type="landscape" data-index="12">
         <div class="gallery-ph ph5"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: United States</div>
         </div>
       </div>
-      <div class="gallery-item ar-portrait" data-country="Canada" data-type="landscape">
+      <div class="gallery-item ar-portrait" data-country="Canada" data-type="landscape" data-index="13">
         <div class="gallery-ph ph6"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Canada</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Portugal" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Portugal" data-type="landscape" data-index="14">
         <div class="gallery-ph ph7"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Portugal</div>
         </div>
       </div>
-      <div class="gallery-item ar-portrait" data-country="Sweden" data-type="landscape">
+      <div class="gallery-item ar-portrait" data-country="Sweden" data-type="landscape" data-index="15">
         <div class="gallery-ph ph8"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Sweden</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Costa Rica" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Costa Rica" data-type="landscape" data-index="16">
         <div class="gallery-ph ph1"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Costa Rica</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Denmark" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Denmark" data-type="landscape" data-index="17">
         <div class="gallery-ph ph2"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Denmark</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Iceland" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Iceland" data-type="landscape" data-index="18">
         <div class="gallery-ph ph3"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Iceland</div>
         </div>
       </div>
-      <div class="gallery-item ar-portrait" data-country="Norway" data-type="landscape">
+      <div class="gallery-item ar-portrait" data-country="Norway" data-type="landscape" data-index="19">
         <div class="gallery-ph ph4"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Norway</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Ireland" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Ireland" data-type="landscape" data-index="20">
         <div class="gallery-ph ph5"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Ireland</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="United States" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="United States" data-type="landscape" data-index="21">
         <div class="gallery-ph ph6"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: United States</div>
         </div>
       </div>
-      <div class="gallery-item ar-portrait" data-country="Canada" data-type="landscape">
+      <div class="gallery-item ar-portrait" data-country="Canada" data-type="landscape" data-index="22">
         <div class="gallery-ph ph7"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Canada</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Portugal" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Portugal" data-type="landscape" data-index="23">
         <div class="gallery-ph ph8"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Portugal</div>
         </div>
       </div>
-      <div class="gallery-item ar-portrait" data-country="Sweden" data-type="landscape">
+      <div class="gallery-item ar-portrait" data-country="Sweden" data-type="landscape" data-index="24">
         <div class="gallery-ph ph1"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Sweden</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Costa Rica" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Costa Rica" data-type="landscape" data-index="25">
         <div class="gallery-ph ph2"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Costa Rica</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Denmark" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Denmark" data-type="landscape" data-index="26">
         <div class="gallery-ph ph3"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Denmark</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Iceland" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Iceland" data-type="landscape" data-index="27">
         <div class="gallery-ph ph4"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Iceland</div>
         </div>
       </div>
-      <div class="gallery-item ar-portrait" data-country="Norway" data-type="landscape">
+      <div class="gallery-item ar-portrait" data-country="Norway" data-type="landscape" data-index="28">
         <div class="gallery-ph ph5"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Norway</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Ireland" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Ireland" data-type="landscape" data-index="29">
         <div class="gallery-ph ph6"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Ireland</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="United States" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="United States" data-type="landscape" data-index="30">
         <div class="gallery-ph ph7"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: United States</div>
         </div>
       </div>
-      <div class="gallery-item ar-portrait" data-country="Canada" data-type="landscape">
+      <div class="gallery-item ar-portrait" data-country="Canada" data-type="landscape" data-index="31">
         <div class="gallery-ph ph8"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Canada</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Portugal" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Portugal" data-type="landscape" data-index="32">
         <div class="gallery-ph ph1"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Portugal</div>
         </div>
       </div>
-      <div class="gallery-item ar-portrait" data-country="Sweden" data-type="landscape">
+      <div class="gallery-item ar-portrait" data-country="Sweden" data-type="landscape" data-index="33">
         <div class="gallery-ph ph2"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Sweden</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Costa Rica" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Costa Rica" data-type="landscape" data-index="34">
         <div class="gallery-ph ph3"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Costa Rica</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Denmark" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Denmark" data-type="landscape" data-index="35">
         <div class="gallery-ph ph4"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Denmark</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Iceland" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Iceland" data-type="landscape" data-index="36">
         <div class="gallery-ph ph5"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Iceland</div>
         </div>
       </div>
-      <div class="gallery-item ar-portrait" data-country="Norway" data-type="landscape">
+      <div class="gallery-item ar-portrait" data-country="Norway" data-type="landscape" data-index="37">
         <div class="gallery-ph ph6"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Norway</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Ireland" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Ireland" data-type="landscape" data-index="38">
         <div class="gallery-ph ph7"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Ireland</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="United States" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="United States" data-type="landscape" data-index="39">
         <div class="gallery-ph ph8"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: United States</div>
         </div>
       </div>
-      <div class="gallery-item ar-portrait" data-country="Canada" data-type="landscape">
+      <div class="gallery-item ar-portrait" data-country="Canada" data-type="landscape" data-index="40">
         <div class="gallery-ph ph1"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Canada</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Portugal" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Portugal" data-type="landscape" data-index="41">
         <div class="gallery-ph ph2"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Portugal</div>
         </div>
       </div>
-      <div class="gallery-item ar-portrait" data-country="Sweden" data-type="landscape">
+      <div class="gallery-item ar-portrait" data-country="Sweden" data-type="landscape" data-index="42">
         <div class="gallery-ph ph3"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Sweden</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Costa Rica" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Costa Rica" data-type="landscape" data-index="43">
         <div class="gallery-ph ph4"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Costa Rica</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Denmark" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Denmark" data-type="landscape" data-index="44">
         <div class="gallery-ph ph5"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Denmark</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Iceland" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Iceland" data-type="landscape" data-index="45">
         <div class="gallery-ph ph6"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Iceland</div>
         </div>
       </div>
-      <div class="gallery-item ar-portrait" data-country="Norway" data-type="landscape">
+      <div class="gallery-item ar-portrait" data-country="Norway" data-type="landscape" data-index="46">
         <div class="gallery-ph ph7"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Norway</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Ireland" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Ireland" data-type="landscape" data-index="47">
         <div class="gallery-ph ph8"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Ireland</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="United States" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="United States" data-type="landscape" data-index="48">
         <div class="gallery-ph ph1"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: United States</div>
         </div>
       </div>
-      <div class="gallery-item ar-portrait" data-country="Canada" data-type="landscape">
+      <div class="gallery-item ar-portrait" data-country="Canada" data-type="landscape" data-index="49">
         <div class="gallery-ph ph2"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Canada</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Portugal" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Portugal" data-type="landscape" data-index="50">
         <div class="gallery-ph ph3"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
@@ -704,12 +724,33 @@
     const galleryItems = document.querySelectorAll('.gallery-item[data-country]');
 
     function filterGallery(country) {
-      galleryItems.forEach(item => {
-        const match = country === 'all' || item.dataset.country === country;
-        item.style.opacity = match ? '1' : '0.2';
-        item.style.pointerEvents = match ? 'auto' : 'none';
-        item.style.transition = 'opacity 0.4s';
-      });
+      const grid = document.getElementById('gallery-grid');
+      const allItems = Array.from(document.querySelectorAll('#gallery-grid .gallery-item[data-type="landscape"]'));
+
+      if (country === 'all') {
+        allItems.sort((a, b) => parseInt(a.dataset.index) - parseInt(b.dataset.index));
+        allItems.forEach(item => {
+          grid.appendChild(item);
+          item.style.opacity = '1';
+          item.style.pointerEvents = 'auto';
+          item.style.transition = 'opacity 0.4s';
+        });
+      } else {
+        const matching = allItems.filter(i => i.dataset.country === country);
+        const nonMatching = allItems.filter(i => i.dataset.country !== country);
+        [...matching, ...nonMatching].forEach(item => grid.appendChild(item));
+        matching.forEach(item => {
+          item.style.opacity = '1';
+          item.style.pointerEvents = 'auto';
+          item.style.transition = 'opacity 0.4s';
+        });
+        nonMatching.forEach(item => {
+          item.style.opacity = '0.15';
+          item.style.pointerEvents = 'none';
+          item.style.transition = 'opacity 0.4s';
+        });
+      }
+
       document.querySelectorAll('.country-path').forEach(el => {
         el.classList.toggle('map-active', el.dataset.name === country);
       });
@@ -804,6 +845,5 @@
       });
     });
   </script>
-    <script src="cart.js"></script>
 </body>
 </html>

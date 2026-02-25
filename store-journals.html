@@ -143,7 +143,27 @@
       .nav-links li.cart-dropdown-wrap { display: none !important; }
       .nav-links a { font-size: 1.1rem !important; letter-spacing: 0.2em; color: var(--earth) !important; white-space: nowrap; }
     }
+
+    #cart-btn-mobile {
+      display: none;
+      align-items: center;
+      gap: 0.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      color: var(--tan);
+      position: relative;
+    }
+    #cart-btn-mobile svg { stroke: currentColor; }
+    #cart-total-mobile { color: var(--bark); font-size: 0.62rem; }
+    @media (max-width: 768px) {
+      #cart-btn-mobile { display: flex !important; }
+    }
   </style>
+  <script src="cart.js"></script>
 </head>
 <body>
   <nav>

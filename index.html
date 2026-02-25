@@ -716,33 +716,51 @@
       footer { flex-direction: column; align-items: flex-start; padding: 2rem 1.5rem; }
       .divider { margin: 0 1.5rem; }
     }
+
+    #cart-btn-mobile {
+      display: none;
+      align-items: center;
+      gap: 0.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      color: var(--tan);
+      position: relative;
+    }
+    #cart-btn-mobile svg { stroke: currentColor; }
+    #cart-total-mobile { color: var(--bark); font-size: 0.62rem; }
+    @media (max-width: 768px) {
+      #cart-btn-mobile { display: flex !important; }
+    }
   </style>
+  <script src="cart.js"></script>
 </head>
 <body>
 
   <!-- NAV -->
-  <nav id="nav">
-    <a href="#hero" class="nav-logo">Ryan Muratore</a>
+    <nav id="nav">
+    <a href="index.html" class="nav-logo">Ryan Muratore</a>
     <div class="mobile-top-right">
-      <button id="cart-btn-mobile" onclick="Cart.toggleDropdown()" style="display:none; align-items:center; gap:0.5rem; background:none; border:none; cursor:pointer; font-family:'Tenor Sans',sans-serif; font-size:0.62rem; letter-spacing:0.18em; color:var(--tan); position:relative;">
+      <button id="cart-btn-mobile" onclick="Cart.toggleDropdown()">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-        <span id="cart-total-mobile" style="color:var(--bark);"></span>
-        <span id="cart-count-mobile" style="display:none; position:absolute; top:-6px; right:-8px; background:var(--bark); color:var(--warm-white); font-size:0.5rem; width:16px; height:16px; border-radius:50%; align-items:center; justify-content:center;"></span>
+        <span id="cart-total-mobile"></span>
       </button>
-      <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()">
         <span></span><span></span><span></span>
       </button>
     </div>
     <ul class="nav-links" id="nav-links">
-      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="index.html#portfolio">Portfolio</a></li>
       <li><a href="portfolio.html">Full Portfolio</a></li>
-      <li><a href="#shop">Prints</a></li>
-      <li><a href="#journals">Field Journals</a></li>
-      <li><a href="#wallpapers">Wallpapers</a></li>
-      <li><a href="prints.html">All Prints</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
-          <li class="cart-dropdown-wrap">
+      <li><a href="index.html#shop">Prints</a></li>
+      <li><a href="index.html#journals">Field Journals</a></li>
+      <li><a href="index.html#wallpapers">Wallpapers</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+      <li class="cart-dropdown-wrap">
         <button id="cart-btn" onclick="Cart.toggleDropdown()">
           <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
           <span id="cart-total"></span>
@@ -932,8 +950,9 @@
         </div>
       </div>
 
-    
-    <div style="text-align: center; margin-top: 3rem; clear: both; width: 100%;">
+    </div>
+
+    <div style="text-align: center; margin-top: 3rem;">
       <a href="portfolio.html" class="btn-portfolio">View Full Portfolio</a>
     </div>
   </section>
@@ -1291,19 +1310,20 @@
 
     function filterGallery(country) {
       const grid = document.getElementById('gallery-grid');
-      const allItems = Array.from(document.querySelectorAll('.gallery-item[data-type="landscape"]'));
+      const allItems = Array.from(document.querySelectorAll('#gallery-grid .gallery-item[data-type="landscape"]'));
 
       if (country === 'all') {
-        // Restore original order
         allItems.sort((a, b) => parseInt(a.dataset.index) - parseInt(b.dataset.index));
         allItems.forEach(item => {
-          grid.appendChild(item);
+          grid.insertBefore(item, grid.firstChild);
           item.style.opacity = '1';
           item.style.pointerEvents = 'auto';
           item.style.transition = 'opacity 0.4s';
         });
+        // restore correct order by sorting
+        allItems.sort((a, b) => parseInt(a.dataset.index) - parseInt(b.dataset.index));
+        allItems.forEach(item => grid.appendChild(item));
       } else {
-        // Move matching items to top, dim others
         const matching = allItems.filter(i => i.dataset.country === country);
         const nonMatching = allItems.filter(i => i.dataset.country !== country);
         [...matching, ...nonMatching].forEach(item => grid.appendChild(item));
@@ -1425,6 +1445,5 @@
       });
     });
   </script>
-    <script src="cart.js"></script>
 </body>
 </html>
