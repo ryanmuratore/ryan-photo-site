@@ -219,20 +219,19 @@
 
   <script>
     const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
     }, { threshold: 0.1 });
     reveals.forEach(el => observer.observe(el));
-
+  
     const journals = {
-      iceland:   { name: 'Iceland Field Journal',    desc: 'Glaciers, waterfalls, and volcanic landscapes — the raw edge of the north.', img: 'journal-iceland.jpg' },
-      norway:    { name: 'Norway Field Journal',     desc: 'Fjords, forests, and the endless Nordic light.', img: 'journal-norway.jpg' },
-      ireland:   { name: 'Ireland Field Journal',    desc: 'Rolling green hills, dramatic coastlines, and ancient silence.', img: 'journal-ireland.jpg' },
-      costarica: { name: 'Costa Rica Field Journal', desc: 'Dense jungle, vibrant wildlife, and golden Pacific light.', img: 'journal-costarica.jpg' },
-      sweden:    { name: 'Sweden Field Journal',     desc: 'Quiet lakes, birch forests, and long summer evenings.', img: 'journal-sweden.jpg' },
-      portugal:  { name: 'Portugal Field Journal',   desc: 'Atlantic coastlines, golden light, and the edge of Europe.', img: 'journal-portugal.jpg' },
+      iceland:   { name: 'Iceland Field Journal',    desc: 'Glaciers, waterfalls, and volcanic landscapes — the raw edge of the north.' },
+      norway:    { name: 'Norway Field Journal',     desc: 'Fjords, forests, and the endless Nordic light.' },
+      ireland:   { name: 'Ireland Field Journal',    desc: 'Rolling green hills, dramatic coastlines, and ancient silence.' },
+      costarica: { name: 'Costa Rica Field Journal', desc: 'Dense jungle, vibrant wildlife, and golden Pacific light.' },
+      sweden:    { name: 'Sweden Field Journal',     desc: 'Quiet lakes, birch forests, and long summer evenings.' },
+      portugal:  { name: 'Portugal Field Journal',   desc: 'Atlantic coastlines, golden light, and the edge of Europe.' },
     };
-
     function addJournalToCart() {
       const active = document.querySelector('.journal-select-btn.active');
       const name = document.getElementById('journal-name').textContent;
@@ -249,11 +248,7 @@
       const cover = document.getElementById('journal-cover');
       cover.className = 'journal-ph ' + ph;
     }
-          });
-    });
-});
-    });
-
+  
     function toggleMenu() {
       const links = document.getElementById('nav-links');
       const burger = document.getElementById('hamburger');
@@ -269,6 +264,5 @@
       });
     });
   </script>
-    <script src="cart.js"></script>
 </body>
 </html>

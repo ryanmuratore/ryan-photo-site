@@ -214,11 +214,11 @@
 
   <script>
     const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
     }, { threshold: 0.1 });
     reveals.forEach(el => observer.observe(el));
-
+  
     function addWallpaperToCart() {
       const type = document.querySelector('.toggle-btn.active').dataset.type;
       Cart.add({ id: 'wallpaper-' + type, name: 'Wallpaper Pack Vol. 1', options: type.charAt(0).toUpperCase() + type.slice(1) + ' · 20 photos', price: 10 });
@@ -236,11 +236,7 @@
         specs.innerHTML = '<span>Resolution</span> — 1170 × 2532px<br><span>Format</span> — JPEG, sRGB<br><span>Files</span> — 20 wallpapers<br><span>Delivery</span> — Instant download';
       }
     }
-          });
-    });
-});
-    });
-
+  
     function toggleMenu() {
       const links = document.getElementById('nav-links');
       const burger = document.getElementById('hamburger');
@@ -256,6 +252,5 @@
       });
     });
   </script>
-    <script src="cart.js"></script>
 </body>
 </html>

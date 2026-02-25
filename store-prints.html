@@ -230,11 +230,11 @@
 
   <script>
     const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
     }, { threshold: 0.1 });
     reveals.forEach(el => observer.observe(el));
-
+  
     function selectSize(btn) {
       document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
@@ -254,11 +254,7 @@
         price: parseInt(size.dataset.price)
       });
     }
-          });
-    });
-});
-    });
-
+  
     function toggleMenu() {
       const links = document.getElementById('nav-links');
       const burger = document.getElementById('hamburger');
@@ -274,6 +270,5 @@
       });
     });
   </script>
-    <script src="cart.js"></script>
 </body>
 </html>
