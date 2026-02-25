@@ -135,6 +135,51 @@
       .portfolio-wrap { padding: 1.5rem 1.5rem 5rem; }
             .gallery-grid { column-count: 2; column-gap: 6px; }
     }
+
+    /* ── CART ── */
+    #cart-btn {
+      display: flex; align-items: center; gap: 0.6rem;
+      background: none; border: none; cursor: pointer;
+      font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.62rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--tan);
+      position: relative; transition: color 0.3s;
+      padding: 0.3rem 0;
+    }
+    #cart-btn:hover { color: var(--bark); }
+    #cart-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+    #cart-count {
+      display: none; align-items: center; justify-content: center;
+      position: absolute; top: -6px; right: -8px;
+      background: var(--bark); color: var(--warm-white);
+      font-size: 0.5rem; width: 16px; height: 16px;
+      border-radius: 50%; font-family: 'Tenor Sans', sans-serif;
+    }
+    #cart-total { color: var(--bark); font-size: 0.62rem; letter-spacing: 0.1em; }
+    .cart-flash { animation: cartFlash 0.6s ease; }
+    @keyframes cartFlash { 0%,100% { color: var(--tan); } 50% { color: var(--bark); } }
+    .cart-dropdown-wrap { position: relative; }
+    #cart-dropdown {
+      display: none; position: absolute; top: calc(100% + 1.2rem);
+      right: 0; width: 320px;
+      background: var(--warm-white); border: 1px solid var(--sand);
+      box-shadow: 0 12px 40px rgba(78,56,32,0.12);
+      z-index: 300; padding: 1.2rem;
+    }
+    #cart-dropdown.open { display: block; }
+    .cart-empty { font-size: 0.72rem; color: var(--tan); letter-spacing: 0.1em; text-align: center; padding: 1rem 0; }
+    .cart-items { display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 1rem; max-height: 300px; overflow-y: auto; }
+    .cart-item { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--linen); }
+    .cart-item-name { font-size: 0.78rem; color: var(--earth); font-family: 'Playfair Display', serif; margin-bottom: 0.2rem; }
+    .cart-item-opts { font-size: 0.62rem; color: var(--clay); letter-spacing: 0.08em; }
+    .cart-item-right { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
+    .cart-item-price { font-size: 0.82rem; color: var(--bark); font-family: 'Playfair Display', serif; white-space: nowrap; }
+    .cart-remove { background: none; border: none; cursor: pointer; color: var(--sand); font-size: 0.65rem; padding: 0.2rem; transition: color 0.2s; }
+    .cart-remove:hover { color: var(--bark); }
+    .cart-footer { padding-top: 1rem; border-top: 1px solid var(--sand); }
+    .cart-subtotal { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--earth); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; }
+    .cart-subtotal span:last-child { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--bark); }
+    .cart-checkout-btn { width: 100%; padding: 0.9rem; background: var(--earth); color: var(--warm-white); border: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; cursor: not-allowed; opacity: 0.6; }
   </style>
 </head>
 <body>
@@ -148,6 +193,14 @@
       <li><a href="index.html#shop">Prints</a></li>
       <li><a href="index.html#about">About</a></li>
       <li><a href="index.html#contact">Contact</a></li>
+          <li class="cart-dropdown-wrap">
+        <button id="cart-btn" onclick="Cart.toggleDropdown()">
+          <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span id="cart-total"></span>
+          <span id="cart-count"></span>
+        </button>
+        <div id="cart-dropdown"></div>
+      </li>
     </ul>
   </nav>
 
@@ -713,5 +766,6 @@
       });
     });
   </script>
+    <script src="cart.js"></script>
 </body>
 </html>
