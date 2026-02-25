@@ -228,15 +228,26 @@
 <body>
 
   <!-- NAV -->
-  <nav>
+  <nav id="nav">
     <a href="index.html" class="nav-logo">Ryan Muratore</a>
-    <ul class="nav-links">
+    <div class="mobile-top-right">
+      <button id="cart-btn-mobile" onclick="Cart.toggleDropdown()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span id="cart-total-mobile"></span>
+      </button>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <ul class="nav-links" id="nav-links">
       <li><a href="index.html#portfolio">Portfolio</a></li>
-      <li><a href="portfolio.html" class="active">Full Portfolio</a></li>
+      <li><a href="portfolio.html">Full Portfolio</a></li>
       <li><a href="index.html#shop">Prints</a></li>
+      <li><a href="index.html#journals">Field Journals</a></li>
+      <li><a href="index.html#wallpapers">Wallpapers</a></li>
       <li><a href="index.html#about">About</a></li>
       <li><a href="index.html#contact">Contact</a></li>
-          <li class="cart-dropdown-wrap">
+      <li class="cart-dropdown-wrap">
         <button id="cart-btn" onclick="Cart.toggleDropdown()">
           <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
           <span id="cart-total"></span>
