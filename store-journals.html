@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Order a Field Journal — Ryan Muratore Photography</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&family=Tenor+Sans&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --warm-white: #faf6f0; --linen: #f0e9de; --sand: #ddd0bc; --clay: #c4a882; --tan: #a8896a; --bark: #7a5c3a; --earth: #4e3820; --ink: #2a1f12; }
+    body { background: var(--warm-white); color: var(--ink); font-family: 'Tenor Sans', sans-serif; overflow-x: hidden; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 3rem; background: rgba(250,246,240,0.96); backdrop-filter: blur(8px); box-shadow: 0 1px 0 var(--sand); }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 300; letter-spacing: 0.12em; color: var(--earth); text-decoration: none; }
+    .nav-links { display: flex; gap: 2.8rem; list-style: none; }
+    .nav-links a { font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--tan); text-decoration: none; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--bark); }
+
+    .page-header { padding: 10rem 3rem 4rem; background: var(--linen); }
+    .section-label { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.8rem; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; line-height: 1.15; color: var(--earth); }
+    .section-title em { font-style: italic; color: var(--tan); }
+    .section-rule { width: 40px; height: 1px; background: var(--clay); margin: 1.8rem 0 0; }
+
+    .store-wrap { padding: 4rem 3rem 7rem; max-width: 900px; margin: 0 auto; }
+    .back-link { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--tan); text-decoration: none; margin-bottom: 3rem; transition: color 0.3s; }
+    .back-link:hover { color: var(--bark); }
+    .back-link::before { content: '←'; }
+
+    .journal-select-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 4rem; }
+    .journal-select-btn { border: 1px solid var(--sand); background: none; padding: 1rem; cursor: pointer; text-align: left; transition: all 0.25s; font-family: 'Tenor Sans', sans-serif; }
+    .journal-select-btn:hover, .journal-select-btn.active { border-color: var(--earth); background: var(--earth); }
+    .journal-select-btn p:first-child { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.3rem; }
+    .journal-select-btn.active p:first-child { color: var(--clay); }
+    .journal-select-btn p:last-child { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 300; color: var(--earth); }
+    .journal-select-btn.active p:last-child { color: var(--warm-white); }
+
+    .product-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-bottom: 4rem; }
+    .product-img { aspect-ratio: 3/4; overflow: hidden; border: 1px solid var(--sand); }
+    .product-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .journal-ph { width: 100%; height: 100%; }
+    .jph1 { background: linear-gradient(160deg, #c0d0d8 0%, #7090a0 100%); }
+    .jph2 { background: linear-gradient(160deg, #a0b8a0 0%, #507060 100%); }
+    .jph3 { background: linear-gradient(160deg, #b0c890 0%, #608050 100%); }
+    .jph4 { background: linear-gradient(160deg, #c8b870 0%, #887830 100%); }
+    .jph5 { background: linear-gradient(160deg, #d0b8a0 0%, #907060 100%); }
+    .jph6 { background: linear-gradient(160deg, #b0b8c8 0%, #607080 100%); }
+
+    .product-details { display: flex; flex-direction: column; gap: 1.8rem; }
+    .product-name { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 300; color: var(--earth); }
+    .product-desc { font-size: 0.82rem; line-height: 1.9; color: var(--tan); }
+    .product-specs { display: flex; flex-direction: column; gap: 0.5rem; padding: 1.2rem; background: var(--linen); border: 1px solid var(--sand); }
+    .product-specs p { font-size: 0.72rem; color: var(--tan); line-height: 1.6; }
+    .product-specs p span { color: var(--bark); font-family: 'Playfair Display', serif; }
+    .price-display { font-family: 'Playfair Display', serif; font-size: 2.4rem; color: var(--bark); }
+    .btn-order { width: 100%; padding: 1.1rem; background: var(--earth); color: var(--warm-white); border: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; cursor: pointer; transition: background 0.3s; }
+    .btn-order:hover { background: var(--bark); }
+
+    .product-info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; padding: 3rem 0; border-top: 1px solid var(--sand); border-bottom: 1px solid var(--sand); }
+    .info-block p:first-child { font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.5rem; }
+    .info-block p:last-child { font-size: 0.82rem; line-height: 1.7; color: var(--tan); }
+
+    footer { background: var(--earth); color: rgba(250,246,240,0.4); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 300; font-style: italic; color: var(--clay); text-decoration: none; }
+    footer p { font-size: 0.65rem; letter-spacing: 0.1em; }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.9s ease, transform 0.9s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { gap: 1.2rem; overflow-x: auto; scrollbar-width: none; }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a { font-size: 0.58rem; white-space: nowrap; }
+      .page-header { padding: 7rem 1.5rem 3rem; }
+      .store-wrap { padding: 2rem 1.5rem 5rem; }
+      .product-hero { grid-template-columns: 1fr; gap: 2rem; }
+      .product-info-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    }
+
+    /* ── CART ── */
+    #cart-btn {
+      display: flex; align-items: center; gap: 0.6rem;
+      background: none; border: none; cursor: pointer;
+      font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.62rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--tan);
+      position: relative; transition: color 0.3s;
+      padding: 0.3rem 0;
+    }
+    #cart-btn:hover { color: var(--bark); }
+    #cart-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+    #cart-count {
+      display: none; align-items: center; justify-content: center;
+      position: absolute; top: -6px; right: -8px;
+      background: var(--bark); color: var(--warm-white);
+      font-size: 0.5rem; width: 16px; height: 16px;
+      border-radius: 50%; font-family: 'Tenor Sans', sans-serif;
+    }
+    #cart-total { color: var(--bark); font-size: 0.62rem; letter-spacing: 0.1em; }
+    .cart-flash { animation: cartFlash 0.6s ease; }
+    @keyframes cartFlash { 0%,100% { color: var(--tan); } 50% { color: var(--bark); } }
+    .cart-dropdown-wrap { position: relative; }
+    #cart-dropdown {
+      display: none; position: absolute; top: calc(100% + 1.2rem);
+      right: 0; width: 320px;
+      background: var(--warm-white); border: 1px solid var(--sand);
+      box-shadow: 0 12px 40px rgba(78,56,32,0.12);
+      z-index: 300; padding: 1.2rem;
+    }
+    #cart-dropdown.open { display: block; }
+    .cart-empty { font-size: 0.72rem; color: var(--tan); letter-spacing: 0.1em; text-align: center; padding: 1rem 0; }
+    .cart-items { display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 1rem; max-height: 300px; overflow-y: auto; }
+    .cart-item { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--linen); }
+    .cart-item-name { font-size: 0.78rem; color: var(--earth); font-family: 'Playfair Display', serif; margin-bottom: 0.2rem; }
+    .cart-item-opts { font-size: 0.62rem; color: var(--clay); letter-spacing: 0.08em; }
+    .cart-item-right { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
+    .cart-item-price { font-size: 0.82rem; color: var(--bark); font-family: 'Playfair Display', serif; white-space: nowrap; }
+    .cart-remove { background: none; border: none; cursor: pointer; color: var(--sand); font-size: 0.65rem; padding: 0.2rem; transition: color 0.2s; }
+    .cart-remove:hover { color: var(--bark); }
+    .cart-footer { padding-top: 1rem; border-top: 1px solid var(--sand); }
+    .cart-subtotal { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--earth); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; }
+    .cart-subtotal span:last-child { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--bark); }
+    .cart-checkout-btn { width: 100%; padding: 0.9rem; background: var(--earth); color: var(--warm-white); border: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; cursor: not-allowed; opacity: 0.6; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="nav-logo">Ryan Muratore</a>
+    <ul class="nav-links">
+      <li><a href="index.html#portfolio">Portfolio</a></li>
+      <li><a href="index.html#shop">Prints</a></li>
+      <li><a href="index.html#journals">Field Journals</a></li>
+      <li><a href="index.html#wallpapers">Wallpapers</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header reveal">
+    <p class="section-label">Field Journals</p>
+    <h1 class="section-title">Order a <em>journal</em></h1>
+    <div class="section-rule"></div>
+  </div>
+
+  <div class="store-wrap">
+    <a href="journals.html" class="back-link reveal">Back to all journals</a>
+
+    <div class="reveal">
+      <span class="section-label" style="margin-bottom:1rem; display:block;">Choose your destination</span>
+      <div class="journal-select-grid">
+        <button class="journal-select-btn active" data-journal="iceland" data-ph="jph1" onclick="selectJournal(this)"><p>Vol. 1</p><p>Iceland</p></button>
+        <button class="journal-select-btn" data-journal="norway" data-ph="jph2" onclick="selectJournal(this)"><p>Vol. 2</p><p>Norway</p></button>
+        <button class="journal-select-btn" data-journal="ireland" data-ph="jph3" onclick="selectJournal(this)"><p>Vol. 3</p><p>Ireland</p></button>
+        <button class="journal-select-btn" data-journal="costarica" data-ph="jph4" onclick="selectJournal(this)"><p>Vol. 4</p><p>Costa Rica</p></button>
+        <button class="journal-select-btn" data-journal="sweden" data-ph="jph5" onclick="selectJournal(this)"><p>Vol. 5</p><p>Sweden</p></button>
+        <button class="journal-select-btn" data-journal="portugal" data-ph="jph6" onclick="selectJournal(this)"><p>Vol. 6</p><p>Portugal</p></button>
+      </div>
+    </div>
+
+    <div class="product-hero reveal">
+      <div class="product-img">
+        <div class="journal-ph jph1" id="journal-cover"></div>
+      </div>
+      <div class="product-details">
+        <p class="product-name" id="journal-name">Iceland Field Journal</p>
+        <p class="product-desc" id="journal-desc">Glaciers, waterfalls, and volcanic landscapes — the raw edge of the north. A curated collection of photographs from across Iceland, printed on premium paper and bound to last.</p>
+        <div class="product-specs">
+          <p><span>Format</span> — Hardcover, 9 × 12 in</p>
+          <p><span>Pages</span> — 60pp full-bleed photography</p>
+          <p><span>Paper</span> — 170gsm silk art paper</p>
+          <p><span>Shipping</span> — 5–7 business days worldwide</p>
+        </div>
+        <p class="price-display">$40</p>
+        <button class="btn-order" onclick="addJournalToCart()">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="product-info-grid reveal">
+      <div class="info-block"><p>Print Quality</p><p>Full-bleed photography printed on 170gsm silk art paper that brings every image to life.</p></div>
+      <div class="info-block"><p>Binding</p><p>Hardcover case binding built to sit on a shelf and last for years.</p></div>
+      <div class="info-block"><p>Shipping</p><p>Shipped within 5–7 business days. Worldwide shipping available.</p></div>
+    </div>
+  </div>
+
+  <footer>
+    <a href="index.html" class="footer-logo">Ryan Muratore Photography</a>
+    <p>© 2025 Ryan Muratore — All rights reserved. Do not reproduce without permission.</p>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    const journals = {
+      iceland:   { name: 'Iceland Field Journal',    desc: 'Glaciers, waterfalls, and volcanic landscapes — the raw edge of the north.', img: 'journal-iceland.jpg' },
+      norway:    { name: 'Norway Field Journal',     desc: 'Fjords, forests, and the endless Nordic light.', img: 'journal-norway.jpg' },
+      ireland:   { name: 'Ireland Field Journal',    desc: 'Rolling green hills, dramatic coastlines, and ancient silence.', img: 'journal-ireland.jpg' },
+      costarica: { name: 'Costa Rica Field Journal', desc: 'Dense jungle, vibrant wildlife, and golden Pacific light.', img: 'journal-costarica.jpg' },
+      sweden:    { name: 'Sweden Field Journal',     desc: 'Quiet lakes, birch forests, and long summer evenings.', img: 'journal-sweden.jpg' },
+      portugal:  { name: 'Portugal Field Journal',   desc: 'Atlantic coastlines, golden light, and the edge of Europe.', img: 'journal-portugal.jpg' },
+    };
+
+    function addJournalToCart() {
+      const active = document.querySelector('.journal-select-btn.active');
+      const name = document.getElementById('journal-name').textContent;
+      Cart.add({ id: 'journal-' + active.dataset.journal, name: name, options: 'Field Journal', price: 40 });
+    }
+    function selectJournal(btn) {
+      document.querySelectorAll('.journal-select-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const key = btn.dataset.journal;
+      const ph = btn.dataset.ph;
+      const data = journals[key];
+      document.getElementById('journal-name').textContent = data.name;
+      document.getElementById('journal-desc').textContent = data.desc;
+      const cover = document.getElementById('journal-cover');
+      cover.className = 'journal-ph ' + ph;
+    }
+  </script>
+    <script src="cart.js"></script>
+</body>
+</html>

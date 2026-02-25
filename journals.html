@@ -63,6 +63,51 @@
       .journals-wrap { padding: 0 1.5rem 5rem; }
       .journals-grid { grid-template-columns: 1fr; }
     }
+
+    /* ── CART ── */
+    #cart-btn {
+      display: flex; align-items: center; gap: 0.6rem;
+      background: none; border: none; cursor: pointer;
+      font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.62rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--tan);
+      position: relative; transition: color 0.3s;
+      padding: 0.3rem 0;
+    }
+    #cart-btn:hover { color: var(--bark); }
+    #cart-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+    #cart-count {
+      display: none; align-items: center; justify-content: center;
+      position: absolute; top: -6px; right: -8px;
+      background: var(--bark); color: var(--warm-white);
+      font-size: 0.5rem; width: 16px; height: 16px;
+      border-radius: 50%; font-family: 'Tenor Sans', sans-serif;
+    }
+    #cart-total { color: var(--bark); font-size: 0.62rem; letter-spacing: 0.1em; }
+    .cart-flash { animation: cartFlash 0.6s ease; }
+    @keyframes cartFlash { 0%,100% { color: var(--tan); } 50% { color: var(--bark); } }
+    .cart-dropdown-wrap { position: relative; }
+    #cart-dropdown {
+      display: none; position: absolute; top: calc(100% + 1.2rem);
+      right: 0; width: 320px;
+      background: var(--warm-white); border: 1px solid var(--sand);
+      box-shadow: 0 12px 40px rgba(78,56,32,0.12);
+      z-index: 300; padding: 1.2rem;
+    }
+    #cart-dropdown.open { display: block; }
+    .cart-empty { font-size: 0.72rem; color: var(--tan); letter-spacing: 0.1em; text-align: center; padding: 1rem 0; }
+    .cart-items { display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 1rem; max-height: 300px; overflow-y: auto; }
+    .cart-item { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--linen); }
+    .cart-item-name { font-size: 0.78rem; color: var(--earth); font-family: 'Playfair Display', serif; margin-bottom: 0.2rem; }
+    .cart-item-opts { font-size: 0.62rem; color: var(--clay); letter-spacing: 0.08em; }
+    .cart-item-right { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
+    .cart-item-price { font-size: 0.82rem; color: var(--bark); font-family: 'Playfair Display', serif; white-space: nowrap; }
+    .cart-remove { background: none; border: none; cursor: pointer; color: var(--sand); font-size: 0.65rem; padding: 0.2rem; transition: color 0.2s; }
+    .cart-remove:hover { color: var(--bark); }
+    .cart-footer { padding-top: 1rem; border-top: 1px solid var(--sand); }
+    .cart-subtotal { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--earth); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; }
+    .cart-subtotal span:last-child { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--bark); }
+    .cart-checkout-btn { width: 100%; padding: 0.9rem; background: var(--earth); color: var(--warm-white); border: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; cursor: not-allowed; opacity: 0.6; }
   </style>
 </head>
 <body>
@@ -89,11 +134,11 @@
     <div class="journals-grid reveal">
 
       <div class="journal-card">
-        <div class="journal-img-wrap">
+        <a href="store-journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap">
           <div class="journal-ph jph1"></div>
           <!-- Replace with: <img src="journal-iceland.jpg" alt="Iceland"> -->
           <div class="journal-overlay"><span class="journal-location">Iceland</span></div>
-        </div>
+        </div></a>
         <div class="journal-info">
           <p class="journal-name">Iceland Field Journal</p>
           <p class="journal-desc">Glaciers, waterfalls, and volcanic landscapes — the raw edge of the north.</p>
@@ -102,11 +147,11 @@
       </div>
 
       <div class="journal-card">
-        <div class="journal-img-wrap">
+        <a href="store-journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap">
           <div class="journal-ph jph2"></div>
           <!-- Replace with: <img src="journal-norway.jpg" alt="Norway"> -->
           <div class="journal-overlay"><span class="journal-location">Norway</span></div>
-        </div>
+        </div></a>
         <div class="journal-info">
           <p class="journal-name">Norway Field Journal</p>
           <p class="journal-desc">Fjords, forests, and the endless Nordic light.</p>
@@ -115,11 +160,11 @@
       </div>
 
       <div class="journal-card">
-        <div class="journal-img-wrap">
+        <a href="store-journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap">
           <div class="journal-ph jph3"></div>
           <!-- Replace with: <img src="journal-ireland.jpg" alt="Ireland"> -->
           <div class="journal-overlay"><span class="journal-location">Ireland</span></div>
-        </div>
+        </div></a>
         <div class="journal-info">
           <p class="journal-name">Ireland Field Journal</p>
           <p class="journal-desc">Rolling green hills, dramatic coastlines, and ancient silence.</p>
@@ -128,11 +173,11 @@
       </div>
 
       <div class="journal-card">
-        <div class="journal-img-wrap">
+        <a href="store-journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap">
           <div class="journal-ph jph4"></div>
           <!-- Replace with: <img src="journal-costarica.jpg" alt="Costa Rica"> -->
           <div class="journal-overlay"><span class="journal-location">Costa Rica</span></div>
-        </div>
+        </div></a>
         <div class="journal-info">
           <p class="journal-name">Costa Rica Field Journal</p>
           <p class="journal-desc">Dense jungle, vibrant wildlife, and golden Pacific light.</p>
@@ -141,11 +186,11 @@
       </div>
 
       <div class="journal-card">
-        <div class="journal-img-wrap">
+        <a href="store-journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap">
           <div class="journal-ph jph5"></div>
           <!-- Replace with: <img src="journal-sweden.jpg" alt="Sweden"> -->
           <div class="journal-overlay"><span class="journal-location">Sweden</span></div>
-        </div>
+        </div></a>
         <div class="journal-info">
           <p class="journal-name">Sweden Field Journal</p>
           <p class="journal-desc">Quiet lakes, birch forests, and long summer evenings.</p>
@@ -154,11 +199,11 @@
       </div>
 
       <div class="journal-card">
-        <div class="journal-img-wrap">
+        <a href="store-journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap">
           <div class="journal-ph jph6"></div>
           <!-- Replace with: <img src="journal-portugal.jpg" alt="Portugal"> -->
           <div class="journal-overlay"><span class="journal-location">Portugal</span></div>
-        </div>
+        </div></a>
         <div class="journal-info">
           <p class="journal-name">Portugal Field Journal</p>
           <p class="journal-desc">Atlantic coastlines, golden light, and the edge of Europe.</p>
@@ -169,10 +214,10 @@
       <!-- Add more journals here as you visit new locations -->
       <!-- Format:
       <div class="journal-card">
-        <div class="journal-img-wrap">
+        <a href="store-journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap">
           <div class="journal-ph jph1"></div>
           <div class="journal-overlay"><span class="journal-location">Country Name</span></div>
-        </div>
+        </div></a>
         <div class="journal-info">
           <p class="journal-name">Country Field Journal</p>
           <p class="journal-desc">Your description here.</p>
@@ -196,5 +241,6 @@
     }, { threshold: 0.1 });
     reveals.forEach(el => observer.observe(el));
   </script>
+    <script src="cart.js"></script>
 </body>
 </html>

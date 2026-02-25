@@ -390,8 +390,47 @@
       letter-spacing: 0.05em;
     }
 
+    /* ── WALLPAPERS ── */
+    #wallpapers { background: var(--linen); }
+    .wallpaper-card-wrap { display: flex; justify-content: center; }
+    .wallpaper-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--sand);
+      overflow: hidden;
+      max-width: 860px;
+      width: 100%;
+      transition: box-shadow 0.4s;
+    }
+    .wallpaper-card:hover { box-shadow: 0 18px 45px rgba(78,56,32,0.1); }
+    .wallpaper-preview { height: 420px; overflow: hidden; position: relative; }
+    .wallpaper-ph { width: 100%; height: 100%; }
+    .wph1 { background: linear-gradient(160deg, #8090a8 0%, #304050 100%); }
+    .wallpaper-preview img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .wallpaper-info { padding: 2.5rem; background: var(--linen); display: flex; flex-direction: column; justify-content: center; gap: 1.2rem; }
+    .wallpaper-name { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 300; color: var(--earth); }
+    .wallpaper-desc { font-size: 0.8rem; line-height: 1.8; color: var(--tan); }
+    .wallpaper-toggle { display: flex; gap: 0; border: 1px solid var(--sand); width: fit-content; }
+    .wallpaper-type-btn {
+      padding: 0.5rem 1.4rem;
+      font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      background: none;
+      color: var(--tan);
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .wallpaper-type-btn.active { background: var(--earth); color: var(--warm-white); }
+    .wallpaper-specs { font-size: 0.65rem; letter-spacing: 0.1em; color: var(--clay); }
+    .wallpaper-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 1.2rem; border-top: 1px solid var(--sand); }
+    .wallpaper-price { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--bark); }
+
     /* ── FIELD JOURNALS ── */
-    #journals { background: var(--warm-white); }
+    #journals { background: var(--linen); }
     .journals-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -522,6 +561,8 @@
       .shop-intro { grid-template-columns: 1fr; gap: 2rem; }
       .prints-grid { grid-template-columns: 1fr; }
       .journals-grid { grid-template-columns: 1fr; }
+      .wallpaper-card { grid-template-columns: 1fr; }
+      .wallpaper-preview { height: 260px; }
       .about-grid { grid-template-columns: 1fr; gap: 3rem; }
       .about-image-wrap { height: 300px; }
       .about-accent { display: none; }
@@ -532,6 +573,51 @@
       footer { flex-direction: column; align-items: flex-start; padding: 2rem 1.5rem; }
       .divider { margin: 0 1.5rem; }
     }
+
+    /* ── CART ── */
+    #cart-btn {
+      display: flex; align-items: center; gap: 0.6rem;
+      background: none; border: none; cursor: pointer;
+      font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.62rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--tan);
+      position: relative; transition: color 0.3s;
+      padding: 0.3rem 0;
+    }
+    #cart-btn:hover { color: var(--bark); }
+    #cart-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+    #cart-count {
+      display: none; align-items: center; justify-content: center;
+      position: absolute; top: -6px; right: -8px;
+      background: var(--bark); color: var(--warm-white);
+      font-size: 0.5rem; width: 16px; height: 16px;
+      border-radius: 50%; font-family: 'Tenor Sans', sans-serif;
+    }
+    #cart-total { color: var(--bark); font-size: 0.62rem; letter-spacing: 0.1em; }
+    .cart-flash { animation: cartFlash 0.6s ease; }
+    @keyframes cartFlash { 0%,100% { color: var(--tan); } 50% { color: var(--bark); } }
+    .cart-dropdown-wrap { position: relative; }
+    #cart-dropdown {
+      display: none; position: absolute; top: calc(100% + 1.2rem);
+      right: 0; width: 320px;
+      background: var(--warm-white); border: 1px solid var(--sand);
+      box-shadow: 0 12px 40px rgba(78,56,32,0.12);
+      z-index: 300; padding: 1.2rem;
+    }
+    #cart-dropdown.open { display: block; }
+    .cart-empty { font-size: 0.72rem; color: var(--tan); letter-spacing: 0.1em; text-align: center; padding: 1rem 0; }
+    .cart-items { display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 1rem; max-height: 300px; overflow-y: auto; }
+    .cart-item { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--linen); }
+    .cart-item-name { font-size: 0.78rem; color: var(--earth); font-family: 'Playfair Display', serif; margin-bottom: 0.2rem; }
+    .cart-item-opts { font-size: 0.62rem; color: var(--clay); letter-spacing: 0.08em; }
+    .cart-item-right { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
+    .cart-item-price { font-size: 0.82rem; color: var(--bark); font-family: 'Playfair Display', serif; white-space: nowrap; }
+    .cart-remove { background: none; border: none; cursor: pointer; color: var(--sand); font-size: 0.65rem; padding: 0.2rem; transition: color 0.2s; }
+    .cart-remove:hover { color: var(--bark); }
+    .cart-footer { padding-top: 1rem; border-top: 1px solid var(--sand); }
+    .cart-subtotal { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--earth); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; }
+    .cart-subtotal span:last-child { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--bark); }
+    .cart-checkout-btn { width: 100%; padding: 0.9rem; background: var(--earth); color: var(--warm-white); border: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; cursor: not-allowed; opacity: 0.6; }
   </style>
 </head>
 <body>
@@ -544,6 +630,7 @@
       <li><a href="portfolio.html">Full Portfolio</a></li>
       <li><a href="#shop">Prints</a></li>
       <li><a href="#journals">Field Journals</a></li>
+      <li><a href="#wallpapers">Wallpapers</a></li>
       <li><a href="prints.html">All Prints</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -607,63 +694,63 @@
     <div class="gallery-grid reveal" id="gallery-grid">
 
       <!-- LANDSCAPE PHOTOS -->
-      <div class="gallery-item ar-landscape" data-country="Iceland" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Iceland" data-type="landscape" data-index="0">
         <img src="iceland-1.jpg" alt="At The Edge of The North">
         <div class="gallery-hover">
           <div class="gallery-hover-title">At The Edge of The North</div>
           <div class="gallery-hover-location">Location: Iceland</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Costa Rica" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Costa Rica" data-type="landscape" data-index="1">
         <img src="costarica-1.jpg" alt="Descent">
         <div class="gallery-hover">
           <div class="gallery-hover-title">Descent</div>
           <div class="gallery-hover-location">Location: Costa Rica</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Costa Rica" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Costa Rica" data-type="landscape" data-index="2">
         <img src="costarica-2.jpg" alt="Emerald Passage">
         <div class="gallery-hover">
           <div class="gallery-hover-title">Emerald Passage</div>
           <div class="gallery-hover-location">Location: Costa Rica</div>
         </div>
       </div>
-      <div class="gallery-item ar-portrait" data-country="Costa Rica" data-type="landscape">
+      <div class="gallery-item ar-portrait" data-country="Costa Rica" data-type="landscape" data-index="3">
         <img src="costarica-3.jpg" alt="Bloom, Anyway">
         <div class="gallery-hover">
           <div class="gallery-hover-title">Bloom, Anyway</div>
           <div class="gallery-hover-location">Location: Costa Rica</div>
         </div>
       </div>
-      <div class="gallery-item ar-portrait" data-country="Canada" data-type="landscape">
+      <div class="gallery-item ar-portrait" data-country="Canada" data-type="landscape" data-index="4">
         <div class="gallery-ph ph5"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Canada</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Portugal" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Portugal" data-type="landscape" data-index="5">
         <div class="gallery-ph ph6"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Portugal</div>
         </div>
       </div>
-      <div class="gallery-item ar-portrait" data-country="Sweden" data-type="landscape">
+      <div class="gallery-item ar-portrait" data-country="Sweden" data-type="landscape" data-index="6">
         <div class="gallery-ph ph7"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Sweden</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Costa Rica" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Costa Rica" data-type="landscape" data-index="7">
         <div class="gallery-ph ph8"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Costa Rica</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Denmark" data-type="landscape">
+      <div class="gallery-item ar-landscape" data-country="Denmark" data-type="landscape" data-index="8">
         <div class="gallery-ph ph1"></div>
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
@@ -752,56 +839,91 @@
     </div>
     <div class="prints-grid reveal">
       <div class="print-card">
-        <div class="print-img-wrap">
+        <a href="store-prints.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
           <div class="print-ph pph1"></div>
           <span class="print-badge">Best Seller</span>
-        </div>
+        </div></a>
         <div class="print-info">
           <p class="print-name">Morning Mist</p>
           <p class="print-location">Location: [Your Location]</p>
           <p class="print-sizes">8×10 · 12×16 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $45</span><button class="btn-add">Order Print</button></div>
+          <div class="print-footer"><span class="print-price">from $45</span><a href="store-prints.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
         </div>
       </div>
       <div class="print-card">
-        <div class="print-img-wrap"><div class="print-ph pph2"></div></div>
+        <a href="store-prints.html" style="display:block; text-decoration:none;"><div class="print-img-wrap"><div class="print-ph pph2"></div></div></a>
         <div class="print-info">
           <p class="print-name">Golden Hour</p>
           <p class="print-location">Location: [Your Location]</p>
           <p class="print-sizes">8×10 · 12×16 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $45</span><button class="btn-add">Order Print</button></div>
+          <div class="print-footer"><span class="print-price">from $45</span><a href="store-prints.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
         </div>
       </div>
       <div class="print-card">
-        <div class="print-img-wrap"><div class="print-ph pph3"></div><span class="print-badge">New</span></div>
+        <a href="store-prints.html" style="display:block; text-decoration:none;"><div class="print-img-wrap"><div class="print-ph pph3"></div><span class="print-badge">New</span></div></a>
         <div class="print-info">
           <p class="print-name">Wild Encounter</p>
           <p class="print-location">Location: [Your Location]</p>
           <p class="print-sizes">8×10 · 12×16 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $45</span><button class="btn-add">Order Print</button></div>
+          <div class="print-footer"><span class="print-price">from $45</span><a href="store-prints.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
         </div>
       </div>
       <div class="print-card">
-        <div class="print-img-wrap"><div class="print-ph pph4"></div></div>
+        <a href="store-prints.html" style="display:block; text-decoration:none;"><div class="print-img-wrap"><div class="print-ph pph4"></div></div></a>
         <div class="print-info">
           <p class="print-name">River Bend</p>
           <p class="print-location">Location: [Your Location]</p>
           <p class="print-sizes">8×10 · 12×16 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $45</span><button class="btn-add">Order Print</button></div>
+          <div class="print-footer"><span class="print-price">from $45</span><a href="store-prints.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
         </div>
       </div>
       <div class="print-card">
-        <div class="print-img-wrap"><div class="print-ph pph1"></div></div>
+        <a href="store-prints.html" style="display:block; text-decoration:none;"><div class="print-img-wrap"><div class="print-ph pph1"></div></div></a>
         <div class="print-info">
           <p class="print-name">Still Waters</p>
           <p class="print-location">Location: [Your Location]</p>
           <p class="print-sizes">8×10 · 12×16 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $45</span><button class="btn-add">Order Print</button></div>
+          <div class="print-footer"><span class="print-price">from $45</span><a href="store-prints.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
         </div>
       </div>
     </div>
     <div style="text-align: center; margin-top: 3rem;">
       <a href="prints.html" class="btn-portfolio">View All 25 Prints</a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- WALLPAPERS -->
+  <section id="wallpapers" class="section-wrap">
+    <div class="shop-intro reveal">
+      <div>
+        <p class="section-label">Digital Downloads</p>
+        <h2 class="section-title">Wallpaper<br><em>packs</em></h2>
+        <div class="section-rule"></div>
+      </div>
+      <p class="shop-note-text">Bring the journey to your screen. Each pack includes 20 curated wallpapers optimized for your device — shot on location, delivered instantly as a digital download.</p>
+    </div>
+    <div class="wallpaper-card-wrap reveal">
+      <div class="wallpaper-card">
+        <div class="wallpaper-preview">
+          <div class="wallpaper-ph wph1"></div>
+          <!-- Replace with: <img src="wallpaper-preview.jpg" alt="Wallpaper Pack Preview"> -->
+        </div>
+        <div class="wallpaper-info">
+          <p class="wallpaper-name">Wallpaper Pack Vol. 1</p>
+          <p class="wallpaper-desc">20 hand-selected photographs from across Iceland, Norway, Ireland, Costa Rica and more — ready for your screen.</p>
+          <div class="wallpaper-toggle">
+            <button class="wallpaper-type-btn active" data-type="desktop">Desktop</button>
+            <button class="wallpaper-type-btn" data-type="mobile">Mobile</button>
+          </div>
+          <p class="wallpaper-specs" id="wallpaper-specs">3840 × 2160px · JPEG · Instant download</p>
+          <div class="wallpaper-footer">
+            <span class="wallpaper-price">$10</span>
+            <a href="store-wallpapers.html" class="btn-add" style="text-decoration:none;">Buy Pack</a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -820,90 +942,90 @@
     <div class="journals-grid reveal">
 
       <div class="journal-card">
-        <div class="journal-img-wrap">
+        <a href="store-journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap">
           <div class="journal-ph jph1"></div>
           <!-- Replace with: <img src="journal-iceland.jpg" alt="Iceland"> -->
           <div class="journal-overlay">
             <span class="journal-location">Iceland</span>
           </div>
-        </div>
+        </div></a>
         <div class="journal-info">
           <p class="journal-name">Iceland Field Journal</p>
           <p class="journal-desc">Glaciers, waterfalls, and volcanic landscapes — the raw edge of the north.</p>
           <div class="journal-footer">
             <span class="journal-price">$40</span>
-            <button class="btn-add">Order Journal</button>
+            <a href="store-journals.html" class="btn-add" style="text-decoration:none;">Order Journal</a>
           </div>
         </div>
       </div>
 
       <div class="journal-card">
-        <div class="journal-img-wrap">
+        <a href="store-journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap">
           <div class="journal-ph jph2"></div>
           <!-- Replace with: <img src="journal-norway.jpg" alt="Norway"> -->
           <div class="journal-overlay">
             <span class="journal-location">Norway</span>
           </div>
-        </div>
+        </div></a>
         <div class="journal-info">
           <p class="journal-name">Norway Field Journal</p>
           <p class="journal-desc">Fjords, forests, and the endless Nordic light.</p>
           <div class="journal-footer">
             <span class="journal-price">$40</span>
-            <button class="btn-add">Order Journal</button>
+            <a href="store-journals.html" class="btn-add" style="text-decoration:none;">Order Journal</a>
           </div>
         </div>
       </div>
 
       <div class="journal-card">
-        <div class="journal-img-wrap">
+        <a href="store-journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap">
           <div class="journal-ph jph3"></div>
           <!-- Replace with: <img src="journal-ireland.jpg" alt="Ireland"> -->
           <div class="journal-overlay">
             <span class="journal-location">Ireland</span>
           </div>
-        </div>
+        </div></a>
         <div class="journal-info">
           <p class="journal-name">Ireland Field Journal</p>
           <p class="journal-desc">Rolling green hills, dramatic coastlines, and ancient silence.</p>
           <div class="journal-footer">
             <span class="journal-price">$40</span>
-            <button class="btn-add">Order Journal</button>
+            <a href="store-journals.html" class="btn-add" style="text-decoration:none;">Order Journal</a>
           </div>
         </div>
       </div>
 
       <div class="journal-card">
-        <div class="journal-img-wrap">
+        <a href="store-journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap">
           <div class="journal-ph jph4"></div>
           <!-- Replace with: <img src="journal-costarica.jpg" alt="Costa Rica"> -->
           <div class="journal-overlay">
             <span class="journal-location">Costa Rica</span>
           </div>
-        </div>
+        </div></a>
         <div class="journal-info">
           <p class="journal-name">Costa Rica Field Journal</p>
           <p class="journal-desc">Dense jungle, vibrant wildlife, and golden Pacific light.</p>
           <div class="journal-footer">
             <span class="journal-price">$40</span>
-            <button class="btn-add">Order Journal</button>
+            <a href="store-journals.html" class="btn-add" style="text-decoration:none;">Order Journal</a>
           </div>
         </div>
       </div>
 
       <div class="journal-card">
-        <div class="journal-img-wrap">
+        <a href="store-journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap">
           <div class="journal-ph jph5"></div>
           <div class="journal-overlay">
             <span class="journal-location">Sweden</span>
           </div>
-        </div>
+        </div></a>
         <div class="journal-info">
           <p class="journal-name">Sweden Field Journal</p>
           <p class="journal-desc">Quiet lakes, birch forests, and long summer evenings.</p>
           <div class="journal-footer">
             <span class="journal-price">$40</span>
-            <button class="btn-add">Order Journal</button>
+            <a href="store-journals.html" class="btn-add" style="text-decoration:none;">Order Journal</a>
           </div>
         </div>
       </div>
@@ -934,8 +1056,8 @@
         <h2 class="section-title">Traveling the world,<br><em>one frame</em> at a time</h2>
         <div class="section-rule"></div>
         <div class="about-body">
-          <p>I’m Ryan Muratore, a photographer based in New York City. I travel whenever I can and use photography to hold onto moments that only exist once.</p>
-          <p>I’m drawn to the details most people pass by. Photography lets me slow down, notice them, and build a world from a single point in time — seen only the way I saw it. I shoot landscapes and wildlife as they are, so someone who wasn’t there can still feel present.</p>
+          <p>I'm Ryan Muratore, a photographer based in New York City. I travel as much as I can and bring everything I see back home through my photos.</p>
+          <p>I'm drawn to the small stuff — the things you'd walk right past. I shoot landscapes and wildlife exactly as they are, so people who weren't there can feel like they were right alongside me.</p>
         </div>
         <div class="about-gear">
           <div class="gear-item">
@@ -1052,12 +1174,35 @@
     const galleryItems = document.querySelectorAll('.gallery-item[data-country]');
 
     function filterGallery(country) {
-      galleryItems.forEach(item => {
-        const match = country === 'all' || item.dataset.country === country;
-        item.style.opacity = match ? '1' : '0.2';
-        item.style.pointerEvents = match ? 'auto' : 'none';
-        item.style.transition = 'opacity 0.4s';
-      });
+      const grid = document.getElementById('gallery-grid');
+      const allItems = Array.from(document.querySelectorAll('.gallery-item[data-type="landscape"]'));
+
+      if (country === 'all') {
+        // Restore original order
+        allItems.sort((a, b) => parseInt(a.dataset.index) - parseInt(b.dataset.index));
+        allItems.forEach(item => {
+          grid.appendChild(item);
+          item.style.opacity = '1';
+          item.style.pointerEvents = 'auto';
+          item.style.transition = 'opacity 0.4s';
+        });
+      } else {
+        // Move matching items to top, dim others
+        const matching = allItems.filter(i => i.dataset.country === country);
+        const nonMatching = allItems.filter(i => i.dataset.country !== country);
+        [...matching, ...nonMatching].forEach(item => grid.appendChild(item));
+        matching.forEach(item => {
+          item.style.opacity = '1';
+          item.style.pointerEvents = 'auto';
+          item.style.transition = 'opacity 0.4s';
+        });
+        nonMatching.forEach(item => {
+          item.style.opacity = '0.15';
+          item.style.pointerEvents = 'none';
+          item.style.transition = 'opacity 0.4s';
+        });
+      }
+
       document.querySelectorAll('.country-path').forEach(el => {
         el.classList.toggle('map-active', el.dataset.name === country);
       });
@@ -1136,6 +1281,20 @@
         }
       });
     });
+    // Wallpaper type toggle
+    document.querySelectorAll('.wallpaper-type-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.wallpaper-type-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const specs = document.getElementById('wallpaper-specs');
+        if (btn.dataset.type === 'desktop') {
+          specs.textContent = '3840 × 2160px · JPEG · Instant download';
+        } else {
+          specs.textContent = '1170 × 2532px · JPEG · Instant download';
+        }
+      });
+    });
   </script>
+    <script src="cart.js"></script>
 </body>
 </html>
