@@ -116,7 +116,6 @@
     .cart-subtotal span:last-child { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--bark); }
     .cart-checkout-btn { width: 100%; padding: 0.9rem; background: var(--earth); color: var(--warm-white); border: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; cursor: not-allowed; opacity: 0.6; }
 
-    .hamburger { display: none; }
     .mobile-top-right { display: none; }
     @media (max-width: 768px) {
       .mobile-top-right { display: flex; align-items: center; gap: 1rem; }
@@ -131,6 +130,39 @@
       .nav-links.open { display: flex; }
       .nav-links a { font-size: 1rem !important; letter-spacing: 0.2em; color: var(--earth) !important; white-space: nowrap; }
       .nav-links li.cart-dropdown-wrap { display: none !important; }
+    }
+
+    /* ── MOBILE NAV ── */
+    .hamburger { display: none; }
+    .mobile-top-right { display: none; }
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem 1.4rem;
+        background: rgba(250,246,240,0.97) !important;
+        backdrop-filter: blur(8px);
+        box-shadow: 0 1px 0 var(--sand);
+      }
+      .nav-logo { font-size: 1rem !important; white-space: nowrap; color: var(--earth) !important; }
+      .mobile-top-right { display: flex !important; align-items: center; gap: 1rem; }
+      .hamburger {
+        display: flex !important; flex-direction: column; gap: 5px;
+        background: none; border: none; cursor: pointer; padding: 0.4rem; z-index: 1001;
+      }
+      .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--earth); transition: all 0.3s; }
+      .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+      .hamburger.open span:nth-child(2) { opacity: 0; }
+      .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+      .nav-links {
+        display: none; flex-direction: column;
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+        background: var(--warm-white); z-index: 999;
+        justify-content: center; align-items: center; gap: 2.2rem;
+        overflow-y: auto;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { display: block; text-align: center; }
+      .nav-links li.cart-dropdown-wrap { display: none !important; }
+      .nav-links a { font-size: 1.1rem !important; letter-spacing: 0.2em; color: var(--earth) !important; white-space: nowrap; }
     }
   </style>
 </head>
@@ -234,26 +266,17 @@
     function toggleMenu() {
       const links = document.getElementById('nav-links');
       const burger = document.getElementById('hamburger');
-      links.classList.toggle('open');
-      burger.classList.toggle('open');
-      document.body.style.overflow = links.classList.contains('open') ? 'hidden' : '';
+      const isOpen = links.classList.toggle('open');
+      burger.classList.toggle('open', isOpen);
     }
-    document.querySelectorAll('.nav-links a').forEach(a => {
-      a.addEventListener('click', () => {
-        document.getElementById('nav-links').classList.remove('open');
-        document.getElementById('hamburger').classList.remove('open');
-        document.body.style.overflow = '';
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.nav-links a').forEach(a => {
+        a.addEventListener('click', () => {
+          document.getElementById('nav-links').classList.remove('open');
+          document.getElementById('hamburger').classList.remove('open');
+        });
       });
     });
-    function updateMobileCart() {
-      const isMobile = window.innerWidth <= 768;
-      const mobileBtn = document.getElementById('cart-btn-mobile');
-      const mobileTop = document.querySelector('.mobile-top-right');
-      if (mobileBtn) mobileBtn.style.display = isMobile ? 'flex' : 'none';
-      if (mobileTop) mobileTop.style.display = isMobile ? 'flex' : 'none';
-    }
-    window.addEventListener('resize', updateMobileCart);
-    document.addEventListener('DOMContentLoaded', updateMobileCart);
   </script>
     <script src="cart.js"></script>
 </body>
