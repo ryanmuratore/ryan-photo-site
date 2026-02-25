@@ -677,43 +677,44 @@
         background: rgba(250,246,240,0.97) !important;
         backdrop-filter: blur(8px);
         box-shadow: 0 1px 0 var(--sand);
-        z-index: 1000;
       }
-      .nav-logo { font-size: 1rem !important; white-space: nowrap; color: var(--earth) !important; }
+      .nav-logo { color: var(--earth) !important; font-size: 1rem; white-space: nowrap; }
       .mobile-top-right { display: flex !important; align-items: center; gap: 1rem; }
-      .hamburger {
-        display: flex !important; flex-direction: column; gap: 5px;
-        background: none; border: none; cursor: pointer; padding: 0.4rem; z-index: 1100;
-      }
+      .hamburger { display: flex !important; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 0.4rem; z-index: 1001; }
       .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--earth); transition: all 0.3s; }
       .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
       .hamburger.open span:nth-child(2) { opacity: 0; }
       .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-      .nav-links {
-        display: none !important;
-        flex-direction: column;
-        position: fixed !important;
-        top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
-        width: 100vw !important; height: 100vh !important;
-        background: var(--warm-white) !important;
-        z-index: 1050 !important;
-        justify-content: center !important;
-        align-items: center !important;
-        gap: 2.5rem;
-        margin: 0 !important; padding: 2rem !important;
-        list-style: none;
-        overflow-y: auto;
-      }
-      .nav-links.open { display: flex !important; }
-      .nav-links li { display: block !important; text-align: center; }
+      .nav-links { display: none; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--warm-white); z-index: 999; justify-content: center; align-items: center; gap: 2.2rem; overflow-y: auto; }
+      .nav-links.open { display: flex; }
+      .nav-links li { display: block; text-align: center; }
       .nav-links li.cart-dropdown-wrap { display: none !important; }
-      .nav-links a {
-        font-size: 1.1rem !important;
-        letter-spacing: 0.2em;
-        color: var(--earth) !important;
-        white-space: nowrap;
-        text-decoration: none;
-      }
+      .nav-links a { font-size: 1.1rem !important; letter-spacing: 0.2em; color: var(--earth) !important; white-space: nowrap; }
+      #hero { height: 100svh; }
+      .hero-content { flex-direction: column; align-items: flex-start; padding: 0 1.5rem 5rem; gap: 1.5rem; }
+      .hero-title { font-size: 2.4rem; }
+      .hero-right { text-align: left; }
+      .hero-cta { justify-content: flex-start; flex-wrap: wrap; }
+      .btn { font-size: 0.58rem; padding: 0.7rem 1.5rem; }
+      .section-wrap { padding: 4rem 1.5rem; }
+      .portfolio-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem; }
+      .gallery-grid { column-count: 2; column-gap: 6px; }
+      .shop-intro { grid-template-columns: 1fr; gap: 2rem; }
+      .prints-grid { grid-template-columns: 1fr !important; display: grid !important; }
+      .print-card { display: block !important; }
+      .print-img-wrap { height: 240px; }
+      .wallpaper-card { grid-template-columns: 1fr; }
+      .wallpaper-preview { height: 260px; }
+      .journals-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-image-wrap { height: 300px; }
+      .about-accent { display: none; }
+      .about-tag { left: 1rem; bottom: 1rem; }
+      .about-gear { flex-direction: column; gap: 1.2rem; }
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; margin-top: 2rem; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { flex-direction: column; align-items: flex-start; padding: 2rem 1.5rem; }
+      .divider { margin: 0 1.5rem; }
     }
   </style>
 </head>
@@ -1262,8 +1263,6 @@
                    month >= 8 && month <= 10 ? 'Autumn' : 'Winter';
     const collectionEl = document.getElementById('collection-month');
     if (collectionEl) collectionEl.textContent = season + ' ' + year + ' Collection';
-
-        });
 
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
