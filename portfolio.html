@@ -68,9 +68,9 @@
     .map-loading { padding: 3rem; text-align: center; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--tan); }
 
     /* ── FULL PORTFOLIO GRID ── */
-    /* ── GALLERY GRID ── */
+            /* ── GALLERY GRID ── */
     .gallery-grid {
-      columns: 3;
+      column-count: 3;
       column-gap: 8px;
     }
     .gallery-item {
@@ -79,7 +79,8 @@
       cursor: pointer;
       break-inside: avoid;
       margin-bottom: 8px;
-      display: block;
+      width: 100%;
+      display: inline-block;
     }
     .gallery-item img {
       width: 100%;
@@ -91,11 +92,11 @@
     .gallery-ph {
       width: 100%;
       display: block;
-      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
-    .gallery-item:hover .gallery-ph { transform: scale(1.04); }
-    .gallery-item.ar-landscape .gallery-ph { aspect-ratio: 3/2; height: auto; min-height: 220px; }
-    .gallery-item.ar-portrait .gallery-ph { aspect-ratio: 2/3; height: auto; min-height: 320px; }
+    .gallery-item.ar-landscape .gallery-ph { aspect-ratio: 3/2; }
+    .gallery-item.ar-portrait .gallery-ph { aspect-ratio: 2/3; }
+    .gallery-item.ar-landscape .gallery-ph { height: 240px; }
+    .gallery-item.ar-portrait .gallery-ph { height: 360px; }
     .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
     .gallery-item:hover img { transform: scale(1.06); }
     .gallery-ph { width: 100%; height: 100%; transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
@@ -132,7 +133,7 @@
       .page-header { padding: 7rem 1.5rem 3rem; }
       .map-filter-wrap { padding: 0 1.5rem 2rem; }
       .portfolio-wrap { padding: 1.5rem 1.5rem 5rem; }
-            .gallery-grid { columns: 2; column-gap: 6px; }
+            .gallery-grid { column-count: 2; column-gap: 6px; }
     }
   </style>
 </head>
