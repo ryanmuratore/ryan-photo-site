@@ -111,9 +111,9 @@
     .ph8 { background: linear-gradient(145deg, #c8a878, #887048); }
     .gallery-hover { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,18,8,0.82) 0%, rgba(26,18,8,0.1) 50%, transparent 100%); opacity: 0; transition: opacity 0.4s; display: flex; flex-direction: column; justify-content: flex-end; padding: 1.4rem; }
     .gallery-item:hover .gallery-hover { opacity: 1; }
-    .gallery-hover-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 300; font-style: italic; color: var(--warm-white); transform: translateY(6px); transition: transform 0.4s; line-height: 1.2; }
-    .gallery-hover-location { font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--clay); margin-top: 0.3rem; transform: translateY(6px); transition: transform 0.4s 0.05s; }
-    .gallery-item:hover .gallery-hover-title, .gallery-item:hover .gallery-hover-location { transform: translateY(0); }
+    .gallery-hover-title { display: none; }
+    .gallery-hover-location { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--warm-white); transform: translateY(6px); transition: transform 0.4s; }
+    .gallery-item:hover .gallery-hover-location { transform: translateY(0); }
 
     /* ── FOOTER ── */
     footer { background: var(--earth); color: rgba(250,246,240,0.4); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
@@ -185,31 +185,31 @@
     <div class="gallery-grid" id="gallery-grid">
 
       <div class="gallery-item ar-landscape" data-country="Iceland" data-type="landscape">
-        <div class="gallery-ph ph1"></div>
+        <img src="iceland-1.jpg" alt="At The Edge of The North">
         <div class="gallery-hover">
-          <div class="gallery-hover-title">[Photo Title]</div>
+          <div class="gallery-hover-title">At The Edge of The North</div>
           <div class="gallery-hover-location">Location: Iceland</div>
         </div>
       </div>
-      <div class="gallery-item ar-portrait" data-country="Norway" data-type="landscape">
-        <div class="gallery-ph ph2"></div>
+      <div class="gallery-item ar-landscape" data-country="Costa Rica" data-type="landscape">
+        <img src="costarica-1.jpg" alt="Descent">
         <div class="gallery-hover">
-          <div class="gallery-hover-title">[Photo Title]</div>
-          <div class="gallery-hover-location">Location: Norway</div>
+          <div class="gallery-hover-title">Descent</div>
+          <div class="gallery-hover-location">Location: Costa Rica</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="Ireland" data-type="landscape">
-        <div class="gallery-ph ph3"></div>
+      <div class="gallery-item ar-landscape" data-country="Costa Rica" data-type="landscape">
+        <img src="costarica-2.jpg" alt="Emerald Passage">
         <div class="gallery-hover">
-          <div class="gallery-hover-title">[Photo Title]</div>
-          <div class="gallery-hover-location">Location: Ireland</div>
+          <div class="gallery-hover-title">Emerald Passage</div>
+          <div class="gallery-hover-location">Location: Costa Rica</div>
         </div>
       </div>
-      <div class="gallery-item ar-landscape" data-country="United States" data-type="landscape">
-        <div class="gallery-ph ph4"></div>
+      <div class="gallery-item ar-portrait" data-country="Costa Rica" data-type="landscape">
+        <img src="costarica-3.jpg" alt="Bloom, Anyway">
         <div class="gallery-hover">
-          <div class="gallery-hover-title">[Photo Title]</div>
-          <div class="gallery-hover-location">Location: United States</div>
+          <div class="gallery-hover-title">Bloom, Anyway</div>
+          <div class="gallery-hover-location">Location: Costa Rica</div>
         </div>
       </div>
       <div class="gallery-item ar-portrait" data-country="Canada" data-type="landscape">
@@ -539,10 +539,66 @@
         <div class="gallery-hover">
           <div class="gallery-hover-title">[Photo Title]</div>
           <div class="gallery-hover-location">Location: Portugal</div>
+        </div>
+      </div>
+      <div class="gallery-item ar-landscape" data-type="wildlife" style="display:none;">
+        <img src="wildlife-1.jpg" alt="Stillness in Motion">
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">Stillness in Motion</div>
+          <div class="gallery-hover-location">Wildlife</div>
+        </div>
+      </div>
+      <div class="gallery-item ar-landscape" data-type="wildlife" style="display:none;">
+        <img src="wildlife-2.jpg" alt="The Still Observer">
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">The Still Observer</div>
+          <div class="gallery-hover-location">Wildlife</div>
+        </div>
+      </div>
+      <div class="gallery-item ar-landscape" data-type="wildlife" style="display:none;">
+        <img src="wildlife-3.jpg" alt="Built to Be Seen">
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">Built to Be Seen</div>
+          <div class="gallery-hover-location">Wildlife</div>
+        </div>
+      </div>
+      <div class="gallery-item ar-landscape" data-type="wildlife" style="display:none;">
+        <img src="wildlife-4.jpg" alt="Hunger">
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">Hunger</div>
+          <div class="gallery-hover-location">Wildlife</div>
+        </div>
+      </div>
+      <div class="gallery-item ar-landscape" data-type="wildlife" style="display:none;">
+        <div class="gallery-ph ph5"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">[Wildlife Title]</div>
+          <div class="gallery-hover-location">Wildlife</div>
+        </div>
+      </div>
+      <div class="gallery-item ar-landscape" data-type="wildlife" style="display:none;">
+        <div class="gallery-ph ph6"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">[Wildlife Title]</div>
+          <div class="gallery-hover-location">Wildlife</div>
+        </div>
+      </div>
+      <div class="gallery-item ar-landscape" data-type="wildlife" style="display:none;">
+        <div class="gallery-ph ph7"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">[Wildlife Title]</div>
+          <div class="gallery-hover-location">Wildlife</div>
+        </div>
+      </div>
+      <div class="gallery-item ar-landscape" data-type="wildlife" style="display:none;">
+        <div class="gallery-ph ph8"></div>
+        <div class="gallery-hover">
+          <div class="gallery-hover-title">[Wildlife Title]</div>
+          <div class="gallery-hover-location">Wildlife</div>
         </div>
       </div>
 
-    </div>
+    
   </div>
 
   <!-- FOOTER -->
