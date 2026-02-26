@@ -255,6 +255,14 @@
     }, { threshold: 0.1 });
     reveals.forEach(el => observer.observe(el));
   
+    const PRINTS = {
+      norway:       { src: 'norway-1.jpg',       name: 'Norway' },
+      unitedstates: { src: 'unitedstates-1.JPG', name: 'United States' },
+      costarica:    { src: 'costarica-3.jpg',    name: 'Costa Rica' },
+      ireland:      { src: 'ireland-1.JPG',      name: 'Ireland' },
+      portugal:     { src: 'portugal-1.JPG',     name: 'Portugal' },
+    };
+
     function selectPrint(btn) {
       document.querySelectorAll('[onclick="selectPrint(this)"]').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
@@ -288,6 +296,13 @@
       burger.classList.toggle('open', isOpen);
     }
     document.addEventListener('DOMContentLoaded', () => {
+      // Auto-select print from URL param e.g. ?print=norway
+      const params = new URLSearchParams(window.location.search);
+      const key = params.get('print');
+      if (key && PRINTS[key]) {
+        const btn = document.querySelector('[data-src="' + PRINTS[key].src + '"]');
+        if (btn) selectPrint(btn);
+      }
       document.querySelectorAll('#nav-links a').forEach(a => {
         a.addEventListener('click', () => {
           document.getElementById('nav-links').classList.remove('open');
