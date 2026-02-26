@@ -310,18 +310,27 @@
 
                 /* ── GALLERY GRID ── */
     .gallery-grid {
-      column-count: 3;
-      column-gap: 8px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      align-items: start;
     }
     .gallery-item {
       position: relative;
       overflow: hidden;
       cursor: pointer;
-      break-inside: avoid;
-      margin-bottom: 8px;
       width: 100%;
-      display: inline-block;
+      aspect-ratio: 3/2;
+      background: var(--sand);
     }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .gallery-item:hover img { transform: scale(1.04); }
     .gallery-item img {
       width: 100%;
       height: auto;
@@ -591,7 +600,7 @@
       /* ── SECTIONS ── */
       .section-wrap { padding: 4rem 1.5rem; }
       .portfolio-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem; }
-      .gallery-grid { column-count: 2; column-gap: 6px; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
 
       /* ── SHOP / PRINTS ── */
       .shop-intro { grid-template-columns: 1fr; gap: 2rem; }
@@ -698,7 +707,7 @@
       .btn { font-size: 0.58rem; padding: 0.7rem 1.5rem; }
       .section-wrap { padding: 4rem 1.5rem; }
       .portfolio-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem; }
-      .gallery-grid { column-count: 2; column-gap: 6px; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
       .shop-intro { grid-template-columns: 1fr; gap: 2rem; }
       .prints-grid { grid-template-columns: 1fr !important; display: grid !important; }
       .print-card { display: block !important; }
@@ -814,7 +823,6 @@
       <div class="map-pills">
         <button class="map-pill active" data-filter="all">All</button>
         <button class="map-pill wildlife-pill" data-filter="wildlife">Wildlife</button>
-        <button class="map-pill" data-filter="Canada">Canada</button>
         <button class="map-pill" data-filter="Costa Rica">Costa Rica</button>
         <button class="map-pill" data-filter="Denmark">Denmark</button>
         <button class="map-pill" data-filter="Iceland">Iceland</button>

@@ -70,18 +70,27 @@
     /* ── FULL PORTFOLIO GRID ── */
             /* ── GALLERY GRID ── */
     .gallery-grid {
-      column-count: 3;
-      column-gap: 8px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      align-items: start;
     }
     .gallery-item {
       position: relative;
       overflow: hidden;
       cursor: pointer;
-      break-inside: avoid;
-      margin-bottom: 8px;
       width: 100%;
-      display: inline-block;
+      aspect-ratio: 3/2;
+      background: var(--sand);
     }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .gallery-item:hover img { transform: scale(1.04); }
     .gallery-item img {
       width: 100%;
       height: auto;
@@ -283,9 +292,9 @@
       <button class="map-pill" data-filter="Portugal">Portugal</button>
       <button class="map-pill" data-filter="Sweden">Sweden</button>
       <button class="map-pill" data-filter="United States">United States</button>
-      <button class="map-pill" data-filter="Portugal">Portugal</button>
-      <button class="map-pill" data-filter="Sweden">Sweden</button>
-      <button class="map-pill" data-filter="United States">United States</button>
+      
+      
+      
     </div>
   </div>
 
