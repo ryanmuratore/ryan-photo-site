@@ -70,23 +70,21 @@
     /* ── FULL PORTFOLIO GRID ── */
             /* ── GALLERY GRID ── */
     .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      align-items: start;
+      column-count: 3;
+      column-gap: 8px;
     }
     .gallery-item {
       position: relative;
       overflow: hidden;
       cursor: pointer;
+      break-inside: avoid;
+      margin-bottom: 8px;
       width: 100%;
-      aspect-ratio: 3/2;
-      background: var(--sand);
+      display: inline-block;
     }
     .gallery-item img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
       display: block;
       transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
@@ -612,7 +610,6 @@
       const allItems = Array.from(document.querySelectorAll('#gallery-grid .gallery-item'));
 
       let matching, nonMatching;
-
       if (filter === 'all') {
         allItems.sort((a, b) => parseInt(a.dataset.index) - parseInt(b.dataset.index));
         matching = allItems;
@@ -625,8 +622,7 @@
         nonMatching = allItems.filter(i => i.dataset.country !== filter || !i.dataset.country);
       }
 
-      // Remove all items from grid, then re-insert matching first, non-matching after
-      // This forces columns to reflow with matching items genuinely at the top
+      // Remove all, reinsert in new order, then force column reflow
       allItems.forEach(item => item.remove());
       matching.forEach(item => {
         item.style.opacity = '1';
@@ -638,6 +634,11 @@
         item.style.pointerEvents = 'none';
         grid.appendChild(item);
       });
+
+      // Force CSS columns to reflow by briefly toggling display
+      grid.style.display = 'none';
+      grid.offsetHeight; // trigger reflow
+      grid.style.display = '';
 
       document.querySelectorAll('.country-path').forEach(el => {
         el.classList.toggle('map-active', el.dataset.name === filter);
