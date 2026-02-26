@@ -264,7 +264,7 @@
     };
 
     function selectPrint(btn) {
-      document.querySelectorAll('[onclick="selectPrint(this)"]').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.print-select-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       document.getElementById('print-preview').src = btn.dataset.src;
       document.getElementById('print-title').textContent = btn.dataset.name;
@@ -300,7 +300,7 @@
       const params = new URLSearchParams(window.location.search);
       const key = params.get('print');
       if (key && PRINTS[key]) {
-        const btn = document.querySelector('[data-src="' + PRINTS[key].src + '"]');
+        const btn = document.querySelector('[data-key="' + key + '"]');
         if (btn) selectPrint(btn);
       }
       document.querySelectorAll('#nav-links a').forEach(a => {
