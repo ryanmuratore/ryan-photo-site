@@ -3,51 +3,57 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>All Prints — Ryan Muratore Photography</title>
+  <title>Wallpaper Packs — Ryan Muratore Photography</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&family=Tenor+Sans&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root { --warm-white: #faf6f0; --linen: #f0e9de; --sand: #ddd0bc; --clay: #c4a882; --tan: #a8896a; --bark: #7a5c3a; --earth: #4e3820; --ink: #2a1f12; }
-    html { scroll-behavior: smooth; }
-    body { background: var(--linen); color: var(--ink); font-family: 'Tenor Sans', sans-serif; overflow-x: hidden; }
+    body { background: var(--warm-white); color: var(--ink); font-family: 'Tenor Sans', sans-serif; overflow-x: hidden; }
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 3rem; background: rgba(250,246,240,0.96); backdrop-filter: blur(8px); box-shadow: 0 1px 0 var(--sand); }
     .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 300; letter-spacing: 0.12em; color: var(--earth); text-decoration: none; }
     .nav-links { display: flex; gap: 2.8rem; list-style: none; }
-    .nav-links a { font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--tan); text-decoration: none; transition: color 0.3s; position: relative; }
-    .nav-links a.active { color: var(--earth); }
-    .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 1px; background: var(--clay); transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease; }
-    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+    .nav-links a { font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--tan); text-decoration: none; transition: color 0.3s; }
     .nav-links a:hover { color: var(--bark); }
+
     .page-header { padding: 10rem 3rem 4rem; background: var(--linen); }
     .section-label { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.8rem; }
     .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; line-height: 1.15; color: var(--earth); }
     .section-title em { font-style: italic; color: var(--tan); }
-    .section-rule { width: 40px; height: 1px; background: var(--clay); margin: 1.8rem 0; }
-    .shop-collection-label { font-family: 'Playfair Display', serif; font-size: 1rem; font-style: italic; color: var(--bark); margin-bottom: 0.5rem; }
-    .season-note { font-size: 0.78rem; line-height: 1.8; color: var(--tan); margin-bottom: 3rem; border-left: 1px solid var(--clay); padding-left: 1.5rem; }
-    .prints-wrap { padding: 0 3rem 7rem; }
-    .prints-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.8rem; }
-    .print-card { background: var(--warm-white); border: 1px solid var(--sand); overflow: hidden; transition: transform 0.4s, box-shadow 0.4s; }
-    .print-card:hover { transform: translateY(-5px); box-shadow: 0 18px 45px rgba(78,56,32,0.1); }
-    .print-img-wrap { height: 280px; position: relative; overflow: hidden; }
-    .print-ph { width: 100%; height: 100%; transition: transform 0.6s ease; }
-    .print-card:hover .print-ph { transform: scale(1.04); }
-    .print-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
-    .print-card:hover img { transform: scale(1.04); }
-    .pph1 { background: linear-gradient(160deg, #c8b898 0%, #9a7a50 100%); }
-    .pph2 { background: linear-gradient(160deg, #a8b888 0%, #688048 100%); }
-    .pph3 { background: linear-gradient(160deg, #d0b898 0%, #a07840 100%); }
-    .pph4 { background: linear-gradient(160deg, #b8c098 0%, #788848 100%); }
-    .print-badge { position: absolute; top: 1rem; left: 1rem; background: var(--bark); color: var(--warm-white); font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; padding: 0.28rem 0.7rem; }
-    .print-info { padding: 1.4rem; }
-    .print-name { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 300; color: var(--earth); margin-bottom: 0.25rem; }
-    .print-location { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 1rem; }
-    .print-sizes { font-size: 0.62rem; color: var(--sand); letter-spacing: 0.1em; margin-bottom: 0.8rem; }
-    .print-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 1rem; border-top: 1px solid var(--linen); }
-    .print-price { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--bark); }
-    .btn-add { padding: 0.5rem 1.2rem; font-family: 'Tenor Sans', sans-serif; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; background: var(--earth); color: var(--warm-white); border: none; cursor: pointer; transition: background 0.25s; }
-    .btn-add:hover { background: var(--bark); }
+    .section-rule { width: 40px; height: 1px; background: var(--clay); margin: 1.8rem 0 0; }
+
+    .store-wrap { padding: 4rem 3rem 7rem; max-width: 900px; margin: 0 auto; }
+    .back-link { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--tan); text-decoration: none; margin-bottom: 3rem; transition: color 0.3s; }
+    .back-link:hover { color: var(--bark); }
+    .back-link::before { content: '←'; }
+
+    .product-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-bottom: 4rem; }
+    .product-img { overflow: hidden; border: 1px solid var(--sand); }
+    .wallpaper-ph-desktop { aspect-ratio: 16/10; background: linear-gradient(160deg, #304050 0%, #8090a8 100%); }
+    .wallpaper-ph-mobile { aspect-ratio: 9/19; background: linear-gradient(180deg, #304050 0%, #8090a8 100%); }
+    .product-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .product-details { display: flex; flex-direction: column; gap: 1.8rem; }
+    .product-name { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 300; color: var(--earth); }
+    .product-desc { font-size: 0.82rem; line-height: 1.9; color: var(--tan); }
+
+    .option-label { font-size: 0.58rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.7rem; display: block; }
+    .toggle-row { display: flex; gap: 0; border: 1px solid var(--sand); width: fit-content; }
+    .toggle-btn { padding: 0.6rem 1.6rem; border: none; background: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--tan); cursor: pointer; transition: all 0.25s; }
+    .toggle-btn.active { background: var(--earth); color: var(--warm-white); }
+
+    .specs-box { padding: 1.2rem; background: var(--linen); border: 1px solid var(--sand); }
+    .specs-box p { font-size: 0.72rem; color: var(--tan); line-height: 1.8; }
+    .specs-box p span { color: var(--bark); font-family: 'Playfair Display', serif; }
+
+    .price-display { font-family: 'Playfair Display', serif; font-size: 2.4rem; color: var(--bark); }
+    .btn-order { width: 100%; padding: 1.1rem; background: var(--earth); color: var(--warm-white); border: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; cursor: pointer; transition: background 0.3s; }
+    .btn-order:hover { background: var(--bark); }
+
+    .product-info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; padding: 3rem 0; border-top: 1px solid var(--sand); border-bottom: 1px solid var(--sand); }
+    .info-block p:first-child { font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.5rem; }
+    .info-block p:last-child { font-size: 0.82rem; line-height: 1.7; color: var(--tan); }
+
     footer { background: var(--earth); color: rgba(250,246,240,0.4); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
     .footer-logo { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 300; font-style: italic; color: var(--clay); text-decoration: none; }
     footer p { font-size: 0.65rem; letter-spacing: 0.1em; }
@@ -151,19 +157,19 @@
       #cart-btn-mobile { display: flex !important; }
     }
   </style>
-  <script src="cart.js"></script>
+  <script src="../cart.js"></script>
 </head>
 <body>
   <nav>
-    <a href="index.html" class="nav-logo">Ryan Muratore</a>
+    <a href="../index.html" class="nav-logo">Ryan Muratore</a>
     <ul class="nav-links" id="nav-links">
-      <li><a href="index.html#portfolio">Portfolio</a></li>
-      <li><a href="portfolio.html">Full Portfolio</a></li>
-      <li><a href="prints.html">Prints</a></li>
-      <li><a href="store/wallpapers.html">Wallpapers</a></li>
-      <li><a href="journals.html">Field Journals</a></li>
-      <li><a href="index.html#about">About</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
+      <li><a href="../index.html#portfolio">Portfolio</a></li>
+      <li><a href="../portfolio.html">Full Portfolio</a></li>
+      <li><a href="../prints.html">Prints</a></li>
+      <li><a href="wallpapers.html">Wallpapers</a></li>
+      <li><a href="../journals.html">Field Journals</a></li>
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
       <li class="cart-dropdown-wrap">
         <button id="cart-btn" onclick="Cart.toggleDropdown()">
           <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
@@ -176,77 +182,54 @@
   </nav>
 
   <div class="page-header reveal">
-    <p class="section-label">Fine Art Prints</p>
-    <h1 class="section-title">This season's<br><em>collection</em></h1>
+    <p class="section-label">Digital Downloads</p>
+    <h1 class="section-title">Wallpaper <em>pack</em></h1>
     <div class="section-rule"></div>
-    <p class="shop-collection-label" id="collection-season"></p>
-    <p class="season-note">25 exclusive prints released each season. Past collections remain available for one year — archives close after one year, then they're gone for good. Every print is museum-quality, printed on 310gsm fine art paper with archival pigment inks. Shipped within 5–7 business days with a certificate of authenticity.</p>
   </div>
 
-  <div class="prints-wrap">
-    <div class="prints-grid reveal">
-      <div class="print-card">
-        <a href="store/prints-norway.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="norway-1.jpg" alt="Norway">
-          <span class="print-badge">Best Seller</span>
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">Norway</p>
-          <p class="print-location">Location: Norway</p>
-          <p class="print-sizes">8×10 · 12×16 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $45</span><a href="store/prints-norway.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
-        </div>
+  <div class="store-wrap">
+    <a href="../index.html#wallpapers" class="back-link reveal">Back to wallpapers</a>
+
+    <div class="product-hero reveal">
+      <div class="product-img">
+        <div class="wallpaper-ph-desktop" id="wallpaper-preview"></div>
+        <!-- Replace with: <img src="../wallpaper-preview.jpg" alt="Wallpaper Pack Preview"> -->
       </div>
-      <div class="print-card">
-        <a href="store/prints-unitedstates.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="unitedstates-1.JPG" alt="United States">
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">United States</p>
-          <p class="print-location">Location: United States</p>
-          <p class="print-sizes">8×10 · 12×16 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $45</span><a href="store/prints-unitedstates.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
+      <div class="product-details">
+        <p class="product-name">Wallpaper Pack Vol. 1</p>
+        <p class="product-desc">20 hand-selected photographs from across Iceland, Norway, Ireland, Costa Rica and more. Shot on location, optimized for your screen, delivered instantly as a digital download.</p>
+
+        <div>
+          <span class="option-label">Select Format</span>
+          <div class="toggle-row">
+            <button class="toggle-btn active" data-type="desktop" onclick="selectType(this)">Desktop</button>
+            <button class="toggle-btn" data-type="mobile" onclick="selectType(this)">Mobile</button>
+          </div>
         </div>
-      </div>
-      <div class="print-card">
-        <a href="store/prints-costarica.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="costarica-3.jpg" alt="Costa Rica">
-          <span class="print-badge">New</span>
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">Costa Rica</p>
-          <p class="print-location">Location: Costa Rica</p>
-          <p class="print-sizes">8×10 · 12×16 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $45</span><a href="store/prints-costarica.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
+
+        <div class="specs-box">
+          <p id="wallpaper-specs-detail">
+            <span>Resolution</span> — 3840 × 2160px (4K)<br>
+            <span>Format</span> — JPEG, sRGB<br>
+            <span>Files</span> — 20 wallpapers<br>
+            <span>Delivery</span> — Instant download
+          </p>
         </div>
+
+        <p class="price-display">$10</p>
+        <button class="btn-order" onclick="addWallpaperToCart()">Add to Cart</button>
       </div>
-      <div class="print-card">
-        <a href="store/prints-ireland.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="ireland-1.JPG" alt="Ireland">
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">Ireland</p>
-          <p class="print-location">Location: Ireland</p>
-          <p class="print-sizes">8×10 · 12×16 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $45</span><a href="store/prints-ireland.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
-        </div>
-      </div>
-      <div class="print-card">
-        <a href="store/prints-portugal.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="portugal-1.JPG" alt="Portugal">
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">Portugal</p>
-          <p class="print-location">Location: Portugal</p>
-          <p class="print-sizes">8×10 · 12×16 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $45</span><a href="store/prints-portugal.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
-        </div>
-      </div>
+    </div>
+
+    <div class="product-info-grid reveal">
+      <div class="info-block"><p>Instant Download</p><p>Your pack is delivered immediately after purchase — no waiting, no shipping.</p></div>
+      <div class="info-block"><p>20 Photos</p><p>Every pack includes 20 unique wallpapers curated from across all destinations.</p></div>
+      <div class="info-block"><p>High Resolution</p><p>Every wallpaper is optimized for your device at the highest resolution available.</p></div>
     </div>
   </div>
 
   <footer>
-    <a href="index.html" class="footer-logo">Ryan Muratore Photography</a>
+    <a href="../index.html" class="footer-logo">Ryan Muratore Photography</a>
     <p>© 2025 Ryan Muratore — All rights reserved. Do not reproduce without permission.</p>
   </footer>
 
@@ -257,12 +240,23 @@
     }, { threshold: 0.1 });
     reveals.forEach(el => observer.observe(el));
   
-    const now = new Date();
-    const month = now.getMonth();
-    const year = now.getFullYear();
-    const season = month >= 2 && month <= 4 ? 'Spring' : month >= 5 && month <= 7 ? 'Summer' : month >= 8 && month <= 10 ? 'Autumn' : 'Winter';
-    const el = document.getElementById('collection-season');
-    if (el) el.textContent = season + ' ' + year + ' Collection';
+    function addWallpaperToCart() {
+      const type = document.querySelector('.toggle-btn.active').dataset.type;
+      Cart.add({ id: 'wallpaper-' + type, name: 'Wallpaper Pack Vol. 1', options: type.charAt(0).toUpperCase() + type.slice(1) + ' · 20 photos', price: 10 });
+    }
+    function selectType(btn) {
+      document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const preview = document.getElementById('wallpaper-preview');
+      const specs = document.getElementById('wallpaper-specs-detail');
+      if (btn.dataset.type === 'desktop') {
+        preview.className = 'wallpaper-ph-desktop';
+        specs.innerHTML = '<span>Resolution</span> — 3840 × 2160px (4K)<br><span>Format</span> — JPEG, sRGB<br><span>Files</span> — 20 wallpapers<br><span>Delivery</span> — Instant download';
+      } else {
+        preview.className = 'wallpaper-ph-mobile';
+        specs.innerHTML = '<span>Resolution</span> — 1170 × 2532px<br><span>Format</span> — JPEG, sRGB<br><span>Files</span> — 20 wallpapers<br><span>Delivery</span> — Instant download';
+      }
+    }
   
     function toggleMenu() {
       const links = document.getElementById('nav-links');

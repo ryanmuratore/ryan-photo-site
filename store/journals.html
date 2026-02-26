@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>All Prints — Ryan Muratore Photography</title>
+  <title>Field Journals — Ryan Muratore Photography</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&family=Tenor+Sans&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root { --warm-white: #faf6f0; --linen: #f0e9de; --sand: #ddd0bc; --clay: #c4a882; --tan: #a8896a; --bark: #7a5c3a; --earth: #4e3820; --ink: #2a1f12; }
     html { scroll-behavior: smooth; }
-    body { background: var(--linen); color: var(--ink); font-family: 'Tenor Sans', sans-serif; overflow-x: hidden; }
+    body { background: var(--warm-white); color: var(--ink); font-family: 'Tenor Sans', sans-serif; overflow-x: hidden; }
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 3rem; background: rgba(250,246,240,0.96); backdrop-filter: blur(8px); box-shadow: 0 1px 0 var(--sand); }
     .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 300; letter-spacing: 0.12em; color: var(--earth); text-decoration: none; }
     .nav-links { display: flex; gap: 2.8rem; list-style: none; }
@@ -19,33 +19,34 @@
     .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 1px; background: var(--clay); transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease; }
     .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
     .nav-links a:hover { color: var(--bark); }
-    .page-header { padding: 10rem 3rem 4rem; background: var(--linen); }
+    .page-header { padding: 10rem 3rem 4rem; }
     .section-label { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.8rem; }
     .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; line-height: 1.15; color: var(--earth); }
     .section-title em { font-style: italic; color: var(--tan); }
     .section-rule { width: 40px; height: 1px; background: var(--clay); margin: 1.8rem 0; }
-    .shop-collection-label { font-family: 'Playfair Display', serif; font-size: 1rem; font-style: italic; color: var(--bark); margin-bottom: 0.5rem; }
-    .season-note { font-size: 0.78rem; line-height: 1.8; color: var(--tan); margin-bottom: 3rem; border-left: 1px solid var(--clay); padding-left: 1.5rem; }
-    .prints-wrap { padding: 0 3rem 7rem; }
-    .prints-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.8rem; }
-    .print-card { background: var(--warm-white); border: 1px solid var(--sand); overflow: hidden; transition: transform 0.4s, box-shadow 0.4s; }
-    .print-card:hover { transform: translateY(-5px); box-shadow: 0 18px 45px rgba(78,56,32,0.1); }
-    .print-img-wrap { height: 280px; position: relative; overflow: hidden; }
-    .print-ph { width: 100%; height: 100%; transition: transform 0.6s ease; }
-    .print-card:hover .print-ph { transform: scale(1.04); }
-    .print-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
-    .print-card:hover img { transform: scale(1.04); }
-    .pph1 { background: linear-gradient(160deg, #c8b898 0%, #9a7a50 100%); }
-    .pph2 { background: linear-gradient(160deg, #a8b888 0%, #688048 100%); }
-    .pph3 { background: linear-gradient(160deg, #d0b898 0%, #a07840 100%); }
-    .pph4 { background: linear-gradient(160deg, #b8c098 0%, #788848 100%); }
-    .print-badge { position: absolute; top: 1rem; left: 1rem; background: var(--bark); color: var(--warm-white); font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; padding: 0.28rem 0.7rem; }
-    .print-info { padding: 1.4rem; }
-    .print-name { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 300; color: var(--earth); margin-bottom: 0.25rem; }
-    .print-location { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 1rem; }
-    .print-sizes { font-size: 0.62rem; color: var(--sand); letter-spacing: 0.1em; margin-bottom: 0.8rem; }
-    .print-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 1rem; border-top: 1px solid var(--linen); }
-    .print-price { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--bark); }
+    .season-note { font-size: 0.78rem; line-height: 1.8; color: var(--tan); border-left: 1px solid var(--clay); padding-left: 1.5rem; margin-bottom: 3rem; }
+    .journals-wrap { padding: 0 3rem 7rem; }
+    .journals-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.8rem; }
+    .journal-card { background: var(--linen); border: 1px solid var(--sand); overflow: hidden; transition: transform 0.4s, box-shadow 0.4s; }
+    .journal-card:hover { transform: translateY(-5px); box-shadow: 0 18px 45px rgba(78,56,32,0.1); }
+    .journal-img-wrap { height: 320px; position: relative; overflow: hidden; }
+    .journal-ph { width: 100%; height: 100%; transition: transform 0.6s ease; }
+    .journal-card:hover .journal-ph { transform: scale(1.04); }
+    .journal-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
+    .journal-card:hover img { transform: scale(1.04); }
+    .jph1 { background: linear-gradient(160deg, #c0d0d8 0%, #7090a0 100%); }
+    .jph2 { background: linear-gradient(160deg, #a0b8a0 0%, #507060 100%); }
+    .jph3 { background: linear-gradient(160deg, #b0c890 0%, #608050 100%); }
+    .jph4 { background: linear-gradient(160deg, #c8b870 0%, #887830 100%); }
+    .jph5 { background: linear-gradient(160deg, #d0b8a0 0%, #907060 100%); }
+    .jph6 { background: linear-gradient(160deg, #b0b8c8 0%, #607080 100%); }
+    .journal-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,18,8,0.7) 0%, transparent 50%); display: flex; align-items: flex-end; padding: 1.2rem; }
+    .journal-location { font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.8); }
+    .journal-info { padding: 1.4rem; }
+    .journal-name { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 300; color: var(--earth); margin-bottom: 0.5rem; }
+    .journal-desc { font-size: 0.8rem; line-height: 1.7; color: var(--tan); margin-bottom: 1.2rem; }
+    .journal-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 1rem; border-top: 1px solid var(--sand); }
+    .journal-price { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--bark); }
     .btn-add { padding: 0.5rem 1.2rem; font-family: 'Tenor Sans', sans-serif; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; background: var(--earth); color: var(--warm-white); border: none; cursor: pointer; transition: background 0.25s; }
     .btn-add:hover { background: var(--bark); }
     footer { background: var(--earth); color: rgba(250,246,240,0.4); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
@@ -176,72 +177,108 @@
   </nav>
 
   <div class="page-header reveal">
-    <p class="section-label">Fine Art Prints</p>
-    <h1 class="section-title">This season's<br><em>collection</em></h1>
+    <p class="section-label">Field Journals</p>
+    <h1 class="section-title">Stories from<br><em>the field</em></h1>
     <div class="section-rule"></div>
-    <p class="shop-collection-label" id="collection-season"></p>
-    <p class="season-note">25 exclusive prints released each season. Past collections remain available for one year — archives close after one year, then they're gone for good. Every print is museum-quality, printed on 310gsm fine art paper with archival pigment inks. Shipped within 5–7 business days with a certificate of authenticity.</p>
+    <p class="season-note">Each Field Journal is a curated collection of photographs from a single destination — the landscapes, the wildlife, the light. Printed on premium paper and bound to last. A piece of the journey, made to keep.</p>
   </div>
 
-  <div class="prints-wrap">
-    <div class="prints-grid reveal">
-      <div class="print-card">
-        <a href="store/prints-norway.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="norway-1.jpg" alt="Norway">
-          <span class="print-badge">Best Seller</span>
+  <div class="journals-wrap">
+    <div class="journals-grid reveal">
+
+      <div class="journal-card">
+        <a href="store/journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap">
+          <div class="journal-ph jph1"></div>
+          <!-- Replace with: <img src="journal-iceland.jpg" alt="Iceland"> -->
+          <div class="journal-overlay"><span class="journal-location">Iceland</span></div>
         </div></a>
-        <div class="print-info">
-          <p class="print-name">Norway</p>
-          <p class="print-location">Location: Norway</p>
-          <p class="print-sizes">8×10 · 12×16 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $45</span><a href="store/prints-norway.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
+        <div class="journal-info">
+          <p class="journal-name">Iceland Field Journal</p>
+          <p class="journal-desc">Glaciers, waterfalls, and volcanic landscapes — the raw edge of the north.</p>
+          <div class="journal-footer"><span class="journal-price">$40</span><button class="btn-add">Order Journal</button></div>
         </div>
       </div>
-      <div class="print-card">
-        <a href="store/prints-unitedstates.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="unitedstates-1.JPG" alt="United States">
+
+      <div class="journal-card">
+        <a href="store/journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap">
+          <div class="journal-ph jph2"></div>
+          <!-- Replace with: <img src="journal-norway.jpg" alt="Norway"> -->
+          <div class="journal-overlay"><span class="journal-location">Norway</span></div>
         </div></a>
-        <div class="print-info">
-          <p class="print-name">United States</p>
-          <p class="print-location">Location: United States</p>
-          <p class="print-sizes">8×10 · 12×16 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $45</span><a href="store/prints-unitedstates.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
+        <div class="journal-info">
+          <p class="journal-name">Norway Field Journal</p>
+          <p class="journal-desc">Fjords, forests, and the endless Nordic light.</p>
+          <div class="journal-footer"><span class="journal-price">$40</span><button class="btn-add">Order Journal</button></div>
         </div>
       </div>
-      <div class="print-card">
-        <a href="store/prints-costarica.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="costarica-3.jpg" alt="Costa Rica">
-          <span class="print-badge">New</span>
+
+      <div class="journal-card">
+        <a href="store/journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap">
+          <div class="journal-ph jph3"></div>
+          <!-- Replace with: <img src="journal-ireland.jpg" alt="Ireland"> -->
+          <div class="journal-overlay"><span class="journal-location">Ireland</span></div>
         </div></a>
-        <div class="print-info">
-          <p class="print-name">Costa Rica</p>
-          <p class="print-location">Location: Costa Rica</p>
-          <p class="print-sizes">8×10 · 12×16 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $45</span><a href="store/prints-costarica.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
+        <div class="journal-info">
+          <p class="journal-name">Ireland Field Journal</p>
+          <p class="journal-desc">Rolling green hills, dramatic coastlines, and ancient silence.</p>
+          <div class="journal-footer"><span class="journal-price">$40</span><button class="btn-add">Order Journal</button></div>
         </div>
       </div>
-      <div class="print-card">
-        <a href="store/prints-ireland.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="ireland-1.JPG" alt="Ireland">
+
+      <div class="journal-card">
+        <a href="store/journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap">
+          <div class="journal-ph jph4"></div>
+          <!-- Replace with: <img src="journal-costarica.jpg" alt="Costa Rica"> -->
+          <div class="journal-overlay"><span class="journal-location">Costa Rica</span></div>
         </div></a>
-        <div class="print-info">
-          <p class="print-name">Ireland</p>
-          <p class="print-location">Location: Ireland</p>
-          <p class="print-sizes">8×10 · 12×16 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $45</span><a href="store/prints-ireland.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
+        <div class="journal-info">
+          <p class="journal-name">Costa Rica Field Journal</p>
+          <p class="journal-desc">Dense jungle, vibrant wildlife, and golden Pacific light.</p>
+          <div class="journal-footer"><span class="journal-price">$40</span><button class="btn-add">Order Journal</button></div>
         </div>
       </div>
-      <div class="print-card">
-        <a href="store/prints-portugal.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="portugal-1.JPG" alt="Portugal">
+
+      <div class="journal-card">
+        <a href="store/journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap">
+          <div class="journal-ph jph5"></div>
+          <!-- Replace with: <img src="journal-sweden.jpg" alt="Sweden"> -->
+          <div class="journal-overlay"><span class="journal-location">Sweden</span></div>
         </div></a>
-        <div class="print-info">
-          <p class="print-name">Portugal</p>
-          <p class="print-location">Location: Portugal</p>
-          <p class="print-sizes">8×10 · 12×16 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $45</span><a href="store/prints-portugal.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
+        <div class="journal-info">
+          <p class="journal-name">Sweden Field Journal</p>
+          <p class="journal-desc">Quiet lakes, birch forests, and long summer evenings.</p>
+          <div class="journal-footer"><span class="journal-price">$40</span><button class="btn-add">Order Journal</button></div>
         </div>
       </div>
+
+      <div class="journal-card">
+        <a href="store/journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap">
+          <div class="journal-ph jph6"></div>
+          <!-- Replace with: <img src="journal-portugal.jpg" alt="Portugal"> -->
+          <div class="journal-overlay"><span class="journal-location">Portugal</span></div>
+        </div></a>
+        <div class="journal-info">
+          <p class="journal-name">Portugal Field Journal</p>
+          <p class="journal-desc">Atlantic coastlines, golden light, and the edge of Europe.</p>
+          <div class="journal-footer"><span class="journal-price">$40</span><button class="btn-add">Order Journal</button></div>
+        </div>
+      </div>
+
+      <!-- Add more journals here as you visit new locations -->
+      <!-- Format:
+      <div class="journal-card">
+        <a href="store/journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap">
+          <div class="journal-ph jph1"></div>
+          <div class="journal-overlay"><span class="journal-location">Country Name</span></div>
+        </div></a>
+        <div class="journal-info">
+          <p class="journal-name">Country Field Journal</p>
+          <p class="journal-desc">Your description here.</p>
+          <div class="journal-footer"><span class="journal-price">$40</span><button class="btn-add">Order Journal</button></div>
+        </div>
+      </div>
+      -->
+
     </div>
   </div>
 
@@ -256,13 +293,6 @@
       entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
     }, { threshold: 0.1 });
     reveals.forEach(el => observer.observe(el));
-  
-    const now = new Date();
-    const month = now.getMonth();
-    const year = now.getFullYear();
-    const season = month >= 2 && month <= 4 ? 'Spring' : month >= 5 && month <= 7 ? 'Summer' : month >= 8 && month <= 10 ? 'Autumn' : 'Winter';
-    const el = document.getElementById('collection-season');
-    if (el) el.textContent = season + ' ' + year + ' Collection';
   
     function toggleMenu() {
       const links = document.getElementById('nav-links');
