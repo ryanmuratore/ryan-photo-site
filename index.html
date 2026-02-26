@@ -1262,27 +1262,33 @@
       const grid = document.getElementById('gallery-grid');
       const allItems = Array.from(document.querySelectorAll('#gallery-grid .gallery-item'));
 
+      let matching, nonMatching;
+
       if (filter === 'all') {
         allItems.sort((a, b) => parseInt(a.dataset.index) - parseInt(b.dataset.index));
-        allItems.forEach(item => {
-          grid.appendChild(item);
-          item.style.opacity = '1';
-          item.style.pointerEvents = 'auto';
-          item.style.transition = 'opacity 0.4s';
-        });
+        matching = allItems;
+        nonMatching = [];
       } else if (filter === 'wildlife') {
-        const matching = allItems.filter(i => i.dataset.type === 'wildlife');
-        const nonMatching = allItems.filter(i => i.dataset.type !== 'wildlife');
-        [...matching, ...nonMatching].forEach(item => grid.appendChild(item));
-        matching.forEach(item => { item.style.opacity = '1'; item.style.pointerEvents = 'auto'; item.style.transition = 'opacity 0.4s'; });
-        nonMatching.forEach(item => { item.style.opacity = '0.15'; item.style.pointerEvents = 'none'; item.style.transition = 'opacity 0.4s'; });
+        matching = allItems.filter(i => i.dataset.type === 'wildlife');
+        nonMatching = allItems.filter(i => i.dataset.type !== 'wildlife');
       } else {
-        const matching = allItems.filter(i => i.dataset.country === filter);
-        const nonMatching = allItems.filter(i => i.dataset.country !== filter || !i.dataset.country);
-        [...matching, ...nonMatching].forEach(item => grid.appendChild(item));
-        matching.forEach(item => { item.style.opacity = '1'; item.style.pointerEvents = 'auto'; item.style.transition = 'opacity 0.4s'; });
-        nonMatching.forEach(item => { item.style.opacity = '0.15'; item.style.pointerEvents = 'none'; item.style.transition = 'opacity 0.4s'; });
+        matching = allItems.filter(i => i.dataset.country === filter);
+        nonMatching = allItems.filter(i => i.dataset.country !== filter || !i.dataset.country);
       }
+
+      // Remove all items from grid, then re-insert matching first, non-matching after
+      // This forces columns to reflow with matching items genuinely at the top
+      allItems.forEach(item => item.remove());
+      matching.forEach(item => {
+        item.style.opacity = '1';
+        item.style.pointerEvents = 'auto';
+        grid.appendChild(item);
+      });
+      nonMatching.forEach(item => {
+        item.style.opacity = '0.15';
+        item.style.pointerEvents = 'none';
+        grid.appendChild(item);
+      });
 
       document.querySelectorAll('.country-path').forEach(el => {
         el.classList.toggle('map-active', el.dataset.name === filter);
