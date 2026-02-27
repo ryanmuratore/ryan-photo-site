@@ -53,7 +53,8 @@
     /* ── MAP FILTER ── */
     .map-filter-wrap { padding: 0 3rem 2rem; }
     .map-label { font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--clay); margin-bottom: 1rem; display: block; }
-    #world-map-container { width: 100%; background: var(--linen); border: 1px solid var(--sand); overflow: hidden; position: relative; }
+    #world-map-container { width: 65%;
+      margin: 0 auto; background: var(--linen); border: 1px solid var(--sand); overflow: hidden; position: relative; }
     #world-map-container svg { width: 100%; height: auto; display: block; }
     .country-path { fill: var(--sand); stroke: var(--warm-white); stroke-width: 0.4; transition: fill 0.25s; cursor: default; }
     .country-path.visited { fill: var(--clay); cursor: pointer; }
@@ -69,18 +70,13 @@
 
     /* ── FULL PORTFOLIO GRID ── */
             /* ── GALLERY GRID ── */
-    .gallery-grid {
-      column-count: 3;
-      column-gap: 8px;
-    }
+    .gallery-grid { }
     .gallery-item {
       position: relative;
       overflow: hidden;
       cursor: pointer;
-      break-inside: avoid;
       margin-bottom: 8px;
       width: 100%;
-      display: inline-block;
     }
     .gallery-item img {
       width: 100%;
@@ -204,11 +200,11 @@
       .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
       .hamburger.open span:nth-child(2) { opacity: 0; }
       .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-      .nav-links { display: none; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--warm-white); z-index: 999; justify-content: center; align-items: center; gap: 2.2rem; overflow-y: auto; }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(250,246,240,0.98); backdrop-filter: blur(8px); z-index: 997; padding: 1rem 0 1.5rem; box-shadow: 0 8px 24px rgba(0,0,0,0.08); border-top: 1px solid var(--sand); }
       .nav-links.open { display: flex; }
-      .nav-links li { display: block; text-align: center; }
+      .nav-links li { display: block; text-align: left; }
       .nav-links li.cart-dropdown-wrap { display: none !important; }
-      .nav-links a { font-size: 1.1rem !important; letter-spacing: 0.2em; color: var(--earth) !important; white-space: nowrap; }
+      .nav-links a { font-size: 0.85rem !important; letter-spacing: 0.15em; color: var(--earth) !important; white-space: nowrap; display: block; padding: 0.75rem 1.4rem; border-bottom: 1px solid var(--linen); }
     }
 
     #cart-btn-mobile {
@@ -605,48 +601,7 @@
     const tooltip = document.getElementById('map-tooltip');
     const galleryItems = document.querySelectorAll('.gallery-item[data-country]');
 
-    function filterGallery(filter) {
-      const grid = document.getElementById('gallery-grid');
-      const allItems = Array.from(document.querySelectorAll('#gallery-grid .gallery-item'));
-
-      let matching, nonMatching;
-      if (filter === 'all') {
-        allItems.sort((a, b) => parseInt(a.dataset.index) - parseInt(b.dataset.index));
-        matching = allItems;
-        nonMatching = [];
-      } else if (filter === 'wildlife') {
-        matching = allItems.filter(i => i.dataset.type === 'wildlife');
-        nonMatching = allItems.filter(i => i.dataset.type !== 'wildlife');
-      } else {
-        matching = allItems.filter(i => i.dataset.country === filter);
-        nonMatching = allItems.filter(i => i.dataset.country !== filter || !i.dataset.country);
-      }
-
-      // Detach grid from DOM, reorder, reattach — forces full column reflow
-      const parent = grid.parentNode;
-      const nextSibling = grid.nextSibling;
-      parent.removeChild(grid);
-
-      matching.forEach(item => {
-        item.style.opacity = '1';
-        item.style.pointerEvents = 'auto';
-        grid.appendChild(item);
-      });
-      nonMatching.forEach(item => {
-        item.style.opacity = '0.15';
-        item.style.pointerEvents = 'none';
-        grid.appendChild(item);
-      });
-
-      parent.insertBefore(grid, nextSibling);
-
-      document.querySelectorAll('.country-path').forEach(el => {
-        el.classList.toggle('map-active', el.dataset.name === filter);
-      });
-      document.querySelectorAll('.map-pill').forEach(pill => {
-        pill.classList.toggle('active', pill.dataset.filter === filter);
-      });
-    }
+    
 
     function loadScript(src) {
       return new Promise((resolve, reject) => {
@@ -719,6 +674,68 @@
       });
     });
 
+
+    // ── MASONRY + FILTER ──
+    function buildMasonry(ordered, matching) {
+      const grid = document.getElementById('gallery-grid');
+      if (!grid) return;
+      const cols = window.innerWidth <= 768 ? 2 : 3;
+
+      grid.innerHTML = '';
+      grid.style.cssText = 'display:flex; gap:8px; align-items:flex-start;';
+
+      const columns = [];
+      for (let i = 0; i < cols; i++) {
+        const col = document.createElement('div');
+        col.style.cssText = 'flex:1; display:flex; flex-direction:column; gap:8px;';
+        grid.appendChild(col);
+        columns.push(col);
+      }
+
+      ordered.forEach((item, i) => {
+        const isMatch = !matching || matching.includes(item);
+        item.style.opacity = isMatch ? '1' : '0.15';
+        item.style.pointerEvents = isMatch ? 'auto' : 'none';
+        columns[i % cols].appendChild(item);
+      });
+    }
+
+    function getAllItems() {
+      // Items may be inside masonry-col divs or directly in grid
+      return Array.from(document.querySelectorAll('#gallery-grid .gallery-item'));
+    }
+
+    function filterGallery(filter) {
+      const allItems = getAllItems();
+
+      let matching, nonMatching;
+      if (filter === 'all') {
+        allItems.sort((a, b) => parseInt(a.dataset.index) - parseInt(b.dataset.index));
+        matching = allItems;
+        nonMatching = [];
+      } else if (filter === 'wildlife') {
+        matching = allItems.filter(i => i.dataset.type === 'wildlife');
+        nonMatching = allItems.filter(i => i.dataset.type !== 'wildlife');
+      } else {
+        matching = allItems.filter(i => i.dataset.country === filter);
+        nonMatching = allItems.filter(i => i.dataset.country !== filter || !i.dataset.country);
+      }
+
+      buildMasonry([...matching, ...nonMatching], matching);
+
+      document.querySelectorAll('.country-path').forEach(el => {
+        el.classList.toggle('map-active', el.dataset.name === filter);
+      });
+      document.querySelectorAll('.map-pill').forEach(pill => {
+        pill.classList.toggle('active', pill.dataset.filter === filter);
+      });
+    }
+
+    window.addEventListener('resize', () => {
+      const active = document.querySelector('.map-pill.active');
+      filterGallery(active ? active.dataset.filter : 'all');
+    });
+
     function toggleMenu() {
       const links = document.getElementById('nav-links');
       const burger = document.getElementById('hamburger');
@@ -726,6 +743,11 @@
       burger.classList.toggle('open', isOpen);
     }
     document.addEventListener('DOMContentLoaded', () => {
+      // Build masonry on load
+      const allItems = Array.from(document.querySelectorAll('#gallery-grid .gallery-item'));
+      allItems.sort((a, b) => parseInt(a.dataset.index) - parseInt(b.dataset.index));
+      buildMasonry(allItems, null);
+
       document.querySelectorAll('#nav-links a').forEach(a => {
         a.addEventListener('click', () => {
           document.getElementById('nav-links').classList.remove('open');
