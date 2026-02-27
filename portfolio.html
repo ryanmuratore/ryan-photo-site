@@ -71,17 +71,22 @@
     /* ── FULL PORTFOLIO GRID ── */
             /* ── GALLERY GRID ── */
     .gallery-grid {
-      column-count: 3;
-      column-gap: 8px;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+    .gallery-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
     .gallery-item {
       position: relative;
       overflow: hidden;
       cursor: pointer;
-      break-inside: avoid;
-      margin-bottom: 8px;
       width: 100%;
-      display: inline-block;
+      transition: opacity 0.4s;
     }
     .gallery-item img {
       width: 100%;
@@ -674,52 +679,51 @@
       });
     });
 
+    // Store all items detached from DOM, distribute into columns
+    let allGalleryItems = [];
 
-    
+    function getColCount() {
+      return window.innerWidth <= 768 ? 2 : 3;
+    }
 
-    function filterGallery(filter) {
-      const allItems = Array.from(document.querySelectorAll('.gallery-item'));
+    function distributeItems(items, highlightSet) {
+      const grid = document.getElementById('gallery-grid');
+      if (!grid) return;
 
-      let matching;
-      if (filter === 'all') {
-        matching = null;
-      } else if (filter === 'wildlife') {
-        matching = allItems.filter(i => i.dataset.type === 'wildlife');
-      } else {
-        matching = allItems.filter(i => i.dataset.country === filter);
+      // Rebuild columns
+      grid.innerHTML = '';
+      const cols = getColCount();
+      const columns = [];
+      for (let i = 0; i < cols; i++) {
+        const col = document.createElement('div');
+        col.className = 'gallery-col';
+        grid.appendChild(col);
+        columns.push(col);
       }
 
-      const grid = document.getElementById('gallery-grid');
+      items.forEach((item, i) => {
+        const isHighlighted = !highlightSet || highlightSet.has(item);
+        item.style.opacity = isHighlighted ? '1' : '0.15';
+        item.style.pointerEvents = isHighlighted ? 'auto' : 'none';
+        columns[i % cols].appendChild(item);
+      });
+    }
 
-      if (!matching) {
-        // Show all in original order
-        allItems.sort((a,b) => parseInt(a.dataset.index) - parseInt(b.dataset.index));
-        allItems.forEach(item => {
-          item.style.opacity = '1';
-          item.style.pointerEvents = 'auto';
-          item.style.display = '';
-          grid.appendChild(item);
-        });
+    function filterGallery(filter) {
+      let matching, nonMatching;
+
+      if (filter === 'all') {
+        const sorted = allGalleryItems.slice().sort((a, b) => parseInt(a.dataset.index) - parseInt(b.dataset.index));
+        distributeItems(sorted, null);
       } else {
-        const nonMatching = allItems.filter(i => !matching.includes(i));
-        // Hide non-matching, show only matching first so they fill columns from top
-        nonMatching.forEach(i => i.style.display = 'none');
-        matching.forEach(item => {
-          item.style.display = '';
-          item.style.opacity = '1';
-          item.style.pointerEvents = 'auto';
-          grid.appendChild(item);
-        });
-        // Force reflow then show non-matching greyed at bottom
-        grid.style.display = 'none';
-        void grid.offsetHeight;
-        grid.style.display = '';
-        nonMatching.forEach(item => {
-          item.style.display = '';
-          item.style.opacity = '0.15';
-          item.style.pointerEvents = 'none';
-          grid.appendChild(item);
-        });
+        if (filter === 'wildlife') {
+          matching = allGalleryItems.filter(i => i.dataset.type === 'wildlife');
+        } else {
+          matching = allGalleryItems.filter(i => i.dataset.country === filter);
+        }
+        nonMatching = allGalleryItems.filter(i => !matching.includes(i));
+        const highlightSet = new Set(matching);
+        distributeItems([...matching, ...nonMatching], highlightSet);
       }
 
       document.querySelectorAll('.country-path').forEach(el => {
@@ -729,18 +733,35 @@
         pill.classList.toggle('active', pill.dataset.filter === filter);
       });
     }
+
+    window.addEventListener('resize', () => {
+      const active = document.querySelector('.map-pill.active');
+      filterGallery(active ? active.dataset.filter : 'all');
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Collect all items, remove from DOM, store them
+      const grid = document.getElementById('gallery-grid');
+      if (grid) {
+        allGalleryItems = Array.from(grid.querySelectorAll('.gallery-item'));
+        allGalleryItems.sort((a, b) => parseInt(a.dataset.index) - parseInt(b.dataset.index));
+        allGalleryItems.forEach(item => item.remove());
+        distributeItems(allGalleryItems, null);
+      }
+      // Close nav on link click
+      document.querySelectorAll('#nav-links a').forEach(a => {
+        a.addEventListener('click', () => {
+          document.getElementById('nav-links').classList.remove('open');
+          document.getElementById('hamburger').classList.remove('open');
+        });
+      });
+    });
     function toggleMenu() {
       const links = document.getElementById('nav-links');
       const burger = document.getElementById('hamburger');
       const isOpen = links.classList.toggle('open');
       burger.classList.toggle('open', isOpen);
     }
-    document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('#nav-links a').forEach(a => {
-        a.addEventListener('click', () => {
-          document.getElementById('nav-links').classList.remove('open');
-          document.getElementById('hamburger').classList.remove('open');
-        });
       });
     });
   </script>
