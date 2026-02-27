@@ -587,6 +587,7 @@
   </footer>
 
   <script>
+
     // Scroll reveal
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
@@ -658,28 +659,7 @@
       document.getElementById('map-loading').textContent = 'Use the buttons below to filter by location.';
     });
 
-    document.querySelectorAll('.map-pill').forEach(pill => {
-      pill.addEventListener('click', () => {
-        const f = pill.dataset.filter;
-        if (f === 'wildlife') {
-          document.querySelectorAll('.gallery-item[data-type="landscape"]').forEach(el => el.style.display = 'none');
-          document.querySelectorAll('.gallery-item[data-type="wildlife"]').forEach(el => { el.style.display = 'block'; el.style.opacity = '1'; });
-          document.getElementById('world-map-container').style.opacity = '0.35';
-          document.getElementById('world-map-container').style.pointerEvents = 'none';
-          document.querySelectorAll('.country-path').forEach(el => el.classList.remove('map-active'));
-          document.querySelectorAll('.map-pill').forEach(p => p.classList.remove('active'));
-          pill.classList.add('active');
-        } else {
-          document.querySelectorAll('.gallery-item[data-type="landscape"]').forEach(el => el.style.display = 'block');
-          document.querySelectorAll('.gallery-item[data-type="wildlife"]').forEach(el => el.style.display = 'none');
-          document.getElementById('world-map-container').style.opacity = '1';
-          document.getElementById('world-map-container').style.pointerEvents = 'auto';
-          filterGallery(f);
-        }
-      });
-    });
-
-    // Store all items detached from DOM, distribute into columns
+    // ── GALLERY MASONRY + FILTER ──
     let allGalleryItems = [];
 
     function getColCount() {
@@ -689,8 +669,6 @@
     function distributeItems(items, highlightSet) {
       const grid = document.getElementById('gallery-grid');
       if (!grid) return;
-
-      // Rebuild columns
       grid.innerHTML = '';
       const cols = getColCount();
       const columns = [];
@@ -700,7 +678,6 @@
         grid.appendChild(col);
         columns.push(col);
       }
-
       items.forEach((item, i) => {
         const isHighlighted = !highlightSet || highlightSet.has(item);
         item.style.opacity = isHighlighted ? '1' : '0.15';
@@ -711,36 +688,41 @@
 
     function filterGallery(filter) {
       let matching, nonMatching;
-
       if (filter === 'all') {
         const sorted = allGalleryItems.slice().sort((a, b) => parseInt(a.dataset.index) - parseInt(b.dataset.index));
         distributeItems(sorted, null);
       } else {
-        if (filter === 'wildlife') {
-          matching = allGalleryItems.filter(i => i.dataset.type === 'wildlife');
-        } else {
-          matching = allGalleryItems.filter(i => i.dataset.country === filter);
-        }
+        matching = filter === 'wildlife'
+          ? allGalleryItems.filter(i => i.dataset.type === 'wildlife')
+          : allGalleryItems.filter(i => i.dataset.country === filter);
         nonMatching = allGalleryItems.filter(i => !matching.includes(i));
-        const highlightSet = new Set(matching);
-        distributeItems([...matching, ...nonMatching], highlightSet);
+        distributeItems([...matching, ...nonMatching], new Set(matching));
       }
-
       document.querySelectorAll('.country-path').forEach(el => {
         el.classList.toggle('map-active', el.dataset.name === filter);
       });
-      document.querySelectorAll('.map-pill').forEach(pill => {
-        pill.classList.toggle('active', pill.dataset.filter === filter);
+      document.querySelectorAll('.map-pill').forEach(p => {
+        p.classList.toggle('active', p.dataset.filter === filter);
       });
     }
+
+    document.querySelectorAll('.map-pill').forEach(pill => {
+      pill.addEventListener('click', () => filterGallery(pill.dataset.filter));
+    });
 
     window.addEventListener('resize', () => {
       const active = document.querySelector('.map-pill.active');
       filterGallery(active ? active.dataset.filter : 'all');
     });
 
+    function toggleMenu() {
+      const links = document.getElementById('nav-links');
+      const burger = document.getElementById('hamburger');
+      const isOpen = links.classList.toggle('open');
+      burger.classList.toggle('open', isOpen);
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
-      // Collect all items, remove from DOM, store them
       const grid = document.getElementById('gallery-grid');
       if (grid) {
         allGalleryItems = Array.from(grid.querySelectorAll('.gallery-item'));
@@ -748,20 +730,11 @@
         allGalleryItems.forEach(item => item.remove());
         distributeItems(allGalleryItems, null);
       }
-      // Close nav on link click
       document.querySelectorAll('#nav-links a').forEach(a => {
         a.addEventListener('click', () => {
           document.getElementById('nav-links').classList.remove('open');
           document.getElementById('hamburger').classList.remove('open');
         });
-      });
-    });
-    function toggleMenu() {
-      const links = document.getElementById('nav-links');
-      const burger = document.getElementById('hamburger');
-      const isOpen = links.classList.toggle('open');
-      burger.classList.toggle('open', isOpen);
-    }
       });
     });
   </script>
