@@ -309,13 +309,18 @@
     @media (max-width: 768px) { #world-map-container { min-height: 180px; } }
 
                 /* ── GALLERY GRID ── */
-    .gallery-grid { }
+    .gallery-grid {
+      column-count: 3;
+      column-gap: 8px;
+    }
     .gallery-item {
       position: relative;
       overflow: hidden;
       cursor: pointer;
+      break-inside: avoid;
       margin-bottom: 8px;
       width: 100%;
+      display: inline-block;
     }
     .gallery-item img {
       width: 100%;
@@ -593,7 +598,7 @@
       /* ── SECTIONS ── */
       .section-wrap { padding: 4rem 1.5rem; }
       .portfolio-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem; }
-      .gallery-grid { }
+      .gallery-grid { column-count: 2; column-gap: 6px; }
 
       /* ── SHOP / PRINTS ── */
       .shop-intro { grid-template-columns: 1fr; gap: 2rem; }
@@ -701,7 +706,7 @@
       .btn { font-size: 0.58rem; padding: 0.7rem 1.5rem; }
       .section-wrap { padding: 4rem 1.5rem; }
       .portfolio-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem; }
-      .gallery-grid { }
+      .gallery-grid { column-count: 2; column-gap: 6px; }
       .shop-intro { grid-template-columns: 1fr; gap: 2rem; }
       .prints-grid { grid-template-columns: 1fr !important; display: grid !important; }
       .print-card { display: block !important; }
@@ -1355,53 +1360,55 @@
       });
     });
 
-    // ── MASONRY + FILTER ──
-    function buildMasonry(ordered, matching) {
-      const grid = document.getElementById('gallery-grid');
-      if (!grid) return;
-      const cols = window.innerWidth <= 768 ? 2 : 3;
-
-      grid.innerHTML = '';
-      grid.style.cssText = 'display:flex; gap:8px; align-items:flex-start;';
-
-      const columns = [];
-      for (let i = 0; i < cols; i++) {
-        const col = document.createElement('div');
-        col.style.cssText = 'flex:1; display:flex; flex-direction:column; gap:8px;';
-        grid.appendChild(col);
-        columns.push(col);
-      }
-
-      ordered.forEach((item, i) => {
-        const isMatch = !matching || matching.includes(item);
-        item.style.opacity = isMatch ? '1' : '0.15';
-        item.style.pointerEvents = isMatch ? 'auto' : 'none';
-        columns[i % cols].appendChild(item);
-      });
-    }
-
-    function getAllItems() {
-      // Items may be inside masonry-col divs or directly in grid
-      return Array.from(document.querySelectorAll('#gallery-grid .gallery-item'));
-    }
+    
 
     function filterGallery(filter) {
-      const allItems = getAllItems();
+      const allItems = Array.from(document.querySelectorAll('.gallery-item'));
 
-      let matching, nonMatching;
+      let matching;
       if (filter === 'all') {
-        allItems.sort((a, b) => parseInt(a.dataset.index) - parseInt(b.dataset.index));
-        matching = allItems;
-        nonMatching = [];
+        matching = null; // show all
       } else if (filter === 'wildlife') {
         matching = allItems.filter(i => i.dataset.type === 'wildlife');
-        nonMatching = allItems.filter(i => i.dataset.type !== 'wildlife');
       } else {
         matching = allItems.filter(i => i.dataset.country === filter);
-        nonMatching = allItems.filter(i => i.dataset.country !== filter || !i.dataset.country);
       }
 
-      buildMasonry([...matching, ...nonMatching], matching);
+      if (!matching) {
+        // Restore original order, show all
+        allItems.sort((a, b) => parseInt(a.dataset.index) - parseInt(b.dataset.index));
+        allItems.forEach(item => {
+          item.style.display = '';
+          item.style.opacity = '1';
+          item.style.pointerEvents = 'auto';
+          item.style.order = '';
+        });
+        // Re-append in sorted order to restore column flow
+        const grid = document.getElementById('gallery-grid');
+        allItems.forEach(item => grid.appendChild(item));
+      } else {
+        const nonMatching = allItems.filter(i => !matching.includes(i));
+        const grid = document.getElementById('gallery-grid');
+        // Append matching first, then non-matching — forces columns to fill from matching
+        matching.forEach(item => {
+          item.style.opacity = '1';
+          item.style.pointerEvents = 'auto';
+          item.style.display = '';
+          grid.appendChild(item);
+        });
+        nonMatching.forEach(item => {
+          item.style.opacity = '0.15';
+          item.style.pointerEvents = 'none';
+          item.style.display = '';
+          grid.appendChild(item);
+        });
+      }
+
+      // Force column reflow
+      const grid = document.getElementById('gallery-grid');
+      grid.style.display = 'none';
+      void grid.offsetHeight;
+      grid.style.display = '';
 
       document.querySelectorAll('.country-path').forEach(el => {
         el.classList.toggle('map-active', el.dataset.name === filter);
@@ -1410,12 +1417,6 @@
         pill.classList.toggle('active', pill.dataset.filter === filter);
       });
     }
-
-    window.addEventListener('resize', () => {
-      const active = document.querySelector('.map-pill.active');
-      filterGallery(active ? active.dataset.filter : 'all');
-    });
-
     function toggleMenu() {
       const links = document.getElementById('nav-links');
       const burger = document.getElementById('hamburger');
@@ -1423,11 +1424,6 @@
       burger.classList.toggle('open', isOpen);
     }
     document.addEventListener('DOMContentLoaded', () => {
-      // Build masonry on load
-      const allItems = Array.from(document.querySelectorAll('#gallery-grid .gallery-item'));
-      allItems.sort((a, b) => parseInt(a.dataset.index) - parseInt(b.dataset.index));
-      buildMasonry(allItems, null);
-
       document.querySelectorAll('#nav-links a').forEach(a => {
         a.addEventListener('click', () => {
           document.getElementById('nav-links').classList.remove('open');
