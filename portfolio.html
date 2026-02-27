@@ -71,37 +71,26 @@
     /* ── FULL PORTFOLIO GRID ── */
             /* ── GALLERY GRID ── */
     .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-auto-rows: auto;
-      gap: 8px;
-      align-items: start;
+      column-count: 3;
+      column-gap: 8px;
     }
     .gallery-item {
       position: relative;
       overflow: hidden;
       cursor: pointer;
+      break-inside: avoid;
+      margin-bottom: 8px;
       width: 100%;
-      transition: opacity 0.4s;
+      display: inline-block;
     }
-    .gallery-ph {
+    .gallery-item img {
       width: 100%;
+      height: auto;
       display: block;
+      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
-    .gallery-item.ar-landscape .gallery-ph { aspect-ratio: 3/2; }
-    .gallery-item.ar-portrait .gallery-ph { aspect-ratio: 2/3; }
-    .gallery-item.ar-landscape .gallery-ph { height: 240px; }
-    .gallery-item.ar-portrait .gallery-ph { height: 360px; }
-    .gallery-ph { width: 100%; height: 100%; transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-    .gallery-item:hover .gallery-ph { transform: scale(1.06); }
-    .ph1 { background: linear-gradient(145deg, #c8b898, #9a8a6a); }
-    .ph2 { background: linear-gradient(145deg, #a8b888, #7a9a68); }
-    .ph3 { background: linear-gradient(145deg, #b8a888, #8a7858); }
-    .ph4 { background: linear-gradient(145deg, #c0a878, #906840); }
-    .ph5 { background: linear-gradient(145deg, #98a878, #687848); }
-    .ph6 { background: linear-gradient(145deg, #d0b898, #a08858); }
-    .ph7 { background: linear-gradient(145deg, #b0c098, #809868); }
-    .ph8 { background: linear-gradient(145deg, #c8a878, #887048); }
+    .gallery-item:hover img { transform: scale(1.04); }
+
     .gallery-hover { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,18,8,0.82) 0%, rgba(26,18,8,0.1) 50%, transparent 100%); opacity: 0; transition: opacity 0.4s; display: flex; flex-direction: column; justify-content: flex-end; padding: 1.4rem; }
     .gallery-item:hover .gallery-hover { opacity: 1; }
     .gallery-hover-title { display: none; }
@@ -689,32 +678,49 @@
     
 
     function filterGallery(filter) {
-      const grid = document.getElementById('gallery-grid');
       const allItems = Array.from(document.querySelectorAll('.gallery-item'));
 
       let matching;
       if (filter === 'all') {
-        matching = allItems.slice().sort((a, b) => parseInt(a.dataset.index) - parseInt(b.dataset.index));
+        matching = null;
       } else if (filter === 'wildlife') {
         matching = allItems.filter(i => i.dataset.type === 'wildlife');
       } else {
         matching = allItems.filter(i => i.dataset.country === filter);
       }
 
-      const nonMatching = allItems.filter(i => !matching.includes(i));
+      const grid = document.getElementById('gallery-grid');
 
-      // Use CSS order property: matching get low order values (appear first in grid)
-      // nonMatching get high order values (appear after)
-      matching.forEach((item, i) => {
-        item.style.order = i;
-        item.style.opacity = '1';
-        item.style.pointerEvents = 'auto';
-      });
-      nonMatching.forEach((item, i) => {
-        item.style.order = matching.length + i;
-        item.style.opacity = '0.15';
-        item.style.pointerEvents = 'none';
-      });
+      if (!matching) {
+        // Show all in original order
+        allItems.sort((a,b) => parseInt(a.dataset.index) - parseInt(b.dataset.index));
+        allItems.forEach(item => {
+          item.style.opacity = '1';
+          item.style.pointerEvents = 'auto';
+          item.style.display = '';
+          grid.appendChild(item);
+        });
+      } else {
+        const nonMatching = allItems.filter(i => !matching.includes(i));
+        // Hide non-matching, show only matching first so they fill columns from top
+        nonMatching.forEach(i => i.style.display = 'none');
+        matching.forEach(item => {
+          item.style.display = '';
+          item.style.opacity = '1';
+          item.style.pointerEvents = 'auto';
+          grid.appendChild(item);
+        });
+        // Force reflow then show non-matching greyed at bottom
+        grid.style.display = 'none';
+        void grid.offsetHeight;
+        grid.style.display = '';
+        nonMatching.forEach(item => {
+          item.style.display = '';
+          item.style.opacity = '0.15';
+          item.style.pointerEvents = 'none';
+          grid.appendChild(item);
+        });
+      }
 
       document.querySelectorAll('.country-path').forEach(el => {
         el.classList.toggle('map-active', el.dataset.name === filter);
