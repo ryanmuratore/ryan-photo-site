@@ -622,8 +622,11 @@
         nonMatching = allItems.filter(i => i.dataset.country !== filter || !i.dataset.country);
       }
 
-      // Remove all, reinsert in new order, then force column reflow
-      allItems.forEach(item => item.remove());
+      // Detach grid from DOM, reorder, reattach — forces full column reflow
+      const parent = grid.parentNode;
+      const nextSibling = grid.nextSibling;
+      parent.removeChild(grid);
+
       matching.forEach(item => {
         item.style.opacity = '1';
         item.style.pointerEvents = 'auto';
@@ -635,10 +638,7 @@
         grid.appendChild(item);
       });
 
-      // Force CSS columns to reflow by briefly toggling display
-      grid.style.display = 'none';
-      grid.offsetHeight; // trigger reflow
-      grid.style.display = '';
+      parent.insertBefore(grid, nextSibling);
 
       document.querySelectorAll('.country-path').forEach(el => {
         el.classList.toggle('map-active', el.dataset.name === filter);
