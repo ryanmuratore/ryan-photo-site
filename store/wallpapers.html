@@ -188,10 +188,25 @@
       position: relative;
       background: var(--earth);
       overflow: hidden;
+      width: 100%;
       aspect-ratio: 16/10;
     }
-    .carousel-wrap.mobile-mode { aspect-ratio: 9/19.5; max-width: 320px; margin: 0 auto; }
-    .carousel-slide { width: 100%; height: 100%; }
+    .carousel-wrap.mobile-mode {
+      aspect-ratio: 9/16;
+      max-width: 380px;
+      margin: 0 auto;
+    }
+    .carousel-slide {
+      position: absolute; top:0; left:0;
+      width: 100%; height: 100%;
+    }
+    .carousel-slide img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      display: block !important;
+    }
+    .carousel-slide { position: absolute; top:0; left:0; width: 100%; height: 100%; }
     .carousel-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .carousel-btn {
       position: absolute;
@@ -263,7 +278,7 @@
     <a href="../index.html#wallpapers" class="back-link reveal">Back to wallpapers</a>
 
     <div class="product-hero reveal">
-      <div class="carousel-wrap" id="wallpaper-carousel">
+      <div class="carousel-wrap desktop-mode" id="wallpaper-carousel">
         <div class="carousel-slide" data-group="desktop" style="display:block">
   <img src="../wallpapers/desktop-1.jpg" alt="Wallpaper 1">
 </div>
@@ -473,11 +488,7 @@ let carouselIndex = 0;
       document.getElementById('carousel-counter').textContent = '1 / ' + TOTAL;
       // Toggle aspect ratio for mobile wallpapers
       const wrap = document.getElementById('wallpaper-carousel');
-      if (carouselGroup === 'mobile') {
-        wrap.classList.add('mobile-mode');
-      } else {
-        wrap.classList.remove('mobile-mode');
-      }
+      wrap.classList.toggle('mobile-mode', carouselGroup === 'mobile');
       // Update specs
       const specs = document.getElementById('wallpaper-specs-detail');
       if (carouselGroup === 'desktop') {
