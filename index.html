@@ -734,6 +734,31 @@
     @media (max-width: 768px) {
       #cart-btn-mobile { display: flex !important; }
     }
+
+    .wallpaper-carousel-wrap {
+      position: relative;
+      overflow: hidden;
+      background: var(--earth);
+    }
+    .wallpaper-carousel-wrap img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .wp-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(250,246,240,0.8); border: none; cursor: pointer;
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 5; backdrop-filter: blur(4px);
+    }
+    .wp-btn svg { width: 14px; height: 14px; stroke: var(--earth); stroke-width: 2; fill: none; }
+    .wp-btn.prev { left: 10px; }
+    .wp-btn.next { right: 10px; }
+    .wp-counter {
+      position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+      background: rgba(0,0,0,0.4); color: #fff;
+      font-family: 'Tenor Sans', sans-serif; font-size: 0.58rem;
+      letter-spacing: 0.12em; padding: 0.2rem 0.6rem; border-radius: 20px;
+    }
   </style>
   <script src="cart.js"></script>
 </head>
@@ -998,9 +1023,30 @@
     </div>
     <div class="wallpaper-card-wrap reveal">
       <div class="wallpaper-card">
-        <div class="wallpaper-preview">
-          <div class="wallpaper-ph wph1"></div>
-          <!-- Replace with: <img src="wallpaper-preview.jpg" alt="Wallpaper Pack Preview"> -->
+<div class="wallpaper-carousel-wrap wallpaper-preview" id="wp-preview">
+          <img src="wallpaper-desktop-1.jpg" alt="Wallpaper 1" class="wp-slide" style="display:block; width:100%; height:100%; object-fit:cover;">
+          <img src="wallpaper-desktop-2.jpg" alt="Wallpaper 2" class="wp-slide" style="display:none; width:100%; height:100%; object-fit:cover;">
+          <img src="wallpaper-desktop-3.jpg" alt="Wallpaper 3" class="wp-slide" style="display:none; width:100%; height:100%; object-fit:cover;">
+          <img src="wallpaper-desktop-4.jpg" alt="Wallpaper 4" class="wp-slide" style="display:none; width:100%; height:100%; object-fit:cover;">
+          <img src="wallpaper-desktop-5.jpg" alt="Wallpaper 5" class="wp-slide" style="display:none; width:100%; height:100%; object-fit:cover;">
+          <img src="wallpaper-desktop-6.jpg" alt="Wallpaper 6" class="wp-slide" style="display:none; width:100%; height:100%; object-fit:cover;">
+          <img src="wallpaper-desktop-7.jpg" alt="Wallpaper 7" class="wp-slide" style="display:none; width:100%; height:100%; object-fit:cover;">
+          <img src="wallpaper-desktop-8.jpg" alt="Wallpaper 8" class="wp-slide" style="display:none; width:100%; height:100%; object-fit:cover;">
+          <img src="wallpaper-desktop-9.jpg" alt="Wallpaper 9" class="wp-slide" style="display:none; width:100%; height:100%; object-fit:cover;">
+          <img src="wallpaper-desktop-10.jpg" alt="Wallpaper 10" class="wp-slide" style="display:none; width:100%; height:100%; object-fit:cover;">
+          <img src="wallpaper-desktop-11.jpg" alt="Wallpaper 11" class="wp-slide" style="display:none; width:100%; height:100%; object-fit:cover;">
+          <img src="wallpaper-desktop-12.jpg" alt="Wallpaper 12" class="wp-slide" style="display:none; width:100%; height:100%; object-fit:cover;">
+          <img src="wallpaper-desktop-13.jpg" alt="Wallpaper 13" class="wp-slide" style="display:none; width:100%; height:100%; object-fit:cover;">
+          <img src="wallpaper-desktop-14.jpg" alt="Wallpaper 14" class="wp-slide" style="display:none; width:100%; height:100%; object-fit:cover;">
+          <img src="wallpaper-desktop-15.jpg" alt="Wallpaper 15" class="wp-slide" style="display:none; width:100%; height:100%; object-fit:cover;">
+          <img src="wallpaper-desktop-16.jpg" alt="Wallpaper 16" class="wp-slide" style="display:none; width:100%; height:100%; object-fit:cover;">
+          <img src="wallpaper-desktop-17.jpg" alt="Wallpaper 17" class="wp-slide" style="display:none; width:100%; height:100%; object-fit:cover;">
+          <img src="wallpaper-desktop-18.jpg" alt="Wallpaper 18" class="wp-slide" style="display:none; width:100%; height:100%; object-fit:cover;">
+          <img src="wallpaper-desktop-19.jpg" alt="Wallpaper 19" class="wp-slide" style="display:none; width:100%; height:100%; object-fit:cover;">
+          <img src="wallpaper-desktop-20.jpg" alt="Wallpaper 20" class="wp-slide" style="display:none; width:100%; height:100%; object-fit:cover;">
+          <button class="wp-btn prev" onclick="wpPrev()"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+          <button class="wp-btn next" onclick="wpNext()"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+          <div class="wp-counter" id="wp-counter">1 / 20</div>
         </div>
         <div class="wallpaper-info">
           <p class="wallpaper-name">Wallpaper Pack Vol. 1</p>
@@ -1373,6 +1419,19 @@
       const active = document.querySelector('.map-pill.active');
       filterGallery(active ? active.dataset.filter : 'all');
     });
+
+
+    // Wallpaper preview carousel on index
+    let wpIdx = 0;
+    const wpSlides = () => document.querySelectorAll('#wp-preview .wp-slide');
+    function wpShow(n) {
+      const slides = wpSlides();
+      wpIdx = (n + 20) % 20;
+      slides.forEach((s, i) => s.style.display = i === wpIdx ? 'block' : 'none');
+      document.getElementById('wp-counter').textContent = (wpIdx + 1) + ' / 20';
+    }
+    function wpNext() { wpShow(wpIdx + 1); }
+    function wpPrev() { wpShow(wpIdx - 1); }
 
     function toggleMenu() {
       const links = document.getElementById('nav-links');

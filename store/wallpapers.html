@@ -183,6 +183,51 @@
     @media (max-width: 768px) {
       #cart-btn-mobile { display: flex !important; }
     }
+
+    .carousel-wrap {
+      position: relative;
+      background: var(--earth);
+      overflow: hidden;
+      aspect-ratio: 16/10;
+    }
+    .carousel-wrap.mobile-mode { aspect-ratio: 9/19.5; max-width: 320px; margin: 0 auto; }
+    .carousel-slide { width: 100%; height: 100%; }
+    .carousel-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(250,246,240,0.85);
+      border: none;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: background 0.2s;
+      backdrop-filter: blur(4px);
+    }
+    .carousel-btn:hover { background: rgba(250,246,240,1); }
+    .carousel-btn.prev { left: 12px; }
+    .carousel-btn.next { right: 12px; }
+    .carousel-btn svg { width: 16px; height: 16px; stroke: var(--earth); stroke-width: 2; fill: none; }
+    .carousel-counter {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.4);
+      color: #fff;
+      font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      padding: 0.25rem 0.7rem;
+      border-radius: 20px;
+      pointer-events: none;
+    }
   </style>
   <script src="../cart.js"></script>
 </head>
@@ -218,9 +263,136 @@
     <a href="../index.html#wallpapers" class="back-link reveal">Back to wallpapers</a>
 
     <div class="product-hero reveal">
-      <div class="product-img">
-        <div class="wallpaper-ph-desktop" id="wallpaper-preview"></div>
-        <!-- Replace with: <img src="../wallpaper-preview.jpg" alt="Wallpaper Pack Preview"> -->
+      <div class="carousel-wrap" id="wallpaper-carousel">
+        <div class="carousel-slide" data-group="desktop" style="display:block">
+  <img src="../wallpaper-desktop-1.jpg" alt="Wallpaper 1">
+</div>
+<div class="carousel-slide" data-group="desktop" style="display:none">
+  <img src="../wallpaper-desktop-2.jpg" alt="Wallpaper 2">
+</div>
+<div class="carousel-slide" data-group="desktop" style="display:none">
+  <img src="../wallpaper-desktop-3.jpg" alt="Wallpaper 3">
+</div>
+<div class="carousel-slide" data-group="desktop" style="display:none">
+  <img src="../wallpaper-desktop-4.jpg" alt="Wallpaper 4">
+</div>
+<div class="carousel-slide" data-group="desktop" style="display:none">
+  <img src="../wallpaper-desktop-5.jpg" alt="Wallpaper 5">
+</div>
+<div class="carousel-slide" data-group="desktop" style="display:none">
+  <img src="../wallpaper-desktop-6.jpg" alt="Wallpaper 6">
+</div>
+<div class="carousel-slide" data-group="desktop" style="display:none">
+  <img src="../wallpaper-desktop-7.jpg" alt="Wallpaper 7">
+</div>
+<div class="carousel-slide" data-group="desktop" style="display:none">
+  <img src="../wallpaper-desktop-8.jpg" alt="Wallpaper 8">
+</div>
+<div class="carousel-slide" data-group="desktop" style="display:none">
+  <img src="../wallpaper-desktop-9.jpg" alt="Wallpaper 9">
+</div>
+<div class="carousel-slide" data-group="desktop" style="display:none">
+  <img src="../wallpaper-desktop-10.jpg" alt="Wallpaper 10">
+</div>
+<div class="carousel-slide" data-group="desktop" style="display:none">
+  <img src="../wallpaper-desktop-11.jpg" alt="Wallpaper 11">
+</div>
+<div class="carousel-slide" data-group="desktop" style="display:none">
+  <img src="../wallpaper-desktop-12.jpg" alt="Wallpaper 12">
+</div>
+<div class="carousel-slide" data-group="desktop" style="display:none">
+  <img src="../wallpaper-desktop-13.jpg" alt="Wallpaper 13">
+</div>
+<div class="carousel-slide" data-group="desktop" style="display:none">
+  <img src="../wallpaper-desktop-14.jpg" alt="Wallpaper 14">
+</div>
+<div class="carousel-slide" data-group="desktop" style="display:none">
+  <img src="../wallpaper-desktop-15.jpg" alt="Wallpaper 15">
+</div>
+<div class="carousel-slide" data-group="desktop" style="display:none">
+  <img src="../wallpaper-desktop-16.jpg" alt="Wallpaper 16">
+</div>
+<div class="carousel-slide" data-group="desktop" style="display:none">
+  <img src="../wallpaper-desktop-17.jpg" alt="Wallpaper 17">
+</div>
+<div class="carousel-slide" data-group="desktop" style="display:none">
+  <img src="../wallpaper-desktop-18.jpg" alt="Wallpaper 18">
+</div>
+<div class="carousel-slide" data-group="desktop" style="display:none">
+  <img src="../wallpaper-desktop-19.jpg" alt="Wallpaper 19">
+</div>
+<div class="carousel-slide" data-group="desktop" style="display:none">
+  <img src="../wallpaper-desktop-20.jpg" alt="Wallpaper 20">
+</div>
+
+        <div class="carousel-slide" data-group="mobile" style="display:block">
+  <img src="../wallpaper-mobile-1.jpg" alt="Wallpaper 1">
+</div>
+<div class="carousel-slide" data-group="mobile" style="display:none">
+  <img src="../wallpaper-mobile-2.jpg" alt="Wallpaper 2">
+</div>
+<div class="carousel-slide" data-group="mobile" style="display:none">
+  <img src="../wallpaper-mobile-3.jpg" alt="Wallpaper 3">
+</div>
+<div class="carousel-slide" data-group="mobile" style="display:none">
+  <img src="../wallpaper-mobile-4.jpg" alt="Wallpaper 4">
+</div>
+<div class="carousel-slide" data-group="mobile" style="display:none">
+  <img src="../wallpaper-mobile-5.jpg" alt="Wallpaper 5">
+</div>
+<div class="carousel-slide" data-group="mobile" style="display:none">
+  <img src="../wallpaper-mobile-6.jpg" alt="Wallpaper 6">
+</div>
+<div class="carousel-slide" data-group="mobile" style="display:none">
+  <img src="../wallpaper-mobile-7.jpg" alt="Wallpaper 7">
+</div>
+<div class="carousel-slide" data-group="mobile" style="display:none">
+  <img src="../wallpaper-mobile-8.jpg" alt="Wallpaper 8">
+</div>
+<div class="carousel-slide" data-group="mobile" style="display:none">
+  <img src="../wallpaper-mobile-9.jpg" alt="Wallpaper 9">
+</div>
+<div class="carousel-slide" data-group="mobile" style="display:none">
+  <img src="../wallpaper-mobile-10.jpg" alt="Wallpaper 10">
+</div>
+<div class="carousel-slide" data-group="mobile" style="display:none">
+  <img src="../wallpaper-mobile-11.jpg" alt="Wallpaper 11">
+</div>
+<div class="carousel-slide" data-group="mobile" style="display:none">
+  <img src="../wallpaper-mobile-12.jpg" alt="Wallpaper 12">
+</div>
+<div class="carousel-slide" data-group="mobile" style="display:none">
+  <img src="../wallpaper-mobile-13.jpg" alt="Wallpaper 13">
+</div>
+<div class="carousel-slide" data-group="mobile" style="display:none">
+  <img src="../wallpaper-mobile-14.jpg" alt="Wallpaper 14">
+</div>
+<div class="carousel-slide" data-group="mobile" style="display:none">
+  <img src="../wallpaper-mobile-15.jpg" alt="Wallpaper 15">
+</div>
+<div class="carousel-slide" data-group="mobile" style="display:none">
+  <img src="../wallpaper-mobile-16.jpg" alt="Wallpaper 16">
+</div>
+<div class="carousel-slide" data-group="mobile" style="display:none">
+  <img src="../wallpaper-mobile-17.jpg" alt="Wallpaper 17">
+</div>
+<div class="carousel-slide" data-group="mobile" style="display:none">
+  <img src="../wallpaper-mobile-18.jpg" alt="Wallpaper 18">
+</div>
+<div class="carousel-slide" data-group="mobile" style="display:none">
+  <img src="../wallpaper-mobile-19.jpg" alt="Wallpaper 19">
+</div>
+<div class="carousel-slide" data-group="mobile" style="display:none">
+  <img src="../wallpaper-mobile-20.jpg" alt="Wallpaper 20">
+</div>
+
+        <button class="carousel-btn prev" onclick="carouselPrev()">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="carousel-btn next" onclick="carouselNext()">
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <div class="carousel-counter" id="carousel-counter">1 / 20</div>
       </div>
       <div class="product-details">
         <p class="product-name">Wallpaper Pack Vol. 1</p>
@@ -271,16 +443,46 @@
       const type = document.querySelector('.toggle-btn.active').dataset.type;
       Cart.add({ id: 'wallpaper-' + type, name: 'Wallpaper Pack Vol. 1', options: type.charAt(0).toUpperCase() + type.slice(1) + ' · 20 photos', price: 10 });
     }
+let carouselIndex = 0;
+    let carouselGroup = 'desktop';
+    const TOTAL = 20;
+
+    function getSlides() {
+      return Array.from(document.querySelectorAll(`.carousel-slide[data-group="${carouselGroup}"]`));
+    }
+
+    function showSlide(n) {
+      const slides = getSlides();
+      carouselIndex = (n + TOTAL) % TOTAL;
+      slides.forEach((s, i) => s.style.display = i === carouselIndex ? 'block' : 'none');
+      document.getElementById('carousel-counter').textContent = (carouselIndex + 1) + ' / ' + TOTAL;
+    }
+
+    function carouselNext() { showSlide(carouselIndex + 1); }
+    function carouselPrev() { showSlide(carouselIndex - 1); }
+
     function selectType(btn) {
       document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      const preview = document.getElementById('wallpaper-preview');
+      carouselGroup = btn.dataset.type;
+      carouselIndex = 0;
+      // Show correct group
+      document.querySelectorAll('.carousel-slide').forEach(s => s.style.display = 'none');
+      const slides = getSlides();
+      if (slides[0]) slides[0].style.display = 'block';
+      document.getElementById('carousel-counter').textContent = '1 / ' + TOTAL;
+      // Toggle aspect ratio for mobile wallpapers
+      const wrap = document.getElementById('wallpaper-carousel');
+      if (carouselGroup === 'mobile') {
+        wrap.classList.add('mobile-mode');
+      } else {
+        wrap.classList.remove('mobile-mode');
+      }
+      // Update specs
       const specs = document.getElementById('wallpaper-specs-detail');
-      if (btn.dataset.type === 'desktop') {
-        preview.className = 'wallpaper-ph-desktop';
+      if (carouselGroup === 'desktop') {
         specs.innerHTML = '<span>Resolution</span> — 3840 × 2160px (4K)<br><span>Format</span> — JPEG, sRGB<br><span>Files</span> — 20 wallpapers<br><span>Delivery</span> — Instant download';
       } else {
-        preview.className = 'wallpaper-ph-mobile';
         specs.innerHTML = '<span>Resolution</span> — 1170 × 2532px<br><span>Format</span> — JPEG, sRGB<br><span>Files</span> — 20 wallpapers<br><span>Delivery</span> — Instant download';
       }
     }
