@@ -145,6 +145,12 @@
         white-space: nowrap;
       }
       .nav-links li:last-child a { border-bottom: none; }
+
+      /* Product layout — stack vertically on mobile */
+      .product-hero { grid-template-columns: 1fr !important; gap: 2rem !important; }
+      .product-img { width: 100% !important; }
+      .product-img img { width: 100% !important; height: auto !important; display: block !important; }
+      .store-wrap { padding: 2rem 1.2rem !important; }
     }
 
     .hamburger { display: none; }
