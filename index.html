@@ -383,7 +383,7 @@
       gap: 0;
       border: 1px solid var(--sand); background: var(--warm-white);
       overflow: hidden;
-      max-width: 1400px;
+      max-width: 960px;
       width: 100%;
       transition: box-shadow 0.4s;
     }
@@ -740,12 +740,13 @@
       overflow: hidden;
       background: var(--earth);
       width: 100%;
-      aspect-ratio: 16/10;
+      aspect-ratio: 16/9;
     }
     .wallpaper-carousel-wrap.mobile-active {
       aspect-ratio: 9/16;
-      max-width: 380px;
+      max-width: 320px;
       margin: 0 auto;
+      background: transparent;
     }
     .wallpaper-carousel-wrap img {
       position: absolute;
@@ -1310,8 +1311,7 @@
   </footer>
 
   <script>
-
-    // Set current season collection label
+    // ── SEASON LABEL ──
     const now = new Date();
     const month = now.getMonth();
     const year = now.getFullYear();
@@ -1321,20 +1321,13 @@
     const collectionEl = document.getElementById('collection-month');
     if (collectionEl) collectionEl.textContent = season + ' ' + year + ' Collection';
 
+    // ── NAV SCROLL ──
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 60);
     });
 
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => observer.observe(el));
-
-    // ── WORLD MAP FILTER ──
+    // ── MAP SETUP ──
     const visited = {
       "United States": "840", "Canada": "124", "Iceland": "352",
       "Ireland": "372", "Norway": "578", "Sweden": "752",
@@ -1342,11 +1335,7 @@
     };
     const visitedByCode = {};
     Object.entries(visited).forEach(([name, code]) => visitedByCode[code] = name);
-
     const tooltip = document.getElementById('map-tooltip');
-    const galleryItems = document.querySelectorAll('.gallery-item[data-country]');
-
-    
 
     function loadScript(src) {
       return new Promise((resolve, reject) => {
@@ -1396,7 +1385,7 @@
         .attr('stroke', 'var(--warm-white)').attr('stroke-width', '0.4');
     }).catch(() => {
       document.getElementById('map-loading').textContent = 'Use the buttons below to filter by location.';
-    });
+    })
 
     // ── GALLERY MASONRY + FILTER ──
     let allGalleryItems = [];
@@ -1426,7 +1415,8 @@
     }
 
     function filterGallery(filter) {
-      let matching, nonMatching;
+      if (!allGalleryItems.length) return;
+      let matching;
       if (filter === 'all') {
         const sorted = allGalleryItems.slice().sort((a, b) => parseInt(a.dataset.index) - parseInt(b.dataset.index));
         distributeItems(sorted, null);
@@ -1434,7 +1424,7 @@
         matching = filter === 'wildlife'
           ? allGalleryItems.filter(i => i.dataset.type === 'wildlife')
           : allGalleryItems.filter(i => i.dataset.country === filter);
-        nonMatching = allGalleryItems.filter(i => !matching.includes(i));
+        const nonMatching = allGalleryItems.filter(i => !matching.includes(i));
         distributeItems([...matching, ...nonMatching], new Set(matching));
       }
       document.querySelectorAll('.country-path').forEach(el => {
@@ -1445,17 +1435,12 @@
       });
     }
 
-    document.querySelectorAll('.map-pill').forEach(pill => {
-      pill.addEventListener('click', () => filterGallery(pill.dataset.filter));
-    });
-
     window.addEventListener('resize', () => {
       const active = document.querySelector('.map-pill.active');
       filterGallery(active ? active.dataset.filter : 'all');
     });
 
-
-    // Wallpaper preview carousel on index
+    // ── WALLPAPER CAROUSEL ──
     let wpIdx = 0;
     let wpGroup = 'desktop';
     function wpSlides() { return Array.from(document.querySelectorAll('#wp-preview .wp-slide[data-group="' + wpGroup + '"]')); }
@@ -1473,21 +1458,23 @@
       wpIdx = 0;
       document.querySelectorAll('.wallpaper-type-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      const wrap = document.getElementById('wp-preview');
-      wrap.classList.toggle('mobile-active', group === 'mobile');
+      document.getElementById('wp-preview').classList.toggle('mobile-active', group === 'mobile');
       wpShow(0);
       const specs = document.getElementById('wallpaper-specs');
       if (specs) specs.textContent = group === 'desktop' ? '3840 × 2160px · JPEG · Instant download' : '1170 × 2532px · JPEG · Instant download';
     }
 
+    // ── NAV TOGGLE ──
     function toggleMenu() {
       const links = document.getElementById('nav-links');
       const burger = document.getElementById('hamburger');
-      const isOpen = links.classList.toggle('open');
-      burger.classList.toggle('open', isOpen);
+      links.classList.toggle('open');
+      burger.classList.toggle('open', links.classList.contains('open'));
     }
 
+    // ── INIT ON LOAD ──
     document.addEventListener('DOMContentLoaded', () => {
+      // Gallery
       const grid = document.getElementById('gallery-grid');
       if (grid) {
         allGalleryItems = Array.from(grid.querySelectorAll('.gallery-item'));
@@ -1495,6 +1482,22 @@
         allGalleryItems.forEach(item => item.remove());
         distributeItems(allGalleryItems, null);
       }
+
+      // Pill listeners (after gallery init)
+      document.querySelectorAll('.map-pill').forEach(pill => {
+        pill.addEventListener('click', () => filterGallery(pill.dataset.filter));
+      });
+
+      // Scroll reveals
+      const reveals = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+      }, { threshold: 0.1 });
+      reveals.forEach(el => observer.observe(el));
+
+      // Nav close on link click
       document.querySelectorAll('#nav-links a').forEach(a => {
         a.addEventListener('click', () => {
           document.getElementById('nav-links').classList.remove('open');
