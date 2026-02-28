@@ -376,13 +376,13 @@
 
     /* ── WALLPAPERS ── */
     #wallpapers { background: var(--warm-white); }
-    .wallpaper-card-wrap { display: flex; justify-content: center; }
     .wallpaper-card {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 2.5rem;
       align-items: start;
-      width: 100%;
+      max-width: 860px;
+      margin: 0 auto;
     }
     .wallpaper-preview { overflow: hidden; position: relative; border-radius: 4px; }
     .wallpaper-ph { width: 100%; height: 100%; }
@@ -743,7 +743,6 @@
       aspect-ratio: 9/16;
       max-width: 260px;
       margin: 0 auto;
-      background: transparent;
     }
     .wallpaper-carousel-wrap img {
       width: 100%;
@@ -767,6 +766,25 @@
       font-family: 'Tenor Sans', sans-serif; font-size: 0.58rem;
       letter-spacing: 0.12em; padding: 0.2rem 0.6rem; border-radius: 20px;
     }
+
+    /* Wallpaper section — mirrors store/wallpapers.html */
+    .wp2-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+    .wp2-carousel {
+      position: relative;
+      overflow: hidden;
+      background: var(--linen);
+      border-radius: 4px;
+      aspect-ratio: 16/9;
+    }
+    .wp2-carousel.mobile-mode { aspect-ratio: 9/16; max-width: 260px; }
+    .wp2-slide { position: absolute; top:0; left:0; width:100%; height:100%; }
+    .wp2-slide img { width:100%; height:100%; object-fit:cover; display:block; }
+    .wp2-details { display: flex; flex-direction: column; gap: 1.4rem; }
   </style>
   <script src="cart.js"></script>
 </head>
@@ -1021,80 +1039,167 @@
 
   <!-- WALLPAPERS -->
   <section id="wallpapers" class="section-wrap">
-    <div style="max-width: 860px; margin: 0 auto;">
 
-      <!-- Section header -->
-      <div class="reveal" style="margin-bottom: 2.5rem;">
+    <div style="max-width: 900px; margin: 0 auto; padding: 0 3rem;">
+      <div class="wp2-header reveal" style="margin-bottom: 2.5rem;">
         <p class="section-label">Digital Downloads</p>
-        <h2 class="section-title">Wallpaper<br><em>packs</em></h2>
+        <h2 class="section-title">Wallpaper <em>packs</em></h2>
         <div class="section-rule"></div>
       </div>
 
-      <!-- Card: carousel + info side by side -->
-      <div class="wallpaper-card reveal">
-        <div class="wallpaper-carousel-wrap wallpaper-preview" id="wp-preview">
-          <img src="wallpapers/desktop-1.jpg" alt="Desktop 1" class="wp-slide" data-group="desktop" style="display:block; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/desktop-2.jpg" alt="Desktop 2" class="wp-slide" data-group="desktop" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/desktop-3.jpg" alt="Desktop 3" class="wp-slide" data-group="desktop" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/desktop-4.jpg" alt="Desktop 4" class="wp-slide" data-group="desktop" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/desktop-5.jpg" alt="Desktop 5" class="wp-slide" data-group="desktop" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/desktop-6.jpg" alt="Desktop 6" class="wp-slide" data-group="desktop" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/desktop-7.jpg" alt="Desktop 7" class="wp-slide" data-group="desktop" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/desktop-8.jpg" alt="Desktop 8" class="wp-slide" data-group="desktop" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/desktop-9.jpg" alt="Desktop 9" class="wp-slide" data-group="desktop" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/desktop-10.jpg" alt="Desktop 10" class="wp-slide" data-group="desktop" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/desktop-11.jpg" alt="Desktop 11" class="wp-slide" data-group="desktop" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/desktop-12.jpg" alt="Desktop 12" class="wp-slide" data-group="desktop" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/desktop-13.jpg" alt="Desktop 13" class="wp-slide" data-group="desktop" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/desktop-14.jpg" alt="Desktop 14" class="wp-slide" data-group="desktop" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/desktop-15.jpg" alt="Desktop 15" class="wp-slide" data-group="desktop" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/desktop-16.jpg" alt="Desktop 16" class="wp-slide" data-group="desktop" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/desktop-17.jpg" alt="Desktop 17" class="wp-slide" data-group="desktop" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/desktop-18.jpg" alt="Desktop 18" class="wp-slide" data-group="desktop" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/desktop-19.jpg" alt="Desktop 19" class="wp-slide" data-group="desktop" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/desktop-20.jpg" alt="Desktop 20" class="wp-slide" data-group="desktop" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/mobile-1.jpg" alt="Mobile 1" class="wp-slide" data-group="mobile" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/mobile-2.jpg" alt="Mobile 2" class="wp-slide" data-group="mobile" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/mobile-3.jpg" alt="Mobile 3" class="wp-slide" data-group="mobile" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/mobile-4.jpg" alt="Mobile 4" class="wp-slide" data-group="mobile" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/mobile-5.jpg" alt="Mobile 5" class="wp-slide" data-group="mobile" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/mobile-6.jpg" alt="Mobile 6" class="wp-slide" data-group="mobile" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/mobile-7.jpg" alt="Mobile 7" class="wp-slide" data-group="mobile" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/mobile-8.jpg" alt="Mobile 8" class="wp-slide" data-group="mobile" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/mobile-9.jpg" alt="Mobile 9" class="wp-slide" data-group="mobile" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/mobile-10.jpg" alt="Mobile 10" class="wp-slide" data-group="mobile" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/mobile-11.jpg" alt="Mobile 11" class="wp-slide" data-group="mobile" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/mobile-12.jpg" alt="Mobile 12" class="wp-slide" data-group="mobile" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/mobile-13.jpg" alt="Mobile 13" class="wp-slide" data-group="mobile" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/mobile-14.jpg" alt="Mobile 14" class="wp-slide" data-group="mobile" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/mobile-15.jpg" alt="Mobile 15" class="wp-slide" data-group="mobile" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/mobile-16.jpg" alt="Mobile 16" class="wp-slide" data-group="mobile" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/mobile-17.jpg" alt="Mobile 17" class="wp-slide" data-group="mobile" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/mobile-18.jpg" alt="Mobile 18" class="wp-slide" data-group="mobile" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/mobile-19.jpg" alt="Mobile 19" class="wp-slide" data-group="mobile" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <img src="wallpapers/mobile-20.jpg" alt="Mobile 20" class="wp-slide" data-group="mobile" style="display:none; width:100%; height:100%; object-fit:cover;">
-          <button class="wp-btn prev" onclick="wpPrev()"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
-          <button class="wp-btn next" onclick="wpNext()"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
-          <div class="wp-counter" id="wp-counter">1 / 20</div>
+      <div class="wp2-hero reveal">
+        <div class="wp2-carousel desktop-mode" id="wp2-carousel">
+<div class="wp2-slide" data-group="desktop" style="display:block">
+  <img src="wallpapers/desktop-1.jpg" alt="Desktop 1">
+</div>
+<div class="wp2-slide" data-group="desktop" style="display:none">
+  <img src="wallpapers/desktop-2.jpg" alt="Desktop 2">
+</div>
+<div class="wp2-slide" data-group="desktop" style="display:none">
+  <img src="wallpapers/desktop-3.jpg" alt="Desktop 3">
+</div>
+<div class="wp2-slide" data-group="desktop" style="display:none">
+  <img src="wallpapers/desktop-4.jpg" alt="Desktop 4">
+</div>
+<div class="wp2-slide" data-group="desktop" style="display:none">
+  <img src="wallpapers/desktop-5.jpg" alt="Desktop 5">
+</div>
+<div class="wp2-slide" data-group="desktop" style="display:none">
+  <img src="wallpapers/desktop-6.jpg" alt="Desktop 6">
+</div>
+<div class="wp2-slide" data-group="desktop" style="display:none">
+  <img src="wallpapers/desktop-7.jpg" alt="Desktop 7">
+</div>
+<div class="wp2-slide" data-group="desktop" style="display:none">
+  <img src="wallpapers/desktop-8.jpg" alt="Desktop 8">
+</div>
+<div class="wp2-slide" data-group="desktop" style="display:none">
+  <img src="wallpapers/desktop-9.jpg" alt="Desktop 9">
+</div>
+<div class="wp2-slide" data-group="desktop" style="display:none">
+  <img src="wallpapers/desktop-10.jpg" alt="Desktop 10">
+</div>
+<div class="wp2-slide" data-group="desktop" style="display:none">
+  <img src="wallpapers/desktop-11.jpg" alt="Desktop 11">
+</div>
+<div class="wp2-slide" data-group="desktop" style="display:none">
+  <img src="wallpapers/desktop-12.jpg" alt="Desktop 12">
+</div>
+<div class="wp2-slide" data-group="desktop" style="display:none">
+  <img src="wallpapers/desktop-13.jpg" alt="Desktop 13">
+</div>
+<div class="wp2-slide" data-group="desktop" style="display:none">
+  <img src="wallpapers/desktop-14.jpg" alt="Desktop 14">
+</div>
+<div class="wp2-slide" data-group="desktop" style="display:none">
+  <img src="wallpapers/desktop-15.jpg" alt="Desktop 15">
+</div>
+<div class="wp2-slide" data-group="desktop" style="display:none">
+  <img src="wallpapers/desktop-16.jpg" alt="Desktop 16">
+</div>
+<div class="wp2-slide" data-group="desktop" style="display:none">
+  <img src="wallpapers/desktop-17.jpg" alt="Desktop 17">
+</div>
+<div class="wp2-slide" data-group="desktop" style="display:none">
+  <img src="wallpapers/desktop-18.jpg" alt="Desktop 18">
+</div>
+<div class="wp2-slide" data-group="desktop" style="display:none">
+  <img src="wallpapers/desktop-19.jpg" alt="Desktop 19">
+</div>
+<div class="wp2-slide" data-group="desktop" style="display:none">
+  <img src="wallpapers/desktop-20.jpg" alt="Desktop 20">
+</div>
+<div class="wp2-slide" data-group="mobile" style="display:none">
+  <img src="wallpapers/mobile-1.jpg" alt="Mobile 1">
+</div>
+<div class="wp2-slide" data-group="mobile" style="display:none">
+  <img src="wallpapers/mobile-2.jpg" alt="Mobile 2">
+</div>
+<div class="wp2-slide" data-group="mobile" style="display:none">
+  <img src="wallpapers/mobile-3.jpg" alt="Mobile 3">
+</div>
+<div class="wp2-slide" data-group="mobile" style="display:none">
+  <img src="wallpapers/mobile-4.jpg" alt="Mobile 4">
+</div>
+<div class="wp2-slide" data-group="mobile" style="display:none">
+  <img src="wallpapers/mobile-5.jpg" alt="Mobile 5">
+</div>
+<div class="wp2-slide" data-group="mobile" style="display:none">
+  <img src="wallpapers/mobile-6.jpg" alt="Mobile 6">
+</div>
+<div class="wp2-slide" data-group="mobile" style="display:none">
+  <img src="wallpapers/mobile-7.jpg" alt="Mobile 7">
+</div>
+<div class="wp2-slide" data-group="mobile" style="display:none">
+  <img src="wallpapers/mobile-8.jpg" alt="Mobile 8">
+</div>
+<div class="wp2-slide" data-group="mobile" style="display:none">
+  <img src="wallpapers/mobile-9.jpg" alt="Mobile 9">
+</div>
+<div class="wp2-slide" data-group="mobile" style="display:none">
+  <img src="wallpapers/mobile-10.jpg" alt="Mobile 10">
+</div>
+<div class="wp2-slide" data-group="mobile" style="display:none">
+  <img src="wallpapers/mobile-11.jpg" alt="Mobile 11">
+</div>
+<div class="wp2-slide" data-group="mobile" style="display:none">
+  <img src="wallpapers/mobile-12.jpg" alt="Mobile 12">
+</div>
+<div class="wp2-slide" data-group="mobile" style="display:none">
+  <img src="wallpapers/mobile-13.jpg" alt="Mobile 13">
+</div>
+<div class="wp2-slide" data-group="mobile" style="display:none">
+  <img src="wallpapers/mobile-14.jpg" alt="Mobile 14">
+</div>
+<div class="wp2-slide" data-group="mobile" style="display:none">
+  <img src="wallpapers/mobile-15.jpg" alt="Mobile 15">
+</div>
+<div class="wp2-slide" data-group="mobile" style="display:none">
+  <img src="wallpapers/mobile-16.jpg" alt="Mobile 16">
+</div>
+<div class="wp2-slide" data-group="mobile" style="display:none">
+  <img src="wallpapers/mobile-17.jpg" alt="Mobile 17">
+</div>
+<div class="wp2-slide" data-group="mobile" style="display:none">
+  <img src="wallpapers/mobile-18.jpg" alt="Mobile 18">
+</div>
+<div class="wp2-slide" data-group="mobile" style="display:none">
+  <img src="wallpapers/mobile-19.jpg" alt="Mobile 19">
+</div>
+<div class="wp2-slide" data-group="mobile" style="display:none">
+  <img src="wallpapers/mobile-20.jpg" alt="Mobile 20">
+</div>
+          <button class="carousel-btn prev" onclick="wp2Prev()">
+            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="carousel-btn next" onclick="wp2Next()">
+            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+          <div class="carousel-counter" id="wp2-counter">1 / 20</div>
         </div>
-          <button class="wp-btn prev" onclick="wpPrev()"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
-          <button class="wp-btn next" onclick="wpNext()"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
-          <div class="wp-counter" id="wp-counter">1 / 20</div>
-        </div>
-        <div class="wallpaper-info">
-          <p class="wallpaper-desc">Bring the journey to your screen — 20 curated wallpapers from Iceland, Norway, Costa Rica and more, optimized for your device.</p>
-          <div class="wallpaper-toggle">
-            <button class="wallpaper-type-btn active" data-type="desktop" onclick="wpSetGroup('desktop', this)">Desktop</button>
-            <button class="wallpaper-type-btn" data-type="mobile" onclick="wpSetGroup('mobile', this)">Mobile</button>
+
+        <div class="wp2-details">
+          <p class="product-name">Wallpaper Pack Vol. 1</p>
+          <p class="product-desc">20 hand-selected photographs from across Iceland, Norway, Ireland, Costa Rica and more — optimized for your screen, delivered instantly.</p>
+          <div>
+            <span class="option-label">Select Format</span>
+            <div class="toggle-row">
+              <button class="toggle-btn active" data-type="desktop" onclick="wp2SetType(this)">Desktop</button>
+              <button class="toggle-btn" data-type="mobile" onclick="wp2SetType(this)">Mobile</button>
+            </div>
           </div>
-          <p class="wallpaper-specs" id="wallpaper-specs">3840 × 2160px · JPEG · Instant download</p>
-          <div class="wallpaper-footer">
-            <span class="wallpaper-price">$10</span>
-            <a href="store/wallpapers.html" class="btn-add" style="text-decoration:none;">Buy Pack</a>
+          <div class="specs-box">
+            <p id="wp2-specs">
+              <span>Resolution</span> — 3840 × 2160px (4K)<br>
+              <span>Format</span> — JPEG, sRGB<br>
+              <span>Files</span> — 20 wallpapers<br>
+              <span>Delivery</span> — Instant download
+            </p>
           </div>
+          <p class="price-display">$10</p>
+          <a href="store/wallpapers.html" class="btn-order" style="text-decoration:none; text-align:center;">Buy Pack</a>
         </div>
       </div>
-
     </div>
   </section>
 
@@ -1438,30 +1543,37 @@
       filterGallery(active ? active.dataset.filter : 'all');
     });
 
-    // ── WALLPAPER CAROUSEL ──
-    let wpIdx = 0;
-    let wpGroup = 'desktop';
-    function wpSlides() { return Array.from(document.querySelectorAll('#wp-preview .wp-slide[data-group="' + wpGroup + '"]')); }
-    function wpShow(n) {
-      const slides = wpSlides();
-      wpIdx = (n + 20) % 20;
-      document.querySelectorAll('#wp-preview .wp-slide').forEach(s => s.style.display = 'none');
-      if (slides[wpIdx]) slides[wpIdx].style.display = 'block';
-      document.getElementById('wp-counter').textContent = (wpIdx + 1) + ' / 20';
-    }
-    function wpNext() { wpShow(wpIdx + 1); }
-    function wpPrev() { wpShow(wpIdx - 1); }
-    function wpSetGroup(group, btn) {
-      wpGroup = group;
-      wpIdx = 0;
-      document.querySelectorAll('.wallpaper-type-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById('wp-preview').classList.toggle('mobile-active', group === 'mobile');
-      wpShow(0);
-      const specs = document.getElementById('wallpaper-specs');
-      if (specs) specs.textContent = group === 'desktop' ? '3840 × 2160px · JPEG · Instant download' : '1170 × 2532px · JPEG · Instant download';
-    }
 
+    // ── WALLPAPER SECTION CAROUSEL ──
+    let wp2Idx = 0, wp2Group = 'desktop';
+    const WP2_TOTAL = 20;
+    function wp2Slides() {
+      return Array.from(document.querySelectorAll('.wp2-slide[data-group="' + wp2Group + '"]'));
+    }
+    function wp2Show(n) {
+      wp2Idx = (n + WP2_TOTAL) % WP2_TOTAL;
+      document.querySelectorAll('.wp2-slide').forEach(s => s.style.display = 'none');
+      const slides = wp2Slides();
+      if (slides[wp2Idx]) slides[wp2Idx].style.display = 'block';
+      document.getElementById('wp2-counter').textContent = (wp2Idx + 1) + ' / ' + WP2_TOTAL;
+    }
+    function wp2Next() { wp2Show(wp2Idx + 1); }
+    function wp2Prev() { wp2Show(wp2Idx - 1); }
+    function wp2SetType(btn) {
+      document.querySelectorAll('#wallpapers .toggle-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      wp2Group = btn.dataset.type;
+      wp2Idx = 0;
+      const wrap = document.getElementById('wp2-carousel');
+      wrap.classList.toggle('mobile-mode', wp2Group === 'mobile');
+      wp2Show(0);
+      const specs = document.getElementById('wp2-specs');
+      if (wp2Group === 'desktop') {
+        specs.innerHTML = '<span>Resolution</span> — 3840 × 2160px (4K)<br><span>Format</span> — JPEG, sRGB<br><span>Files</span> — 20 wallpapers<br><span>Delivery</span> — Instant download';
+      } else {
+        specs.innerHTML = '<span>Resolution</span> — 1170 × 2532px<br><span>Format</span> — JPEG, sRGB<br><span>Files</span> — 20 wallpapers<br><span>Delivery</span> — Instant download';
+      }
+    }
     // ── NAV TOGGLE ──
     function toggleMenu() {
       const links = document.getElementById('nav-links');
