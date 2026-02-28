@@ -376,13 +376,12 @@
 
     /* ── WALLPAPERS ── */
     #wallpapers { background: var(--warm-white); }
-    .wallpaper-card-wrap { display: flex; justify-content: center; margin-top: 2rem; }
+    .wallpaper-card-wrap { display: flex; justify-content: center; }
     .wallpaper-card {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 2.5rem;
       align-items: start;
-      max-width: 860px;
       width: 100%;
     }
     .wallpaper-preview { overflow: hidden; position: relative; border-radius: 4px; }
@@ -1022,17 +1021,18 @@
 
   <!-- WALLPAPERS -->
   <section id="wallpapers" class="section-wrap">
-    <div class="shop-intro reveal">
-      <div>
+    <div style="max-width: 860px; margin: 0 auto;">
+
+      <!-- Section header -->
+      <div class="reveal" style="margin-bottom: 2.5rem;">
         <p class="section-label">Digital Downloads</p>
         <h2 class="section-title">Wallpaper<br><em>packs</em></h2>
         <div class="section-rule"></div>
       </div>
-      <p class="shop-note-text">Bring the journey to your screen. Each pack includes 20 curated wallpapers optimized for your device — shot on location, delivered instantly as a digital download.</p>
-    </div>
-    <div class="wallpaper-card-wrap reveal">
-      <div class="wallpaper-card">
-<div class="wallpaper-carousel-wrap wallpaper-preview" id="wp-preview">
+
+      <!-- Card: carousel + info side by side -->
+      <div class="wallpaper-card reveal">
+        <div class="wallpaper-carousel-wrap wallpaper-preview" id="wp-preview">
           <img src="wallpapers/desktop-1.jpg" alt="Desktop 1" class="wp-slide" data-group="desktop" style="display:block; width:100%; height:100%; object-fit:cover;">
           <img src="wallpapers/desktop-2.jpg" alt="Desktop 2" class="wp-slide" data-group="desktop" style="display:none; width:100%; height:100%; object-fit:cover;">
           <img src="wallpapers/desktop-3.jpg" alt="Desktop 3" class="wp-slide" data-group="desktop" style="display:none; width:100%; height:100%; object-fit:cover;">
@@ -1077,11 +1077,12 @@
           <button class="wp-btn next" onclick="wpNext()"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
           <div class="wp-counter" id="wp-counter">1 / 20</div>
         </div>
+          <button class="wp-btn prev" onclick="wpPrev()"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+          <button class="wp-btn next" onclick="wpNext()"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+          <div class="wp-counter" id="wp-counter">1 / 20</div>
         </div>
         <div class="wallpaper-info">
-          <p class="section-label">Digital Download</p>
-          <p class="wallpaper-name">Wallpaper Pack Vol. 1</p>
-          <p class="wallpaper-desc">20 hand-selected photographs from across Iceland, Norway, Ireland, Costa Rica and more — optimized for your screen, delivered instantly.</p>
+          <p class="wallpaper-desc">Bring the journey to your screen — 20 curated wallpapers from Iceland, Norway, Costa Rica and more, optimized for your device.</p>
           <div class="wallpaper-toggle">
             <button class="wallpaper-type-btn active" data-type="desktop" onclick="wpSetGroup('desktop', this)">Desktop</button>
             <button class="wallpaper-type-btn" data-type="mobile" onclick="wpSetGroup('mobile', this)">Mobile</button>
@@ -1093,6 +1094,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </section>
 
