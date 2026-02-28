@@ -785,6 +785,34 @@
     .wp2-slide { position: absolute; top:0; left:0; width:100%; height:100%; }
     .wp2-slide img { width:100%; height:100%; object-fit:cover; display:block; }
     .wp2-details { display: flex; flex-direction: column; gap: 1.4rem; }
+
+    /* ── Wallpaper section styles (copied from store) ── */
+    .wp2-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
+    .wp2-carousel {
+      position: relative; overflow: hidden; background: var(--linen);
+      border-radius: 4px; width: 100%; aspect-ratio: 16/9;
+    }
+    .wp2-carousel.mobile-mode { aspect-ratio: 9/16; max-width: 260px; }
+    .wp2-slide { position: absolute; top:0; left:0; width:100%; height:100%; }
+    .wp2-slide img { width:100%; height:100%; object-fit:cover; display:block; }
+    .wp2-details { display: flex; flex-direction: column; gap: 1.4rem; }
+    .wp2-details .product-name { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 300; color: var(--earth); }
+    .wp2-details .product-desc { font-size: 0.82rem; line-height: 1.9; color: var(--tan); }
+    .wp2-details .option-label { font-size: 0.58rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.7rem; display: block; }
+    .wp2-details .toggle-row { display: flex; }
+    .wp2-details .toggle-btn { padding: 0.6rem 1.6rem; border: 1px solid var(--sand); background: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--tan); cursor: pointer; transition: all 0.25s; }
+    .wp2-details .toggle-btn.active { background: var(--earth); color: var(--warm-white); border-color: var(--earth); }
+    .wp2-details .specs-box { padding: 1.2rem; background: var(--linen); border: 1px solid var(--sand); font-size: 0.78rem; line-height: 2; color: var(--tan); }
+    .wp2-details .specs-box span { color: var(--earth); font-weight: 500; }
+    .wp2-details .price-display { font-family: 'Playfair Display', serif; font-size: 2.4rem; color: var(--bark); margin: 0; }
+    .wp2-details .btn-order { display: block; width: 100%; padding: 1.1rem; background: var(--earth); color: var(--warm-white); border: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; cursor: pointer; transition: background 0.3s; text-align: center; }
+    .wp2-details .btn-order:hover { background: var(--bark); }
+    .wp2-carousel .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(250,246,240,0.85); border: none; cursor: pointer; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10; transition: background 0.2s; backdrop-filter: blur(4px); }
+    .wp2-carousel .carousel-btn:hover { background: rgba(250,246,240,1); }
+    .wp2-carousel .carousel-btn.prev { left: 12px; }
+    .wp2-carousel .carousel-btn.next { right: 12px; }
+    .wp2-carousel .carousel-btn svg { width: 16px; height: 16px; stroke: var(--earth); stroke-width: 2; fill: none; }
+    .wp2-carousel .carousel-counter { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.4); color: #fff; font-family: 'Tenor Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.15em; padding: 0.25rem 0.7rem; border-radius: 20px; pointer-events: none; }
   </style>
   <script src="cart.js"></script>
 </head>
