@@ -27,8 +27,8 @@
     .back-link:hover { color: var(--bark); }
     .back-link::before { content: '←'; }
 
-    .product-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-bottom: 4rem; }
-    .product-img { overflow: hidden; border: 1px solid var(--sand); }
+    .product-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; margin-bottom: 4rem; }
+    .product-img { overflow: hidden; border-radius: 4px; }
     .wallpaper-ph-desktop { aspect-ratio: 16/9; background: linear-gradient(160deg, #304050 0%, #8090a8 100%); }
     .wallpaper-ph-mobile { aspect-ratio: 9/19; background: linear-gradient(180deg, #304050 0%, #8090a8 100%); }
     .product-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -469,9 +469,11 @@ let carouselIndex = 0;
     }
 
     function showSlide(n) {
-      const slides = getSlides();
       carouselIndex = (n + TOTAL) % TOTAL;
-      slides.forEach((s, i) => s.style.display = i === carouselIndex ? 'block' : 'none');
+      // Hide ALL slides regardless of group, then show only the target
+      document.querySelectorAll('.carousel-slide').forEach(s => s.style.display = 'none');
+      const slides = getSlides();
+      if (slides[carouselIndex]) slides[carouselIndex].style.display = 'block';
       document.getElementById('carousel-counter').textContent = (carouselIndex + 1) + ' / ' + TOTAL;
     }
 
