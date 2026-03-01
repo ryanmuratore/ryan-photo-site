@@ -226,6 +226,50 @@
       .trust { gap: 1rem; flex-wrap: wrap; }
       footer { flex-direction: column; align-items: flex-start; gap: 0.4rem; padding: 1.2rem 1.4rem; }
     }
+
+    /* ── IMAGE PROTECTION ── */
+    .stage { user-select: none; -webkit-user-select: none; }
+    .stage img { pointer-events: none; -webkit-user-drag: none; user-drag: none; }
+
+    /* Watermark overlay — sits over the entire viewer at all times */
+    .watermark-overlay {
+      position: absolute; inset: 0; z-index: 10;
+      pointer-events: none;
+      display: flex; align-items: center; justify-content: center;
+    }
+    /* Diagonal repeating text watermark */
+    .watermark-overlay::before {
+      content: '';
+      position: absolute; inset: -50%;
+      background-image: repeating-linear-gradient(
+        -45deg,
+        transparent 0px,
+        transparent 80px,
+        rgba(250,246,240,0.0) 80px,
+        rgba(250,246,240,0.0) 81px
+      );
+    }
+    .wm-text {
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='160'%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dominant-baseline='middle' transform='rotate(-30, 140, 80)' font-family='Georgia, serif' font-size='13' fill='rgba(255,255,255,0.18)' letter-spacing='3'%3E© Ryan Muratore%3C/text%3E%3C/svg%3E");
+      background-repeat: repeat;
+    }
+    /* Bottom-right corner watermark — always visible */
+    .wm-corner {
+      position: absolute;
+      bottom: 1.2rem; right: 1.4rem;
+      font-family: 'EB Garamond', serif;
+      font-style: italic;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.08em;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+      pointer-events: none;
+      z-index: 11;
+    }
+    /* On linen bg, use darker text */
+    .p-photo .wm-corner { color: rgba(78,56,32,0.3); text-shadow: none; }
+    .p-photo .wm-text { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='160'%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dominant-baseline='middle' transform='rotate(-30, 140, 80)' font-family='Georgia, serif' font-size='13' fill='rgba(78,56,32,0.07)' letter-spacing='3'%3E© Ryan Muratore%3C/text%3E%3C/svg%3E"); }
   </style>
 </head>
 <body>
@@ -271,9 +315,10 @@
 
       <div class="panel p-photo on" id="panel-photo">
         <img src="../norway-1.jpg" alt="Stillness on the Fjord">
+        <div class="watermark-overlay"><div class="wm-text"></div><span class="wm-corner">© Ryan Muratore</span></div>
       </div>
 
-      <div class="panel p-framed" id="panel-framed">
+      <div class="panel p-framed" id="panel-framed"><div class="watermark-overlay"><div class="wm-text"></div><span class="wm-corner">© Ryan Muratore</span></div>
         <div class="framed-scene">
           <div class="frame-wrap">
             <div class="f-outer black" id="f-outer">
@@ -287,7 +332,7 @@
         </div>
       </div>
 
-      <div class="panel p-wall" id="panel-wall">
+      <div class="panel p-wall" id="panel-wall"><div class="watermark-overlay"><div class="wm-text"></div><span class="wm-corner">© Ryan Muratore</span></div>
         <div class="wall-room">
           <div class="wall-light"></div>
           <div class="wall-floor"></div>
@@ -529,6 +574,30 @@
   document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
 
   buildGrid(); updateUI();
+
+  // ── IMAGE PROTECTION ──
+  // Disable right-click on entire viewer
+  document.querySelector('.viewer').addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    return false;
+  });
+  // Disable drag on all images
+  document.querySelectorAll('.viewer img').forEach(function(img) {
+    img.addEventListener('dragstart', function(e) { e.preventDefault(); });
+  });
+  // Disable common save shortcuts over the viewer
+  document.querySelector('.viewer').addEventListener('keydown', function(e) {
+    if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S' || e.key === 'u' || e.key === 'U')) {
+      e.preventDefault();
+    }
+  });
+  // Clear clipboard if someone manages a copy
+  document.querySelector('.viewer').addEventListener('copy', function(e) {
+    e.preventDefault();
+    e.clipboardData.setData('text/plain', '© Ryan Muratore Photography — All rights reserved.');
+  });
+
 </script>
+<script src="../protect.js"></script>
 </body>
 </html>
