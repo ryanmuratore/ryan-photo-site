@@ -41,18 +41,18 @@
     /* ── LEFT: VIEWER ── */
     .viewer { position: sticky; top: 55px; height: calc(100vh - 55px); display: flex; flex-direction: column; overflow: hidden; }
 
-    .tabs { display: flex; background: #13110e; }
-    .tab { flex: 1; padding: 0.95rem 0.5rem; border: none; border-right: 1px solid rgba(255,255,255,0.07); background: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.54rem; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(255,255,255,0.3); cursor: pointer; transition: all 0.25s; }
+    .tabs { display: flex; background: var(--sand); border-bottom: 1px solid var(--clay); }
+    .tab { flex: 1; padding: 0.95rem 0.5rem; border: none; border-right: 1px solid var(--clay); background: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.54rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--tan); cursor: pointer; transition: all 0.25s; }
     .tab:last-child { border-right: none; }
-    .tab.active { color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.06); }
-    .tab:hover:not(.active) { color: rgba(255,255,255,0.55); background: rgba(255,255,255,0.03); }
+    .tab.active { color: var(--earth); background: var(--w); border-bottom: 2px solid var(--earth); }
+    .tab:hover:not(.active) { color: var(--bark); background: rgba(255,255,255,0.4); }
 
     .stage { flex: 1; position: relative; }
     .panel { position: absolute; inset: 0; opacity: 0; pointer-events: none; transition: opacity 0.45s ease; display: flex; align-items: center; justify-content: center; }
     .panel.on { opacity: 1; pointer-events: all; }
 
     /* Photo panel — pure dark showcase */
-    .p-photo { background: #0e0c0a; }
+    .p-photo { background: var(--linen); }
     .p-photo img { max-width: 100%; max-height: 100%; object-fit: contain; padding: 2.5rem; display: block; }
 
     /* Framed panel — warm gallery wall */
