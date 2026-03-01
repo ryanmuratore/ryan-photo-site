@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Norway Print — Ryan Muratore Photography</title>
+  <title>Stillness on the Fjord — Ryan Muratore Photography</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&family=Tenor+Sans&display=swap" rel="stylesheet">
   <script src="../cart.js"></script>
@@ -12,14 +12,14 @@
     :root { --warm-white: #faf6f0; --linen: #f0e9de; --sand: #ddd0bc; --clay: #c4a882; --tan: #a8896a; --bark: #7a5c3a; --earth: #4e3820; --ink: #2a1f12; }
     body { background: var(--warm-white); color: var(--ink); font-family: 'Tenor Sans', sans-serif; overflow-x: hidden; }
 
+    /* NAV */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 3rem; background: rgba(250,246,240,0.96); backdrop-filter: blur(8px); box-shadow: 0 1px 0 var(--sand); }
     .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 300; letter-spacing: 0.12em; color: var(--earth); text-decoration: none; }
     .nav-links { display: flex; gap: 2.8rem; list-style: none; align-items: center; }
     .nav-links a { font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--tan); text-decoration: none; transition: color 0.3s; }
     .nav-links a:hover { color: var(--bark); }
-    #cart-btn { background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; color: var(--tan); }
+    #cart-btn { background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; color: var(--tan); padding: 0; }
     #cart-btn svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.5; }
-    #cart-count { font-size: 0.65rem; }
     #cart-dropdown { position: absolute; top: calc(100% + 8px); right: 3rem; background: var(--warm-white); border: 1px solid var(--sand); min-width: 280px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); z-index: 300; display: none; }
     #cart-dropdown.open { display: block; }
     .mobile-top-right { display: none; align-items: center; gap: 1rem; }
@@ -27,394 +27,486 @@
     #cart-btn-mobile svg { width: 20px; height: 20px; stroke: var(--tan); fill: none; stroke-width: 1.5; }
     .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 0.4rem; }
     .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--earth); transition: all 0.3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-    .page-header { padding: 10rem 3rem 3rem; }
-    .section-label { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.8rem; }
-    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; line-height: 1.15; color: var(--earth); }
-    .section-title em { font-style: italic; color: var(--tan); }
-    .section-rule { width: 40px; height: 1px; background: var(--clay); margin: 1.8rem 0 0; }
+    /* LAYOUT */
+    .page-wrap { padding-top: 72px; display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
 
-    .store-wrap { padding: 3rem 3rem 7rem; max-width: 1000px; margin: 0 auto; }
-    .product-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-bottom: 5rem; }
+    /* LEFT — image viewer */
+    .viewer { position: sticky; top: 72px; height: calc(100vh - 72px); background: var(--linen); display: flex; flex-direction: column; }
+    .view-tabs { display: flex; border-bottom: 1px solid var(--sand); }
+    .view-tab { flex: 1; padding: 0.9rem; border: none; background: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--clay); cursor: pointer; transition: all 0.2s; border-right: 1px solid var(--sand); }
+    .view-tab:last-child { border-right: none; }
+    .view-tab.active { background: var(--warm-white); color: var(--earth); }
+    .view-tab:hover:not(.active) { background: rgba(255,255,255,0.4); }
 
-    /* Image Viewer */
-    .image-viewer { display: flex; flex-direction: column; gap: 1rem; }
-    .view-toggle { display: flex; border: 1px solid var(--sand); width: fit-content; }
-    .view-btn { padding: 0.5rem 1.1rem; border: none; border-right: 1px solid var(--sand); background: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--tan); cursor: pointer; transition: all 0.2s; }
-    .view-btn:last-child { border-right: none; }
-    .view-btn.active { background: var(--earth); color: var(--warm-white); }
-    .img-panel { display: none; }
-    .img-panel.active { display: block; }
+    .view-stage { flex: 1; position: relative; overflow: hidden; }
+    .view-panel { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.35s ease; }
+    .view-panel.active { opacity: 1; pointer-events: all; }
 
-    .photo-view { background: var(--linen); overflow: hidden; }
-    .photo-view img { width: 100%; height: auto; display: block; }
+    /* Photo panel */
+    .photo-panel { background: var(--linen); }
+    .photo-panel img { width: 100%; height: 100%; object-fit: contain; padding: 2rem; }
 
-    .framed-view { background: #e8e0d4; display: flex; align-items: center; justify-content: center; padding: 2.5rem; min-height: 360px; }
-    .frame-border { padding: 16px; display: inline-block; transition: background 0.3s; }
-    .frame-border.black { background: #1a1a1a; box-shadow: 2px 2px 12px rgba(0,0,0,0.3), inset 0 0 0 1px rgba(255,255,255,0.05); }
-    .frame-border.white { background: #f5f5f0; box-shadow: 2px 2px 8px rgba(0,0,0,0.15), inset 0 0 0 1px #ccc; }
-    .frame-border.natural { background: #c8a97e; box-shadow: 2px 2px 10px rgba(0,0,0,0.2); }
-    .frame-border.gold { background: linear-gradient(135deg, #9a7520, #d4af45, #b8932a); box-shadow: 2px 2px 10px rgba(0,0,0,0.2); }
-    .frame-border.silver { background: linear-gradient(135deg, #777, #bbb, #888); box-shadow: 2px 2px 10px rgba(0,0,0,0.2); }
-    .frame-border.darkgrey { background: #3a3a3a; box-shadow: 2px 2px 10px rgba(0,0,0,0.25); }
-    .mount { background: #f8f4ef; padding: 18px; display: inline-block; transition: padding 0.2s, background 0.2s; }
-    .frame-img { display: block; width: 240px; height: auto; vertical-align: middle; }
+    /* Framed panel */
+    .framed-panel { background: #e4ddd4; }
+    .frame-wrap { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; padding: 2.5rem; }
+    .frame-box { transition: background 0.3s, box-shadow 0.3s; }
+    .frame-box.black  { background: #1c1c1c; box-shadow: 4px 4px 20px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.04); }
+    .frame-box.white  { background: #f0ede8; box-shadow: 4px 4px 16px rgba(0,0,0,0.18), inset 0 0 0 1px #d8d5d0; }
+    .frame-box.natural { background: #bf9e6e; box-shadow: 4px 4px 16px rgba(0,0,0,0.22); }
+    .frame-box.gold   { background: linear-gradient(135deg, #8a6a18, #d4af45, #9a7520); box-shadow: 4px 4px 16px rgba(0,0,0,0.22); }
+    .frame-box.silver { background: linear-gradient(135deg, #6e6e6e, #c0c0c0, #7a7a7a); box-shadow: 4px 4px 16px rgba(0,0,0,0.22); }
+    .frame-box.darkgrey { background: #2e2e2e; box-shadow: 4px 4px 18px rgba(0,0,0,0.35); }
+    .frame-padding { padding: 18px; }
+    .mount-mat { background: #f5f1ec; transition: padding 0.25s, background 0.25s; }
+    .mount-mat.with-mount { padding: 20px; }
+    .mount-mat.no-mount { padding: 0; background: transparent; }
+    .frame-photo { display: block; width: 220px; height: auto; }
 
-    .wall-view { background: #cfc8be; position: relative; overflow: hidden; min-height: 360px; display: flex; align-items: center; justify-content: center; }
-    .wall-texture { position: absolute; inset: 0; background-image: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.012) 3px, rgba(0,0,0,0.012) 6px), repeating-linear-gradient(90deg, transparent, transparent 8px, rgba(0,0,0,0.008) 8px, rgba(0,0,0,0.008) 16px); }
-    .wall-scene { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
-    .wall-nail { width: 6px; height: 6px; background: #8a8078; border-radius: 50%; box-shadow: 0 1px 2px rgba(0,0,0,0.3); margin-bottom: 6px; }
-    .wall-frame { display: inline-block; box-shadow: 6px 12px 32px rgba(0,0,0,0.28), 2px 4px 8px rgba(0,0,0,0.15); transform: perspective(1000px) rotateY(-1.5deg); }
-    .wall-frame .frame-border { padding: 12px; }
-    .wall-frame .mount { padding: 12px; }
-    .wall-frame img { width: 160px; height: auto; display: block; }
-    .wall-shadow { width: 130%; height: 10px; background: radial-gradient(ellipse at center, rgba(0,0,0,0.18), transparent 70%); margin-top: 8px; }
+    /* Wall panel */
+    .wall-panel { background: #c8c0b6; }
+    .wall-bg { width: 100%; height: 100%; position: relative; display: flex; align-items: center; justify-content: center; }
+    .wall-texture { position: absolute; inset: 0; background-image: repeating-linear-gradient(0deg, transparent, transparent 4px, rgba(0,0,0,0.01) 4px, rgba(0,0,0,0.01) 8px), repeating-linear-gradient(90deg, transparent, transparent 12px, rgba(0,0,0,0.007) 12px, rgba(0,0,0,0.007) 24px); }
+    .wall-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
+    .nail { width: 5px; height: 5px; background: #8a8078; border-radius: 50%; box-shadow: 0 1px 2px rgba(0,0,0,0.35); margin-bottom: 5px; }
+    .wall-frame-outer { transform: perspective(900px) rotateY(-1deg) rotateX(0.5deg); box-shadow: 8px 16px 48px rgba(0,0,0,0.32), 2px 4px 12px rgba(0,0,0,0.18); transition: box-shadow 0.3s; }
+    .wall-frame-box { transition: background 0.3s; }
+    .wall-frame-box.black  { background: #1c1c1c; }
+    .wall-frame-box.white  { background: #f0ede8; }
+    .wall-frame-box.natural { background: #bf9e6e; }
+    .wall-frame-box.gold   { background: linear-gradient(135deg, #8a6a18, #d4af45, #9a7520); }
+    .wall-frame-box.silver { background: linear-gradient(135deg, #6e6e6e, #c0c0c0, #7a7a7a); }
+    .wall-frame-box.darkgrey { background: #2e2e2e; }
+    .wall-frame-box .frame-padding { padding: 12px; }
+    .wall-mount { background: #f5f1ec; transition: padding 0.25s, background 0.25s; }
+    .wall-mount.with-mount { padding: 14px; }
+    .wall-mount.no-mount { padding: 0; background: transparent; }
+    .wall-photo { display: block; width: 160px; height: auto; }
+    .wall-drop { width: 140%; height: 12px; background: radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.2), transparent 70%); margin-top: 10px; }
 
-    /* Color picker */
-    .color-picker { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 0.3rem; }
-    .color-dot { width: 26px; height: 26px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: all 0.2s; }
-    .color-dot:hover { transform: scale(1.12); }
-    .color-dot.active { box-shadow: 0 0 0 2px var(--warm-white), 0 0 0 4px var(--earth); }
-    .color-dot.black { background: #1a1a1a; }
-    .color-dot.white { background: #f0ede8; border-color: #ccc; }
-    .color-dot.natural { background: #c8a97e; }
-    .color-dot.gold { background: linear-gradient(135deg, #b8932a, #d4af45); }
-    .color-dot.silver { background: linear-gradient(135deg, #888, #bbb); }
-    .color-dot.darkgrey { background: #3a3a3a; }
-    .color-label { font-size: 0.6rem; color: var(--clay); letter-spacing: 0.1em; margin-left: 0.2rem; align-self: center; }
+    /* RIGHT — product details */
+    .details { padding: 4rem 3.5rem; overflow-y: auto; }
+    .back-link { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); text-decoration: none; margin-bottom: 2.5rem; transition: color 0.2s; }
+    .back-link:hover { color: var(--bark); }
+    .back-link svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
 
-    /* Product details */
-    .product-details { display: flex; flex-direction: column; gap: 1.6rem; }
-    .product-name { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 300; color: var(--earth); }
-    .product-meta { display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--tan); }
-    .product-meta span { color: var(--earth); display: block; margin-bottom: 0.2rem; font-size: 0.58rem; letter-spacing: 0.28em; }
-    .product-desc { font-size: 0.82rem; line-height: 1.9; color: var(--tan); }
-    .option-label { font-size: 0.58rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.7rem; display: block; }
+    .print-name { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 300; color: var(--earth); line-height: 1.1; margin-bottom: 0.3rem; }
+    .print-sub { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 2rem; }
 
-    .format-toggle { display: flex; border: 1px solid var(--sand); }
-    .format-btn { flex: 1; padding: 0.65rem 1rem; border: none; border-right: 1px solid var(--sand); background: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--tan); cursor: pointer; transition: all 0.2s; }
-    .format-btn:last-child { border-right: none; }
-    .format-btn.active { background: var(--earth); color: var(--warm-white); }
+    .meta-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--linen); }
+    .meta-item { }
+    .meta-label { font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.3rem; }
+    .meta-value { font-size: 0.78rem; color: var(--tan); }
 
-    .size-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
-    .size-btn { padding: 0.8rem 0.5rem; border: 1px solid var(--sand); background: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.06em; color: var(--tan); cursor: pointer; transition: all 0.25s; text-align: center; line-height: 1.5; }
-    .size-btn:hover { border-color: var(--bark); color: var(--bark); }
-    .size-btn.active { background: var(--earth); border-color: var(--earth); color: var(--warm-white); }
-    .size-dim { display: block; font-size: 0.7rem; }
-    .size-price { display: block; font-size: 0.58rem; margin-top: 0.1rem; opacity: 0.7; }
-    .size-btn.active .size-price { color: var(--warm-white); }
+    .print-desc { font-size: 0.84rem; line-height: 1.95; color: var(--tan); margin-bottom: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--linen); }
 
-    .frame-options { display: flex; flex-direction: column; gap: 1rem; }
-    .frame-options.hidden { display: none; }
-    .mount-toggle { display: flex; border: 1px solid var(--sand); width: fit-content; }
-    .mount-btn { padding: 0.5rem 1rem; border: none; border-right: 1px solid var(--sand); background: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--tan); cursor: pointer; transition: all 0.2s; }
-    .mount-btn:last-child { border-right: none; }
-    .mount-btn.active { background: var(--earth); color: var(--warm-white); }
+    /* Option groups */
+    .opt-group { margin-bottom: 1.8rem; }
+    .opt-label { font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.8rem; display: flex; align-items: center; justify-content: space-between; }
+    .opt-label span { color: var(--tan); font-size: 0.68rem; text-transform: none; letter-spacing: 0.05em; }
 
-    .price-display { font-family: 'Playfair Display', serif; font-size: 2.4rem; color: var(--bark); }
-    .price-note { font-size: 0.66rem; color: var(--clay); margin-top: -0.6rem; letter-spacing: 0.06em; }
+    /* Segmented controls */
+    .seg { display: flex; border: 1px solid var(--sand); }
+    .seg-btn { flex: 1; padding: 0.75rem 0.5rem; border: none; border-right: 1px solid var(--sand); background: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--tan); cursor: pointer; transition: all 0.2s; }
+    .seg-btn:last-child { border-right: none; }
+    .seg-btn.active { background: var(--earth); color: var(--warm-white); }
+    .seg-btn:hover:not(.active) { background: var(--linen); color: var(--bark); }
 
-    .btn-order { width: 100%; padding: 1.1rem; background: var(--earth); color: var(--warm-white); border: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; cursor: pointer; transition: background 0.3s; }
-    .btn-order:hover { background: var(--bark); }
+    /* Size grid */
+    .size-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; }
+    .sz { padding: 0.85rem 0.5rem; border: 1px solid var(--sand); background: none; font-family: 'Tenor Sans', sans-serif; cursor: pointer; transition: all 0.22s; text-align: center; }
+    .sz:hover:not(.active) { border-color: var(--bark); }
+    .sz.active { background: var(--earth); border-color: var(--earth); }
+    .sz-dim { display: block; font-size: 0.72rem; letter-spacing: 0.06em; color: var(--tan); transition: color 0.2s; }
+    .sz.active .sz-dim { color: var(--warm-white); }
+    .sz-price { display: block; font-size: 0.6rem; color: var(--clay); margin-top: 0.15rem; transition: color 0.2s; }
+    .sz.active .sz-price { color: rgba(250,246,240,0.65); }
 
-    .product-info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; padding-top: 3rem; border-top: 1px solid var(--sand); }
-    .info-block p:first-child { font-size: 0.58rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.6rem; }
-    .info-block p:last-child { font-size: 0.82rem; line-height: 1.8; color: var(--tan); }
+    /* Frame colors */
+    .frame-colors { display: flex; gap: 0.55rem; align-items: center; }
+    .swatch { width: 28px; height: 28px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: all 0.2s; flex-shrink: 0; }
+    .swatch:hover { transform: scale(1.1); }
+    .swatch.active { box-shadow: 0 0 0 2px var(--warm-white), 0 0 0 4px var(--earth); }
+    .swatch.black   { background: #1c1c1c; }
+    .swatch.white   { background: #f0ede8; border-color: #ccc; }
+    .swatch.natural { background: #bf9e6e; }
+    .swatch.gold    { background: linear-gradient(135deg, #9a7520, #d4af45); }
+    .swatch.silver  { background: linear-gradient(135deg, #7a7a7a, #c0c0c0); }
+    .swatch.darkgrey { background: #2e2e2e; }
+    .frame-name { font-size: 0.66rem; color: var(--tan); margin-left: 0.3rem; }
 
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    /* Frame extras — hidden until framed selected */
+    .frame-extras { display: none; flex-direction: column; gap: 1.8rem; }
+    .frame-extras.show { display: flex; }
+
+    /* Pricing area */
+    .pricing-area { border-top: 1px solid var(--linen); padding-top: 2rem; margin-top: 0.5rem; }
+    .price-main { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--earth); line-height: 1; margin-bottom: 0.4rem; }
+    .price-detail { font-size: 0.7rem; color: var(--clay); letter-spacing: 0.06em; margin-bottom: 2rem; line-height: 1.6; }
+
+    .btn-cart { width: 100%; padding: 1.2rem; background: var(--earth); color: var(--warm-white); border: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.65rem; letter-spacing: 0.32em; text-transform: uppercase; cursor: pointer; transition: background 0.3s; margin-bottom: 0.8rem; }
+    .btn-cart:hover { background: var(--bark); }
+    .shipping-note { text-align: center; font-size: 0.6rem; color: var(--clay); letter-spacing: 0.1em; }
+
+    /* Info blocks */
+    .info-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--linen); margin-top: 3rem; }
+    .info-cell { padding: 1.5rem 0; border-right: 1px solid var(--linen); padding-right: 1.5rem; }
+    .info-cell:last-child { border-right: none; padding-left: 1.5rem; padding-right: 0; }
+    .info-cell:nth-child(2) { padding-left: 1.5rem; }
+    .info-cell-label { font-size: 0.55rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.5rem; }
+    .info-cell-text { font-size: 0.78rem; line-height: 1.75; color: var(--tan); }
+
+    /* reveal */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    .divider { height: 1px; background: var(--sand); margin: 0 3rem; }
-    footer { display: flex; justify-content: space-between; align-items: center; padding: 2rem 3rem; font-size: 0.68rem; color: var(--clay); letter-spacing: 0.08em; }
+    /* footer */
+    .divider { height: 1px; background: var(--sand); }
+    footer { display: flex; justify-content: space-between; align-items: center; padding: 1.8rem 3rem; font-size: 0.66rem; color: var(--clay); }
     .footer-logo { font-family: 'Playfair Display', serif; font-size: 0.9rem; color: var(--bark); text-decoration: none; font-weight: 300; }
 
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
+      .page-wrap { grid-template-columns: 1fr; }
+      .viewer { position: relative; top: 0; height: 60vw; min-height: 300px; }
+      .details { padding: 2.5rem 1.5rem 4rem; }
       nav { padding: 1rem 1.4rem; }
-      .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(250,246,240,0.98); z-index: 999; border-top: 1px solid var(--sand); padding: 0.5rem 0; }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(250,246,240,0.98); border-top: 1px solid var(--sand); z-index: 999; }
       .nav-links.open { display: flex; }
       .nav-links li { display: block; }
       .nav-links li.cart-dropdown-wrap { display: none !important; }
       .nav-links a { display: block; padding: 0.8rem 1.4rem; border-bottom: 1px solid var(--linen); font-size: 0.72rem; }
       .mobile-top-right { display: flex; }
       .hamburger { display: flex; }
-      .product-hero { grid-template-columns: 1fr; gap: 2.5rem; }
-      .page-header { padding: 7rem 1.5rem 2rem; }
-      .store-wrap { padding: 2rem 1.5rem 5rem; }
-      .product-info-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-      footer { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
-      .divider { margin: 0 1.5rem; }
+      .info-strip { grid-template-columns: 1fr; }
+      .info-cell { border-right: none; border-bottom: 1px solid var(--linen); padding: 1.2rem 0; }
+      .info-cell:last-child { border-bottom: none; }
+      .info-cell:nth-child(2) { padding-left: 0; }
+      footer { flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 1.5rem; }
     }
   </style>
 </head>
 <body>
 
-  <nav>
-    <a href="../index.html" class="nav-logo">Ryan Muratore</a>
-    <ul class="nav-links" id="nav-links">
-      <li><a href="../index.html#portfolio">Portfolio</a></li>
-      <li><a href="../portfolio.html">Full Portfolio</a></li>
-      <li><a href="../prints.html">Prints</a></li>
-      <li><a href="wallpapers.html">Wallpapers</a></li>
-      <li><a href="../journals.html">Field Journals</a></li>
-      <li><a href="../index.html#about">About</a></li>
-      <li><a href="../index.html#contact">Contact</a></li>
-      <li class="cart-dropdown-wrap">
-        <button id="cart-btn" onclick="Cart.toggleDropdown()">
-          <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-          <span id="cart-total"></span><span id="cart-count"></span>
-        </button>
-        <div id="cart-dropdown"></div>
-      </li>
-    </ul>
-    <div class="mobile-top-right">
-      <button id="cart-btn-mobile" onclick="Cart.toggleDropdown()">
+<nav>
+  <a href="../index.html" class="nav-logo">Ryan Muratore</a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="../index.html#portfolio">Portfolio</a></li>
+    <li><a href="../portfolio.html">Full Portfolio</a></li>
+    <li><a href="../prints.html">Prints</a></li>
+    <li><a href="wallpapers.html">Wallpapers</a></li>
+    <li><a href="../journals.html">Field Journals</a></li>
+    <li><a href="../index.html#about">About</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+    <li class="cart-dropdown-wrap">
+      <button id="cart-btn" onclick="Cart.toggleDropdown()">
         <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span id="cart-total"></span><span id="cart-count"></span>
       </button>
-      <button class="hamburger" id="hamburger" onclick="toggleMenu()">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
-
-  <div class="page-header">
-    <p class="section-label">Fine Art Prints</p>
-    <h1 class="section-title">Order a <em>Print</em></h1>
-    <div class="section-rule"></div>
+      <div id="cart-dropdown"></div>
+    </li>
+  </ul>
+  <div class="mobile-top-right">
+    <button id="cart-btn-mobile" onclick="Cart.toggleDropdown()">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+    </button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
   </div>
+</nav>
 
-  <div class="store-wrap">
-    <div class="product-hero">
+<div class="page-wrap">
 
-      <div class="image-viewer">
-        <div class="view-toggle">
-          <button class="view-btn active" onclick="setView('photo', this)">Photo</button>
-          <button class="view-btn" onclick="setView('framed', this)">Framed</button>
-          <button class="view-btn" onclick="setView('wall', this)">On Wall</button>
-        </div>
+  <!-- LEFT: IMAGE VIEWER -->
+  <div class="viewer">
+    <div class="view-tabs">
+      <button class="view-tab active" onclick="setView('photo',this)">Photo</button>
+      <button class="view-tab" onclick="setView('framed',this)">Framed</button>
+      <button class="view-tab" onclick="setView('wall',this)">On Wall</button>
+    </div>
+    <div class="view-stage">
 
-        <div class="img-panel photo-view active" id="panel-photo">
-          <img src="../norway-1.jpg" alt="Norway">
-        </div>
+      <!-- Photo -->
+      <div class="view-panel photo-panel active" id="panel-photo">
+        <img src="../norway-1.jpg" alt="Stillness on the Fjord">
+      </div>
 
-        <div class="img-panel framed-view" id="panel-framed">
-          <div class="frame-border black" id="frame-border-desk">
-            <div class="mount" id="mount-desk">
-              <img class="frame-img" src="../norway-1.jpg" alt="Norway">
+      <!-- Framed -->
+      <div class="view-panel framed-panel" id="panel-framed">
+        <div class="frame-wrap">
+          <div class="frame-box black" id="frame-box">
+            <div class="frame-padding">
+              <div class="mount-mat with-mount" id="mount-mat">
+                <img class="frame-photo" src="../norway-1.jpg" alt="Stillness on the Fjord">
+              </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="img-panel wall-view" id="panel-wall">
+      <!-- Wall -->
+      <div class="view-panel wall-panel" id="panel-wall">
+        <div class="wall-bg">
           <div class="wall-texture"></div>
-          <div class="wall-scene">
-            <div class="wall-nail"></div>
-            <div class="wall-frame">
-              <div class="frame-border black" id="wall-frame-border">
-                <div class="mount" id="mount-wall">
-                  <img src="../norway-1.jpg" alt="Norway">
+          <div class="wall-content">
+            <div class="nail"></div>
+            <div class="wall-frame-outer">
+              <div class="wall-frame-box black" id="wall-frame-box">
+                <div class="frame-padding">
+                  <div class="wall-mount with-mount" id="wall-mount">
+                    <img class="wall-photo" src="../norway-1.jpg" alt="Stillness on the Fjord">
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="wall-shadow"></div>
+            <div class="wall-drop"></div>
           </div>
         </div>
       </div>
 
-      <div class="product-details">
-        <p class="product-name">Norway</p>
-        <div class="product-meta">
-          <div><span>Location</span>Latefossen, Norway</div>
-          <div><span>Camera</span>Sony a7IV</div>
-        </div>
-        <p class="product-desc">Museum-quality print on 310gsm fine art paper with archival pigment inks. Each print is from this season's exclusive collection — once the season ends, it's gone for good.</p>
+    </div>
+  </div>
 
-        <div>
-          <span class="option-label">Format</span>
-          <div class="format-toggle">
-            <button class="format-btn active" onclick="setFormat('unframed', this)">Unframed</button>
-            <button class="format-btn" onclick="setFormat('framed', this)">Framed</button>
-          </div>
-        </div>
+  <!-- RIGHT: DETAILS -->
+  <div class="details">
+    <a class="back-link" href="../prints.html">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      All Prints
+    </a>
 
-        <div>
-          <span class="option-label">Size</span>
-          <div class="size-grid" id="size-grid"></div>
-        </div>
+    <h1 class="print-name">Stillness on the Fjord</h1>
+    <p class="print-sub">Latefossen, Stillness on the Fjord</p>
 
-        <div class="frame-options hidden" id="frame-options">
-          <div>
-            <span class="option-label">Frame Color</span>
-            <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
-              <div class="color-picker">
-                <div class="color-dot black active" title="Black" onclick="setFrame('black', this)"></div>
-                <div class="color-dot white" title="White" onclick="setFrame('white', this)"></div>
-                <div class="color-dot natural" title="Natural Wood" onclick="setFrame('natural', this)"></div>
-                <div class="color-dot gold" title="Antique Gold" onclick="setFrame('gold', this)"></div>
-                <div class="color-dot silver" title="Antique Silver" onclick="setFrame('silver', this)"></div>
-                <div class="color-dot darkgrey" title="Dark Grey" onclick="setFrame('darkgrey', this)"></div>
-              </div>
-              <span class="color-label" id="frame-label">Black</span>
-            </div>
-          </div>
-          <div>
-            <span class="option-label">Mount</span>
-            <div class="mount-toggle">
-              <button class="mount-btn active" onclick="setMount(true, this)">With Mount</button>
-              <button class="mount-btn" onclick="setMount(false, this)">No Mount</button>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <p class="price-display" id="price-display">$55</p>
-          <p class="price-note" id="price-note">Unframed &middot; 8 &times; 10 in &middot; Free shipping</p>
-        </div>
-
-        <button class="btn-order" onclick="addToCart()">Add to Cart</button>
+    <div class="meta-row">
+      <div class="meta-item">
+        <div class="meta-label">Location</div>
+        <div class="meta-value">Latefossen, Stillness on the Fjord</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Camera</div>
+        <div class="meta-value">Fujifilm X-T30 II</div>
       </div>
     </div>
 
-    <div class="product-info-grid reveal">
-      <div class="info-block">
-        <p>Paper</p>
-        <p>310gsm Hahnemühle fine art paper with archival pigment inks, built to last generations without fading.</p>
+    <p class="print-desc">Museum-quality print on 310gsm fine art paper with archival pigment inks. Each print is from this season's exclusive collection — once the season ends, it's gone for good.</p>
+
+    <!-- FORMAT -->
+    <div class="opt-group">
+      <div class="opt-label">Format</div>
+      <div class="seg">
+        <button class="seg-btn active" onclick="setFormat('unframed',this)">Unframed</button>
+        <button class="seg-btn" onclick="setFormat('framed',this)">Framed</button>
       </div>
-      <div class="info-block">
-        <p>Framing</p>
-        <p>Handmade to order by specialist framers. Conservation-grade acid-free mounts. 6 frame finishes available.</p>
+    </div>
+
+    <!-- SIZE -->
+    <div class="opt-group">
+      <div class="opt-label">Size <span id="size-label">8 × 10 in</span></div>
+      <div class="size-grid" id="size-grid"></div>
+    </div>
+
+    <!-- FRAME OPTIONS (hidden until framed) -->
+    <div class="frame-extras" id="frame-extras">
+
+      <div class="opt-group" style="margin-bottom:0;">
+        <div class="opt-label">Frame Color <span id="frame-name-label">Black</span></div>
+        <div class="frame-colors">
+          <div class="swatch black active" title="Black" onclick="setFrame('black',this)"></div>
+          <div class="swatch white" title="White" onclick="setFrame('white',this)"></div>
+          <div class="swatch natural" title="Natural Wood" onclick="setFrame('natural',this)"></div>
+          <div class="swatch gold" title="Antique Gold" onclick="setFrame('gold',this)"></div>
+          <div class="swatch silver" title="Antique Silver" onclick="setFrame('silver',this)"></div>
+          <div class="swatch darkgrey" title="Dark Grey" onclick="setFrame('darkgrey',this)"></div>
+        </div>
       </div>
-      <div class="info-block">
-        <p>Shipping</p>
-        <p>Ships within 5–7 business days with a certificate of authenticity. Free worldwide shipping on all orders.</p>
+
+      <div class="opt-group" style="margin-bottom:0;">
+        <div class="opt-label">Mount</div>
+        <div class="seg">
+          <button class="seg-btn active" onclick="setMount(true,this)">With Mount</button>
+          <button class="seg-btn" onclick="setMount(false,this)">No Mount</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PRICING + CTA -->
+    <div class="pricing-area">
+      <div class="price-main" id="price-main">$55</div>
+      <div class="price-detail" id="price-detail">Unframed &middot; 8 &times; 10 in</div>
+      <button class="btn-cart" onclick="addToCart()">Add to Cart</button>
+      <p class="shipping-note">Free worldwide shipping &middot; Ships in 5–7 business days</p>
+    </div>
+
+    <!-- INFO -->
+    <div class="info-strip reveal">
+      <div class="info-cell">
+        <div class="info-cell-label">Paper</div>
+        <div class="info-cell-text">310gsm Hahnemühle fine art paper, archival pigment inks, built to last generations.</div>
+      </div>
+      <div class="info-cell">
+        <div class="info-cell-label">Framing</div>
+        <div class="info-cell-text">Handmade by specialist framers. Conservation-grade acid-free mounts. 6 finishes.</div>
+      </div>
+      <div class="info-cell">
+        <div class="info-cell-label">Authenticity</div>
+        <div class="info-cell-text">Every print ships with a signed certificate of authenticity from Ryan Muratore.</div>
       </div>
     </div>
   </div>
 
-  <div class="divider"></div>
-  <footer>
-    <a href="../index.html" class="footer-logo">Ryan Muratore Photography</a>
-    <p>&copy; 2025 Ryan Muratore &mdash; All rights reserved.</p>
-  </footer>
+</div>
 
-  <script>
-    const UNFRAMED = [
-      { label: '8 × 10 in',  price: 55  },
-      { label: '12 × 16 in', price: 90  },
-      { label: '16 × 24 in', price: 145 },
-      { label: '24 × 36 in', price: 240 },
-    ];
-    const FRAME_ADD = [65, 95, 135, 185];
+<div class="divider"></div>
+<footer>
+  <a href="../index.html" class="footer-logo">Ryan Muratore Photography</a>
+  <p>&copy; 2025 Ryan Muratore &mdash; All rights reserved.</p>
+</footer>
 
-    const FRAME_NAMES = { black: 'Black', white: 'White', natural: 'Natural Wood', gold: 'Antique Gold', silver: 'Antique Silver', darkgrey: 'Dark Grey' };
+<script>
+  var SIZES = [
+    { dim: '8 \u00d7 10 in',  unframed: 55,  framed: 120 },
+    { dim: '12 \u00d7 16 in', unframed: 90,  framed: 185 },
+    { dim: '16 \u00d7 24 in', unframed: 145, framed: 280 },
+    { dim: '24 \u00d7 36 in', unframed: 240, framed: 425 },
+  ];
 
-    let fmt = 'unframed', sizeIdx = 0, frameColor = 'black', withMount = true, currentView = 'photo';
+  var FRAME_NAMES = {
+    black: 'Black', white: 'White', natural: 'Natural Wood',
+    gold: 'Antique Gold', silver: 'Antique Silver', darkgrey: 'Dark Grey'
+  };
 
-    function getSizes() {
-      return UNFRAMED.map((u, i) => ({
-        label: u.label,
-        price: fmt === 'framed' ? u.price + FRAME_ADD[i] : u.price
-      }));
+  var state = { fmt: 'unframed', sizeIdx: 0, frame: 'black', mount: true, view: 'photo' };
+
+  function price() {
+    var s = SIZES[state.sizeIdx];
+    return state.fmt === 'framed' ? s.framed : s.unframed;
+  }
+
+  function buildGrid() {
+    var html = '';
+    for (var i = 0; i < SIZES.length; i++) {
+      var s = SIZES[i];
+      var p = state.fmt === 'framed' ? s.framed : s.unframed;
+      var active = i === state.sizeIdx ? ' active' : '';
+      html += '<button class="sz' + active + '" onclick="pickSize(' + i + ',this)">' +
+              '<span class="sz-dim">' + s.dim + '</span>' +
+              '<span class="sz-price">$' + p + '</span>' +
+              '</button>';
     }
+    document.getElementById('size-grid').innerHTML = html;
+  }
 
-    function buildGrid() {
-      const sizes = getSizes();
-      document.getElementById('size-grid').innerHTML = sizes.map((s, i) =>
-        `<button class="size-btn ${i === sizeIdx ? 'active' : ''}" onclick="pickSize(${i}, this)">
-          <span class="size-dim">${s.label}</span>
-          <span class="size-price">$${s.price}</span>
-        </button>`
-      ).join('');
-      updatePrice();
+  function updateUI() {
+    var s = SIZES[state.sizeIdx];
+    var p = price();
+    document.getElementById('price-main').textContent = '$' + p;
+    document.getElementById('size-label').textContent = s.dim;
+
+    var detail = (state.fmt === 'framed' ? 'Framed' : 'Unframed') + ' \u00b7 ' + s.dim;
+    if (state.fmt === 'framed') {
+      detail += ' \u00b7 ' + FRAME_NAMES[state.frame] + ' frame';
+      if (state.mount) detail += ' + mount';
     }
+    document.getElementById('price-detail').textContent = detail;
+  }
 
-    function updatePrice() {
-      const sizes = getSizes();
-      const s = sizes[sizeIdx];
-      document.getElementById('price-display').textContent = '$' + s.price;
-      const frameStr = fmt === 'framed'
-        ? \` · ${FRAME_NAMES[frameColor]} frame${withMount ? ' + mount' : ''}\` : '';
-      document.getElementById('price-note').innerHTML =
-        `${fmt === 'framed' ? 'Framed' : 'Unframed'} &middot; ${s.label}${frameStr} &middot; Free shipping`;
+  function pickSize(idx, btn) {
+    state.sizeIdx = idx;
+    var btns = document.querySelectorAll('.sz');
+    for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+    btn.classList.add('active');
+    updateUI();
+  }
+
+  function setFormat(fmt, btn) {
+    state.fmt = fmt;
+    var btns = document.querySelectorAll('.seg-btn');
+    // only deactivate the format buttons (first seg group)
+    var fmtBtns = document.querySelectorAll('.opt-group .seg-btn');
+    for (var i = 0; i < 2; i++) {
+      if (fmtBtns[i]) fmtBtns[i].classList.remove('active');
     }
+    btn.classList.add('active');
 
-    function pickSize(idx, btn) {
-      sizeIdx = idx;
-      document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      updatePrice();
+    var extras = document.getElementById('frame-extras');
+    if (fmt === 'framed') {
+      extras.classList.add('show');
+      if (state.view === 'photo') setView('framed', document.querySelectorAll('.view-tab')[1]);
+    } else {
+      extras.classList.remove('show');
+      setView('photo', document.querySelectorAll('.view-tab')[0]);
     }
-
-    function setFormat(f, btn) {
-      fmt = f;
-      document.querySelectorAll('.format-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const frameOpts = document.getElementById('frame-options');
-      if (f === 'framed') {
-        frameOpts.classList.remove('hidden');
-        if (currentView === 'photo') setView('framed', document.querySelectorAll('.view-btn')[1]);
-      } else {
-        frameOpts.classList.add('hidden');
-        setView('photo', document.querySelectorAll('.view-btn')[0]);
-      }
-      buildGrid();
-    }
-
-    function setFrame(color, dot) {
-      frameColor = color;
-      document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
-      dot.classList.add('active');
-      document.getElementById('frame-label').textContent = FRAME_NAMES[color];
-      ['frame-border-desk', 'wall-frame-border'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.className = 'frame-border ' + color;
-      });
-      updatePrice();
-    }
-
-    function setMount(on, btn) {
-      withMount = on;
-      ['mount-desk', 'mount-wall'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) { el.style.padding = on ? '' : '0'; el.style.background = on ? '' : 'transparent'; }
-      });
-      btn.closest('.mount-toggle').querySelectorAll('.mount-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      updatePrice();
-    }
-
-    function setView(view, btn) {
-      currentView = view;
-      document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      document.querySelectorAll('.img-panel').forEach(p => p.classList.remove('active'));
-      document.getElementById('panel-' + view).classList.add('active');
-    }
-
-    function addToCart() {
-      const sizes = getSizes();
-      const s = sizes[sizeIdx];
-      const frameStr = fmt === 'framed'
-        ? \` · ${FRAME_NAMES[frameColor]}${withMount ? ' + mount' : ''}\` : '';
-      Cart.add({
-        id: 'print-norway-' + fmt + '-' + sizeIdx + '-' + frameColor,
-        name: 'Norway',
-        options: `${fmt === 'framed' ? 'Framed' : 'Unframed'} · ${s.label}${frameStr}`,
-        price: s.price
-      });
-    }
-
-    function toggleMenu() {
-      document.getElementById('nav-links').classList.toggle('open');
-      document.getElementById('hamburger').classList.toggle('open');
-    }
-
-    const reveals = document.querySelectorAll('.reveal');
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => obs.observe(el));
-
     buildGrid();
-  </script>
+    updateUI();
+  }
+
+  function setFrame(color, dot) {
+    state.frame = color;
+    var dots = document.querySelectorAll('.swatch');
+    for (var i = 0; i < dots.length; i++) dots[i].classList.remove('active');
+    dot.classList.add('active');
+    document.getElementById('frame-name-label').textContent = FRAME_NAMES[color];
+    document.getElementById('frame-box').className = 'frame-box ' + color;
+    document.getElementById('wall-frame-box').className = 'wall-frame-box ' + color;
+    updateUI();
+  }
+
+  function setMount(on, btn) {
+    state.mount = on;
+    var mountClass = on ? 'mount-mat with-mount' : 'mount-mat no-mount';
+    var wallMountClass = on ? 'wall-mount with-mount' : 'wall-mount no-mount';
+    document.getElementById('mount-mat').className = mountClass;
+    document.getElementById('wall-mount').className = wallMountClass;
+    var mountBtns = btn.closest('.seg').querySelectorAll('.seg-btn');
+    for (var i = 0; i < mountBtns.length; i++) mountBtns[i].classList.remove('active');
+    btn.classList.add('active');
+    updateUI();
+  }
+
+  function setView(view, btn) {
+    state.view = view;
+    var tabs = document.querySelectorAll('.view-tab');
+    for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
+    btn.classList.add('active');
+    var panels = document.querySelectorAll('.view-panel');
+    for (var i = 0; i < panels.length; i++) panels[i].classList.remove('active');
+    document.getElementById('panel-' + view).classList.add('active');
+  }
+
+  function addToCart() {
+    var s = SIZES[state.sizeIdx];
+    var p = price();
+    var opts = (state.fmt === 'framed' ? 'Framed' : 'Unframed') + ' \u00b7 ' + s.dim;
+    if (state.fmt === 'framed') {
+      opts += ' \u00b7 ' + FRAME_NAMES[state.frame];
+      if (state.mount) opts += ' + mount';
+    }
+    Cart.add({
+      id: 'norway-' + state.fmt + '-' + state.sizeIdx + '-' + state.frame,
+      name: 'Stillness on the Fjord',
+      options: opts,
+      price: p
+    });
+  }
+
+  function toggleMenu() {
+    document.getElementById('nav-links').classList.toggle('open');
+    document.getElementById('hamburger').classList.toggle('open');
+  }
+
+  var reveals = document.querySelectorAll('.reveal');
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(function(el) { obs.observe(el); });
+
+  // Init
+  buildGrid();
+  updateUI();
+</script>
 </body>
 </html>
