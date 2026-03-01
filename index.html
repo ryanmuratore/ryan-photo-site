@@ -306,7 +306,7 @@
       text-transform: uppercase;
       color: var(--tan);
     }
-    @media (max-width: 768px) { #world-map-container { min-height: 180px; } }
+    
 
                 /* ── GALLERY GRID ── */
     .gallery-grid {
@@ -523,100 +523,7 @@
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ── MOBILE ── */
-    @media (max-width: 768px) {
-      /* ── NAV ── */
-      nav {
-        padding: 1rem 1.4rem;
-        background: rgba(250,246,240,0.97) !important;
-        backdrop-filter: blur(8px);
-        box-shadow: 0 1px 0 var(--sand);
-        position: relative;
-      }
-      .nav-logo { color: var(--earth) !important; font-size: 1rem; white-space: nowrap; }
-      .mobile-top-right { display: flex !important; align-items: center; gap: 1rem; }
-      .hamburger {
-        display: flex !important;
-        flex-direction: column; gap: 5px;
-        background: none; border: none; cursor: pointer;
-        padding: 0.4rem; z-index: 1001;
-      }
-      .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--earth); transition: all 0.3s; }
-      .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-      .hamburger.open span:nth-child(2) { opacity: 0; }
-      .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0; right: 0;
-        background: rgba(250,246,240,0.98);
-        backdrop-filter: blur(10px);
-        z-index: 999;
-        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-        border-top: 1px solid var(--sand);
-      }
-      .nav-links.open { display: flex; }
-      .nav-links li { display: block; width: 100%; }
-      .nav-links li.cart-dropdown-wrap { display: none !important; }
-      .nav-links a {
-        font-size: 0.72rem !important;
-        letter-spacing: 0.18em;
-        color: var(--earth) !important;
-        display: block;
-        padding: 0.9rem 1.4rem;
-        border-bottom: 1px solid var(--linen);
-        text-transform: uppercase;
-      }
-      .nav-links li:last-child a { border-bottom: none; }
-
-      /* ── HERO ── */
-      #hero { height: 100svh; }
-      .hero-content { flex-direction: column; align-items: flex-start; padding: 0 1.5rem 5rem; gap: 1.5rem; }
-      .hero-title { font-size: 2.4rem; }
-      .hero-right { text-align: left; }
-      .hero-cta { justify-content: flex-start; flex-wrap: wrap; }
-      .btn { font-size: 0.58rem; padding: 0.7rem 1.5rem; }
-
-      /* ── SECTIONS ── */
-      .section-wrap { padding: 4rem 1.5rem; }
-      .portfolio-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem; }
-      .gallery-grid { gap: 6px; }
-      .gallery-col { gap: 6px; }
-      #world-map-container { width: 100% !important; margin: 0 !important; }
-
-      /* ── SHOP / PRINTS ── */
-      .shop-intro { grid-template-columns: 1fr; gap: 2rem; }
-      .prints-grid { grid-template-columns: 1fr !important; display: grid !important; }
-      .print-card { display: block !important; opacity: 1 !important; visibility: visible !important; }
-      .print-img-wrap { height: 240px; }
-
-      /* ── WALLPAPERS ── */
-      .wallpaper-card { grid-template-columns: 1fr; }
-      .wallpaper-preview { height: 260px; }
-      .wp2-hero { grid-template-columns: 1fr; gap: 1.5rem; }
-      .wp2-carousel { width: 100%; aspect-ratio: 16/9; }
-      .wp2-carousel.mobile-mode { max-width: 200px; margin: 0 auto; }
-
-      /* ── JOURNALS ── */
-      .journals-grid { grid-template-columns: 1fr; }
-      .journal-card { display: block !important; }
-
-      /* ── ABOUT ── */
-      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .about-image-wrap { height: 300px; }
-      .about-accent { display: none; }
-      .about-tag { left: 1rem; bottom: 1rem; }
-      .about-gear { flex-direction: column; gap: 1.2rem; }
-
-      /* ── CONTACT ── */
-      .contact-grid { grid-template-columns: 1fr; gap: 3rem; margin-top: 2rem; }
-      .form-row { grid-template-columns: 1fr; }
-
-      /* ── FOOTER ── */
-      footer { flex-direction: column; align-items: flex-start; padding: 2rem 1.5rem; }
-      .divider { margin: 0 1.5rem; }
-    }
+    
 
     /* ── CART ── */
     #cart-btn {
@@ -666,54 +573,7 @@
     /* ── MOBILE NAV ── */
     .hamburger { display: none; }
     .mobile-top-right { display: none; }
-    @media (max-width: 768px) {
-      nav {
-        padding: 1rem 1.4rem;
-        background: rgba(250,246,240,0.97) !important;
-        backdrop-filter: blur(8px);
-        box-shadow: 0 1px 0 var(--sand);
-        position: relative;
-      }
-      .nav-logo { color: var(--earth) !important; font-size: 1rem; white-space: nowrap; }
-      .mobile-top-right { display: flex !important; align-items: center; gap: 1rem; }
-      .hamburger { display: flex !important; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 0.4rem; z-index: 1001; }
-      .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--earth); transition: all 0.3s; }
-      .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-      .hamburger.open span:nth-child(2) { opacity: 0; }
-      .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-      .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(250,246,240,0.98); backdrop-filter: blur(8px); z-index: 997; padding: 1rem 0 1.5rem; box-shadow: 0 8px 24px rgba(0,0,0,0.08); border-top: 1px solid var(--sand); }
-      .nav-links.open { display: flex; }
-      .nav-links li { display: block; text-align: left; }
-      .nav-links li.cart-dropdown-wrap { display: none !important; }
-      .nav-links a { font-size: 0.85rem !important; letter-spacing: 0.15em; color: var(--earth) !important; white-space: nowrap; display: block; padding: 0.75rem 1.4rem; border-bottom: 1px solid var(--linen); }
-      #hero { height: 100svh; }
-      .hero-content { flex-direction: column; align-items: flex-start; padding: 0 1.5rem 5rem; gap: 1.5rem; }
-      .hero-title { font-size: 2.4rem; }
-      .hero-right { text-align: left; }
-      .hero-cta { justify-content: flex-start; flex-wrap: wrap; }
-      .btn { font-size: 0.58rem; padding: 0.7rem 1.5rem; }
-      .section-wrap { padding: 4rem 1.5rem; }
-      .portfolio-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem; }
-      .gallery-grid { gap: 6px; }
-      .gallery-col { gap: 6px; }
-      #world-map-container { width: 100% !important; margin: 0 !important; }
-      .shop-intro { grid-template-columns: 1fr; gap: 2rem; }
-      .prints-grid { grid-template-columns: 1fr !important; display: grid !important; }
-      .print-card { display: block !important; }
-      .print-img-wrap { height: 240px; }
-      .wallpaper-card { grid-template-columns: 1fr; }
-      .wallpaper-preview { height: 260px; }
-      .journals-grid { grid-template-columns: 1fr; }
-      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .about-image-wrap { height: 300px; }
-      .about-accent { display: none; }
-      .about-tag { left: 1rem; bottom: 1rem; }
-      .about-gear { flex-direction: column; gap: 1.2rem; }
-      .contact-grid { grid-template-columns: 1fr; gap: 3rem; margin-top: 2rem; }
-      .form-row { grid-template-columns: 1fr; }
-      footer { flex-direction: column; align-items: flex-start; padding: 2rem 1.5rem; }
-      .divider { margin: 0 1.5rem; }
-    }
+    
 
     #cart-btn-mobile {
       display: none;
@@ -730,9 +590,7 @@
     }
     #cart-btn-mobile svg { stroke: currentColor; }
     #cart-total-mobile { color: var(--bark); font-size: 0.62rem; }
-    @media (max-width: 768px) {
-      #cart-btn-mobile { display: flex !important; }
-    }
+    
 
     .wallpaper-carousel-wrap {
       position: relative;
@@ -791,10 +649,7 @@
 
     /* ── Wallpaper section styles (copied from store) ── */
     .wp2-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
-    .wp2-carousel {
-      position: relative; overflow: hidden; background: var(--linen);
-      border-radius: 4px; width: 100%; aspect-ratio: 16/9;
-    }
+    
     .wp2-carousel.mobile-mode { aspect-ratio: 9/16; max-width: 260px; }
     .wp2-slide { position: absolute; top:0; left:0; width:100%; height:100%; }
     .wp2-slide img { width:100%; height:100%; object-fit:cover; display:block; }
@@ -816,6 +671,100 @@
     .wp2-carousel .carousel-btn.next { right: 12px; }
     .wp2-carousel .carousel-btn svg { width: 16px; height: 16px; stroke: var(--earth); stroke-width: 2; fill: none; }
     .wp2-carousel .carousel-counter { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.4); color: #fff; font-family: 'Tenor Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.15em; padding: 0.25rem 0.7rem; border-radius: 20px; pointer-events: none; }
+  @media (max-width: 768px) {
+      /* ── NAV ── */
+      nav {
+        padding: 1rem 1.4rem;
+        background: rgba(250,246,240,0.97) !important;
+        backdrop-filter: blur(8px);
+        box-shadow: 0 1px 0 var(--sand);
+        position: relative;
+      }
+      .nav-logo { color: var(--earth) !important; font-size: 1rem; white-space: nowrap; }
+      .mobile-top-right { display: flex !important; align-items: center; gap: 1rem; }
+      .hamburger {
+        display: flex !important;
+        flex-direction: column; gap: 5px;
+        background: none; border: none; cursor: pointer;
+        padding: 0.4rem; z-index: 1001;
+      }
+      .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--earth); transition: all 0.3s; }
+      .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+      .hamburger.open span:nth-child(2) { opacity: 0; }
+      .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0; right: 0;
+        background: rgba(250,246,240,0.98);
+        backdrop-filter: blur(10px);
+        z-index: 999;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        border-top: 1px solid var(--sand);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { display: block; width: 100%; }
+      .nav-links li.cart-dropdown-wrap { display: none !important; }
+      .nav-links a {
+        font-size: 0.72rem !important;
+        letter-spacing: 0.18em;
+        color: var(--earth) !important;
+        display: block;
+        padding: 0.9rem 1.4rem;
+        border-bottom: 1px solid var(--linen);
+        text-transform: uppercase;
+      }
+      .nav-links li:last-child a { border-bottom: none; }
+
+      /* ── HERO ── */
+      #hero { height: 100svh; }
+      .hero-content { flex-direction: column; align-items: flex-start; padding: 0 1.5rem 5rem; gap: 1.5rem; }
+      .hero-title { font-size: 2.4rem; }
+      .hero-right { text-align: left; }
+      .hero-cta { justify-content: flex-start; flex-wrap: wrap; }
+      .btn { font-size: 0.58rem; padding: 0.7rem 1.5rem; }
+
+      /* ── SECTIONS ── */
+      .section-wrap { padding: 4rem 1.5rem; }
+      .portfolio-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem; }
+      .gallery-grid { gap: 6px; align-items: flex-end !important; }
+      .gallery-col { gap: 6px; }
+      #world-map-container { width: 100% !important; margin: 0 !important; }
+
+      /* ── SHOP / PRINTS ── */
+      .shop-intro { grid-template-columns: 1fr; gap: 2rem; }
+      .prints-grid { grid-template-columns: 1fr !important; display: grid !important; }
+      .print-card { display: block !important; opacity: 1 !important; visibility: visible !important; }
+      .print-img-wrap { height: 240px; }
+
+      /* ── WALLPAPERS ── */
+      .wallpaper-card { grid-template-columns: 1fr; }
+      .wallpaper-preview { height: 260px; }
+      .wp2-hero { grid-template-columns: 1fr; gap: 1.5rem; }
+      .wp2-details .btn-order { display: block; }
+
+      /* ── JOURNALS ── */
+      .journals-grid { grid-template-columns: 1fr; }
+      .journal-card { display: block !important; }
+
+      /* ── ABOUT ── */
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-image-wrap { height: 300px; }
+      .about-accent { display: none; }
+      .about-tag { left: 1rem; bottom: 1rem; }
+      .about-gear { flex-direction: column; gap: 1.2rem; }
+
+      /* ── CONTACT ── */
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; margin-top: 2rem; }
+      .form-row { grid-template-columns: 1fr; }
+
+      /* ── FOOTER ── */
+      footer { flex-direction: column; align-items: flex-start; padding: 2rem 1.5rem; }
+      .divider { margin: 0 1.5rem; }
+      .wp2-details { display: flex !important; flex-direction: column; gap: 1rem; }
+    }
   </style>
   <script src="cart.js"></script>
 </head>

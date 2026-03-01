@@ -196,8 +196,8 @@
       /* ── MAP ── */
       #world-map-container { width: 100% !important; margin: 0 !important; }
       /* ── GALLERY GRID ── */
-      .gallery-grid { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 6px !important; }
-      .gallery-col { display: contents !important; }
+      .gallery-grid { display: flex !important; gap: 6px !important; align-items: flex-end !important; }
+      .gallery-col { gap: 6px !important; }
     }
 
     .hamburger { display: none; }
@@ -237,8 +237,8 @@
       #cart-btn-mobile { display: flex !important;   /* ── MAP ── */
       #world-map-container { width: 100% !important; margin: 0 !important; min-height: 220px; }
       /* ── GALLERY GRID ── */
-      .gallery-grid { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 6px !important; }
-      .gallery-col { display: contents !important; }
+      .gallery-grid { display: flex !important; gap: 6px !important; align-items: flex-end !important; }
+      .gallery-col { gap: 6px !important; }
     }
     }
   </style>
