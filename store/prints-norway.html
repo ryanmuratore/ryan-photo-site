@@ -5,186 +5,226 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Stillness on the Fjord — Ryan Muratore Photography</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&family=Tenor+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&family=Tenor+Sans&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
   <script src="../cart.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --warm-white: #faf6f0; --linen: #f0e9de; --sand: #ddd0bc; --clay: #c4a882; --tan: #a8896a; --bark: #7a5c3a; --earth: #4e3820; --ink: #2a1f12; }
-    body { background: var(--warm-white); color: var(--ink); font-family: 'Tenor Sans', sans-serif; overflow-x: hidden; }
+    :root {
+      --w: #faf6f0; --linen: #f0e9de; --sand: #ddd0bc;
+      --clay: #c4a882; --tan: #a8896a; --bark: #7a5c3a; --earth: #4e3820; --ink: #2a1f12;
+    }
+    body { background: var(--w); color: var(--ink); font-family: 'Tenor Sans', sans-serif; overflow-x: hidden; }
 
-    /* NAV */
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 3rem; background: rgba(250,246,240,0.96); backdrop-filter: blur(8px); box-shadow: 0 1px 0 var(--sand); }
-    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 300; letter-spacing: 0.12em; color: var(--earth); text-decoration: none; }
-    .nav-links { display: flex; gap: 2.8rem; list-style: none; align-items: center; }
-    .nav-links a { font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--tan); text-decoration: none; transition: color 0.3s; }
-    .nav-links a:hover { color: var(--bark); }
-    #cart-btn { background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; color: var(--tan); padding: 0; }
-    #cart-btn svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.5; }
-    #cart-dropdown { position: absolute; top: calc(100% + 8px); right: 3rem; background: var(--warm-white); border: 1px solid var(--sand); min-width: 280px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); z-index: 300; display: none; }
+    /* ── NAV ── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 3rem; background: rgba(250,246,240,0.97); backdrop-filter: blur(16px); border-bottom: 1px solid var(--sand); }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 300; letter-spacing: 0.14em; color: var(--earth); text-decoration: none; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+    .nav-links a { font-size: 0.6rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--tan); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--earth); }
+    #cart-btn { background: none; border: none; cursor: pointer; display: flex; align-items: center; color: var(--tan); padding: 0; transition: color 0.2s; }
+    #cart-btn:hover { color: var(--earth); }
+    #cart-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+    #cart-dropdown { position: absolute; top: calc(100% + 1px); right: 3rem; background: var(--w); border: 1px solid var(--sand); min-width: 300px; box-shadow: 0 16px 48px rgba(0,0,0,0.1); z-index: 300; display: none; }
     #cart-dropdown.open { display: block; }
-    .mobile-top-right { display: none; align-items: center; gap: 1rem; }
-    #cart-btn-mobile { display: none; background: none; border: none; cursor: pointer; }
-    #cart-btn-mobile svg { width: 20px; height: 20px; stroke: var(--tan); fill: none; stroke-width: 1.5; }
-    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 0.4rem; }
-    .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--earth); transition: all 0.3s; }
-    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .mob-right { display: none; align-items: center; gap: 1rem; }
+    #cart-mob { display: none; background: none; border: none; cursor: pointer; }
+    #cart-mob svg { width: 20px; height: 20px; stroke: var(--tan); fill: none; stroke-width: 1.5; }
+    .burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 0.4rem; }
+    .burger span { display: block; width: 22px; height: 1.5px; background: var(--earth); transition: all 0.3s; }
+    .burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .burger.open span:nth-child(2) { opacity: 0; }
+    .burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-    /* LAYOUT */
-    .page-wrap { padding-top: 72px; display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
+    /* ── LAYOUT ── */
+    .shell { display: grid; grid-template-columns: 58% 42%; min-height: 100vh; padding-top: 55px; }
 
-    /* LEFT — image viewer */
-    .viewer { position: sticky; top: 72px; height: calc(100vh - 72px); background: var(--linen); display: flex; flex-direction: column; }
-    .view-tabs { display: flex; border-bottom: 1px solid var(--sand); }
-    .view-tab { flex: 1; padding: 0.9rem; border: none; background: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--clay); cursor: pointer; transition: all 0.2s; border-right: 1px solid var(--sand); }
-    .view-tab:last-child { border-right: none; }
-    .view-tab.active { background: var(--warm-white); color: var(--earth); }
-    .view-tab:hover:not(.active) { background: rgba(255,255,255,0.4); }
+    /* ── LEFT: VIEWER ── */
+    .viewer { position: sticky; top: 55px; height: calc(100vh - 55px); display: flex; flex-direction: column; overflow: hidden; }
 
-    .view-stage { flex: 1; position: relative; overflow: hidden; }
-    .view-panel { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.35s ease; }
-    .view-panel.active { opacity: 1; pointer-events: all; }
+    .tabs { display: flex; background: #13110e; }
+    .tab { flex: 1; padding: 0.95rem 0.5rem; border: none; border-right: 1px solid rgba(255,255,255,0.07); background: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.54rem; letter-spacing: 0.26em; text-transform: uppercase; color: rgba(255,255,255,0.3); cursor: pointer; transition: all 0.25s; }
+    .tab:last-child { border-right: none; }
+    .tab.active { color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.06); }
+    .tab:hover:not(.active) { color: rgba(255,255,255,0.55); background: rgba(255,255,255,0.03); }
 
-    /* Photo panel */
-    .photo-panel { background: var(--linen); }
-    .photo-panel img { width: 100%; height: 100%; object-fit: contain; padding: 2rem; }
+    .stage { flex: 1; position: relative; }
+    .panel { position: absolute; inset: 0; opacity: 0; pointer-events: none; transition: opacity 0.45s ease; display: flex; align-items: center; justify-content: center; }
+    .panel.on { opacity: 1; pointer-events: all; }
 
-    /* Framed panel */
-    .framed-panel { background: #e4ddd4; }
-    .frame-wrap { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; padding: 2.5rem; }
-    .frame-box { transition: background 0.3s, box-shadow 0.3s; }
-    .frame-box.black  { background: #1c1c1c; box-shadow: 4px 4px 20px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.04); }
-    .frame-box.white  { background: #f0ede8; box-shadow: 4px 4px 16px rgba(0,0,0,0.18), inset 0 0 0 1px #d8d5d0; }
-    .frame-box.natural { background: #bf9e6e; box-shadow: 4px 4px 16px rgba(0,0,0,0.22); }
-    .frame-box.gold   { background: linear-gradient(135deg, #8a6a18, #d4af45, #9a7520); box-shadow: 4px 4px 16px rgba(0,0,0,0.22); }
-    .frame-box.silver { background: linear-gradient(135deg, #6e6e6e, #c0c0c0, #7a7a7a); box-shadow: 4px 4px 16px rgba(0,0,0,0.22); }
-    .frame-box.darkgrey { background: #2e2e2e; box-shadow: 4px 4px 18px rgba(0,0,0,0.35); }
-    .frame-padding { padding: 18px; }
-    .mount-mat { background: #f5f1ec; transition: padding 0.25s, background 0.25s; }
-    .mount-mat.with-mount { padding: 20px; }
-    .mount-mat.no-mount { padding: 0; background: transparent; }
-    .frame-photo { display: block; width: 220px; height: auto; }
+    /* Photo panel — pure dark showcase */
+    .p-photo { background: #0e0c0a; }
+    .p-photo img { max-width: 100%; max-height: 100%; object-fit: contain; padding: 2.5rem; display: block; }
 
-    /* Wall panel */
-    .wall-panel { background: #c8c0b6; }
-    .wall-bg { width: 100%; height: 100%; position: relative; display: flex; align-items: center; justify-content: center; }
-    .wall-texture { position: absolute; inset: 0; background-image: repeating-linear-gradient(0deg, transparent, transparent 4px, rgba(0,0,0,0.01) 4px, rgba(0,0,0,0.01) 8px), repeating-linear-gradient(90deg, transparent, transparent 12px, rgba(0,0,0,0.007) 12px, rgba(0,0,0,0.007) 24px); }
-    .wall-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
-    .nail { width: 5px; height: 5px; background: #8a8078; border-radius: 50%; box-shadow: 0 1px 2px rgba(0,0,0,0.35); margin-bottom: 5px; }
-    .wall-frame-outer { transform: perspective(900px) rotateY(-1deg) rotateX(0.5deg); box-shadow: 8px 16px 48px rgba(0,0,0,0.32), 2px 4px 12px rgba(0,0,0,0.18); transition: box-shadow 0.3s; }
-    .wall-frame-box { transition: background 0.3s; }
-    .wall-frame-box.black  { background: #1c1c1c; }
-    .wall-frame-box.white  { background: #f0ede8; }
-    .wall-frame-box.natural { background: #bf9e6e; }
-    .wall-frame-box.gold   { background: linear-gradient(135deg, #8a6a18, #d4af45, #9a7520); }
-    .wall-frame-box.silver { background: linear-gradient(135deg, #6e6e6e, #c0c0c0, #7a7a7a); }
-    .wall-frame-box.darkgrey { background: #2e2e2e; }
-    .wall-frame-box .frame-padding { padding: 12px; }
-    .wall-mount { background: #f5f1ec; transition: padding 0.25s, background 0.25s; }
-    .wall-mount.with-mount { padding: 14px; }
-    .wall-mount.no-mount { padding: 0; background: transparent; }
-    .wall-photo { display: block; width: 160px; height: auto; }
-    .wall-drop { width: 140%; height: 12px; background: radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.2), transparent 70%); margin-top: 10px; }
+    /* Framed panel — warm gallery wall */
+    .p-framed { background: #e6e0d8; }
+    .framed-scene { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 3rem; position: relative; }
+    /* subtle linen texture */
+    .framed-scene::before { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%23e6e0d8'/%3E%3Crect width='1' height='1' fill='%23dedad2' opacity='0.6'/%3E%3Crect x='2' y='2' width='1' height='1' fill='%23dedad2' opacity='0.6'/%3E%3C/svg%3E"); opacity: 0.8; }
+    /* top light */
+    .framed-scene::after { content: ''; position: absolute; top: 0; left: 30%; right: 30%; height: 50%; background: radial-gradient(ellipse at 50% -20%, rgba(255,255,255,0.25) 0%, transparent 70%); pointer-events: none; }
+    .frame-wrap { position: relative; z-index: 1; }
+    .f-outer { transition: background 0.3s, box-shadow 0.3s; }
+    .f-outer.black    { background: #181818; box-shadow: 0 4px 12px rgba(0,0,0,0.15), 4px 20px 60px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.05); }
+    .f-outer.white    { background: #edebe6; box-shadow: 0 4px 12px rgba(0,0,0,0.1), 4px 20px 50px rgba(0,0,0,0.22), inset 0 0 0 1px #ccc9c3; }
+    .f-outer.natural  { background: #b8916a; box-shadow: 0 4px 12px rgba(0,0,0,0.12), 4px 20px 50px rgba(0,0,0,0.28); }
+    .f-outer.gold     { background: linear-gradient(160deg, #7e5812 0%, #c8a030 45%, #7e5812 100%); box-shadow: 0 4px 12px rgba(0,0,0,0.12), 4px 20px 50px rgba(0,0,0,0.28); }
+    .f-outer.silver   { background: linear-gradient(160deg, #686868 0%, #b8b8b8 45%, #686868 100%); box-shadow: 0 4px 12px rgba(0,0,0,0.12), 4px 20px 50px rgba(0,0,0,0.28); }
+    .f-outer.darkgrey { background: #242424; box-shadow: 0 4px 12px rgba(0,0,0,0.15), 4px 20px 55px rgba(0,0,0,0.32); }
+    .f-pad { padding: 20px; }
+    .f-mat { background: #f3efe9; transition: padding 0.3s ease, background 0.3s; }
+    .f-mat.on  { padding: 24px; }
+    .f-mat.off { padding: 0; background: transparent; }
+    .f-img { display: block; width: 230px; height: auto; vertical-align: middle; }
 
-    /* RIGHT — product details */
-    .details { padding: 4rem 3.5rem; overflow-y: auto; }
-    .back-link { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); text-decoration: none; margin-bottom: 2.5rem; transition: color 0.2s; }
-    .back-link:hover { color: var(--bark); }
-    .back-link svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+    /* Wall panel — realistic interior */
+    .p-wall { background: #beb7af; }
+    .wall-room { width: 100%; height: 100%; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    /* wall gradient — makes it feel lit from above */
+    .wall-room::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, #c8c1b8 0%, #b8b1a8 60%, #a8a097 100%); }
+    /* subtle vertical linen lines */
+    .wall-room::after { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(0,0,0,0.012) 40px, rgba(0,0,0,0.012) 41px); }
+    /* ceiling light bloom */
+    .wall-light { position: absolute; top: 0; left: 0; right: 0; height: 45%; background: radial-gradient(ellipse at 50% -30%, rgba(255,255,255,0.18) 0%, transparent 70%); z-index: 1; pointer-events: none; }
+    /* floor shadow */
+    .wall-floor { position: absolute; bottom: 0; left: 0; right: 0; height: 25%; background: linear-gradient(to top, rgba(0,0,0,0.12), transparent); z-index: 1; pointer-events: none; }
+    .wall-center { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; }
+    /* picture rail line */
+    .rail { width: 180px; height: 1px; background: rgba(0,0,0,0.15); margin-bottom: 0; position: relative; }
+    .rail::after { content: ''; position: absolute; left: 50%; top: 0; transform: translateX(-50%); width: 3px; height: 14px; background: rgba(60,50,40,0.35); border-radius: 0 0 2px 2px; }
+    /* thin hanging wire */
+    .wire { width: 1px; height: 18px; background: rgba(0,0,0,0.18); margin: 0 auto; }
+    .wall-art { transform: perspective(1400px) rotateY(-1.2deg) rotateX(0.6deg); transition: transform 0.4s ease; }
+    .wall-art:hover { transform: perspective(1400px) rotateY(0deg) rotateX(0deg); }
+    .w-outer { transition: background 0.3s, box-shadow 0.3s; }
+    .w-outer.black    { background: #181818; box-shadow: 3px 6px 16px rgba(0,0,0,0.22), 8px 22px 64px rgba(0,0,0,0.38), -1px -1px 0 rgba(255,255,255,0.04) inset; }
+    .w-outer.white    { background: #edebe6; box-shadow: 3px 6px 14px rgba(0,0,0,0.14), 8px 22px 55px rgba(0,0,0,0.25), inset 0 0 0 1px #ccc9c3; }
+    .w-outer.natural  { background: #b8916a; box-shadow: 3px 6px 14px rgba(0,0,0,0.16), 8px 22px 55px rgba(0,0,0,0.3); }
+    .w-outer.gold     { background: linear-gradient(160deg, #7e5812, #c8a030, #7e5812); box-shadow: 3px 6px 14px rgba(0,0,0,0.16), 8px 22px 55px rgba(0,0,0,0.3); }
+    .w-outer.silver   { background: linear-gradient(160deg, #686868, #b8b8b8, #686868); box-shadow: 3px 6px 14px rgba(0,0,0,0.16), 8px 22px 55px rgba(0,0,0,0.3); }
+    .w-outer.darkgrey { background: #242424; box-shadow: 3px 6px 15px rgba(0,0,0,0.2), 8px 22px 60px rgba(0,0,0,0.35); }
+    .w-pad { padding: 14px; }
+    .w-mat { background: #f3efe9; transition: padding 0.3s ease, background 0.3s; }
+    .w-mat.on  { padding: 16px; }
+    .w-mat.off { padding: 0; background: transparent; }
+    .w-img { display: block; width: 155px; height: auto; vertical-align: middle; }
+    /* drop shadow cast on wall below frame */
+    .art-shadow { width: 220px; height: 18px; background: radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.22), transparent 65%); margin-top: 14px; }
 
-    .print-name { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 300; color: var(--earth); line-height: 1.1; margin-bottom: 0.3rem; }
-    .print-sub { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 2rem; }
+    /* ── RIGHT: DETAILS ── */
+    .details { background: var(--w); display: flex; flex-direction: column; }
+    .d-inner { padding: 3rem 3rem 3.5rem; flex: 1; display: flex; flex-direction: column; }
 
-    .meta-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--linen); }
-    .meta-item { }
-    .meta-label { font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.3rem; }
-    .meta-value { font-size: 0.78rem; color: var(--tan); }
+    .back { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.56rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--clay); text-decoration: none; margin-bottom: 2.5rem; transition: color 0.2s; width: fit-content; }
+    .back:hover { color: var(--bark); }
+    .back svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 2.5; }
 
-    .print-desc { font-size: 0.84rem; line-height: 1.95; color: var(--tan); margin-bottom: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--linen); }
+    /* Title area */
+    .eyebrow { font-size: 0.56rem; letter-spacing: 0.38em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.55rem; }
+    .title { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 300; color: var(--earth); line-height: 1.08; }
+    .title em { font-style: italic; color: var(--tan); }
 
-    /* Option groups */
-    .opt-group { margin-bottom: 1.8rem; }
-    .opt-label { font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.8rem; display: flex; align-items: center; justify-content: space-between; }
-    .opt-label span { color: var(--tan); font-size: 0.68rem; text-transform: none; letter-spacing: 0.05em; }
+    /* Thin rule */
+    .rule { height: 1px; background: var(--linen); margin: 1.8rem 0; }
+
+    /* Meta */
+    .meta { display: flex; gap: 0; margin-bottom: 1.8rem; }
+    .m-item { flex: 1; }
+    .m-item + .m-item { border-left: 1px solid var(--linen); padding-left: 1.4rem; margin-left: 0; }
+    .m-lbl { font-size: 0.5rem; letter-spacing: 0.34em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.3rem; }
+    .m-val { font-size: 0.78rem; color: var(--bark); }
+
+    /* Desc */
+    .desc { font-family: 'EB Garamond', serif; font-size: 1.02rem; line-height: 1.85; color: var(--tan); margin-bottom: 0; }
+
+    /* Options */
+    .opts { display: flex; flex-direction: column; gap: 1.6rem; }
+
+    .opt { }
+    .opt-row { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 0.75rem; }
+    .opt-lbl { font-size: 0.5rem; letter-spacing: 0.34em; text-transform: uppercase; color: var(--clay); }
+    .opt-cur { font-family: 'EB Garamond', serif; font-style: italic; font-size: 0.82rem; color: var(--tan); }
 
     /* Segmented controls */
     .seg { display: flex; border: 1px solid var(--sand); }
-    .seg-btn { flex: 1; padding: 0.75rem 0.5rem; border: none; border-right: 1px solid var(--sand); background: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--tan); cursor: pointer; transition: all 0.2s; }
-    .seg-btn:last-child { border-right: none; }
-    .seg-btn.active { background: var(--earth); color: var(--warm-white); }
-    .seg-btn:hover:not(.active) { background: var(--linen); color: var(--bark); }
+    .sb { flex: 1; padding: 0.75rem; border: none; border-right: 1px solid var(--sand); background: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.57rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--tan); cursor: pointer; transition: all 0.2s; }
+    .sb:last-child { border-right: none; }
+    .sb.on { background: var(--earth); border-color: var(--earth); color: var(--w); }
+    .sb:hover:not(.on) { background: var(--linen); color: var(--bark); }
 
-    /* Size grid */
+    /* Size tiles */
     .size-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; }
-    .sz { padding: 0.85rem 0.5rem; border: 1px solid var(--sand); background: none; font-family: 'Tenor Sans', sans-serif; cursor: pointer; transition: all 0.22s; text-align: center; }
-    .sz:hover:not(.active) { border-color: var(--bark); }
-    .sz.active { background: var(--earth); border-color: var(--earth); }
-    .sz-dim { display: block; font-size: 0.72rem; letter-spacing: 0.06em; color: var(--tan); transition: color 0.2s; }
-    .sz.active .sz-dim { color: var(--warm-white); }
-    .sz-price { display: block; font-size: 0.6rem; color: var(--clay); margin-top: 0.15rem; transition: color 0.2s; }
-    .sz.active .sz-price { color: rgba(250,246,240,0.65); }
+    .sz { padding: 0.85rem 0.5rem; border: 1px solid var(--sand); background: var(--w); font-family: 'Tenor Sans', sans-serif; cursor: pointer; transition: all 0.2s; text-align: center; }
+    .sz:hover:not(.on) { border-color: var(--clay); background: var(--linen); }
+    .sz.on { background: var(--earth); border-color: var(--earth); }
+    .sz-d { display: block; font-size: 0.7rem; letter-spacing: 0.07em; color: var(--tan); transition: color 0.2s; }
+    .sz.on .sz-d { color: var(--w); }
+    .sz-p { display: block; font-size: 0.6rem; color: var(--clay); margin-top: 0.18rem; transition: color 0.2s; }
+    .sz.on .sz-p { color: rgba(250,246,240,0.55); }
 
-    /* Frame colors */
-    .frame-colors { display: flex; gap: 0.55rem; align-items: center; }
-    .swatch { width: 28px; height: 28px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: all 0.2s; flex-shrink: 0; }
-    .swatch:hover { transform: scale(1.1); }
-    .swatch.active { box-shadow: 0 0 0 2px var(--warm-white), 0 0 0 4px var(--earth); }
-    .swatch.black   { background: #1c1c1c; }
-    .swatch.white   { background: #f0ede8; border-color: #ccc; }
-    .swatch.natural { background: #bf9e6e; }
-    .swatch.gold    { background: linear-gradient(135deg, #9a7520, #d4af45); }
-    .swatch.silver  { background: linear-gradient(135deg, #7a7a7a, #c0c0c0); }
-    .swatch.darkgrey { background: #2e2e2e; }
-    .frame-name { font-size: 0.66rem; color: var(--tan); margin-left: 0.3rem; }
+    /* Frame extras — animated reveal */
+    .fex { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.38s ease; }
+    .fex.show { grid-template-rows: 1fr; }
+    .fex-inner { overflow: hidden; }
+    .fex-body { padding-top: 1.6rem; display: flex; flex-direction: column; gap: 1.6rem; }
 
-    /* Frame extras — hidden until framed selected */
-    .frame-extras { display: none; flex-direction: column; gap: 1.8rem; }
-    .frame-extras.show { display: flex; }
+    /* Swatches */
+    .swatches { display: flex; gap: 0.55rem; }
+    .sw { width: 28px; height: 28px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: all 0.2s; flex-shrink: 0; }
+    .sw:hover { transform: scale(1.12); }
+    .sw.on { box-shadow: 0 0 0 2px var(--w), 0 0 0 4px var(--earth); }
+    .sw.black    { background: #181818; }
+    .sw.white    { background: #edebe6; border-color: #bbb; }
+    .sw.natural  { background: #b8916a; }
+    .sw.gold     { background: linear-gradient(135deg, #7e5812, #c8a030); }
+    .sw.silver   { background: linear-gradient(135deg, #686868, #b8b8b8); }
+    .sw.darkgrey { background: #242424; }
 
-    /* Pricing area */
-    .pricing-area { border-top: 1px solid var(--linen); padding-top: 2rem; margin-top: 0.5rem; }
-    .price-main { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--earth); line-height: 1; margin-bottom: 0.4rem; }
-    .price-detail { font-size: 0.7rem; color: var(--clay); letter-spacing: 0.06em; margin-bottom: 2rem; line-height: 1.6; }
+    /* Pricing */
+    .price-block { margin-top: auto; padding-top: 1.6rem; border-top: 1px solid var(--linen); }
+    .price-num { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 300; color: var(--earth); line-height: 1; letter-spacing: -0.01em; }
+    .price-desc { font-family: 'EB Garamond', serif; font-style: italic; font-size: 0.9rem; color: var(--clay); margin-top: 0.3rem; margin-bottom: 1.4rem; }
 
-    .btn-cart { width: 100%; padding: 1.2rem; background: var(--earth); color: var(--warm-white); border: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.65rem; letter-spacing: 0.32em; text-transform: uppercase; cursor: pointer; transition: background 0.3s; margin-bottom: 0.8rem; }
-    .btn-cart:hover { background: var(--bark); }
-    .shipping-note { text-align: center; font-size: 0.6rem; color: var(--clay); letter-spacing: 0.1em; }
+    .btn-add { width: 100%; padding: 1.1rem; background: var(--earth); color: var(--w); border: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.6rem; letter-spacing: 0.38em; text-transform: uppercase; cursor: pointer; transition: background 0.25s, letter-spacing 0.25s; }
+    .btn-add:hover { background: var(--bark); letter-spacing: 0.44em; }
 
-    /* Info blocks */
-    .info-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--linen); margin-top: 3rem; }
-    .info-cell { padding: 1.5rem 0; border-right: 1px solid var(--linen); padding-right: 1.5rem; }
-    .info-cell:last-child { border-right: none; padding-left: 1.5rem; padding-right: 0; }
-    .info-cell:nth-child(2) { padding-left: 1.5rem; }
-    .info-cell-label { font-size: 0.55rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.5rem; }
-    .info-cell-text { font-size: 0.78rem; line-height: 1.75; color: var(--tan); }
+    /* Trust badges */
+    .trust { display: flex; justify-content: center; gap: 2rem; margin-top: 1rem; }
+    .ti { display: flex; align-items: center; gap: 0.35rem; font-size: 0.56rem; letter-spacing: 0.1em; color: var(--clay); white-space: nowrap; }
+    .ti svg { width: 12px; height: 12px; stroke: var(--clay); fill: none; stroke-width: 2; flex-shrink: 0; }
 
-    /* reveal */
-    .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+    /* Specs */
+    .specs { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--linen); margin-top: 2.5rem; }
+    .sp { padding: 1.4rem 1.2rem 1.4rem 0; border-right: 1px solid var(--linen); }
+    .sp:last-child { border-right: none; padding-right: 0; padding-left: 1.2rem; }
+    .sp:nth-child(2) { padding-left: 1.2rem; }
+    .sp-lbl { font-size: 0.5rem; letter-spacing: 0.32em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.45rem; }
+    .sp-txt { font-family: 'EB Garamond', serif; font-size: 0.92rem; line-height: 1.7; color: var(--tan); }
 
-    /* footer */
-    .divider { height: 1px; background: var(--sand); }
-    footer { display: flex; justify-content: space-between; align-items: center; padding: 1.8rem 3rem; font-size: 0.66rem; color: var(--clay); }
-    .footer-logo { font-family: 'Playfair Display', serif; font-size: 0.9rem; color: var(--bark); text-decoration: none; font-weight: 300; }
+    .reveal { opacity: 0; transform: translateY(10px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
 
-    @media (max-width: 900px) {
-      .page-wrap { grid-template-columns: 1fr; }
-      .viewer { position: relative; top: 0; height: 60vw; min-height: 300px; }
-      .details { padding: 2.5rem 1.5rem 4rem; }
+    hr.div { border: none; border-top: 1px solid var(--sand); }
+    footer { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 3rem; font-size: 0.63rem; color: var(--clay); }
+    .fl { font-family: 'Playfair Display', serif; font-size: 0.9rem; color: var(--bark); text-decoration: none; font-weight: 300; }
+
+    @media (max-width: 960px) {
+      .shell { grid-template-columns: 1fr; }
+      .viewer { position: relative; top: 0; height: 65vw; min-height: 280px; }
+      .d-inner { padding: 2rem 1.4rem 3rem; }
       nav { padding: 1rem 1.4rem; }
       .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(250,246,240,0.98); border-top: 1px solid var(--sand); z-index: 999; }
       .nav-links.open { display: flex; }
       .nav-links li { display: block; }
-      .nav-links li.cart-dropdown-wrap { display: none !important; }
-      .nav-links a { display: block; padding: 0.8rem 1.4rem; border-bottom: 1px solid var(--linen); font-size: 0.72rem; }
-      .mobile-top-right { display: flex; }
-      .hamburger { display: flex; }
-      .info-strip { grid-template-columns: 1fr; }
-      .info-cell { border-right: none; border-bottom: 1px solid var(--linen); padding: 1.2rem 0; }
-      .info-cell:last-child { border-bottom: none; }
-      .info-cell:nth-child(2) { padding-left: 0; }
-      footer { flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 1.5rem; }
+      .nav-links li.cdw { display: none !important; }
+      .nav-links a { display: block; padding: 0.8rem 1.4rem; border-bottom: 1px solid var(--linen); }
+      .mob-right { display: flex; }
+      .burger { display: flex; }
+      .specs { grid-template-columns: 1fr; }
+      .sp { border-right: none; border-bottom: 1px solid var(--linen); padding: 1.1rem 0; }
+      .sp:last-child { border-bottom: none; padding-left: 0; }
+      .sp:nth-child(2) { padding-left: 0; }
+      .trust { gap: 1rem; flex-wrap: wrap; }
+      footer { flex-direction: column; align-items: flex-start; gap: 0.4rem; padding: 1.2rem 1.4rem; }
     }
   </style>
 </head>
@@ -200,7 +240,7 @@
     <li><a href="../journals.html">Field Journals</a></li>
     <li><a href="../index.html#about">About</a></li>
     <li><a href="../index.html#contact">Contact</a></li>
-    <li class="cart-dropdown-wrap">
+    <li class="cdw cart-dropdown-wrap">
       <button id="cart-btn" onclick="Cart.toggleDropdown()">
         <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
         <span id="cart-total"></span><span id="cart-count"></span>
@@ -208,61 +248,62 @@
       <div id="cart-dropdown"></div>
     </li>
   </ul>
-  <div class="mobile-top-right">
-    <button id="cart-btn-mobile" onclick="Cart.toggleDropdown()">
+  <div class="mob-right">
+    <button id="cart-mob" onclick="Cart.toggleDropdown()">
       <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
     </button>
-    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <button class="burger" id="burger" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 
-<div class="page-wrap">
+<div class="shell">
 
-  <!-- LEFT: IMAGE VIEWER -->
+  <!-- VIEWER -->
   <div class="viewer">
-    <div class="view-tabs">
-      <button class="view-tab active" onclick="setView('photo',this)">Photo</button>
-      <button class="view-tab" onclick="setView('framed',this)">Framed</button>
-      <button class="view-tab" onclick="setView('wall',this)">On Wall</button>
+    <div class="tabs">
+      <button class="tab active" onclick="setView('photo',this)">Photo</button>
+      <button class="tab" onclick="setView('framed',this)">Framed</button>
+      <button class="tab" onclick="setView('wall',this)">On Wall</button>
     </div>
-    <div class="view-stage">
+    <div class="stage">
 
-      <!-- Photo -->
-      <div class="view-panel photo-panel active" id="panel-photo">
+      <div class="panel p-photo on" id="panel-photo">
         <img src="../norway-1.jpg" alt="Stillness on the Fjord">
       </div>
 
-      <!-- Framed -->
-      <div class="view-panel framed-panel" id="panel-framed">
-        <div class="frame-wrap">
-          <div class="frame-box black" id="frame-box">
-            <div class="frame-padding">
-              <div class="mount-mat with-mount" id="mount-mat">
-                <img class="frame-photo" src="../norway-1.jpg" alt="Stillness on the Fjord">
+      <div class="panel p-framed" id="panel-framed">
+        <div class="framed-scene">
+          <div class="frame-wrap">
+            <div class="f-outer black" id="f-outer">
+              <div class="f-pad">
+                <div class="f-mat on" id="f-mat">
+                  <img class="f-img" src="../norway-1.jpg" alt="Stillness on the Fjord">
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Wall -->
-      <div class="view-panel wall-panel" id="panel-wall">
-        <div class="wall-bg">
-          <div class="wall-texture"></div>
-          <div class="wall-content">
-            <div class="nail"></div>
-            <div class="wall-frame-outer">
-              <div class="wall-frame-box black" id="wall-frame-box">
-                <div class="frame-padding">
-                  <div class="wall-mount with-mount" id="wall-mount">
-                    <img class="wall-photo" src="../norway-1.jpg" alt="Stillness on the Fjord">
+      <div class="panel p-wall" id="panel-wall">
+        <div class="wall-room">
+          <div class="wall-light"></div>
+          <div class="wall-floor"></div>
+          <div class="wall-center">
+            <div class="rail"></div>
+            <div class="wire"></div>
+            <div class="wall-art">
+              <div class="w-outer black" id="w-outer">
+                <div class="w-pad">
+                  <div class="w-mat on" id="w-mat">
+                    <img class="w-img" src="../norway-1.jpg" alt="Stillness on the Fjord">
                   </div>
                 </div>
               </div>
             </div>
-            <div class="wall-drop"></div>
+            <div class="art-shadow"></div>
           </div>
         </div>
       </div>
@@ -270,243 +311,224 @@
     </div>
   </div>
 
-  <!-- RIGHT: DETAILS -->
+  <!-- DETAILS -->
   <div class="details">
-    <a class="back-link" href="../prints.html">
-      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-      All Prints
-    </a>
+    <div class="d-inner">
 
-    <h1 class="print-name">Stillness on the Fjord</h1>
-    <p class="print-sub">Latefossen, Stillness on the Fjord</p>
+      <a class="back" href="../prints.html">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>All Prints
+      </a>
 
-    <div class="meta-row">
-      <div class="meta-item">
-        <div class="meta-label">Location</div>
-        <div class="meta-value">Latefossen, Stillness on the Fjord</div>
-      </div>
-      <div class="meta-item">
-        <div class="meta-label">Camera</div>
-        <div class="meta-value">Fujifilm X-T30 II</div>
-      </div>
-    </div>
+      <p class="eyebrow">Fine Art Print &mdash; Norway Collection</p>
+      <h1 class="title">Stillness on<br><em>the Fjord</em></h1>
 
-    <p class="print-desc">Museum-quality print on 310gsm fine art paper with archival pigment inks. Each print is from this season's exclusive collection — once the season ends, it's gone for good.</p>
+      <div class="rule"></div>
 
-    <!-- FORMAT -->
-    <div class="opt-group">
-      <div class="opt-label">Format</div>
-      <div class="seg">
-        <button class="seg-btn active" onclick="setFormat('unframed',this)">Unframed</button>
-        <button class="seg-btn" onclick="setFormat('framed',this)">Framed</button>
-      </div>
-    </div>
-
-    <!-- SIZE -->
-    <div class="opt-group">
-      <div class="opt-label">Size <span id="size-label">8 × 10 in</span></div>
-      <div class="size-grid" id="size-grid"></div>
-    </div>
-
-    <!-- FRAME OPTIONS (hidden until framed) -->
-    <div class="frame-extras" id="frame-extras">
-
-      <div class="opt-group" style="margin-bottom:0;">
-        <div class="opt-label">Frame Color <span id="frame-name-label">Black</span></div>
-        <div class="frame-colors">
-          <div class="swatch black active" title="Black" onclick="setFrame('black',this)"></div>
-          <div class="swatch white" title="White" onclick="setFrame('white',this)"></div>
-          <div class="swatch natural" title="Natural Wood" onclick="setFrame('natural',this)"></div>
-          <div class="swatch gold" title="Antique Gold" onclick="setFrame('gold',this)"></div>
-          <div class="swatch silver" title="Antique Silver" onclick="setFrame('silver',this)"></div>
-          <div class="swatch darkgrey" title="Dark Grey" onclick="setFrame('darkgrey',this)"></div>
+      <div class="meta">
+        <div class="m-item">
+          <div class="m-lbl">Location</div>
+          <div class="m-val">Latefossen, Norway</div>
+        </div>
+        <div class="m-item">
+          <div class="m-lbl">Camera</div>
+          <div class="m-val">Fujifilm X-T30 II</div>
         </div>
       </div>
 
-      <div class="opt-group" style="margin-bottom:0;">
-        <div class="opt-label">Mount</div>
-        <div class="seg">
-          <button class="seg-btn active" onclick="setMount(true,this)">With Mount</button>
-          <button class="seg-btn" onclick="setMount(false,this)">No Mount</button>
+      <p class="desc">Museum-quality print on 310gsm fine art paper with archival pigment inks. Part of this season's exclusive collection &mdash; once the season closes, this print is gone for good.</p>
+
+      <div class="rule"></div>
+
+      <div class="opts">
+
+        <div class="opt">
+          <div class="opt-row">
+            <span class="opt-lbl">Format</span>
+          </div>
+          <div class="seg" id="seg-fmt">
+            <button class="sb on" onclick="setFmt('unframed',this)">Unframed</button>
+            <button class="sb" onclick="setFmt('framed',this)">Framed</button>
+          </div>
+        </div>
+
+        <div class="opt">
+          <div class="opt-row">
+            <span class="opt-lbl">Size</span>
+            <span class="opt-cur" id="cur-size">8 &times; 10 in</span>
+          </div>
+          <div class="size-grid" id="size-grid"></div>
+        </div>
+
+        <!-- Frame extras — smooth reveal -->
+        <div class="fex" id="fex">
+          <div class="fex-inner">
+            <div class="fex-body">
+
+              <div class="opt">
+                <div class="opt-row">
+                  <span class="opt-lbl">Frame Color</span>
+                  <span class="opt-cur" id="cur-frame">Black</span>
+                </div>
+                <div class="swatches">
+                  <div class="sw black on" title="Black"         onclick="setFrame('black',this)"></div>
+                  <div class="sw white"    title="White"         onclick="setFrame('white',this)"></div>
+                  <div class="sw natural"  title="Natural Wood"  onclick="setFrame('natural',this)"></div>
+                  <div class="sw gold"     title="Antique Gold"  onclick="setFrame('gold',this)"></div>
+                  <div class="sw silver"   title="Antique Silver" onclick="setFrame('silver',this)"></div>
+                  <div class="sw darkgrey" title="Dark Grey"     onclick="setFrame('darkgrey',this)"></div>
+                </div>
+              </div>
+
+              <div class="opt">
+                <div class="opt-row">
+                  <span class="opt-lbl">Mount</span>
+                </div>
+                <div class="seg" id="seg-mount">
+                  <button class="sb on" onclick="setMount(true,this)">With Mount</button>
+                  <button class="sb"    onclick="setMount(false,this)">No Mount</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /opts -->
+
+      <div class="price-block">
+        <div class="price-num" id="price-num">$55</div>
+        <div class="price-desc" id="price-desc">Unframed &middot; 8 &times; 10 in</div>
+        <button class="btn-add" onclick="addToCart()">Add to Cart</button>
+        <div class="trust">
+          <div class="ti"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Ships in 5&ndash;7 days</div>
+          <div class="ti"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Free worldwide</div>
+          <div class="ti"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Certificate</div>
         </div>
       </div>
 
-    </div>
+      <div class="specs reveal">
+        <div class="sp">
+          <div class="sp-lbl">Paper</div>
+          <div class="sp-txt">310gsm Hahnemühle fine art, archival pigment inks. Generations of colour accuracy.</div>
+        </div>
+        <div class="sp">
+          <div class="sp-lbl">Framing</div>
+          <div class="sp-txt">Handmade by specialist framers. Conservation-grade acid-free mounts, 6 finishes.</div>
+        </div>
+        <div class="sp">
+          <div class="sp-lbl">Authenticity</div>
+          <div class="sp-txt">Signed certificate of authenticity included with every order.</div>
+        </div>
+      </div>
 
-    <!-- PRICING + CTA -->
-    <div class="pricing-area">
-      <div class="price-main" id="price-main">$55</div>
-      <div class="price-detail" id="price-detail">Unframed &middot; 8 &times; 10 in</div>
-      <button class="btn-cart" onclick="addToCart()">Add to Cart</button>
-      <p class="shipping-note">Free worldwide shipping &middot; Ships in 5–7 business days</p>
-    </div>
-
-    <!-- INFO -->
-    <div class="info-strip reveal">
-      <div class="info-cell">
-        <div class="info-cell-label">Paper</div>
-        <div class="info-cell-text">310gsm Hahnemühle fine art paper, archival pigment inks, built to last generations.</div>
-      </div>
-      <div class="info-cell">
-        <div class="info-cell-label">Framing</div>
-        <div class="info-cell-text">Handmade by specialist framers. Conservation-grade acid-free mounts. 6 finishes.</div>
-      </div>
-      <div class="info-cell">
-        <div class="info-cell-label">Authenticity</div>
-        <div class="info-cell-text">Every print ships with a signed certificate of authenticity from Ryan Muratore.</div>
-      </div>
     </div>
   </div>
 
 </div>
 
-<div class="divider"></div>
+<hr class="div">
 <footer>
-  <a href="../index.html" class="footer-logo">Ryan Muratore Photography</a>
+  <a href="../index.html" class="fl">Ryan Muratore Photography</a>
   <p>&copy; 2025 Ryan Muratore &mdash; All rights reserved.</p>
 </footer>
 
 <script>
   var SIZES = [
-    { dim: '8 \u00d7 10 in',  unframed: 55,  framed: 120 },
-    { dim: '12 \u00d7 16 in', unframed: 90,  framed: 185 },
-    { dim: '16 \u00d7 24 in', unframed: 145, framed: 280 },
-    { dim: '24 \u00d7 36 in', unframed: 240, framed: 425 },
+    { d:'8 \u00d7 10 in',  u:55,  f:120 },
+    { d:'12 \u00d7 16 in', u:90,  f:185 },
+    { d:'16 \u00d7 24 in', u:145, f:280 },
+    { d:'24 \u00d7 36 in', u:240, f:425 }
   ];
+  var FN = { black:'Black', white:'White', natural:'Natural Wood', gold:'Antique Gold', silver:'Antique Silver', darkgrey:'Dark Grey' };
+  var S = { fmt:'unframed', si:0, fc:'black', mt:true, view:'photo' };
 
-  var FRAME_NAMES = {
-    black: 'Black', white: 'White', natural: 'Natural Wood',
-    gold: 'Antique Gold', silver: 'Antique Silver', darkgrey: 'Dark Grey'
-  };
-
-  var state = { fmt: 'unframed', sizeIdx: 0, frame: 'black', mount: true, view: 'photo' };
-
-  function price() {
-    var s = SIZES[state.sizeIdx];
-    return state.fmt === 'framed' ? s.framed : s.unframed;
-  }
+  function price() { return S.fmt==='framed' ? SIZES[S.si].f : SIZES[S.si].u; }
 
   function buildGrid() {
-    var html = '';
-    for (var i = 0; i < SIZES.length; i++) {
-      var s = SIZES[i];
-      var p = state.fmt === 'framed' ? s.framed : s.unframed;
-      var active = i === state.sizeIdx ? ' active' : '';
-      html += '<button class="sz' + active + '" onclick="pickSize(' + i + ',this)">' +
-              '<span class="sz-dim">' + s.dim + '</span>' +
-              '<span class="sz-price">$' + p + '</span>' +
-              '</button>';
+    var h='';
+    for(var i=0;i<SIZES.length;i++){
+      var s=SIZES[i], p=S.fmt==='framed'?s.f:s.u;
+      h+='<button class="sz'+(i===S.si?' on':'')+'" onclick="pickSize('+i+',this)">'+
+         '<span class="sz-d">'+s.d+'</span>'+
+         '<span class="sz-p">$'+p+'</span></button>';
     }
-    document.getElementById('size-grid').innerHTML = html;
+    document.getElementById('size-grid').innerHTML=h;
   }
 
   function updateUI() {
-    var s = SIZES[state.sizeIdx];
-    var p = price();
-    document.getElementById('price-main').textContent = '$' + p;
-    document.getElementById('size-label').textContent = s.dim;
-
-    var detail = (state.fmt === 'framed' ? 'Framed' : 'Unframed') + ' \u00b7 ' + s.dim;
-    if (state.fmt === 'framed') {
-      detail += ' \u00b7 ' + FRAME_NAMES[state.frame] + ' frame';
-      if (state.mount) detail += ' + mount';
-    }
-    document.getElementById('price-detail').textContent = detail;
+    var s=SIZES[S.si], p=price();
+    document.getElementById('price-num').textContent='$'+p;
+    document.getElementById('cur-size').textContent=s.d;
+    var desc=(S.fmt==='framed'?'Framed':'Unframed')+' \u00b7 '+s.d;
+    if(S.fmt==='framed') desc+=' \u00b7 '+FN[S.fc]+' frame'+(S.mt?' + mount':'');
+    document.getElementById('price-desc').textContent=desc;
   }
 
-  function pickSize(idx, btn) {
-    state.sizeIdx = idx;
-    var btns = document.querySelectorAll('.sz');
-    for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
-    btn.classList.add('active');
+  function pickSize(i,btn) {
+    S.si=i;
+    document.querySelectorAll('.sz').forEach(function(b){b.classList.remove('on');});
+    btn.classList.add('on');
     updateUI();
   }
 
-  function setFormat(fmt, btn) {
-    state.fmt = fmt;
-    var btns = document.querySelectorAll('.seg-btn');
-    // only deactivate the format buttons (first seg group)
-    var fmtBtns = document.querySelectorAll('.opt-group .seg-btn');
-    for (var i = 0; i < 2; i++) {
-      if (fmtBtns[i]) fmtBtns[i].classList.remove('active');
-    }
-    btn.classList.add('active');
-
-    var extras = document.getElementById('frame-extras');
-    if (fmt === 'framed') {
-      extras.classList.add('show');
-      if (state.view === 'photo') setView('framed', document.querySelectorAll('.view-tab')[1]);
+  function setFmt(fmt,btn) {
+    S.fmt=fmt;
+    document.querySelectorAll('#seg-fmt .sb').forEach(function(b){b.classList.remove('on');});
+    btn.classList.add('on');
+    var fex=document.getElementById('fex');
+    if(fmt==='framed'){
+      fex.classList.add('show');
+      if(S.view==='photo') setView('framed',document.querySelectorAll('.tab')[1]);
     } else {
-      extras.classList.remove('show');
-      setView('photo', document.querySelectorAll('.view-tab')[0]);
+      fex.classList.remove('show');
+      setView('photo',document.querySelectorAll('.tab')[0]);
     }
-    buildGrid();
+    buildGrid(); updateUI();
+  }
+
+  function setFrame(c,dot) {
+    S.fc=c;
+    document.querySelectorAll('.sw').forEach(function(d){d.classList.remove('on');});
+    dot.classList.add('on');
+    document.getElementById('cur-frame').textContent=FN[c];
+    document.getElementById('f-outer').className='f-outer '+c;
+    document.getElementById('w-outer').className='w-outer '+c;
     updateUI();
   }
 
-  function setFrame(color, dot) {
-    state.frame = color;
-    var dots = document.querySelectorAll('.swatch');
-    for (var i = 0; i < dots.length; i++) dots[i].classList.remove('active');
-    dot.classList.add('active');
-    document.getElementById('frame-name-label').textContent = FRAME_NAMES[color];
-    document.getElementById('frame-box').className = 'frame-box ' + color;
-    document.getElementById('wall-frame-box').className = 'wall-frame-box ' + color;
+  function setMount(on,btn) {
+    S.mt=on;
+    document.getElementById('f-mat').className='f-mat '+(on?'on':'off');
+    document.getElementById('w-mat').className='w-mat '+(on?'on':'off');
+    document.querySelectorAll('#seg-mount .sb').forEach(function(b){b.classList.remove('on');});
+    btn.classList.add('on');
     updateUI();
   }
 
-  function setMount(on, btn) {
-    state.mount = on;
-    var mountClass = on ? 'mount-mat with-mount' : 'mount-mat no-mount';
-    var wallMountClass = on ? 'wall-mount with-mount' : 'wall-mount no-mount';
-    document.getElementById('mount-mat').className = mountClass;
-    document.getElementById('wall-mount').className = wallMountClass;
-    var mountBtns = btn.closest('.seg').querySelectorAll('.seg-btn');
-    for (var i = 0; i < mountBtns.length; i++) mountBtns[i].classList.remove('active');
+  function setView(v,btn) {
+    S.view=v;
+    document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
     btn.classList.add('active');
-    updateUI();
-  }
-
-  function setView(view, btn) {
-    state.view = view;
-    var tabs = document.querySelectorAll('.view-tab');
-    for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
-    btn.classList.add('active');
-    var panels = document.querySelectorAll('.view-panel');
-    for (var i = 0; i < panels.length; i++) panels[i].classList.remove('active');
-    document.getElementById('panel-' + view).classList.add('active');
+    document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on');});
+    document.getElementById('panel-'+v).classList.add('on');
   }
 
   function addToCart() {
-    var s = SIZES[state.sizeIdx];
-    var p = price();
-    var opts = (state.fmt === 'framed' ? 'Framed' : 'Unframed') + ' \u00b7 ' + s.dim;
-    if (state.fmt === 'framed') {
-      opts += ' \u00b7 ' + FRAME_NAMES[state.frame];
-      if (state.mount) opts += ' + mount';
-    }
-    Cart.add({
-      id: 'norway-' + state.fmt + '-' + state.sizeIdx + '-' + state.frame,
-      name: 'Stillness on the Fjord',
-      options: opts,
-      price: p
-    });
+    var s=SIZES[S.si], p=price();
+    var opts=(S.fmt==='framed'?'Framed':'Unframed')+' \u00b7 '+s.d;
+    if(S.fmt==='framed') opts+=' \u00b7 '+FN[S.fc]+(S.mt?' + mount':'');
+    Cart.add({id:'norway-'+S.fmt+'-'+S.si+'-'+S.fc, name:'Stillness on the Fjord', options:opts, price:p});
   }
 
   function toggleMenu() {
     document.getElementById('nav-links').classList.toggle('open');
-    document.getElementById('hamburger').classList.toggle('open');
+    document.getElementById('burger').classList.toggle('open');
   }
 
-  var reveals = document.querySelectorAll('.reveal');
-  var obs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-  reveals.forEach(function(el) { obs.observe(el); });
+  var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
 
-  // Init
-  buildGrid();
-  updateUI();
+  buildGrid(); updateUI();
 </script>
 </body>
 </html>
