@@ -722,16 +722,16 @@
       // Build Shopify cart URL with all items
       var VARIANTS = {
         'print': {
-          '8 \u00d7 12 in':  'TBD',
-          '12 \u00d7 18 in': 'TBD',
-          '16 \u00d7 24 in': 'TBD',
-          '24 \u00d7 36 in': 'TBD'
+          '8 \u00d7 12 in':  '47894978265302',
+          '12 \u00d7 18 in': '47894978298070',
+          '16 \u00d7 24 in': '47894978330838',
+          '24 \u00d7 36 in': '47894978363606'
         },
         'metal': {
-          '8 \u00d7 12 in':  'TBD',
-          '12 \u00d7 18 in': 'TBD',
-          '16 \u00d7 24 in': 'TBD',
-          '24 \u00d7 36 in': 'TBD'
+          '8 \u00d7 12 in':  '47894981640406',
+          '12 \u00d7 18 in': '47894981673174',
+          '16 \u00d7 24 in': '47894981705942',
+          '24 \u00d7 36 in': '47894981738710'
         }
       };
       var parts = items.map(function(item) {
@@ -765,7 +765,7 @@
     var fmt = S.fmt;
     var sizeLabel = curFmt().sizes[S.si].d;
     var variantId = VARIANTS[fmt] && VARIANTS[fmt][sizeLabel];
-    if (!variantId || variantId === 'TBD') { alert('Online ordering for this print is coming soon. Please email contact-ryanmuratore@gmail.com to order.'); return; }
+    if (!variantId) { alert('This variant is not available.'); return; }
 
     Cart.add({
       id: fmt + '-' + sizeLabel,
