@@ -603,47 +603,9 @@
     var variantId = getVariantId();
     if (!variantId) { alert('This variant is not available.'); return; }
 
-    var btn = document.getElementById('atc-btn');
-    btn.textContent = 'Adding…';
-    btn.disabled = true;
-
-    // Create checkout via Storefront API
-    var mutation = JSON.stringify({
-      query: 'mutation { checkoutCreate(input: { lineItems: [{ variantId: "gid://shopify/ProductVariant/' + variantId + '", quantity: 1 }] }) { checkout { webUrl } userErrors { message } } }'
-    });
-
-    fetch('https://' + SHOPIFY_DOMAIN + '/api/2023-10/graphql.json', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Shopify-Storefront-Access-Token': STOREFRONT_TOKEN
-      },
-      body: mutation
-    })
-    .then(function(r){ return r.json(); })
-    .then(function(data){
-      var checkout = data.data && data.data.checkoutCreate && data.data.checkoutCreate.checkout;
-      var errors = data.data && data.data.checkoutCreate && data.data.checkoutCreate.userErrors;
-      if (errors && errors.length > 0) {
-        alert('Error: ' + errors[0].message);
-        btn.textContent = 'Add to Cart';
-        btn.disabled = false;
-        return;
-      }
-      if (checkout && checkout.webUrl) {
-        btn.textContent = 'Add to Cart';
-        btn.disabled = false;
-        // Open Shopify checkout in popup
-        var popup = window.open(checkout.webUrl, 'shopify-checkout', 'width=500,height=700,scrollbars=yes,resizable=yes');
-        if (!popup) window.location.href = checkout.webUrl;
-      }
-    })
-    .catch(function(err){
-      console.error(err);
-      btn.textContent = 'Add to Cart';
-      btn.disabled = false;
-      alert('Something went wrong. Please try again.');
-    });
+    var checkoutUrl = 'https://' + SHOPIFY_DOMAIN + '/cart/' + variantId + ':1';
+    var popup = window.open(checkoutUrl, 'shopify-checkout', 'width=500,height=700,scrollbars=yes,resizable=yes');
+    if (!popup) window.location.href = checkoutUrl;
   }
 
 /*]]>*/
