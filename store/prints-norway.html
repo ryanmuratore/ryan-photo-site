@@ -138,14 +138,14 @@
 
     /* Format cards */
     .fmt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem; }
-    .fmt-card { padding: 0.9rem 0.7rem; border: 1px solid var(--sand); background: var(--w); cursor: pointer; transition: all 0.2s; text-align: left; font-family: 'Tenor Sans', sans-serif; }
+    .fmt-card { padding: 1rem 0.9rem; border: 1px solid var(--sand); background: var(--w); cursor: pointer; transition: all 0.2s; text-align: left; font-family: 'Tenor Sans', sans-serif; position: relative; }
     .fmt-card:hover:not(.on) { border-color: var(--clay); background: var(--linen); }
     .fmt-card.on { border-color: var(--earth); background: var(--earth); }
-    .fmt-icon { font-size: 1.1rem; margin-bottom: 0.35rem; display: block; }
-    .fmt-name { display: block; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--tan); transition: color 0.2s; }
+    .fmt-card.on::after { content: ''; position: absolute; top: 0.55rem; right: 0.7rem; width: 5px; height: 5px; border-radius: 50%; background: var(--clay); }
+    .fmt-name { display: block; font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--bark); transition: color 0.2s; margin-bottom: 0.28rem; }
     .fmt-card.on .fmt-name { color: var(--w); }
-    .fmt-desc { display: block; font-size: 0.58rem; color: var(--clay); margin-top: 0.15rem; transition: color 0.2s; line-height: 1.4; }
-    .fmt-card.on .fmt-desc { color: rgba(250,246,240,0.6); }
+    .fmt-desc { display: block; font-size: 0.58rem; color: var(--clay); transition: color 0.2s; line-height: 1.4; font-family: 'EB Garamond', serif; font-style: italic; }
+    .fmt-card.on .fmt-desc { color: rgba(250,246,240,0.55); }
 
     /* Size grid */
     .opt { margin-bottom: 1.8rem; }
@@ -382,24 +382,20 @@
         <div class="opt-row"><span class="opt-lbl">Format</span></div>
         <div class="fmt-grid">
           <button class="fmt-card on" onclick="setFmt('print',this)">
-            <span class="fmt-icon">🖨</span>
             <span class="fmt-name">Print</span>
-            <span class="fmt-desc">Luster photo paper</span>
+            <span class="fmt-desc">Giclée fine art paper</span>
           </button>
           <button class="fmt-card" onclick="setFmt('framed',this)">
-            <span class="fmt-icon">🖼</span>
             <span class="fmt-name">Framed</span>
             <span class="fmt-desc">Print + mat + frame</span>
           </button>
           <button class="fmt-card" onclick="setFmt('canvas',this)">
-            <span class="fmt-icon">🎨</span>
             <span class="fmt-name">Canvas</span>
-            <span class="fmt-desc">Gallery wrap canvas</span>
+            <span class="fmt-desc">Gallery wrap</span>
           </button>
           <button class="fmt-card" onclick="setFmt('metal',this)">
-            <span class="fmt-icon">✦</span>
             <span class="fmt-name">Metal</span>
-            <span class="fmt-desc">Glossy aluminum print</span>
+            <span class="fmt-desc">Aluminium print</span>
           </button>
         </div>
       </div>
@@ -425,20 +421,8 @@
           <div class="fex-body">
             <div class="opt" style="margin:0;">
               <div class="opt-row">
-                <span class="opt-lbl">Frame Color</span>
-                <span class="opt-cur" id="cur-frame">Black</span>
-              </div>
-              <div class="swatches">
-                <div class="sw black on" title="Black"       onclick="setFrame('black',this)"></div>
-                <div class="sw natural"  title="Natural Wood" onclick="setFrame('natural',this)"></div>
-                <div class="sw white"    title="White"        onclick="setFrame('white',this)"></div>
-              </div>
-            </div>
-            <div class="opt" style="margin:0;">
-              <div class="opt-row"><span class="opt-lbl">Mount</span></div>
-              <div class="seg" id="seg-mount">
-                <button class="sb on" onclick="setMount(true,this)">With Mat</button>
-                <button class="sb"    onclick="setMount(false,this)">No Mat</button>
+                <span class="opt-lbl">Frame</span>
+                <span class="opt-cur">Black Box Frame</span>
               </div>
             </div>
           </div>
@@ -447,8 +431,9 @@
 
       <!-- PRICING -->
       <div class="price-block">
-        <div class="price-num" id="price-num">$90</div>
-        <div class="price-desc" id="price-desc">Print &middot; 12 &times; 16 in</div>
+        <div class="price-num" id="price-num">$110</div>
+        <div class="price-desc" id="price-desc">Print &middot; 12 &times; 18 in</div>
+
         <button class="btn-add" onclick="addToCart()">Add to Cart</button>
         <div class="trust">
           <div class="ti"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Ships in 5&ndash;7 days</div>
@@ -489,49 +474,48 @@
   var FORMATS = {
     print:  {
       label: 'Print',
-      info: 'Premium Luster Photo Paper',
-      desc: 'Vibrant colour accuracy on a semi-gloss surface. The best choice for photographic detail and tonal range. Ships rolled in a protective tube.',
+      info: 'Giclée on Hahnemühle Photo Rag',
+      desc: 'Archival pigment inks on Hahnemühle Photo Rag 308gsm — 100% cotton, museum-grade matte paper used by galleries worldwide. Ships flat-packed in protective packaging.',
       sizes: [
-        { d:'8 \u00d7 10 in',  p:55  },
-        { d:'12 \u00d7 16 in', p:90  },
-        { d:'16 \u00d7 24 in', p:145 },
-        { d:'24 \u00d7 36 in', p:240 }
+        { d:'8 \u00d7 12 in',  p:65  },
+        { d:'12 \u00d7 18 in', p:110 },
+        { d:'16 \u00d7 24 in', p:165 },
+        { d:'24 \u00d7 36 in', p:265 }
       ],
       view: 'photo', hasFrame: false
     },
     framed: {
       label: 'Framed Print',
-      info: 'Framed Print with Mat',
-      desc: 'Your print mounted behind conservation-grade acid-free mat, in a handcrafted frame. Ready to hang — no assembly needed.',
+      info: 'Box Frame — Hahnemühle Photo Rag',
+      desc: 'Hahnemühle Photo Rag giclée print in a handcrafted solid wood box frame with protective glaze. Ready to hang — no assembly needed.',
       sizes: [
-        { d:'8 \u00d7 10 in',  p:185 },
-        { d:'12 \u00d7 16 in', p:280 },
-        { d:'16 \u00d7 24 in', p:390 },
-        { d:'24 \u00d7 36 in', p:520 }
+        { d:'8 \u00d7 12 in',  p:195 },
+        { d:'12 \u00d7 18 in', p:295 },
+        { d:'16 \u00d7 24 in', p:420 },
+        { d:'24 \u00d7 36 in', p:560 }
       ],
       view: 'framed', hasFrame: true
     },
     canvas: {
       label: 'Canvas',
-      info: 'Gallery Wrap Canvas',
-      desc: 'Printed on premium artist canvas and stretched over a 1.5" wooden frame. No frame needed — the canvas itself is the statement. Ready to hang.',
+      info: 'Gallery Wrap — Stretched Canvas',
+      desc: 'Giclée printed on premium artist canvas, hand-stretched over a 38mm solid wood stretcher bar. Ready to hang straight from the box — no additional framing needed.',
       sizes: [
-        { d:'8 \u00d7 10 in',  p:120 },
-        { d:'12 \u00d7 16 in', p:185 },
-        { d:'16 \u00d7 24 in', p:280 },
-        { d:'24 \u00d7 36 in', p:420 }
+        { d:'12 \u00d7 18 in', p:200 },
+        { d:'16 \u00d7 24 in', p:295 },
+        { d:'24 \u00d7 36 in', p:450 }
       ],
       view: 'canvas', hasFrame: false
     },
     metal: {
       label: 'Metal Print',
-      info: 'Glossy Aluminum Metal Print',
-      desc: 'Infused directly onto high-gloss aluminum for unmatched vibrancy and depth. Completely waterproof and scratch-resistant. Floats off the wall with a hidden mount.',
+      info: 'Professional Metal Print — Gloss Aluminium',
+      desc: 'Your image printed onto high-gloss aluminium with a float mount hanger. Completely waterproof and scratch-resistant — colours are extraordinarily vivid in person.',
       sizes: [
-        { d:'8 \u00d7 10 in',  p:175 },
-        { d:'12 \u00d7 16 in', p:265 },
-        { d:'16 \u00d7 24 in', p:360 },
-        { d:'24 \u00d7 36 in', p:490 }
+        { d:'8 \u00d7 12 in',  p:185 },
+        { d:'12 \u00d7 18 in', p:280 },
+        { d:'16 \u00d7 24 in', p:380 },
+        { d:'24 \u00d7 36 in', p:520 }
       ],
       view: 'metal', hasFrame: false
     }
@@ -539,6 +523,7 @@
 
   var FN = { black:'Black', natural:'Natural Wood', white:'White' };
   var S = { fmt:'print', si:1, fc:'black', mt:true, view:'photo' };
+  // si:1 = 12x18 default (index 1 for print/framed/metal, index 0 for canvas)
 
   function curFmt() { return FORMATS[S.fmt]; }
   function price() { return curFmt().sizes[S.si].p; }
@@ -576,10 +561,10 @@
 
   function setFmt(fmt, btn) {
     S.fmt = fmt;
-    S.si = 1; // default to 12x16
+    // Canvas has no 8x12 so default to index 0 (12x18); others default to index 1 (12x18)
+    S.si = (fmt === 'canvas') ? 0 : 1;
     document.querySelectorAll('.fmt-card').forEach(function(b){b.classList.remove('on');});
     btn.classList.add('on');
-    // Auto-switch view
     var view = FORMATS[fmt].view;
     setView(view, document.querySelectorAll('.tab')[['photo','framed','canvas','metal','wall'].indexOf(view)]);
     buildGrid();
