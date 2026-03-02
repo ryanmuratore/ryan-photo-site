@@ -737,9 +737,8 @@
       var parts = items.map(function(item) {
         return item.variantId + ':' + item.qty;
       }).join(',');
-      var url = 'https://ba7in0-ag.myshopify.com/cart/' + parts;
-      var popup = window.open(url, 'shopify-checkout', 'width=500,height=700,scrollbars=yes,resizable=yes');
-      if (!popup) window.location.href = url;
+      var url = 'https://checkout.ryanmuratore.com/cart/' + parts;
+      window.location.href = url;
     }
 
     load();
