@@ -267,13 +267,7 @@
 
   <!-- VIEWER -->
   <div class="viewer">
-    <div class="tabs">
-      <button class="tab active" onclick="setView('photo',this)">Photo</button>
-      <button class="tab" onclick="setView('framed',this)">Framed</button>
-      <button class="tab" onclick="setView('canvas',this)">Canvas</button>
-      <button class="tab" onclick="setView('metal',this)">Metal</button>
-      <button class="tab" onclick="setView('wall',this)">On Wall</button>
-    </div>
+    <div class="tabs" style="display:none;"></div>
     <div class="stage">
 
       <!-- Photo -->
@@ -386,22 +380,22 @@
           </button>
           <button class="fmt-card" onclick="setFmt('framed',this)">
             <span class="fmt-name">Framed</span>
-            <span class="fmt-desc">Print + mat + frame</span>
+            <span class="fmt-desc">Box frame, no mount</span>
           </button>
           <button class="fmt-card" onclick="setFmt('canvas',this)">
             <span class="fmt-name">Canvas</span>
-            <span class="fmt-desc">Gallery wrap</span>
+            <span class="fmt-desc">38mm stretcher bar</span>
           </button>
           <button class="fmt-card" onclick="setFmt('metal',this)">
             <span class="fmt-name">Metal</span>
-            <span class="fmt-desc">Aluminium print</span>
+            <span class="fmt-desc">Gloss aluminium</span>
           </button>
         </div>
       </div>
 
       <!-- FORMAT INFO -->
       <div class="fmt-info" id="fmt-info">
-        <div class="fmt-info-title">Premium Luster Photo Paper</div>
+        <div class="fmt-info-title" id="fmt-info-title">Giclée on Hahnemühle Photo Rag</div>
         <div class="fmt-info-text" id="fmt-info-text">Vibrant colour accuracy on a semi-gloss surface. The best choice for photographic detail and tonal range. Ships rolled in a protective tube.</div>
       </div>
 
@@ -550,7 +544,6 @@
     document.getElementById('fmt-info').querySelector('.fmt-info-title').textContent = f.info;
     document.getElementById('fmt-info-text').textContent = f.desc;
     var d = f.label + ' \u00b7 ' + s.d;
-    if (S.fmt === 'framed') d += ' \u00b7 ' + FN[S.fc] + (S.mt ? ' + mat' : '');
     document.getElementById('price-desc').textContent = d;
     // Frame extras visibility
     document.getElementById('fex').className = 'fex' + (f.hasFrame ? ' show' : '');
@@ -561,6 +554,7 @@
     document.querySelectorAll('.sz').forEach(function(b){b.classList.remove('on');});
     btn.classList.add('on');
     updateUI();
+    if (window.__shopifySyncFmt) window.__shopifySyncFmt();
   }
 
   function setFmt(fmt, btn) {
@@ -573,6 +567,7 @@
     setView(view, document.querySelectorAll('.tab')[['photo','framed','canvas','metal','wall'].indexOf(view)]);
     buildGrid();
     updateUI();
+    if (window.__shopifySyncFmt) window.__shopifySyncFmt();
   }
 
   function setFrame(c, dot) {
@@ -633,7 +628,9 @@
   #shopify-buy-btn-wrap .shopify-buy__product { padding: 0 !important; margin: 0 !important; }
   #shopify-buy-btn-wrap .shopify-buy__layout-horizontal { flex-direction: column !important; }
   #shopify-buy-btn-wrap .shopify-buy__product__variant-selectors { margin-bottom: 0.8rem; }
-  #shopify-buy-btn-wrap select { width: 100%; padding: 0.7rem; border: 1px solid var(--sand); background: var(--w); font-family: 'Tenor Sans', sans-serif; font-size: 0.75rem; color: var(--ink); margin-bottom: 0.5rem; }
+  /* Hide Shopify's variant dropdowns — we drive selection from our custom UI */
+  #shopify-buy-btn-wrap .shopify-buy__option-select-wrapper,
+  #shopify-buy-btn-wrap .shopify-buy__option-select__label { display: none !important; }
 </style>
 
 <script type="text/javascript">
@@ -726,6 +723,49 @@
             }
           }
         },
+      }).then(function() {
+        // Once Shopify component is ready, sync our custom UI to its selects
+        function syncToShopify() {
+          var fmt = S.fmt; // e.g. 'print', 'framed', 'canvas', 'metal'
+          var sizeLabel = curFmt().sizes[S.si].d.replace(' \u00d7 ', 'x').replace(' in', ''); // e.g. "12x18"
+          var formatLabel = FORMATS[fmt].label; // e.g. "Print", "Framed", etc.
+
+          var selects = document.querySelectorAll('#product-component-1772479384907 select');
+          selects.forEach(function(sel) {
+            var lbl = sel.closest('.shopify-buy__option-select-wrapper');
+            var name = lbl ? lbl.querySelector('label') : null;
+            var nameText = name ? name.textContent.trim().toLowerCase() : sel.name ? sel.name.toLowerCase() : '';
+
+            for (var i = 0; i < sel.options.length; i++) {
+              var optText = sel.options[i].text.toLowerCase();
+              if (nameText.includes('size') || optText.includes('x')) {
+                if (optText === sizeLabel.toLowerCase() || optText.includes(sizeLabel.toLowerCase())) {
+                  sel.selectedIndex = i;
+                  sel.dispatchEvent(new Event('change', { bubbles: true }));
+                  break;
+                }
+              } else if (nameText.includes('format') || optText.includes('print') || optText.includes('canvas') || optText.includes('metal') || optText.includes('framed')) {
+                if (optText === formatLabel.toLowerCase() || optText.includes(formatLabel.toLowerCase())) {
+                  sel.selectedIndex = i;
+                  sel.dispatchEvent(new Event('change', { bubbles: true }));
+                  break;
+                }
+              }
+            }
+          });
+        }
+
+        // Override setFmt and setSz to also sync Shopify
+        var origSetFmt = setFmt;
+        window.__shopifySyncFmt = syncToShopify;
+        // Poll until Shopify selects are available, then attach
+        var checkReady = setInterval(function() {
+          var selects = document.querySelectorAll('#product-component-1772479384907 select');
+          if (selects.length > 0) {
+            clearInterval(checkReady);
+            syncToShopify();
+          }
+        }, 200);
       });
     });
   }
