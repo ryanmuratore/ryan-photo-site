@@ -378,14 +378,6 @@
             <span class="fmt-name">Print</span>
             <span class="fmt-desc">Giclée fine art paper</span>
           </button>
-          <button class="fmt-card" onclick="setFmt('framed',this)">
-            <span class="fmt-name">Framed</span>
-            <span class="fmt-desc">Box frame, no mount</span>
-          </button>
-          <button class="fmt-card" onclick="setFmt('canvas',this)">
-            <span class="fmt-name">Canvas</span>
-            <span class="fmt-desc">38mm stretcher bar</span>
-          </button>
           <button class="fmt-card" onclick="setFmt('metal',this)">
             <span class="fmt-name">Metal</span>
             <span class="fmt-desc">Gloss aluminium</span>
@@ -409,18 +401,6 @@
       </div>
 
       <!-- FRAME OPTIONS -->
-      <div class="fex" id="fex">
-        <div class="fex-inner">
-          <div class="fex-body">
-            <div class="opt" style="margin:0;">
-              <div class="opt-row">
-                <span class="opt-lbl">Frame</span>
-                <span class="opt-cur">Black Box Frame</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <!-- PRICING -->
       <div class="price-block">
@@ -444,11 +424,11 @@
       <div class="specs reveal">
         <div class="sp">
           <div class="sp-lbl">Quality</div>
-          <div class="sp-txt">Archival materials — luster paper, gallery canvas, or aluminum. Colour-accurate and built to last.</div>
+          <div class="sp-txt">Archival pigment inks on Hahnemühle Photo Rag 308gsm or gloss aluminium — built to last a lifetime.</div>
         </div>
         <div class="sp">
-          <div class="sp-lbl">Framing</div>
-          <div class="sp-txt">Handcrafted frames with acid-free conservation mats in black, natural wood, or white.</div>
+          <div class="sp-lbl">Ready to Display</div>
+          <div class="sp-txt">Prints ship flat-packed in protective tubes. Metal prints arrive with a float mount hanger — ready to hang straight from the box.</div>
         </div>
         <div class="sp">
           <div class="sp-lbl">Authenticity</div>
@@ -482,29 +462,6 @@
       ],
       view: 'photo', hasFrame: false
     },
-    framed: {
-      label: 'Framed Print',
-      info: 'Box Frame — Hahnemühle Photo Rag',
-      desc: 'Hahnemühle Photo Rag giclée print in a handcrafted solid wood box frame with protective glaze. Ready to hang — no assembly needed.',
-      sizes: [
-        { d:'8 \u00d7 12 in',  p:195 },
-        { d:'12 \u00d7 18 in', p:295 },
-        { d:'16 \u00d7 24 in', p:420 },
-        { d:'24 \u00d7 36 in', p:560 }
-      ],
-      view: 'framed', hasFrame: true
-    },
-    canvas: {
-      label: 'Canvas',
-      info: 'Gallery Wrap — Stretched Canvas',
-      desc: 'Giclée printed on premium artist canvas, hand-stretched over a 38mm solid wood stretcher bar. Ready to hang straight from the box — no additional framing needed.',
-      sizes: [
-        { d:'12 \u00d7 18 in', p:200 },
-        { d:'16 \u00d7 24 in', p:295 },
-        { d:'24 \u00d7 36 in', p:450 }
-      ],
-      view: 'canvas', hasFrame: false
-    },
     metal: {
       label: 'Metal Print',
       info: 'Professional Metal Print — Gloss Aluminium',
@@ -515,13 +472,12 @@
         { d:'16 \u00d7 24 in', p:380 },
         { d:'24 \u00d7 36 in', p:520 }
       ],
-      view: 'metal', hasFrame: false
+      view: 'photo', hasFrame: false
     }
   };
 
   var FN = { black:'Black', natural:'Natural Wood', white:'White' };
   var S = { fmt:'print', si:1, fc:'black', mt:true, view:'photo' };
-  // si:1 = 12x18 default (index 1 for print/framed/metal, index 0 for canvas)
 
   function curFmt() { return FORMATS[S.fmt]; }
   function price() { return curFmt().sizes[S.si].p; }
@@ -559,12 +515,11 @@
 
   function setFmt(fmt, btn) {
     S.fmt = fmt;
-    // Canvas has no 8x12 so default to index 0 (12x18); others default to index 1 (12x18)
-    S.si = (fmt === 'canvas') ? 0 : 1;
+    S.si = 1; // default to 12x18
     document.querySelectorAll('.fmt-card').forEach(function(b){b.classList.remove('on');});
     btn.classList.add('on');
     var view = FORMATS[fmt].view;
-    setView(view, document.querySelectorAll('.tab')[['photo','framed','canvas','metal','wall'].indexOf(view)]);
+    setView(view, null);
     buildGrid();
     updateUI();
     if (window.__shopifySyncFmt) window.__shopifySyncFmt();
@@ -721,48 +676,47 @@
           }
         },
       }).then(function() {
-        // Once Shopify component is ready, sync our custom UI to its selects
         function syncToShopify() {
-          var fmt = S.fmt; // e.g. 'print', 'framed', 'canvas', 'metal'
           var sizeLabel = curFmt().sizes[S.si].d.replace(' \u00d7 ', 'x').replace(' in', ''); // e.g. "12x18"
-          var formatLabel = FORMATS[fmt].label; // e.g. "Print", "Framed", etc.
+          var formatLabel = FORMATS[S.fmt].label; // e.g. "Print", "Metal Print"
 
           var selects = document.querySelectorAll('#product-component-1772479384907 select');
           selects.forEach(function(sel) {
-            var lbl = sel.closest('.shopify-buy__option-select-wrapper');
-            var name = lbl ? lbl.querySelector('label') : null;
-            var nameText = name ? name.textContent.trim().toLowerCase() : sel.name ? sel.name.toLowerCase() : '';
-
             for (var i = 0; i < sel.options.length; i++) {
-              var optText = sel.options[i].text.toLowerCase();
-              if (nameText.includes('size') || optText.includes('x')) {
-                if (optText === sizeLabel.toLowerCase() || optText.includes(sizeLabel.toLowerCase())) {
+              var opt = sel.options[i].text.trim().toLowerCase();
+              // Match size options
+              if (opt.replace(/\s/g,'').indexOf(sizeLabel.toLowerCase().replace(/\s/g,'')) !== -1) {
+                if (sel.selectedIndex !== i) {
                   sel.selectedIndex = i;
                   sel.dispatchEvent(new Event('change', { bubbles: true }));
-                  break;
                 }
-              } else if (nameText.includes('format') || optText.includes('print') || optText.includes('canvas') || optText.includes('metal') || optText.includes('framed')) {
-                if (optText === formatLabel.toLowerCase() || optText.includes(formatLabel.toLowerCase())) {
+                break;
+              }
+              // Match format options
+              if (opt.indexOf(formatLabel.toLowerCase().split(' ')[0]) !== -1) {
+                if (sel.selectedIndex !== i) {
                   sel.selectedIndex = i;
                   sel.dispatchEvent(new Event('change', { bubbles: true }));
-                  break;
                 }
+                break;
               }
             }
           });
         }
 
-        // Override setFmt and setSz to also sync Shopify
-        var origSetFmt = setFmt;
         window.__shopifySyncFmt = syncToShopify;
-        // Poll until Shopify selects are available, then attach
+
+        // Poll until Shopify selects exist, set to 12x18 on load
+        var attempts = 0;
         var checkReady = setInterval(function() {
           var selects = document.querySelectorAll('#product-component-1772479384907 select');
-          if (selects.length > 0) {
+          if (selects.length > 0 || attempts++ > 30) {
             clearInterval(checkReady);
+            // Ensure state is 12x18 print before syncing
+            S.si = 1;
             syncToShopify();
           }
-        }, 200);
+        }, 300);
       });
     });
   }
