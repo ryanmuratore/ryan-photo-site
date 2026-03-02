@@ -628,9 +628,6 @@
   #shopify-buy-btn-wrap .shopify-buy__product { padding: 0 !important; margin: 0 !important; }
   #shopify-buy-btn-wrap .shopify-buy__layout-horizontal { flex-direction: column !important; }
   #shopify-buy-btn-wrap .shopify-buy__product__variant-selectors { margin-bottom: 0.8rem; }
-  /* Hide Shopify's variant dropdowns — we drive selection from our custom UI */
-  #shopify-buy-btn-wrap .shopify-buy__option-select-wrapper,
-  #shopify-buy-btn-wrap .shopify-buy__option-select__label { display: none !important; }
 </style>
 
 <script type="text/javascript">
@@ -694,7 +691,7 @@
               "price": false,
               "description": false,
               "button": true,
-              "options": true
+              "options": false
             },
             "width": "100%",
             "text": { "button": "Add to Cart" }
