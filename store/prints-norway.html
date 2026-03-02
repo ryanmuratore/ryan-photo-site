@@ -6,7 +6,6 @@
   <title>Stillness on the Fjord — Ryan Muratore Photography</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&family=Tenor+Sans&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
-  <script src="../cart.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root { --w: #faf6f0; --linen: #f0e9de; --sand: #ddd0bc; --clay: #c4a882; --tan: #a8896a; --bark: #7a5c3a; --earth: #4e3820; --ink: #2a1f12; }
@@ -434,12 +433,17 @@
         <div class="price-num" id="price-num">$110</div>
         <div class="price-desc" id="price-desc">Print &middot; 12 &times; 18 in</div>
 
-        <button class="btn-add" onclick="addToCart()">Add to Cart</button>
+        <div id="shopify-buy-btn-wrap">
+          <div id='product-component-1772479384907'></div>
+        </div>
         <div class="trust">
           <div class="ti"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Ships in 5&ndash;7 days</div>
-          <div class="ti"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Free worldwide</div>
+          <div class="ti"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Free worldwide shipping</div>
           <div class="ti"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Certificate included</div>
         </div>
+        <p style="margin-top:0.9rem; font-family:'EB Garamond',serif; font-size:0.82rem; color:var(--clay); text-align:center;">
+          <a href="../shipping.html" style="color:var(--tan); text-decoration:underline; text-underline-offset:3px; letter-spacing:0.04em;">Shipping &amp; Returns Policy</a>
+        </p>
       </div>
 
       <!-- SPECS -->
@@ -598,12 +602,7 @@
     document.getElementById('panel-'+v).classList.add('on');
   }
 
-  function addToCart() {
-    var f = curFmt(), s = f.sizes[S.si];
-    var opts = f.label + ' \u00b7 ' + s.d;
-    if (S.fmt === 'framed') opts += ' \u00b7 ' + FN[S.fc] + (S.mt ? ' + mat' : '');
-    Cart.add({ id:'norway-'+S.fmt+'-'+S.si+'-'+S.fc, name:'Stillness on the Fjord', options:opts, price:price() });
-  }
+
 
   function toggleMenu() {
     document.getElementById('nav-links').classList.toggle('open');
@@ -620,6 +619,118 @@
   document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
 
   buildGrid(); updateUI();
+</script>
+
+<style>
+  /* Hide Shopify's own title, price, description, image — we have our own */
+  #shopify-buy-btn-wrap .shopify-buy__product__title,
+  #shopify-buy-btn-wrap .shopify-buy__product__price,
+  #shopify-buy-btn-wrap .shopify-buy__product-description,
+  #shopify-buy-btn-wrap .shopify-buy__product__variant-img,
+  #shopify-buy-btn-wrap .shopify-buy__product-img-wrap { display: none !important; }
+  /* Make buy button full width to match our design */
+  #shopify-buy-btn-wrap .shopify-buy__btn { width: 100% !important; letter-spacing: 0.38em !important; font-family: 'Tenor Sans', sans-serif !important; text-transform: uppercase !important; }
+  #shopify-buy-btn-wrap .shopify-buy__product { padding: 0 !important; margin: 0 !important; }
+  #shopify-buy-btn-wrap .shopify-buy__layout-horizontal { flex-direction: column !important; }
+  #shopify-buy-btn-wrap .shopify-buy__product__variant-selectors { margin-bottom: 0.8rem; }
+  #shopify-buy-btn-wrap select { width: 100%; padding: 0.7rem; border: 1px solid var(--sand); background: var(--w); font-family: 'Tenor Sans', sans-serif; font-size: 0.75rem; color: var(--ink); margin-bottom: 0.5rem; }
+</style>
+
+<script type="text/javascript">
+/*<![CDATA[*/
+(function () {
+  var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+  if (window.ShopifyBuy) {
+    if (window.ShopifyBuy.UI) {
+      ShopifyBuyInit();
+    } else {
+      loadScript();
+    }
+  } else {
+    loadScript();
+  }
+  function loadScript() {
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = scriptURL;
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+    script.onload = ShopifyBuyInit;
+  }
+  function ShopifyBuyInit() {
+    var client = ShopifyBuy.buildClient({
+      domain: 'ba7in0-ag.myshopify.com',
+      storefrontAccessToken: '290f325a982d8c1f3ec9fbbdce0405a9',
+    });
+    ShopifyBuy.UI.onReady(client).then(function (ui) {
+      ui.createComponent('product', {
+        id: '9272925913302',
+        node: document.getElementById('product-component-1772479384907'),
+        moneyFormat: '%24%7B%7Bamount%7D%7D',
+        options: {
+          "product": {
+            "styles": {
+              "product": {
+                "@media (min-width: 601px)": {
+                  "max-width": "100%",
+                  "margin-left": "0",
+                  "margin-bottom": "0px"
+                },
+                "text-align": "left"
+              },
+              "button": {
+                "font-size": "12px",
+                "padding-top": "16px",
+                "padding-bottom": "16px",
+                "letter-spacing": "0.38em",
+                "width": "100%",
+                ":hover": { "background-color": "#7a5c3a" },
+                "background-color": "#4e3820",
+                ":focus": { "background-color": "#7a5c3a" },
+                "border-radius": "0px"
+              }
+            },
+            "layout": "vertical",
+            "contents": {
+              "img": false,
+              "imgWithCarousel": false,
+              "title": false,
+              "price": false,
+              "description": false,
+              "button": true,
+              "options": true
+            },
+            "width": "100%",
+            "text": { "button": "Add to Cart" }
+          },
+          "cart": {
+            "styles": {
+              "button": {
+                "font-size": "12px",
+                "padding-top": "16px",
+                "padding-bottom": "16px",
+                ":hover": { "background-color": "#7a5c3a" },
+                "background-color": "#4e3820",
+                ":focus": { "background-color": "#7a5c3a" },
+                "border-radius": "0px"
+              }
+            },
+            "text": { "total": "Subtotal", "button": "Checkout" }
+          },
+          "toggle": {
+            "styles": {
+              "toggle": {
+                "background-color": "#4e3820",
+                ":hover": { "background-color": "#7a5c3a" },
+                ":focus": { "background-color": "#7a5c3a" }
+              }
+            }
+          }
+        },
+      });
+    });
+  }
+})();
+/*]]>*/
 </script>
 </body>
 </html>

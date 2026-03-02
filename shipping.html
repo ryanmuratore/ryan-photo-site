@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shipping & Returns — Ryan Muratore Photography</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&family=Tenor+Sans&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --w: #faf6f0; --linen: #f0e9de; --sand: #ddd0bc; --clay: #c4a882; --tan: #a8896a; --bark: #7a5c3a; --earth: #4e3820; --ink: #2a1f12; }
+    body { background: var(--w); color: var(--ink); font-family: 'Tenor Sans', sans-serif; overflow-x: hidden; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 3rem; background: rgba(250,246,240,0.97); backdrop-filter: blur(16px); border-bottom: 1px solid var(--sand); }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 300; letter-spacing: 0.14em; color: var(--earth); text-decoration: none; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+    .nav-links a { font-size: 0.6rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--tan); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--earth); }
+    .burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 0.4rem; }
+    .burger span { display: block; width: 22px; height: 1.5px; background: var(--earth); transition: all 0.3s; }
+    .burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .burger.open span:nth-child(2) { opacity: 0; }
+    .burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* HERO */
+    .hero { padding: 140px 3rem 80px; border-bottom: 1px solid var(--sand); }
+    .hero-inner { max-width: 760px; }
+    .eyebrow { font-size: 0.56rem; letter-spacing: 0.38em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.8rem; display: block; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 300; color: var(--earth); line-height: 1.08; margin-bottom: 1.4rem; }
+    .hero h1 em { font-style: italic; color: var(--tan); }
+    .hero-desc { font-family: 'EB Garamond', serif; font-size: 1.05rem; line-height: 1.85; color: var(--tan); max-width: 560px; }
+
+    /* TRUST STRIP */
+    .trust-strip { display: flex; gap: 0; border-bottom: 1px solid var(--sand); }
+    .ti { flex: 1; display: flex; align-items: center; gap: 0.9rem; padding: 1.6rem 2rem; border-right: 1px solid var(--sand); }
+    .ti:last-child { border-right: none; }
+    .ti-icon { width: 36px; height: 36px; background: var(--linen); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ti-icon svg { width: 16px; height: 16px; stroke: var(--bark); fill: none; stroke-width: 1.5; }
+    .ti-lbl { font-size: 0.56rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.2rem; }
+    .ti-val { font-family: 'EB Garamond', serif; font-size: 0.92rem; color: var(--bark); }
+
+    /* CONTENT */
+    .content { max-width: 900px; margin: 0 auto; padding: 5rem 3rem 6rem; }
+    .section { margin-bottom: 4rem; }
+    .section:last-child { margin-bottom: 0; }
+    .s-rule { width: 32px; height: 1px; background: var(--clay); margin-bottom: 1.4rem; }
+    .section h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 300; color: var(--earth); margin-bottom: 1.2rem; }
+    .section h2 em { font-style: italic; }
+    .section p { font-family: 'EB Garamond', serif; font-size: 1rem; line-height: 1.85; color: var(--tan); margin-bottom: 1rem; }
+    .section p:last-child { margin-bottom: 0; }
+    .section p strong { font-weight: 500; color: var(--bark); }
+
+    /* TABLE */
+    .ship-table { width: 100%; border-collapse: collapse; margin: 1.6rem 0; }
+    .ship-table th { font-size: 0.52rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--clay); padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--sand); font-weight: 400; }
+    .ship-table td { font-family: 'EB Garamond', serif; font-size: 0.95rem; color: var(--tan); padding: 0.9rem 1rem; border-bottom: 1px solid var(--linen); vertical-align: top; }
+    .ship-table tr:last-child td { border-bottom: none; }
+    .ship-table td:first-child { color: var(--bark); font-weight: 500; }
+    .tag { display: inline-block; font-size: 0.5rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.2rem 0.55rem; background: var(--linen); color: var(--bark); border: 1px solid var(--sand); margin-left: 0.4rem; vertical-align: middle; }
+    .tag.green { background: #edf5ee; color: #3a6640; border-color: #c8deca; }
+
+    /* DIVIDER */
+    .divider { height: 1px; background: var(--sand); margin: 4rem 0; }
+
+    /* FAQ */
+    .faq-item { border-bottom: 1px solid var(--linen); }
+    .faq-q { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 0; background: none; border: none; cursor: pointer; text-align: left; font-family: 'Tenor Sans', sans-serif; font-size: 0.82rem; letter-spacing: 0.06em; color: var(--bark); }
+    .faq-q svg { width: 14px; height: 14px; stroke: var(--clay); fill: none; stroke-width: 2; transition: transform 0.3s; flex-shrink: 0; }
+    .faq-item.open .faq-q svg { transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s; }
+    .faq-item.open .faq-a { max-height: 300px; }
+    .faq-a p { font-family: 'EB Garamond', serif; font-size: 0.97rem; line-height: 1.82; color: var(--tan); padding-bottom: 1.2rem; }
+
+    /* CONTACT */
+    .contact-block { background: var(--linen); border: 1px solid var(--sand); padding: 2.4rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; margin-top: 3rem; flex-wrap: wrap; }
+    .cb-text h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 300; color: var(--earth); margin-bottom: 0.4rem; }
+    .cb-text p { font-family: 'EB Garamond', serif; font-size: 0.95rem; color: var(--tan); }
+    .cb-btn { display: inline-block; padding: 0.9rem 2rem; background: var(--earth); color: var(--w); font-family: 'Tenor Sans', sans-serif; font-size: 0.56rem; letter-spacing: 0.32em; text-transform: uppercase; text-decoration: none; white-space: nowrap; transition: background 0.2s; }
+    .cb-btn:hover { background: var(--bark); }
+
+    footer { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 3rem; border-top: 1px solid var(--sand); font-size: 0.63rem; color: var(--clay); }
+    .fl { font-family: 'Playfair Display', serif; font-size: 0.9rem; color: var(--bark); text-decoration: none; font-weight: 300; }
+
+    .reveal { opacity: 0; transform: translateY(12px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.4rem; }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(250,246,240,0.98); border-top: 1px solid var(--sand); z-index: 999; }
+      .nav-links.open { display: flex; }
+      .nav-links a { display: block; padding: 0.8rem 1.4rem; border-bottom: 1px solid var(--linen); }
+      .burger { display: flex; }
+      .hero { padding: 100px 1.4rem 50px; }
+      .trust-strip { flex-direction: column; }
+      .ti { border-right: none; border-bottom: 1px solid var(--sand); }
+      .ti:last-child { border-bottom: none; }
+      .content { padding: 3rem 1.4rem 4rem; }
+      footer { flex-direction: column; align-items: flex-start; gap: 0.4rem; padding: 1.2rem 1.4rem; }
+      .contact-block { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Ryan Muratore</a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html#portfolio">Portfolio</a></li>
+    <li><a href="portfolio.html">Full Portfolio</a></li>
+    <li><a href="prints.html">Prints</a></li>
+    <li><a href="store/wallpapers.html">Wallpapers</a></li>
+    <li><a href="journals.html">Field Journals</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <button class="burger" id="burger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">Orders &amp; Fulfilment</span>
+    <h1>Shipping <em>&amp; Returns</em></h1>
+    <p class="hero-desc">Every print is made to order and ships directly to your door from specialist fine art labs. Here's everything you need to know before and after your purchase.</p>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip reveal">
+  <div class="ti">
+    <div class="ti-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+    <div>
+      <div class="ti-lbl">Processing</div>
+      <div class="ti-val">Ships in 5–7 business days</div>
+    </div>
+  </div>
+  <div class="ti">
+    <div class="ti-icon"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    <div>
+      <div class="ti-lbl">Shipping</div>
+      <div class="ti-val">Free worldwide</div>
+    </div>
+  </div>
+  <div class="ti">
+    <div class="ti-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+    <div>
+      <div class="ti-lbl">Quality</div>
+      <div class="ti-val">Replaced if damaged or lost</div>
+    </div>
+  </div>
+  <div class="ti">
+    <div class="ti-icon"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+    <div>
+      <div class="ti-lbl">Delivery</div>
+      <div class="ti-val">Tracked to your door</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- SHIPPING -->
+  <div class="section reveal">
+    <div class="s-rule"></div>
+    <h2>Shipping <em>Times</em></h2>
+    <p>All prints are produced on demand at specialist fine art labs and shipped directly to you. Processing takes 2–5 business days, after which delivery times depend on your location.</p>
+
+    <table class="ship-table">
+      <thead>
+        <tr>
+          <th>Region</th>
+          <th>Estimated Delivery</th>
+          <th>Shipping Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>United States</td>
+          <td>3–7 business days after dispatch</td>
+          <td>Free <span class="tag green">Included</span></td>
+        </tr>
+        <tr>
+          <td>United Kingdom</td>
+          <td>2–4 business days after dispatch</td>
+          <td>Free <span class="tag green">Included</span></td>
+        </tr>
+        <tr>
+          <td>Europe</td>
+          <td>3–7 business days after dispatch</td>
+          <td>Free <span class="tag green">Included</span></td>
+        </tr>
+        <tr>
+          <td>Canada &amp; Australia</td>
+          <td>5–10 business days after dispatch</td>
+          <td>Free <span class="tag green">Included</span></td>
+        </tr>
+        <tr>
+          <td>Rest of World</td>
+          <td>7–14 business days after dispatch</td>
+          <td>Free <span class="tag green">Included</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Once your order ships you will receive a tracking number by email. All orders are fully trackable from dispatch to delivery.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PACKAGING -->
+  <div class="section reveal">
+    <div class="s-rule"></div>
+    <h2>Packaging <em>&amp; Care</em></h2>
+    <p>Unframed prints ship rolled in rigid protective tubes with reinforced end caps. Framed prints, canvas, and metal prints ship in double-wall corrugated boxes designed specifically for fine art. All packaging is recyclable.</p>
+    <p>Every order includes a <strong>certificate of authenticity</strong> signed by Ryan Muratore, confirming the print's provenance and archival specifications.</p>
+    <p>Prints are white-labelled — all packaging arrives branded as Ryan Muratore Photography with no third-party fulfilment branding.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- RETURNS -->
+  <div class="section reveal">
+    <div class="s-rule"></div>
+    <h2>Returns <em>&amp; Replacements</em></h2>
+    <p>Because every print is made to order specifically for you, we are unable to accept returns or exchanges for change of mind. We encourage you to review all product details, sizes, and format descriptions carefully before purchasing.</p>
+    <p><strong>Damaged or defective orders</strong> — if your print arrives damaged, defective, or materially different from what was ordered, we will replace it at no cost to you. Simply contact us within <strong>14 days of delivery</strong> with your order number and a photograph of the issue.</p>
+    <p><strong>Lost orders</strong> — if your order is confirmed lost in transit we will send a replacement immediately at no charge.</p>
+    <p>To raise a claim please email <a href="mailto:contact-ryanmuratore@gmail.com" style="color:var(--bark);">contact-ryanmuratore@gmail.com</a> with your order number and we will resolve it promptly.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- FAQ -->
+  <div class="section reveal">
+    <div class="s-rule"></div>
+    <h2>Frequently Asked <em>Questions</em></h2>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Can I change or cancel my order after placing it?
+        <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-a"><p>Orders enter production quickly. If you need to make a change please contact us immediately at contact-ryanmuratore@gmail.com — we will do our best to accommodate changes before printing begins, but cannot guarantee this once the order is in production.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Will my print look exactly like it does on screen?
+        <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-a"><p>Colour reproduction is calibrated to be as accurate as possible, however screens vary in brightness and colour profile. Hahnemühle Photo Rag has a natural warm white tone which gives prints a slightly warmer appearance than most monitors. If colour accuracy is critical, we recommend ordering a smaller size first.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Do you ship to my country?
+        <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-a"><p>Yes — we ship worldwide to virtually every country. All orders include free shipping regardless of destination. International orders may be subject to local customs duties or import taxes, which are the responsibility of the recipient.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        How long will my print last?
+        <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-a"><p>All prints are produced using archival pigment inks on Hahnemühle Photo Rag 308gsm — a museum-grade 100% cotton paper. Under normal indoor display conditions, prints carry a 100+ year colour guarantee. Avoid direct sunlight and high humidity for best longevity.</p></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Are the prints signed?
+        <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </button>
+      <div class="faq-a"><p>Each print includes a certificate of authenticity signed by Ryan Muratore. The prints themselves carry Ryan's signature within the image. Limited edition prints are individually numbered on the certificate.</p></div>
+    </div>
+
+  </div>
+
+  <!-- CONTACT -->
+  <div class="contact-block reveal">
+    <div class="cb-text">
+      <h3>Still have a question?</h3>
+      <p>Get in touch and we'll respond within one business day.</p>
+    </div>
+    <a href="mailto:contact-ryanmuratore@gmail.com" class="cb-btn">Contact Us</a>
+  </div>
+
+</div>
+
+<footer>
+  <a href="index.html" class="fl">Ryan Muratore Photography</a>
+  <p>&copy; 2025 Ryan Muratore &mdash; All rights reserved.</p>
+</footer>
+
+<script>
+  function toggleFaq(btn) {
+    var item = btn.parentElement;
+    var isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function(i){ i.classList.remove('open'); });
+    if (!isOpen) item.classList.add('open');
+  }
+  function toggleMenu() {
+    document.getElementById('nav-links').classList.toggle('open');
+    document.getElementById('burger').classList.toggle('open');
+  }
+  var obs = new IntersectionObserver(function(e){ e.forEach(function(x){ if(x.isIntersecting) x.target.classList.add('visible'); }); }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+</script>
+</body>
+</html>
