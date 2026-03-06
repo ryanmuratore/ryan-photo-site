@@ -241,7 +241,9 @@
       .gallery-col { gap: 6px !important; }
     }
     }
-  /* CART DRAWER */
+
+    
+      /* CART DRAWER */
     #cart-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 400; }
     #cart-overlay.open { display: block; }
     #cart-drawer { position: fixed; top: 0; right: -420px; width: 400px; max-width: 95vw; height: 100vh; background: var(--w); z-index: 500; display: flex; flex-direction: column; transition: right 0.35s cubic-bezier(0.4,0,0.2,1); border-left: 1px solid var(--sand); }
@@ -275,8 +277,6 @@
     .cd-checkout:hover { background: var(--bark); }
     #cart-count { font-size: 0.52rem; background: var(--earth); color: var(--w); border-radius: 50%; width: 16px; height: 16px; display: none; align-items: center; justify-content: center; margin-left: 4px; }
     #cart-count.has-items { display: inline-flex; }
-
-    
   </style>
   <script src="cart.js"></script>
 </head>
@@ -312,6 +312,31 @@
       </li>
     </ul>
   </nav>
+
+
+<!-- CART DRAWER -->
+<div id="cart-overlay" onclick="Cart.close()"></div>
+<div id="cart-drawer">
+  <div class="cd-head">
+    <span class="cd-title">Your Cart</span>
+    <button class="cd-close" onclick="Cart.close()">
+      <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div id="cd-items"></div>
+  <div id="cd-footer">
+    <div class="cd-subtotal">
+      <span>Subtotal</span>
+      <span id="cd-total">$0</span>
+    </div>
+    <div class="cd-note">Free worldwide shipping · Certificate included</div>
+    <button class="cd-checkout" id="cd-checkout-btn" onclick="Cart.checkout()">Proceed to Checkout</button>
+  </div>
+  <div id="cd-empty">
+    <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" fill="none" stroke-width="1"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+    <p>Your cart is empty</p>
+  </div>
+</div>
 
   <!-- PAGE HEADER -->
   <div class="page-header reveal">
@@ -939,7 +964,8 @@
 
     load();
     return { add: add, remove: remove, updateQty: updateQty, open: open, close: close, toggleDropdown: toggleDropdown, checkout: checkout, render: render };
-  })();  // Init cart on load
+  })();
+  // Init cart on load
   window.addEventListener('DOMContentLoaded', function(){ Cart.render(); });
 </script>
 </body>
