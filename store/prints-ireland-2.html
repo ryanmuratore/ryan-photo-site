@@ -266,6 +266,23 @@
       .sp:nth-child(2) { padding-left: 0; }
       footer { flex-direction: column; align-items: flex-start; gap: 0.4rem; padding: 1.2rem 1.4rem; }
     }
+  
+    /* Mockup panels */
+    .p-mock { background: #f0ebe4; }
+    .p-mock img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+    .p-mock .mock-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; color: var(--sand); }
+    .p-mock .mock-placeholder svg { opacity: 0.4; }
+    .p-mock .mock-placeholder p { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.6; }
+
+    /* Image thumbnail dots */
+    .img-dots { display: flex; align-items: center; justify-content: center; gap: 0.6rem; padding: 0.6rem 0 0.4rem; background: var(--linen); border-top: 1px solid var(--sand); }
+    .img-dot { width: 28px; height: 28px; border-radius: 3px; overflow: hidden; cursor: pointer; border: 2px solid transparent; transition: border-color 0.2s; opacity: 0.55; transition: opacity 0.2s, border-color 0.2s; flex-shrink: 0; }
+    .img-dot img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; -webkit-user-drag: none; }
+    .img-dot.active { border-color: var(--bark); opacity: 1; }
+    .img-dot-icon { width: 28px; height: 28px; border-radius: 3px; cursor: pointer; border: 2px solid transparent; transition: opacity 0.2s, border-color 0.2s; opacity: 0.55; display: flex; align-items: center; justify-content: center; background: var(--sand); }
+    .img-dot-icon.active { border-color: var(--bark); opacity: 1; }
+    .img-dot-icon svg { width: 14px; height: 14px; stroke: var(--earth); fill: none; stroke-width: 1.5; }
+
   </style>
 </head>
 <body>
@@ -331,7 +348,7 @@
 
       <!-- Photo -->
       <div class="panel p-photo on" id="panel-photo">
-        <img src="../ireland-2.jpg" alt="Quiet Pasture">
+        <img src="../images/ireland-2.jpg" alt="Quiet Pasture">
         <div class="wm"></div>
         <span class="wm-corner">© Ryan Muratore</span>
       </div>
@@ -342,7 +359,7 @@
           <div class="f-outer black" id="f-outer">
             <div class="f-pad">
               <div class="f-mat on" id="f-mat">
-                <img class="f-img" src="../ireland-2.jpg" alt="Quiet Pasture">
+                <img class="f-img" src="../images/ireland-2.jpg" alt="Quiet Pasture">
               </div>
             </div>
           </div>
@@ -355,7 +372,7 @@
       <div class="panel p-canvas" id="panel-canvas">
         <div class="canvas-scene">
           <div class="canvas-wrap">
-            <img class="canvas-img" src="../ireland-2.jpg" alt="Quiet Pasture">
+            <img class="canvas-img" src="../images/ireland-2.jpg" alt="Quiet Pasture">
             <div class="canvas-right"></div>
             <div class="canvas-bottom"></div>
           </div>
@@ -368,7 +385,7 @@
       <div class="panel p-metal" id="panel-metal">
         <div class="metal-scene">
           <div class="metal-wrap">
-            <img class="metal-img" src="../ireland-2.jpg" alt="Quiet Pasture">
+            <img class="metal-img" src="../images/ireland-2.jpg" alt="Quiet Pasture">
             <div class="metal-sheen"></div>
           </div>
         </div>
@@ -388,7 +405,7 @@
               <div class="w-outer black" id="w-outer">
                 <div class="w-pad">
                   <div class="w-mat on" id="w-mat">
-                    <img class="w-img" src="../ireland-2.jpg" alt="Quiet Pasture">
+                    <img class="w-img" src="../images/ireland-2.jpg" alt="Quiet Pasture">
                   </div>
                 </div>
               </div>
@@ -400,7 +417,38 @@
         <span class="wm-corner">© Ryan Muratore</span>
       </div>
 
+
+      <!-- Print Mockup -->
+      <div class="panel p-mock" id="panel-mock-print">
+        <img src="../mockups/ireland-2-print-mock.jpg" alt="Quiet Pasture - Print Mockup" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="mock-placeholder" style="display:none;">
+          <svg viewBox="0 0 24 24" width="40" height="40" stroke="currentColor" fill="none" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <p>Print mockup coming soon</p>
+        </div>
+      </div>
+
+      <!-- Metal Mockup -->
+      <div class="panel p-mock" id="panel-mock-metal">
+        <img src="../mockups/ireland-2-metal-mock.jpg" alt="Quiet Pasture - Metal Mockup" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="mock-placeholder" style="display:none;">
+          <svg viewBox="0 0 24 24" width="40" height="40" stroke="currentColor" fill="none" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <p>Metal mockup coming soon</p>
+        </div>
+      </div>
     </div>
+
+  <!-- Image dots -->
+  <div class="img-dots" id="img-dots">
+    <div class="img-dot active" id="dot-photo" onclick="switchImage('photo', this)" title="Photo">
+      <img src="../images/ireland-2.jpg" alt="Quiet Pasture">
+    </div>
+    <div class="img-dot" id="dot-mock-print" onclick="switchImage('mock-print', this)" title="Print Mockup">
+      <img src="../mockups/ireland-2-print-mock.jpg" alt="Print Mockup" onerror="this.parentElement.innerHTML='<svg viewBox=\'0 0 24 24\' width=\'14\' height=\'14\' stroke=\'#8a7a6a\' fill=\'none\' stroke-width=\'1.5\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg>'; this.parentElement.style.background='#d8d0c4'; this.parentElement.style.display='flex'; this.parentElement.style.alignItems='center'; this.parentElement.style.justifyContent='center';">
+    </div>
+    <div class="img-dot" id="dot-mock-metal" onclick="switchImage('mock-metal', this)" title="Metal Mockup">
+      <img src="../mockups/ireland-2-metal-mock.jpg" alt="Metal Mockup" onerror="this.parentElement.innerHTML='<svg viewBox=\'0 0 24 24\' width=\'14\' height=\'14\' stroke=\'#8a7a6a\' fill=\'none\' stroke-width=\'1.5\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg>'; this.parentElement.style.background='#b8b0a8'; this.parentElement.style.display='flex'; this.parentElement.style.alignItems='center'; this.parentElement.style.justifyContent='center';">
+    </div>
+  </div>
   </div>
 
   <!-- DETAILS -->
@@ -623,6 +671,14 @@
   var obs = new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:0.1});
   document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
 
+
+  function switchImage(panel, dot) {
+    document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on');});
+    document.getElementById('panel-' + panel).classList.add('on');
+    document.querySelectorAll('.img-dot').forEach(function(d){d.classList.remove('active');});
+    dot.classList.add('active');
+  }
+
   buildGrid(); updateUI();
 </script>
 
@@ -772,7 +828,7 @@
       variantId: variantId,
       opts: FORMATS[fmt].label + ' · ' + sizeLabel,
       price: curFmt().sizes[S.si].p,
-      thumb: '../ireland-2.jpg'
+      thumb: '..images/ireland-2.jpg'
     });
   }
 
