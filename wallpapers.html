@@ -493,6 +493,7 @@ let carouselIndex = 0;
       // Toggle aspect ratio for mobile wallpapers
       const wrap = document.getElementById('wallpaper-carousel');
       wrap.classList.toggle('mobile-mode', carouselGroup === 'mobile');
+      wrap.classList.toggle('desktop-mode', carouselGroup === 'desktop');
       // Update specs
       const specs = document.getElementById('wallpaper-specs-detail');
       if (carouselGroup === 'desktop') {
