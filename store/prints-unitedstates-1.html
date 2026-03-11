@@ -248,9 +248,9 @@
     footer { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 3rem; font-size: 0.63rem; color: var(--clay); }
     .fl { font-family: 'Playfair Display', serif; font-size: 0.9rem; color: var(--bark); text-decoration: none; font-weight: 300; }
 
-    @media (max-width: 960px) {
-      .shell { grid-template-columns: 1fr; }
-      .viewer { position: relative; top: 0; height: 65vw; min-height: 280px; }
+    @media (max-width: 1024px) {
+      .shell { display: block; }
+      .viewer { position: relative; top: 0; height: 75vw; min-height: 260px; max-height: 500px; }
       .d-inner { padding: 2rem 1.4rem 3rem; }
       nav { padding: 1rem 1.4rem; }
       .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(250,246,240,0.98); border-top: 1px solid var(--sand); z-index: 999; }
@@ -828,7 +828,7 @@
       variantId: variantId,
       opts: FORMATS[fmt].label + ' · ' + sizeLabel,
       price: curFmt().sizes[S.si].p,
-      thumb: '..images/unitedstates-1.jpg'
+      thumb: '../images/unitedstates-1.jpg'
     });
   }
 
