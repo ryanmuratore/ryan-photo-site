@@ -8,9 +8,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&family=Tenor+Sans&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --warm-white: #faf6f0; --linen: #f0e9de; --sand: #ddd0bc; --clay: #c4a882; --tan: #a8896a; --bark: #7a5c3a; --earth: #4e3820; --ink: #2a1f12; }
+    :root {
+      --warm-white: #faf6f0;
+      --linen: #f0e9de;
+      --sand: #ddd0bc;
+      --clay: #c4a882;
+      --tan: #a8896a;
+      --bark: #7a5c3a;
+      --earth: #4e3820;
+      --ink: #2a1f12;
+    }
     html { scroll-behavior: smooth; }
     body { background: var(--linen); color: var(--ink); font-family: 'Tenor Sans', sans-serif; overflow-x: hidden; }
+
+    /* ── NAV ── */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 3rem; background: rgba(250,246,240,0.96); backdrop-filter: blur(8px); box-shadow: 0 1px 0 var(--sand); }
     .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 300; letter-spacing: 0.12em; color: var(--earth); text-decoration: none; }
     .nav-links { display: flex; gap: 2.8rem; list-style: none; }
@@ -19,6 +30,8 @@
     .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 1px; background: var(--clay); transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease; }
     .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
     .nav-links a:hover { color: var(--bark); }
+
+    /* ── PAGE HEADER ── */
     .page-header { padding: 10rem 3rem 4rem; background: var(--linen); }
     .section-label { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.8rem; }
     .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; line-height: 1.15; color: var(--earth); }
@@ -26,33 +39,107 @@
     .section-rule { width: 40px; height: 1px; background: var(--clay); margin: 1.8rem 0; }
     .shop-collection-label { font-family: 'Playfair Display', serif; font-size: 1rem; font-style: italic; color: var(--bark); margin-bottom: 0.5rem; }
     .season-note { font-size: 0.78rem; line-height: 1.8; color: var(--tan); margin-bottom: 3rem; border-left: 1px solid var(--clay); padding-left: 1.5rem; }
-    .prints-wrap { padding: 0 3rem 7rem; }
-    .prints-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.8rem; }
-    .print-card { background: var(--warm-white); border: 1px solid var(--sand); overflow: hidden; transition: transform 0.4s, box-shadow 0.4s; }
-    .print-card:hover { transform: translateY(-5px); box-shadow: 0 18px 45px rgba(78,56,32,0.1); }
-    .print-img-wrap { height: 280px; position: relative; overflow: hidden; }
-    .print-ph { width: 100%; height: 100%; transition: transform 0.6s ease; }
-    .print-card:hover .print-ph { transform: scale(1.04); }
-    .print-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
-    .print-card:hover img { transform: scale(1.04); }
-    .pph1 { background: linear-gradient(160deg, #c8b898 0%, #9a7a50 100%); }
-    .pph2 { background: linear-gradient(160deg, #a8b888 0%, #688048 100%); }
-    .pph3 { background: linear-gradient(160deg, #d0b898 0%, #a07840 100%); }
-    .pph4 { background: linear-gradient(160deg, #b8c098 0%, #788848 100%); }
-    .print-badge { position: absolute; top: 1rem; left: 1rem; background: var(--bark); color: var(--warm-white); font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; padding: 0.28rem 0.7rem; }
-    .print-info { padding: 1.4rem; }
-    .print-name { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 300; color: var(--earth); margin-bottom: 0.25rem; }
-    .print-location { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 1rem; }
-    .print-sizes { font-size: 0.62rem; color: var(--sand); letter-spacing: 0.1em; margin-bottom: 0.8rem; }
-    .print-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 1rem; border-top: 1px solid var(--linen); }
-    .print-price { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--bark); }
-    .btn-add { padding: 0.5rem 1.2rem; font-family: 'Tenor Sans', sans-serif; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; background: var(--earth); color: var(--warm-white); border: none; cursor: pointer; transition: background 0.25s; }
-    .btn-add:hover { background: var(--bark); }
-    footer { background: var(--earth); color: rgba(250,246,240,0.4); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
-    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 300; font-style: italic; color: var(--clay); text-decoration: none; }
-    footer p { font-size: 0.65rem; letter-spacing: 0.1em; }
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.9s ease, transform 0.9s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── EDITORIAL GRID ── */
+    .prints-wrap { padding: 0 3rem 8rem; }
+
+    /* 3-column staggered rows — groups of 3 */
+    .prints-gallery { display: flex; flex-direction: column; gap: 5rem; }
+
+    .print-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2.5rem;
+      align-items: center; /* cards vertically centered, center card raised via margin */
+    }
+
+    /* Every row: center card sits higher */
+    .print-row .print-item:nth-child(2) {
+      margin-top: -6rem;
+    }
+
+    /* Alternate rows: left card raised instead for variety */
+    .print-row.alt .print-item:nth-child(2) {
+      margin-top: 0;
+    }
+    .print-row.alt .print-item:nth-child(1) {
+      margin-top: -5rem;
+    }
+
+    .print-item { display: block; text-decoration: none; color: inherit; }
+
+    .print-img-wrap {
+      width: 100%;
+      overflow: hidden;
+      margin-bottom: 1.4rem;
+      position: relative;
+    }
+
+    .print-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .print-item:hover .print-img-wrap img {
+      transform: scale(1.04);
+    }
+
+    /* Vary aspect ratios slightly for editorial feel */
+    .print-row .print-item:nth-child(1) .print-img-wrap { aspect-ratio: 3/4; }
+    .print-row .print-item:nth-child(2) .print-img-wrap { aspect-ratio: 4/3; }
+    .print-row .print-item:nth-child(3) .print-img-wrap { aspect-ratio: 3/4; }
+
+    .print-row.alt .print-item:nth-child(1) .print-img-wrap { aspect-ratio: 4/3; }
+    .print-row.alt .print-item:nth-child(2) .print-img-wrap { aspect-ratio: 3/4; }
+    .print-row.alt .print-item:nth-child(3) .print-img-wrap { aspect-ratio: 4/3; }
+
+    .print-badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: var(--bark);
+      color: var(--warm-white);
+      font-size: 0.52rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 0.28rem 0.7rem;
+    }
+
+    .print-meta { text-align: center; }
+
+    .print-name {
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--earth);
+      margin-bottom: 0.45rem;
+      font-family: 'Tenor Sans', sans-serif;
+    }
+
+    .print-price {
+      font-family: 'Tenor Sans', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      color: var(--tan);
+    }
+
+    /* Hover reveal location */
+    .print-location {
+      display: block;
+      font-size: 0.54rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--clay);
+      margin-top: 0.25rem;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .print-item:hover .print-location { opacity: 1; transform: translateY(0); }
+
     /* ── CART ── */
     #cart-btn { display: flex; align-items: center; gap: 0.6rem; background: none; border: none; cursor: pointer; font-family: 'Tenor Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--tan); position: relative; transition: color 0.3s; padding: 0.3rem 0; }
     #cart-btn:hover { color: var(--bark); }
@@ -65,7 +152,8 @@
     #cart-btn-mobile { display: none; align-items: center; gap: 0.5rem; background: none; border: none; cursor: pointer; font-family: 'Tenor Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.18em; color: var(--tan); position: relative; }
     #cart-btn-mobile svg { stroke: currentColor; }
     #cart-total-mobile { color: var(--bark); font-size: 0.62rem; }
-    /* CART DRAWER */
+
+    /* ── CART DRAWER ── */
     #cart-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 400; }
     #cart-overlay.open { display: block; }
     #cart-drawer { position: fixed; top: 0; right: -420px; width: 400px; max-width: 95vw; height: 100vh; background: var(--warm-white); z-index: 500; display: flex; flex-direction: column; transition: right 0.35s cubic-bezier(0.4,0,0.2,1); border-left: 1px solid var(--sand); }
@@ -76,31 +164,42 @@
     .cd-close:hover { color: var(--earth); }
     #cd-items { flex: 1; overflow-y: auto; padding: 0 1.6rem; }
     #cd-empty { display: none; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; color: var(--clay); padding: 3rem 2rem; text-align: center; }
-    #cd-empty p { font-family: 'EB Garamond', serif; font-size: 1rem; color: var(--clay); }
+    #cd-empty p { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--clay); }
     #cd-empty svg { opacity: 0.4; }
     .cd-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1.2rem 0; border-bottom: 1px solid var(--linen); }
     .cd-item-thumb { width: 56px; height: 44px; object-fit: cover; flex-shrink: 0; }
     .cd-item-info { flex: 1; }
     .cd-item-name { font-size: 0.68rem; letter-spacing: 0.08em; color: var(--earth); margin-bottom: 0.2rem; text-transform: uppercase; }
-    .cd-item-opts { font-family: 'EB Garamond', serif; font-size: 0.88rem; color: var(--tan); }
-    .cd-item-price { font-family: 'EB Garamond', serif; font-size: 1rem; color: var(--bark); margin-top: 0.3rem; }
+    .cd-item-opts { font-family: 'Playfair Display', serif; font-size: 0.88rem; color: var(--tan); }
+    .cd-item-price { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--bark); margin-top: 0.3rem; }
     .cd-qty { display: flex; align-items: center; gap: 0.6rem; margin-top: 0.5rem; }
     .cd-qty-btn { width: 22px; height: 22px; background: var(--linen); border: 1px solid var(--sand); cursor: pointer; font-size: 1rem; color: var(--bark); display: flex; align-items: center; justify-content: center; transition: background 0.2s; line-height: 1; }
     .cd-qty-btn:hover { background: var(--sand); }
-    .cd-qty-num { font-family: 'EB Garamond', serif; font-size: 0.95rem; color: var(--ink); min-width: 20px; text-align: center; }
+    .cd-qty-num { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--ink); min-width: 20px; text-align: center; }
     .cd-item-remove { background: none; border: none; cursor: pointer; color: var(--clay); font-size: 0.52rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 0; margin-top: 0.3rem; display: block; transition: color 0.2s; font-family: 'Tenor Sans', sans-serif; }
     .cd-item-remove:hover { color: var(--earth); }
     #cd-footer { padding: 1.4rem 1.6rem; border-top: 1px solid var(--sand); }
     .cd-subtotal { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
     .cd-subtotal span:first-child { font-size: 0.56rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--clay); }
-    #cd-total { font-family: 'EB Garamond', serif; font-size: 1.2rem; color: var(--earth); }
-    .cd-note { font-family: 'EB Garamond', serif; font-size: 0.78rem; color: var(--clay); margin-bottom: 1rem; font-style: italic; }
+    #cd-total { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--earth); }
+    .cd-note { font-family: 'Playfair Display', serif; font-size: 0.78rem; color: var(--clay); margin-bottom: 1rem; font-style: italic; }
     .cd-checkout { width: 100%; padding: 1rem; background: var(--earth); color: var(--warm-white); border: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.58rem; letter-spacing: 0.34em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
     .cd-checkout:hover { background: var(--bark); }
     #cart-count { font-size: 0.52rem; background: var(--earth); color: var(--warm-white); border-radius: 50%; width: 16px; height: 16px; display: none; align-items: center; justify-content: center; margin-left: 4px; }
     #cart-count.has-items { display: inline-flex; }
-    @media (max-width: 768px) {
-      nav { padding: 1rem 1.4rem; background: rgba(250,246,240,0.97) !important; backdrop-filter: blur(8px); box-shadow: 0 1px 0 var(--sand); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--earth); color: rgba(250,246,240,0.4); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 300; font-style: italic; color: var(--clay); text-decoration: none; }
+    footer p { font-size: 0.65rem; letter-spacing: 0.1em; }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.9s ease, transform 0.9s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.4rem; background: rgba(250,246,240,0.97) !important; }
       .nav-logo { font-size: 1rem !important; white-space: nowrap; color: var(--earth) !important; }
       .mobile-top-right { display: flex !important; align-items: center; gap: 1rem; }
       .hamburger { display: flex !important; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 0.4rem; z-index: 1001; }
@@ -115,10 +214,34 @@
       .nav-links a { font-size: 1.1rem !important; letter-spacing: 0.2em; color: var(--earth) !important; white-space: nowrap; }
       #cart-btn-mobile { display: flex !important; }
       .page-header { padding: 5rem 1.4rem 2rem; }
-      .prints-wrap { padding: 0 1rem 4rem; }
-      .prints-grid { grid-template-columns: 1fr 1fr; gap: 0.9rem; }
-      .print-img-wrap { height: 46vw; }
-      .print-info { padding: 0.75rem 0.7rem 0.9rem; }
+      .prints-wrap { padding: 0 1.2rem 5rem; }
+      .prints-gallery { gap: 3rem; }
+      .print-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+      /* On mobile, just stack them in pairs — no vertical offset */
+      .print-row .print-item:nth-child(2),
+      .print-row.alt .print-item:nth-child(1),
+      .print-row.alt .print-item:nth-child(2) {
+        margin-top: 0;
+      }
+      /* Third item spans full width on mobile in a sub-row */
+      .print-row .print-item:nth-child(3) {
+        grid-column: 1 / -1;
+      }
+      .print-row .print-item:nth-child(1) .print-img-wrap,
+      .print-row .print-item:nth-child(2) .print-img-wrap,
+      .print-row .print-item:nth-child(3) .print-img-wrap,
+      .print-row.alt .print-item:nth-child(1) .print-img-wrap,
+      .print-row.alt .print-item:nth-child(2) .print-img-wrap,
+      .print-row.alt .print-item:nth-child(3) .print-img-wrap {
+        aspect-ratio: 3/2;
+      }
+      .print-row .print-item:nth-child(3) .print-img-wrap,
+      .print-row.alt .print-item:nth-child(3) .print-img-wrap {
+        aspect-ratio: 16/9;
+      }
       footer { flex-direction: column; align-items: flex-start; gap: 0.4rem; padding: 1.2rem 1.4rem; }
     }
   </style>
@@ -186,273 +309,286 @@
     <p class="shop-collection-label" id="collection-season"></p>
     <p class="season-note">22 exclusive prints released each season. Past collections remain available for one year — archives close after one year, then they're gone for good. Every print is museum-quality, printed on 310gsm fine art paper with archival pigment inks. Shipped within 5–7 business days with a certificate of authenticity.</p>
   </div>
+
   <div class="prints-wrap">
-    <div class="prints-grid reveal">
-      <div class="print-card">
-        <a href="store/prints-norway.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="images/norway-1.jpg" alt="Stillness on the Fjord">
-          <span class="print-badge">Best Seller</span>
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">Stillness on the Fjord</p>
-          <p class="print-location">Norway</p>
-          <p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-norway.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
-        </div>
-      </div>
-      <div class="print-card">
-        <a href="store/prints-sweden.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="images/sweden-1.jpg" alt="A Place Kept">
-          <span class="print-badge">New</span>
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">A Place Kept</p>
-          <p class="print-location">Sweden</p>
-          <p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-sweden.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
-        </div>
-      </div>
-      <div class="print-card">
-        <a href="store/prints-wildlife2.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="images/wildlife-1.jpg" alt="Emerald Hover">
-          <span class="print-badge">New</span>
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">Emerald Hover</p>
-          <p class="print-location">Wildlife</p>
-          <p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-wildlife2.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
-        </div>
+    <div class="prints-gallery reveal">
+
+      <!-- Row 1 -->
+      <div class="print-row">
+        <a href="store/prints-norway.html" class="print-item">
+          <div class="print-img-wrap">
+            <img src="images/norway-1.jpg" alt="Stillness on the Fjord">
+            <span class="print-badge">Best Seller</span>
+          </div>
+          <div class="print-meta">
+            <p class="print-name">Stillness on the Fjord</p>
+            <p class="print-price">from $75</p>
+            <span class="print-location">Norway</span>
+          </div>
+        </a>
+        <a href="store/prints-sweden.html" class="print-item">
+          <div class="print-img-wrap">
+            <img src="images/sweden-1.jpg" alt="A Place Kept">
+            <span class="print-badge">New</span>
+          </div>
+          <div class="print-meta">
+            <p class="print-name">A Place Kept</p>
+            <p class="print-price">from $75</p>
+            <span class="print-location">Sweden</span>
+          </div>
+        </a>
+        <a href="store/prints-wildlife2.html" class="print-item">
+          <div class="print-img-wrap">
+            <img src="images/wildlife-1.jpg" alt="Emerald Hover">
+            <span class="print-badge">New</span>
+          </div>
+          <div class="print-meta">
+            <p class="print-name">Emerald Hover</p>
+            <p class="print-price">from $75</p>
+            <span class="print-location">Wildlife</span>
+          </div>
+        </a>
       </div>
 
-      <div class="print-card">
-        <a href="store/prints-costarica-2.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="images/costarica-2.jpg" alt="Hidden Cascade">
-          <span class="print-badge">New</span>
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">Hidden Cascade</p>
-          <p class="print-location">Costa Rica</p>
-          <p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-costarica-2.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
-        </div>
+      <!-- Row 2 (alt) -->
+      <div class="print-row alt">
+        <a href="store/prints-costarica-2.html" class="print-item">
+          <div class="print-img-wrap">
+            <img src="images/costarica-2.jpg" alt="Hidden Cascade">
+            <span class="print-badge">New</span>
+          </div>
+          <div class="print-meta">
+            <p class="print-name">Hidden Cascade</p>
+            <p class="print-price">from $75</p>
+            <span class="print-location">Costa Rica</span>
+          </div>
+        </a>
+        <a href="store/prints-ireland-1.html" class="print-item">
+          <div class="print-img-wrap">
+            <img src="images/ireland-1.jpg" alt="The Edge">
+            <span class="print-badge">New</span>
+          </div>
+          <div class="print-meta">
+            <p class="print-name">The Edge</p>
+            <p class="print-price">from $75</p>
+            <span class="print-location">Ireland</span>
+          </div>
+        </a>
+        <a href="store/prints-ireland-2.html" class="print-item">
+          <div class="print-img-wrap">
+            <img src="images/ireland-2.jpg" alt="Quiet Pasture">
+            <span class="print-badge">New</span>
+          </div>
+          <div class="print-meta">
+            <p class="print-name">Quiet Pasture</p>
+            <p class="print-price">from $75</p>
+            <span class="print-location">Ireland</span>
+          </div>
+        </a>
       </div>
-      <div class="print-card">
-        <a href="store/prints-ireland-1.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="images/ireland-1.jpg" alt="The Edge">
-          <span class="print-badge">New</span>
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">The Edge</p>
-          <p class="print-location">Ireland</p>
-          <p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-ireland-1.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
-        </div>
+
+      <!-- Row 3 -->
+      <div class="print-row">
+        <a href="store/prints-ireland-3.html" class="print-item">
+          <div class="print-img-wrap">
+            <img src="images/ireland-3.jpg" alt="Companions">
+            <span class="print-badge">New</span>
+          </div>
+          <div class="print-meta">
+            <p class="print-name">Companions</p>
+            <p class="print-price">from $75</p>
+            <span class="print-location">Ireland</span>
+          </div>
+        </a>
+        <a href="store/prints-portugal-1.html" class="print-item">
+          <div class="print-img-wrap">
+            <img src="images/portugal-1.jpg" alt="Between Tides">
+            <span class="print-badge">New</span>
+          </div>
+          <div class="print-meta">
+            <p class="print-name">Between Tides</p>
+            <p class="print-price">from $75</p>
+            <span class="print-location">Portugal</span>
+          </div>
+        </a>
+        <a href="store/prints-sweden-3.html" class="print-item">
+          <div class="print-img-wrap">
+            <img src="images/sweden-3.jpg" alt="Between Two Shores">
+            <span class="print-badge">New</span>
+          </div>
+          <div class="print-meta">
+            <p class="print-name">Between Two Shores</p>
+            <p class="print-price">from $75</p>
+            <span class="print-location">Sweden</span>
+          </div>
+        </a>
       </div>
-      <div class="print-card">
-        <a href="store/prints-ireland-2.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="images/ireland-2.jpg" alt="Quiet Pasture">
-          <span class="print-badge">New</span>
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">Quiet Pasture</p>
-          <p class="print-location">Ireland</p>
-          <p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-ireland-2.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
-        </div>
+
+      <!-- Row 4 (alt) -->
+      <div class="print-row alt">
+        <a href="store/prints-sweden-5.html" class="print-item">
+          <div class="print-img-wrap">
+            <img src="images/sweden-5.jpg" alt="Autumn Alley">
+            <span class="print-badge">New</span>
+          </div>
+          <div class="print-meta">
+            <p class="print-name">Autumn Alley</p>
+            <p class="print-price">from $75</p>
+            <span class="print-location">Sweden</span>
+          </div>
+        </a>
+        <a href="store/prints-unitedstates-1.html" class="print-item">
+          <div class="print-img-wrap">
+            <img src="images/unitedstates-1.jpg" alt="Open Water">
+            <span class="print-badge">New</span>
+          </div>
+          <div class="print-meta">
+            <p class="print-name">Open Water</p>
+            <p class="print-price">from $75</p>
+            <span class="print-location">United States</span>
+          </div>
+        </a>
+        <a href="store/prints-unitedstates-5.html" class="print-item">
+          <div class="print-img-wrap">
+            <img src="images/unitedstates-5.jpg" alt="Cove">
+            <span class="print-badge">New</span>
+          </div>
+          <div class="print-meta">
+            <p class="print-name">Cove</p>
+            <p class="print-price">from $75</p>
+            <span class="print-location">United States</span>
+          </div>
+        </a>
       </div>
-      <div class="print-card">
-        <a href="store/prints-ireland-3.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="images/ireland-3.jpg" alt="Companions">
-          <span class="print-badge">New</span>
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">Companions</p>
-          <p class="print-location">Ireland</p>
-          <p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-ireland-3.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
-        </div>
+
+      <!-- Row 5 -->
+      <div class="print-row">
+        <a href="store/prints-unitedstates-7.html" class="print-item">
+          <div class="print-img-wrap">
+            <img src="images/unitedstates-7.jpg" alt="Full Bloom">
+            <span class="print-badge">New</span>
+          </div>
+          <div class="print-meta">
+            <p class="print-name">Full Bloom</p>
+            <p class="print-price">from $75</p>
+            <span class="print-location">United States</span>
+          </div>
+        </a>
+        <a href="store/prints-wildlife-14.html" class="print-item">
+          <div class="print-img-wrap">
+            <img src="images/wildlife-14.jpg" alt="Eyes in the Dark">
+            <span class="print-badge">New</span>
+          </div>
+          <div class="print-meta">
+            <p class="print-name">Eyes in the Dark</p>
+            <p class="print-price">from $75</p>
+            <span class="print-location">Wildlife</span>
+          </div>
+        </a>
+        <a href="store/prints-costarica-3.html" class="print-item">
+          <div class="print-img-wrap">
+            <img src="images/costarica-3.jpg" alt="A Flame in the Blue">
+            <span class="print-badge">New</span>
+          </div>
+          <div class="print-meta">
+            <p class="print-name">A Flame in the Blue</p>
+            <p class="print-price">from $75</p>
+            <span class="print-location">Costa Rica</span>
+          </div>
+        </a>
       </div>
-      <div class="print-card">
-        <a href="store/prints-portugal-1.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="images/portugal-1.jpg" alt="Between Tides">
-          <span class="print-badge">New</span>
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">Between Tides</p>
-          <p class="print-location">Portugal</p>
-          <p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-portugal-1.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
-        </div>
+
+      <!-- Row 6 (alt) -->
+      <div class="print-row alt">
+        <a href="store/prints-costarica-10.html" class="print-item">
+          <div class="print-img-wrap">
+            <img src="images/costarica-10.jpg" alt="Where The Forest Breathes">
+            <span class="print-badge">New</span>
+          </div>
+          <div class="print-meta">
+            <p class="print-name">Where The Forest Breathes</p>
+            <p class="print-price">from $75</p>
+            <span class="print-location">Costa Rica</span>
+          </div>
+        </a>
+        <a href="store/prints-costarica-11.html" class="print-item">
+          <div class="print-img-wrap">
+            <img src="images/costarica-11.jpg" alt="Valley of Mist">
+            <span class="print-badge">New</span>
+          </div>
+          <div class="print-meta">
+            <p class="print-name">Valley of Mist</p>
+            <p class="print-price">from $75</p>
+            <span class="print-location">Costa Rica</span>
+          </div>
+        </a>
+        <a href="store/prints-ireland-10.html" class="print-item">
+          <div class="print-img-wrap">
+            <img src="images/ireland-10.jpg" alt="The Western Fields">
+            <span class="print-badge">New</span>
+          </div>
+          <div class="print-meta">
+            <p class="print-name">The Western Fields</p>
+            <p class="print-price">from $75</p>
+            <span class="print-location">Ireland</span>
+          </div>
+        </a>
       </div>
-      <div class="print-card">
-        <a href="store/prints-sweden-3.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="images/sweden-3.jpg" alt="Between Two Shores">
-          <span class="print-badge">New</span>
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">Between Two Shores</p>
-          <p class="print-location">Sweden</p>
-          <p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-sweden-3.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
-        </div>
+
+      <!-- Row 7 -->
+      <div class="print-row">
+        <a href="store/prints-unitedstates-4(landscape).html" class="print-item">
+          <div class="print-img-wrap">
+            <img src="images/unitedstates-4(landscape).jpg" alt="Afternoon at the Harbor">
+            <span class="print-badge">New</span>
+          </div>
+          <div class="print-meta">
+            <p class="print-name">Afternoon at the Harbor</p>
+            <p class="print-price">from $75</p>
+            <span class="print-location">United States</span>
+          </div>
+        </a>
+        <a href="store/prints-iceland-13.html" class="print-item">
+          <div class="print-img-wrap">
+            <img src="images/iceland-13.jpg" alt="Kirkjufell">
+            <span class="print-badge">New</span>
+          </div>
+          <div class="print-meta">
+            <p class="print-name">Kirkjufell</p>
+            <p class="print-price">from $75</p>
+            <span class="print-location">Iceland</span>
+          </div>
+        </a>
+        <a href="store/prints-iceland-14.html" class="print-item">
+          <div class="print-img-wrap">
+            <img src="images/iceland-14.jpg" alt="Highland Wind">
+            <span class="print-badge">New</span>
+          </div>
+          <div class="print-meta">
+            <p class="print-name">Highland Wind</p>
+            <p class="print-price">from $75</p>
+            <span class="print-location">Iceland</span>
+          </div>
+        </a>
       </div>
-      <div class="print-card">
-        <a href="store/prints-sweden-5.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="images/sweden-5.jpg" alt="Autumn Alley">
-          <span class="print-badge">New</span>
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">Autumn Alley</p>
-          <p class="print-location">Sweden</p>
-          <p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-sweden-5.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
-        </div>
+
+      <!-- Row 8 (single centered) -->
+      <div class="print-row" style="justify-items:center;">
+        <div></div>
+        <a href="store/prints-portugal-4.html" class="print-item">
+          <div class="print-img-wrap">
+            <img src="images/portugal-4.jpg" alt="Walls Above The Valley">
+            <span class="print-badge">New</span>
+          </div>
+          <div class="print-meta">
+            <p class="print-name">Walls Above The Valley</p>
+            <p class="print-price">from $75</p>
+            <span class="print-location">Portugal</span>
+          </div>
+        </a>
+        <div></div>
       </div>
-      <div class="print-card">
-        <a href="store/prints-unitedstates-1.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="images/unitedstates-1.jpg" alt="Open Water">
-          <span class="print-badge">New</span>
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">Open Water</p>
-          <p class="print-location">United States</p>
-          <p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-unitedstates-1.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
-        </div>
-      </div>
-      <div class="print-card">
-        <a href="store/prints-unitedstates-5.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="images/unitedstates-5.jpg" alt="Cove">
-          <span class="print-badge">New</span>
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">Cove</p>
-          <p class="print-location">United States</p>
-          <p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-unitedstates-5.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
-        </div>
-      </div>
-      <div class="print-card">
-        <a href="store/prints-unitedstates-7.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="images/unitedstates-7.jpg" alt="Full Bloom">
-          <span class="print-badge">New</span>
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">Full Bloom</p>
-          <p class="print-location">United States</p>
-          <p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-unitedstates-7.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
-        </div>
-      </div>
-      <div class="print-card">
-        <a href="store/prints-wildlife-14.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="images/wildlife-14.jpg" alt="Eyes in the Dark">
-          <span class="print-badge">New</span>
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">Eyes in the Dark</p>
-          <p class="print-location">Wildlife</p>
-          <p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-wildlife-14.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
-        </div>
-      </div>
-      <div class="print-card">
-        <a href="store/prints-costarica-3.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="images/costarica-3.jpg" alt="A Flame in the Blue">
-          <span class="print-badge">New</span>
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">A Flame in the Blue</p>
-          <p class="print-location">Costa Rica</p>
-          <p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-costarica-3.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
-        </div>
-      </div>
-      <div class="print-card">
-        <a href="store/prints-costarica-10.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="images/costarica-10.jpg" alt="Where The Forest Breathes">
-          <span class="print-badge">New</span>
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">Where The Forest Breathes</p>
-          <p class="print-location">Costa Rica</p>
-          <p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-costarica-10.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
-        </div>
-      </div>
-      <div class="print-card">
-        <a href="store/prints-costarica-11.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="images/costarica-11.jpg" alt="Valley of Mist">
-          <span class="print-badge">New</span>
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">Valley of Mist</p>
-          <p class="print-location">Costa Rica</p>
-          <p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-costarica-11.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
-        </div>
-      </div>
-      <div class="print-card">
-        <a href="store/prints-ireland-10.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="images/ireland-10.jpg" alt="The Western Fields">
-          <span class="print-badge">New</span>
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">The Western Fields</p>
-          <p class="print-location">Ireland</p>
-          <p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-ireland-10.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
-        </div>
-      </div>
-      <div class="print-card">
-        <a href="store/prints-unitedstates-4(landscape).html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="images/unitedstates-4(landscape).jpg" alt="Afternoon at the Harbor">
-          <span class="print-badge">New</span>
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">Afternoon at the Harbor</p>
-          <p class="print-location">United States</p>
-          <p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-unitedstates-4(landscape).html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
-        </div>
-      </div>
-      <div class="print-card">
-        <a href="store/prints-iceland-13.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="images/iceland-13.jpg" alt="Kirkjufell">
-          <span class="print-badge">New</span>
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">Kirkjufell</p>
-          <p class="print-location">Iceland</p>
-          <p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-iceland-13.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
-        </div>
-      </div>
-      <div class="print-card">
-        <a href="store/prints-iceland-14.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="images/iceland-14.jpg" alt="Highland Wind">
-          <span class="print-badge">New</span>
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">Highland Wind</p>
-          <p class="print-location">Iceland</p>
-          <p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-iceland-14.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
-        </div>
-      </div>
-      <div class="print-card">
-        <a href="store/prints-portugal-4.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="images/portugal-4.jpg" alt="Walls Above The Valley">
-          <span class="print-badge">New</span>
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">Walls Above The Valley</p>
-          <p class="print-location">Portugal</p>
-          <p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-portugal-4.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
-        </div>
-      </div>
+
     </div>
   </div>
 
