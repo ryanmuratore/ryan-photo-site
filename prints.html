@@ -40,37 +40,24 @@
     .shop-collection-label { font-family: 'Playfair Display', serif; font-size: 1rem; font-style: italic; color: var(--bark); margin-bottom: 0.5rem; }
     .season-note { font-size: 0.78rem; line-height: 1.8; color: var(--tan); margin-bottom: 3rem; border-left: 1px solid var(--clay); padding-left: 1.5rem; }
 
-    /* ── EDITORIAL GRID ── */
-    .prints-wrap { padding: 0 3rem 8rem; }
+    /* ── GRID ── */
+    .prints-wrap { padding: 0 4rem 8rem; }
 
-    .prints-gallery { display: flex; flex-direction: column; gap: 4rem; max-width: 1100px; margin: 0 auto; }
-
-    .print-row {
+    .prints-gallery {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 1.8rem;
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 3rem;
+      row-gap: 5rem;
+      max-width: 1200px;
+      margin: 0 auto;
       align-items: start;
-    }
-
-    /* Every row: center card sits higher */
-    .print-row .print-item:nth-child(2) {
-      margin-top: -4rem;
-    }
-
-    /* Alternate rows: left card raised instead for variety */
-    .print-row.alt .print-item:nth-child(2) {
-      margin-top: 0;
-    }
-    .print-row.alt .print-item:nth-child(1) {
-      margin-top: -3rem;
     }
 
     .print-item { display: block; text-decoration: none; color: inherit; }
 
     .print-img-wrap {
       width: 100%;
-      overflow: hidden;
-      margin-bottom: 1.4rem;
+      margin-bottom: 1.2rem;
       position: relative;
     }
 
@@ -78,46 +65,43 @@
       width: 100%;
       height: auto;
       display: block;
-      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transition: opacity 0.3s ease;
     }
 
-    .print-item:hover .print-img-wrap img {
-      transform: scale(1.04);
-    }
+    .print-item:hover .print-img-wrap img { opacity: 0.88; }
 
     .print-badge {
       position: absolute;
-      top: 1rem;
-      left: 1rem;
+      top: 0.8rem;
+      left: 0.8rem;
       background: var(--bark);
       color: var(--warm-white);
       font-size: 0.52rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      padding: 0.28rem 0.7rem;
+      padding: 0.25rem 0.6rem;
     }
 
     .print-meta { text-align: center; }
 
     .print-name {
-      font-size: 0.62rem;
-      letter-spacing: 0.22em;
+      font-size: 0.6rem;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
       color: var(--earth);
-      margin-bottom: 0.45rem;
+      margin-bottom: 0.4rem;
       font-family: 'Tenor Sans', sans-serif;
     }
 
     .print-price {
       font-family: 'Tenor Sans', sans-serif;
       font-size: 0.6rem;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.1em;
       color: var(--tan);
     }
 
-    /* Hover reveal location */
     .print-location {
-      display: block;
+      display: none;
       font-size: 0.54rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -290,281 +274,94 @@
 
   <div class="prints-wrap">
     <div class="prints-gallery reveal">
-
-      <!-- Row 1 -->
-      <div class="print-row">
         <a href="store/prints-norway.html" class="print-item">
-          <div class="print-img-wrap">
-            <img src="images/norway-1.jpg" alt="Stillness on the Fjord">
-            <span class="print-badge">Best Seller</span>
-          </div>
-          <div class="print-meta">
-            <p class="print-name">Stillness on the Fjord</p>
-            <p class="print-price">from $75</p>
-            <span class="print-location">Norway</span>
-          </div>
+          <div class="print-img-wrap"><img src="images/norway-1.jpg" alt="Stillness on the Fjord"><span class="print-badge">Best Seller</span></div>
+          <div class="print-meta"><p class="print-name">Stillness on the Fjord</p><p class="print-price">from $75</p></div>
         </a>
         <a href="store/prints-sweden.html" class="print-item">
-          <div class="print-img-wrap">
-            <img src="images/sweden-1.jpg" alt="A Place Kept">
-            <span class="print-badge">New</span>
-          </div>
-          <div class="print-meta">
-            <p class="print-name">A Place Kept</p>
-            <p class="print-price">from $75</p>
-            <span class="print-location">Sweden</span>
-          </div>
+          <div class="print-img-wrap"><img src="images/sweden-1.jpg" alt="A Place Kept"><span class="print-badge">New</span></div>
+          <div class="print-meta"><p class="print-name">A Place Kept</p><p class="print-price">from $75</p></div>
         </a>
         <a href="store/prints-wildlife2.html" class="print-item">
-          <div class="print-img-wrap">
-            <img src="images/wildlife-1.jpg" alt="Emerald Hover">
-            <span class="print-badge">New</span>
-          </div>
-          <div class="print-meta">
-            <p class="print-name">Emerald Hover</p>
-            <p class="print-price">from $75</p>
-            <span class="print-location">Wildlife</span>
-          </div>
+          <div class="print-img-wrap"><img src="images/wildlife-1.jpg" alt="Emerald Hover"><span class="print-badge">New</span></div>
+          <div class="print-meta"><p class="print-name">Emerald Hover</p><p class="print-price">from $75</p></div>
         </a>
-      </div>
-
-      <!-- Row 2 (alt) -->
-      <div class="print-row alt">
         <a href="store/prints-costarica-2.html" class="print-item">
-          <div class="print-img-wrap">
-            <img src="images/costarica-2.jpg" alt="Hidden Cascade">
-            <span class="print-badge">New</span>
-          </div>
-          <div class="print-meta">
-            <p class="print-name">Hidden Cascade</p>
-            <p class="print-price">from $75</p>
-            <span class="print-location">Costa Rica</span>
-          </div>
+          <div class="print-img-wrap"><img src="images/costarica-2.jpg" alt="Hidden Cascade"><span class="print-badge">New</span></div>
+          <div class="print-meta"><p class="print-name">Hidden Cascade</p><p class="print-price">from $75</p></div>
         </a>
         <a href="store/prints-ireland-1.html" class="print-item">
-          <div class="print-img-wrap">
-            <img src="images/ireland-1.jpg" alt="The Edge">
-            <span class="print-badge">New</span>
-          </div>
-          <div class="print-meta">
-            <p class="print-name">The Edge</p>
-            <p class="print-price">from $75</p>
-            <span class="print-location">Ireland</span>
-          </div>
+          <div class="print-img-wrap"><img src="images/ireland-1.jpg" alt="The Edge"><span class="print-badge">New</span></div>
+          <div class="print-meta"><p class="print-name">The Edge</p><p class="print-price">from $75</p></div>
         </a>
         <a href="store/prints-ireland-2.html" class="print-item">
-          <div class="print-img-wrap">
-            <img src="images/ireland-2.jpg" alt="Quiet Pasture">
-            <span class="print-badge">New</span>
-          </div>
-          <div class="print-meta">
-            <p class="print-name">Quiet Pasture</p>
-            <p class="print-price">from $75</p>
-            <span class="print-location">Ireland</span>
-          </div>
+          <div class="print-img-wrap"><img src="images/ireland-2.jpg" alt="Quiet Pasture"><span class="print-badge">New</span></div>
+          <div class="print-meta"><p class="print-name">Quiet Pasture</p><p class="print-price">from $75</p></div>
         </a>
-      </div>
-
-      <!-- Row 3 -->
-      <div class="print-row">
         <a href="store/prints-ireland-3.html" class="print-item">
-          <div class="print-img-wrap">
-            <img src="images/ireland-3.jpg" alt="Companions">
-            <span class="print-badge">New</span>
-          </div>
-          <div class="print-meta">
-            <p class="print-name">Companions</p>
-            <p class="print-price">from $75</p>
-            <span class="print-location">Ireland</span>
-          </div>
+          <div class="print-img-wrap"><img src="images/ireland-3.jpg" alt="Companions"><span class="print-badge">New</span></div>
+          <div class="print-meta"><p class="print-name">Companions</p><p class="print-price">from $75</p></div>
         </a>
         <a href="store/prints-portugal-1.html" class="print-item">
-          <div class="print-img-wrap">
-            <img src="images/portugal-1.jpg" alt="Between Tides">
-            <span class="print-badge">New</span>
-          </div>
-          <div class="print-meta">
-            <p class="print-name">Between Tides</p>
-            <p class="print-price">from $75</p>
-            <span class="print-location">Portugal</span>
-          </div>
+          <div class="print-img-wrap"><img src="images/portugal-1.jpg" alt="Between Tides"><span class="print-badge">New</span></div>
+          <div class="print-meta"><p class="print-name">Between Tides</p><p class="print-price">from $75</p></div>
         </a>
         <a href="store/prints-sweden-3.html" class="print-item">
-          <div class="print-img-wrap">
-            <img src="images/sweden-3.jpg" alt="Between Two Shores">
-            <span class="print-badge">New</span>
-          </div>
-          <div class="print-meta">
-            <p class="print-name">Between Two Shores</p>
-            <p class="print-price">from $75</p>
-            <span class="print-location">Sweden</span>
-          </div>
+          <div class="print-img-wrap"><img src="images/sweden-3.jpg" alt="Between Two Shores"><span class="print-badge">New</span></div>
+          <div class="print-meta"><p class="print-name">Between Two Shores</p><p class="print-price">from $75</p></div>
         </a>
-      </div>
-
-      <!-- Row 4 (alt) -->
-      <div class="print-row alt">
         <a href="store/prints-sweden-5.html" class="print-item">
-          <div class="print-img-wrap">
-            <img src="images/sweden-5.jpg" alt="Autumn Alley">
-            <span class="print-badge">New</span>
-          </div>
-          <div class="print-meta">
-            <p class="print-name">Autumn Alley</p>
-            <p class="print-price">from $75</p>
-            <span class="print-location">Sweden</span>
-          </div>
+          <div class="print-img-wrap"><img src="images/sweden-5.jpg" alt="Autumn Alley"><span class="print-badge">New</span></div>
+          <div class="print-meta"><p class="print-name">Autumn Alley</p><p class="print-price">from $75</p></div>
         </a>
         <a href="store/prints-unitedstates-1.html" class="print-item">
-          <div class="print-img-wrap">
-            <img src="images/unitedstates-1.jpg" alt="Open Water">
-            <span class="print-badge">New</span>
-          </div>
-          <div class="print-meta">
-            <p class="print-name">Open Water</p>
-            <p class="print-price">from $75</p>
-            <span class="print-location">United States</span>
-          </div>
+          <div class="print-img-wrap"><img src="images/unitedstates-1.jpg" alt="Open Water"><span class="print-badge">New</span></div>
+          <div class="print-meta"><p class="print-name">Open Water</p><p class="print-price">from $75</p></div>
         </a>
         <a href="store/prints-unitedstates-5.html" class="print-item">
-          <div class="print-img-wrap">
-            <img src="images/unitedstates-5.jpg" alt="Cove">
-            <span class="print-badge">New</span>
-          </div>
-          <div class="print-meta">
-            <p class="print-name">Cove</p>
-            <p class="print-price">from $75</p>
-            <span class="print-location">United States</span>
-          </div>
+          <div class="print-img-wrap"><img src="images/unitedstates-5.jpg" alt="Cove"><span class="print-badge">New</span></div>
+          <div class="print-meta"><p class="print-name">Cove</p><p class="print-price">from $75</p></div>
         </a>
-      </div>
-
-      <!-- Row 5 -->
-      <div class="print-row">
         <a href="store/prints-unitedstates-7.html" class="print-item">
-          <div class="print-img-wrap">
-            <img src="images/unitedstates-7.jpg" alt="Full Bloom">
-            <span class="print-badge">New</span>
-          </div>
-          <div class="print-meta">
-            <p class="print-name">Full Bloom</p>
-            <p class="print-price">from $75</p>
-            <span class="print-location">United States</span>
-          </div>
+          <div class="print-img-wrap"><img src="images/unitedstates-7.jpg" alt="Full Bloom"><span class="print-badge">New</span></div>
+          <div class="print-meta"><p class="print-name">Full Bloom</p><p class="print-price">from $75</p></div>
         </a>
         <a href="store/prints-wildlife-14.html" class="print-item">
-          <div class="print-img-wrap">
-            <img src="images/wildlife-14.jpg" alt="Eyes in the Dark">
-            <span class="print-badge">New</span>
-          </div>
-          <div class="print-meta">
-            <p class="print-name">Eyes in the Dark</p>
-            <p class="print-price">from $75</p>
-            <span class="print-location">Wildlife</span>
-          </div>
+          <div class="print-img-wrap"><img src="images/wildlife-14.jpg" alt="Eyes in the Dark"><span class="print-badge">New</span></div>
+          <div class="print-meta"><p class="print-name">Eyes in the Dark</p><p class="print-price">from $75</p></div>
         </a>
         <a href="store/prints-costarica-3.html" class="print-item">
-          <div class="print-img-wrap">
-            <img src="images/costarica-3.jpg" alt="A Flame in the Blue">
-            <span class="print-badge">New</span>
-          </div>
-          <div class="print-meta">
-            <p class="print-name">A Flame in the Blue</p>
-            <p class="print-price">from $75</p>
-            <span class="print-location">Costa Rica</span>
-          </div>
+          <div class="print-img-wrap"><img src="images/costarica-3.jpg" alt="A Flame in the Blue"><span class="print-badge">New</span></div>
+          <div class="print-meta"><p class="print-name">A Flame in the Blue</p><p class="print-price">from $75</p></div>
         </a>
-      </div>
-
-      <!-- Row 6 (alt) -->
-      <div class="print-row alt">
         <a href="store/prints-costarica-10.html" class="print-item">
-          <div class="print-img-wrap">
-            <img src="images/costarica-10.jpg" alt="Where The Forest Breathes">
-            <span class="print-badge">New</span>
-          </div>
-          <div class="print-meta">
-            <p class="print-name">Where The Forest Breathes</p>
-            <p class="print-price">from $75</p>
-            <span class="print-location">Costa Rica</span>
-          </div>
+          <div class="print-img-wrap"><img src="images/costarica-10.jpg" alt="Where The Forest Breathes"><span class="print-badge">New</span></div>
+          <div class="print-meta"><p class="print-name">Where The Forest Breathes</p><p class="print-price">from $75</p></div>
         </a>
         <a href="store/prints-costarica-11.html" class="print-item">
-          <div class="print-img-wrap">
-            <img src="images/costarica-11.jpg" alt="Valley of Mist">
-            <span class="print-badge">New</span>
-          </div>
-          <div class="print-meta">
-            <p class="print-name">Valley of Mist</p>
-            <p class="print-price">from $75</p>
-            <span class="print-location">Costa Rica</span>
-          </div>
+          <div class="print-img-wrap"><img src="images/costarica-11.jpg" alt="Valley of Mist"><span class="print-badge">New</span></div>
+          <div class="print-meta"><p class="print-name">Valley of Mist</p><p class="print-price">from $75</p></div>
         </a>
         <a href="store/prints-ireland-10.html" class="print-item">
-          <div class="print-img-wrap">
-            <img src="images/ireland-10.jpg" alt="The Western Fields">
-            <span class="print-badge">New</span>
-          </div>
-          <div class="print-meta">
-            <p class="print-name">The Western Fields</p>
-            <p class="print-price">from $75</p>
-            <span class="print-location">Ireland</span>
-          </div>
+          <div class="print-img-wrap"><img src="images/ireland-10.jpg" alt="The Western Fields"><span class="print-badge">New</span></div>
+          <div class="print-meta"><p class="print-name">The Western Fields</p><p class="print-price">from $75</p></div>
         </a>
-      </div>
-
-      <!-- Row 7 -->
-      <div class="print-row">
         <a href="store/prints-unitedstates-4(landscape).html" class="print-item">
-          <div class="print-img-wrap">
-            <img src="images/unitedstates-4(landscape).jpg" alt="Afternoon at the Harbor">
-            <span class="print-badge">New</span>
-          </div>
-          <div class="print-meta">
-            <p class="print-name">Afternoon at the Harbor</p>
-            <p class="print-price">from $75</p>
-            <span class="print-location">United States</span>
-          </div>
+          <div class="print-img-wrap"><img src="images/unitedstates-4(landscape).jpg" alt="Afternoon at the Harbor"><span class="print-badge">New</span></div>
+          <div class="print-meta"><p class="print-name">Afternoon at the Harbor</p><p class="print-price">from $75</p></div>
         </a>
         <a href="store/prints-iceland-13.html" class="print-item">
-          <div class="print-img-wrap">
-            <img src="images/iceland-13.jpg" alt="Kirkjufell">
-            <span class="print-badge">New</span>
-          </div>
-          <div class="print-meta">
-            <p class="print-name">Kirkjufell</p>
-            <p class="print-price">from $75</p>
-            <span class="print-location">Iceland</span>
-          </div>
+          <div class="print-img-wrap"><img src="images/iceland-13.jpg" alt="Kirkjufell"><span class="print-badge">New</span></div>
+          <div class="print-meta"><p class="print-name">Kirkjufell</p><p class="print-price">from $75</p></div>
         </a>
         <a href="store/prints-iceland-14.html" class="print-item">
-          <div class="print-img-wrap">
-            <img src="images/iceland-14.jpg" alt="Highland Wind">
-            <span class="print-badge">New</span>
-          </div>
-          <div class="print-meta">
-            <p class="print-name">Highland Wind</p>
-            <p class="print-price">from $75</p>
-            <span class="print-location">Iceland</span>
-          </div>
+          <div class="print-img-wrap"><img src="images/iceland-14.jpg" alt="Highland Wind"><span class="print-badge">New</span></div>
+          <div class="print-meta"><p class="print-name">Highland Wind</p><p class="print-price">from $75</p></div>
         </a>
-      </div>
-
-      <!-- Row 8 (single centered) -->
-      <div class="print-row" style="justify-items:center;">
-        <div></div>
         <a href="store/prints-portugal-4.html" class="print-item">
-          <div class="print-img-wrap">
-            <img src="images/portugal-4.jpg" alt="Walls Above The Valley">
-            <span class="print-badge">New</span>
-          </div>
-          <div class="print-meta">
-            <p class="print-name">Walls Above The Valley</p>
-            <p class="print-price">from $75</p>
-            <span class="print-location">Portugal</span>
-          </div>
+          <div class="print-img-wrap"><img src="images/portugal-4.jpg" alt="Walls Above The Valley"><span class="print-badge">New</span></div>
+          <div class="print-meta"><p class="print-name">Walls Above The Valley</p><p class="print-price">from $75</p></div>
         </a>
-        <div></div>
       </div>
 
     </div>
