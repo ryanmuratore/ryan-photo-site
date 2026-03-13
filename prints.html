@@ -41,14 +41,14 @@
     .season-note { font-size: 0.78rem; line-height: 1.8; color: var(--tan); margin-bottom: 3rem; border-left: 1px solid var(--clay); padding-left: 1.5rem; }
 
     /* ── GRID ── */
-    .prints-wrap { padding: 0 4rem 8rem; }
+    .prints-wrap { padding: 0 6rem 8rem; }
 
     .prints-gallery {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      column-gap: 3rem;
-      row-gap: 5rem;
-      max-width: 1200px;
+      column-gap: 4rem;
+      row-gap: 4rem;
+      max-width: 1100px;
       margin: 0 auto;
       align-items: start;
     }
@@ -57,8 +57,7 @@
 
     .print-img-wrap {
       width: 100%;
-      margin-bottom: 1.2rem;
-      position: relative;
+      margin-bottom: 1rem;
     }
 
     .print-img-wrap img {
@@ -70,26 +69,16 @@
 
     .print-item:hover .print-img-wrap img { opacity: 0.88; }
 
-    .print-badge {
-      position: absolute;
-      top: 0.8rem;
-      left: 0.8rem;
-      background: var(--bark);
-      color: var(--warm-white);
-      font-size: 0.52rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      padding: 0.25rem 0.6rem;
-    }
+    .print-badge { display: none; }
 
-    .print-meta { text-align: center; }
+    .print-meta { text-align: center; padding-top: 0.2rem; }
 
     .print-name {
       font-size: 0.6rem;
       letter-spacing: 0.24em;
       text-transform: uppercase;
       color: var(--earth);
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.35rem;
       font-family: 'Tenor Sans', sans-serif;
     }
 
@@ -187,21 +176,11 @@
       .nav-links a { font-size: 1.1rem !important; letter-spacing: 0.2em; color: var(--earth) !important; white-space: nowrap; }
       #cart-btn-mobile { display: flex !important; }
       .page-header { padding: 5rem 1.4rem 2rem; }
-      .prints-wrap { padding: 0 1.2rem 5rem; }
-      .prints-gallery { gap: 3rem; }
-      .print-row {
-        grid-template-columns: 1fr 1fr;
-        gap: 1rem;
-      }
-      /* On mobile, just stack them in pairs — no vertical offset */
-      .print-row .print-item:nth-child(2),
-      .print-row.alt .print-item:nth-child(1),
-      .print-row.alt .print-item:nth-child(2) {
-        margin-top: 0;
-      }
-      /* Third item spans full width on mobile in a sub-row */
-      .print-row .print-item:nth-child(3) {
-        grid-column: 1 / -1;
+      .prints-wrap { padding: 0 1.5rem 5rem; }
+      .prints-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 1.5rem;
+        row-gap: 2.5rem;
       }
 
       footer { flex-direction: column; align-items: flex-start; gap: 0.4rem; padding: 1.2rem 1.4rem; }
