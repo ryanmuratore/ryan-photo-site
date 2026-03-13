@@ -306,9 +306,8 @@
       text-transform: uppercase;
       color: var(--tan);
     }
-    
 
-                /* ── GALLERY GRID ── */
+    /* ── GALLERY GRID ── */
     .gallery-grid {
       display: flex;
       gap: 8px;
@@ -522,9 +521,6 @@
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.9s ease, transform 0.9s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* ── MOBILE ── */
-    
-
     /* ── CART ── */
     #cart-btn {
       display: flex; align-items: center; gap: 0.6rem;
@@ -573,7 +569,6 @@
     /* ── MOBILE NAV ── */
     .hamburger { display: none; }
     .mobile-top-right { display: none; }
-    
 
     #cart-btn-mobile {
       display: none;
@@ -590,7 +585,6 @@
     }
     #cart-btn-mobile svg { stroke: currentColor; }
     #cart-total-mobile { color: var(--bark); font-size: 0.62rem; }
-    
 
     .wallpaper-carousel-wrap {
       position: relative;
@@ -628,7 +622,7 @@
       letter-spacing: 0.12em; padding: 0.2rem 0.6rem; border-radius: 20px;
     }
 
-    /* Wallpaper section — mirrors store/wallpapers.html */
+    /* Wallpaper section */
     .wp2-hero {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -642,14 +636,6 @@
       border-radius: 4px;
       aspect-ratio: 16/9;
     }
-    .wp2-carousel.mobile-mode { aspect-ratio: 9/16; max-width: 260px; }
-    .wp2-slide { position: absolute; top:0; left:0; width:100%; height:100%; }
-    .wp2-slide img { width:100%; height:100%; object-fit:cover; display:block; }
-    .wp2-details { display: flex; flex-direction: column; gap: 1.4rem; }
-
-    /* ── Wallpaper section styles (copied from store) ── */
-    .wp2-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
-    
     .wp2-carousel.mobile-mode { aspect-ratio: 9/16; max-width: 260px; }
     .wp2-slide { position: absolute; top:0; left:0; width:100%; height:100%; }
     .wp2-slide img { width:100%; height:100%; object-fit:cover; display:block; }
@@ -671,7 +657,9 @@
     .wp2-carousel .carousel-btn.next { right: 12px; }
     .wp2-carousel .carousel-btn svg { width: 16px; height: 16px; stroke: var(--earth); stroke-width: 2; fill: none; }
     .wp2-carousel .carousel-counter { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.4); color: #fff; font-family: 'Tenor Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.15em; padding: 0.25rem 0.7rem; border-radius: 20px; pointer-events: none; }
-  @media (max-width: 768px) {
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
       /* ── NAV ── */
       nav {
         padding: 1rem 1.4rem;
@@ -729,15 +717,18 @@
       /* ── SECTIONS ── */
       .section-wrap { padding: 4rem 1.5rem; }
       .portfolio-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem; }
-      .gallery-grid { gap: 6px; align-items: flex-end !important; }
-      .gallery-col { gap: 6px; }
+
+      /* ── GALLERY MOBILE FIXES ── */
+      .gallery-grid { gap: 6px; align-items: flex-start !important; width: 100% !important; }
+      .gallery-col { gap: 6px; flex: 1 1 0 !important; min-width: 0 !important; width: 50% !important; }
+
       #world-map-container { width: 100% !important; margin: 0 !important; }
 
       /* ── SHOP / PRINTS ── */
       .shop-intro { grid-template-columns: 1fr; gap: 2rem; }
-      .prints-grid { grid-template-columns: 1fr !important; display: grid !important; }
+      .prints-grid { grid-template-columns: 1fr 1fr !important; display: grid !important; gap: 0.9rem !important; }
       .print-card { display: block !important; opacity: 1 !important; visibility: visible !important; }
-      .print-img-wrap { height: 240px; }
+      .print-img-wrap { height: 46vw; }
 
       /* ── WALLPAPERS ── */
       .wallpaper-card { grid-template-columns: 1fr; }
@@ -766,8 +757,7 @@
       .wp2-details { display: flex !important; flex-direction: column; gap: 1rem; }
     }
 
-    
-      /* CART DRAWER */
+    /* CART DRAWER */
     #cart-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 400; }
     #cart-overlay.open { display: block; }
     #cart-drawer { position: fixed; top: 0; right: -420px; width: 400px; max-width: 95vw; height: 100vh; background: var(--warm-white); z-index: 500; display: flex; flex-direction: column; transition: right 0.35s cubic-bezier(0.4,0,0.2,1); border-left: 1px solid var(--sand); }
@@ -807,7 +797,7 @@
 <body>
 
   <!-- NAV -->
-    <nav id="nav">
+  <nav id="nav">
     <a href="index.html" class="nav-logo">Ryan Muratore</a>
     <div class="mobile-top-right">
       <button id="cart-btn-mobile" onclick="Cart.toggleDropdown()">
@@ -837,30 +827,29 @@
     </ul>
   </nav>
 
-
-<!-- CART DRAWER -->
-<div id="cart-overlay" onclick="Cart.close()"></div>
-<div id="cart-drawer">
-  <div class="cd-head">
-    <span class="cd-title">Your Cart</span>
-    <button class="cd-close" onclick="Cart.close()">
-      <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
-  </div>
-  <div id="cd-items"></div>
-  <div id="cd-footer">
-    <div class="cd-subtotal">
-      <span>Subtotal</span>
-      <span id="cd-total">$0</span>
+  <!-- CART DRAWER -->
+  <div id="cart-overlay" onclick="Cart.close()"></div>
+  <div id="cart-drawer">
+    <div class="cd-head">
+      <span class="cd-title">Your Cart</span>
+      <button class="cd-close" onclick="Cart.close()">
+        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
     </div>
-    <div class="cd-note">Free worldwide shipping · Certificate included</div>
-    <button class="cd-checkout" id="cd-checkout-btn" onclick="Cart.checkout()">Proceed to Checkout</button>
+    <div id="cd-items"></div>
+    <div id="cd-footer">
+      <div class="cd-subtotal">
+        <span>Subtotal</span>
+        <span id="cd-total">$0</span>
+      </div>
+      <div class="cd-note">Free worldwide shipping · Certificate included</div>
+      <button class="cd-checkout" id="cd-checkout-btn" onclick="Cart.checkout()">Proceed to Checkout</button>
+    </div>
+    <div id="cd-empty">
+      <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" fill="none" stroke-width="1"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <p>Your cart is empty</p>
+    </div>
   </div>
-  <div id="cd-empty">
-    <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" fill="none" stroke-width="1"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-    <p>Your cart is empty</p>
-  </div>
-</div>
 
   <!-- HERO -->
   <section id="hero">
@@ -870,7 +859,7 @@
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <div class="hero-text">
-        <p class="hero-eyebrow">Landscapes & Wildlife Photography</p>
+        <p class="hero-eyebrow">Landscapes &amp; Wildlife Photography</p>
         <h1 class="hero-title">
           The world<br>through <em>my</em><br>lens
         </h1>
@@ -962,145 +951,87 @@
           <div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-wildlife2.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
         </div>
       </div>
+      <div class="print-card">
+        <a href="store/prints-iceland-13.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
+          <img src="images/iceland-13.jpg" alt="Kirkjufell">
+          <span class="print-badge">New</span>
+        </div></a>
+        <div class="print-info">
+          <p class="print-name">Kirkjufell</p>
+          <p class="print-location">Iceland</p>
+          <p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p>
+          <div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-iceland-13.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
+        </div>
+      </div>
+      <div class="print-card">
+        <a href="store/prints-iceland-14.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
+          <img src="images/iceland-14.jpg" alt="Highland Wind">
+          <span class="print-badge">New</span>
+        </div></a>
+        <div class="print-info">
+          <p class="print-name">Highland Wind</p>
+          <p class="print-location">Iceland</p>
+          <p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p>
+          <div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-iceland-14.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
+        </div>
+      </div>
     </div>
     <div style="text-align: center; margin-top: 3rem;">
-      <a href="prints.html" class="btn-portfolio">View All 20 Prints</a>
+      <a href="prints.html" class="btn-portfolio">View All 22 Prints</a>
     </div>
   </section>
 
   <div class="divider"></div>
 
   <section id="wallpapers" class="section-wrap">
-
     <div style="max-width: 900px; margin: 0 auto; padding: 0 3rem;">
       <div class="wp2-header" style="margin-bottom: 2.5rem;">
         <p class="section-label">Digital Downloads</p>
         <h2 class="section-title">Wallpaper <em>packs</em></h2>
         <div class="section-rule"></div>
       </div>
-
       <div class="wp2-hero">
         <div class="wp2-carousel desktop-mode" id="wp2-carousel">
-<div class="wp2-slide" data-group="desktop" style="display:block">
-  <img src="wallpapers/desktop-1.jpg" alt="Desktop 1">
-</div>
-<div class="wp2-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-2.jpg" alt="Desktop 2">
-</div>
-<div class="wp2-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-3.jpg" alt="Desktop 3">
-</div>
-<div class="wp2-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-4.jpg" alt="Desktop 4">
-</div>
-<div class="wp2-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-5.jpg" alt="Desktop 5">
-</div>
-<div class="wp2-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-6.jpg" alt="Desktop 6">
-</div>
-<div class="wp2-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-7.jpg" alt="Desktop 7">
-</div>
-<div class="wp2-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-8.jpg" alt="Desktop 8">
-</div>
-<div class="wp2-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-9.jpg" alt="Desktop 9">
-</div>
-<div class="wp2-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-10.jpg" alt="Desktop 10">
-</div>
-<div class="wp2-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-11.jpg" alt="Desktop 11">
-</div>
-<div class="wp2-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-12.jpg" alt="Desktop 12">
-</div>
-<div class="wp2-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-13.jpg" alt="Desktop 13">
-</div>
-<div class="wp2-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-14.jpg" alt="Desktop 14">
-</div>
-<div class="wp2-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-15.jpg" alt="Desktop 15">
-</div>
-<div class="wp2-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-16.jpg" alt="Desktop 16">
-</div>
-<div class="wp2-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-17.jpg" alt="Desktop 17">
-</div>
-<div class="wp2-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-18.jpg" alt="Desktop 18">
-</div>
-<div class="wp2-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-19.jpg" alt="Desktop 19">
-</div>
-<div class="wp2-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-20.jpg" alt="Desktop 20">
-</div>
-<div class="wp2-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-1.jpg" alt="Mobile 1">
-</div>
-<div class="wp2-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-2.jpg" alt="Mobile 2">
-</div>
-<div class="wp2-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-3.jpg" alt="Mobile 3">
-</div>
-<div class="wp2-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-4.jpg" alt="Mobile 4">
-</div>
-<div class="wp2-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-5.jpg" alt="Mobile 5">
-</div>
-<div class="wp2-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-6.jpg" alt="Mobile 6">
-</div>
-<div class="wp2-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-7.jpg" alt="Mobile 7">
-</div>
-<div class="wp2-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-8.jpg" alt="Mobile 8">
-</div>
-<div class="wp2-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-9.jpg" alt="Mobile 9">
-</div>
-<div class="wp2-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-10.jpg" alt="Mobile 10">
-</div>
-<div class="wp2-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-11.jpg" alt="Mobile 11">
-</div>
-<div class="wp2-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-12.jpg" alt="Mobile 12">
-</div>
-<div class="wp2-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-13.jpg" alt="Mobile 13">
-</div>
-<div class="wp2-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-14.jpg" alt="Mobile 14">
-</div>
-<div class="wp2-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-15.jpg" alt="Mobile 15">
-</div>
-<div class="wp2-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-16.jpg" alt="Mobile 16">
-</div>
-<div class="wp2-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-17.jpg" alt="Mobile 17">
-</div>
-<div class="wp2-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-18.jpg" alt="Mobile 18">
-</div>
-<div class="wp2-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-19.jpg" alt="Mobile 19">
-</div>
-<div class="wp2-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-20.jpg" alt="Mobile 20">
-</div>
+          <div class="wp2-slide" data-group="desktop" style="display:block"><img src="wallpapers/desktop-1.jpg" alt="Desktop 1"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-2.jpg" alt="Desktop 2"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-3.jpg" alt="Desktop 3"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-4.jpg" alt="Desktop 4"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-5.jpg" alt="Desktop 5"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-6.jpg" alt="Desktop 6"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-7.jpg" alt="Desktop 7"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-8.jpg" alt="Desktop 8"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-9.jpg" alt="Desktop 9"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-10.jpg" alt="Desktop 10"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-11.jpg" alt="Desktop 11"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-12.jpg" alt="Desktop 12"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-13.jpg" alt="Desktop 13"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-14.jpg" alt="Desktop 14"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-15.jpg" alt="Desktop 15"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-16.jpg" alt="Desktop 16"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-17.jpg" alt="Desktop 17"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-18.jpg" alt="Desktop 18"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-19.jpg" alt="Desktop 19"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-20.jpg" alt="Desktop 20"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-1.jpg" alt="Mobile 1"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-2.jpg" alt="Mobile 2"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-3.jpg" alt="Mobile 3"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-4.jpg" alt="Mobile 4"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-5.jpg" alt="Mobile 5"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-6.jpg" alt="Mobile 6"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-7.jpg" alt="Mobile 7"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-8.jpg" alt="Mobile 8"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-9.jpg" alt="Mobile 9"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-10.jpg" alt="Mobile 10"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-11.jpg" alt="Mobile 11"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-12.jpg" alt="Mobile 12"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-13.jpg" alt="Mobile 13"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-14.jpg" alt="Mobile 14"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-15.jpg" alt="Mobile 15"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-16.jpg" alt="Mobile 16"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-17.jpg" alt="Mobile 17"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-18.jpg" alt="Mobile 18"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-19.jpg" alt="Mobile 19"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-20.jpg" alt="Mobile 20"></div>
           <button class="carousel-btn prev" onclick="wp2Prev()">
             <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
           </button>
@@ -1109,7 +1040,6 @@
           </button>
           <div class="carousel-counter" id="wp2-counter">1 / 20</div>
         </div>
-
         <div class="wp2-details">
           <p class="product-name">Wallpaper Pack Vol. 1</p>
           <p class="product-desc">20 hand-selected photographs from across Iceland, Norway, Ireland, Costa Rica and more — optimized for your screen, delivered instantly.</p>
@@ -1147,14 +1077,10 @@
       <p class="shop-note-text">Each Field Journal is a curated collection of photographs from a single destination — the landscapes, the wildlife, the light. Printed on premium paper and bound to last. A piece of the journey, made to keep.</p>
     </div>
     <div class="journals-grid reveal">
-
       <div class="journal-card">
         <a href="store/journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap">
           <div class="journal-ph jph1"></div>
-          <!-- Replace with: <img src="images/journal-iceland.jpg" alt="Iceland"> -->
-          <div class="journal-overlay">
-            <span class="journal-location">Iceland</span>
-          </div>
+          <div class="journal-overlay"><span class="journal-location">Iceland</span></div>
         </div></a>
         <div class="journal-info">
           <p class="journal-name">Iceland Field Journal</p>
@@ -1165,14 +1091,10 @@
           </div>
         </div>
       </div>
-
       <div class="journal-card">
         <a href="store/journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap">
           <div class="journal-ph jph2"></div>
-          <!-- Replace with: <img src="images/journal-norway.jpg" alt="Norway"> -->
-          <div class="journal-overlay">
-            <span class="journal-location">Norway</span>
-          </div>
+          <div class="journal-overlay"><span class="journal-location">Norway</span></div>
         </div></a>
         <div class="journal-info">
           <p class="journal-name">Norway Field Journal</p>
@@ -1183,14 +1105,10 @@
           </div>
         </div>
       </div>
-
       <div class="journal-card">
         <a href="store/journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap">
           <div class="journal-ph jph3"></div>
-          <!-- Replace with: <img src="images/journal-ireland.jpg" alt="Ireland"> -->
-          <div class="journal-overlay">
-            <span class="journal-location">Ireland</span>
-          </div>
+          <div class="journal-overlay"><span class="journal-location">Ireland</span></div>
         </div></a>
         <div class="journal-info">
           <p class="journal-name">Ireland Field Journal</p>
@@ -1201,14 +1119,10 @@
           </div>
         </div>
       </div>
-
       <div class="journal-card">
         <a href="store/journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap">
           <div class="journal-ph jph4"></div>
-          <!-- Replace with: <img src="images/journal-costarica.jpg" alt="Costa Rica"> -->
-          <div class="journal-overlay">
-            <span class="journal-location">Costa Rica</span>
-          </div>
+          <div class="journal-overlay"><span class="journal-location">Costa Rica</span></div>
         </div></a>
         <div class="journal-info">
           <p class="journal-name">Costa Rica Field Journal</p>
@@ -1219,13 +1133,10 @@
           </div>
         </div>
       </div>
-
       <div class="journal-card">
         <a href="store/journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap">
           <div class="journal-ph jph5"></div>
-          <div class="journal-overlay">
-            <span class="journal-location">Sweden</span>
-          </div>
+          <div class="journal-overlay"><span class="journal-location">Sweden</span></div>
         </div></a>
         <div class="journal-info">
           <p class="journal-name">Sweden Field Journal</p>
@@ -1236,7 +1147,6 @@
           </div>
         </div>
       </div>
-
     </div>
     <div style="text-align: center; margin-top: 3rem;">
       <a href="journals.html" class="btn-portfolio">View All Field Journals</a>
@@ -1248,7 +1158,7 @@
   <section id="portfolio" class="section-wrap">
     <div class="reveal">
       <p class="section-label">Selected Work</p>
-      <h2 class="section-title">Landscapes & <em>Wildlife</em></h2>
+      <h2 class="section-title">Landscapes &amp; <em>Wildlife</em></h2>
       <div class="section-rule"></div>
     </div>
     <div class="map-filter-wrap">
@@ -1273,60 +1183,49 @@
     <div class="gallery-grid" id="gallery-grid">
       <div class="gallery-item" data-type="landscape" data-country="Norway" data-index="0">
         <img src="images/norway-1.jpg" alt="Norway">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Norway</div>
-        </div>
+        <div class="gallery-hover"><div class="gallery-hover-location">Norway</div></div>
       </div>
       <div class="gallery-item" data-type="landscape" data-country="Portugal" data-index="1">
         <img src="images/portugal-1.jpg" alt="Portugal">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Portugal</div>
-        </div>
+        <div class="gallery-hover"><div class="gallery-hover-location">Portugal</div></div>
       </div>
       <div class="gallery-item" data-type="landscape" data-country="Ireland" data-index="2">
         <img src="images/ireland-1.jpg" alt="Ireland">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Ireland</div>
-        </div>
+        <div class="gallery-hover"><div class="gallery-hover-location">Ireland</div></div>
       </div>
       <div class="gallery-item" data-type="landscape" data-country="United States" data-index="3">
         <img src="images/unitedstates-7.jpg" alt="United States">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">United States</div>
-        </div>
+        <div class="gallery-hover"><div class="gallery-hover-location">United States</div></div>
       </div>
       <div class="gallery-item" data-type="landscape" data-country="United States" data-index="4">
         <img src="images/unitedstates-5.jpg" alt="United States">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">United States</div>
-        </div>
+        <div class="gallery-hover"><div class="gallery-hover-location">United States</div></div>
       </div>
       <div class="gallery-item" data-type="landscape" data-country="United States" data-index="5">
         <img src="images/unitedstates-1.jpg" alt="United States">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">United States</div>
-        </div>
+        <div class="gallery-hover"><div class="gallery-hover-location">United States</div></div>
       </div>
       <div class="gallery-item" data-type="landscape" data-country="Costa Rica" data-index="6">
         <img src="images/costarica-4.jpg" alt="Costa Rica">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Costa Rica</div>
-        </div>
+        <div class="gallery-hover"><div class="gallery-hover-location">Costa Rica</div></div>
       </div>
       <div class="gallery-item" data-type="landscape" data-country="Sweden" data-index="7">
         <img src="images/sweden-2.jpg" alt="Sweden">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Sweden</div>
-        </div>
+        <div class="gallery-hover"><div class="gallery-hover-location">Sweden</div></div>
       </div>
       <div class="gallery-item" data-type="wildlife" data-index="8">
         <img src="images/wildlife-2.jpg" alt="Wildlife">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Wildlife</div>
-        </div>
+        <div class="gallery-hover"><div class="gallery-hover-location">Wildlife</div></div>
+      </div>
+      <div class="gallery-item" data-type="landscape" data-country="Iceland" data-index="9">
+        <img src="images/iceland-13.jpg" alt="Iceland">
+        <div class="gallery-hover"><div class="gallery-hover-location">Iceland</div></div>
+      </div>
+      <div class="gallery-item" data-type="landscape" data-country="Iceland" data-index="10">
+        <img src="images/iceland-14.jpg" alt="Iceland">
+        <div class="gallery-hover"><div class="gallery-hover-location">Iceland</div></div>
       </div>
     </div>
-
     <div style="text-align: center; margin-top: 3rem;">
       <a href="portfolio.html" class="btn-portfolio">View Full Portfolio</a>
     </div>
@@ -1506,7 +1405,7 @@
         .attr('stroke', 'var(--warm-white)').attr('stroke-width', '0.4');
     }).catch(() => {
       document.getElementById('map-loading').textContent = 'Use the buttons below to filter by location.';
-    })
+    });
 
     // ── GALLERY MASONRY + FILTER ──
     let allGalleryItems = [];
@@ -1561,7 +1460,6 @@
       filterGallery(active ? active.dataset.filter : 'all');
     });
 
-
     // ── WALLPAPER SECTION CAROUSEL ──
     let wp2Idx = 0, wp2Group = 'desktop';
     const WP2_TOTAL = 20;
@@ -1592,6 +1490,7 @@
         specs.innerHTML = '<span>Resolution</span> — 1170 × 2532px<br><span>Format</span> — JPEG, sRGB<br><span>Files</span> — 20 wallpapers<br><span>Delivery</span> — Instant download';
       }
     }
+
     // ── NAV TOGGLE ──
     function toggleMenu() {
       const links = document.getElementById('nav-links');
@@ -1611,7 +1510,7 @@
         distributeItems(allGalleryItems, null);
       }
 
-      // Pill listeners (after gallery init)
+      // Pill listeners
       document.querySelectorAll('.map-pill').forEach(pill => {
         pill.addEventListener('click', () => filterGallery(pill.dataset.filter));
       });
@@ -1634,127 +1533,106 @@
       });
     });
   </script>
-<script src="./protect.js"></script>
-<script>
-  // ── CART ──
-  var Cart = (function() {
-    var items = [];
+  <script src="./protect.js"></script>
+  <script>
+    // ── CART ──
+    var Cart = (function() {
+      var items = [];
 
-    function save() {
-      try { localStorage.setItem('rm_cart', JSON.stringify(items)); } catch(e) {}
-    }
-    function load() {
-      try { var d = localStorage.getItem('rm_cart'); if (d) items = JSON.parse(d); } catch(e) {}
-    }
-    function add(item) {
-      // item: { id, name, opts, price, thumb }
-      var existing = items.find(function(i){ return i.id === item.id; });
-      if (existing) { existing.qty++; }
-      else { item.qty = 1; items.push(item); }
-      save();
-      render();
-      open();
-      // Flash the button
-      var btn = document.getElementById('atc-btn');
-      btn.textContent = 'Added!';
-      setTimeout(function(){ btn.textContent = 'Add to Cart'; }, 1200);
-    }
-    function remove(id) {
-      items = items.filter(function(i){ return i.id !== id; });
-      save(); render();
-    }
-    function updateQty(id, delta) {
-      var item = items.find(function(i){ return i.id === id; });
-      if (!item) return;
-      item.qty += delta;
-      if (item.qty <= 0) items = items.filter(function(i){ return i.id !== id; });
-      save(); render();
-    }
-    function total() {
-      return items.reduce(function(s, i){ return s + i.price * i.qty; }, 0);
-    }
-    function render() {
-      var el = document.getElementById('cd-items');
-      var empty = document.getElementById('cd-empty');
-      var footer = document.getElementById('cd-footer');
-      var count = document.getElementById('cart-count');
-      var totalEl = document.getElementById('cd-total');
-      var totalItems = items.reduce(function(s,i){ return s + i.qty; }, 0);
-
-      // Badge
-      count.textContent = totalItems;
-      count.className = totalItems > 0 ? 'has-items' : '';
-
-      // Total
-      if (totalEl) totalEl.textContent = '$' + total().toFixed(2).replace(/\.00$/, '');
-
-      if (items.length === 0) {
-        el.innerHTML = '';
-        empty.style.display = 'flex';
-        if (footer) footer.style.display = 'none';
-        return;
+      function save() {
+        try { localStorage.setItem('rm_cart', JSON.stringify(items)); } catch(e) {}
       }
-      empty.style.display = 'none';
-      if (footer) footer.style.display = 'block';
+      function load() {
+        try { var d = localStorage.getItem('rm_cart'); if (d) items = JSON.parse(d); } catch(e) {}
+      }
+      function add(item) {
+        var existing = items.find(function(i){ return i.id === item.id; });
+        if (existing) { existing.qty++; }
+        else { item.qty = 1; items.push(item); }
+        save();
+        render();
+        open();
+        var btn = document.getElementById('atc-btn');
+        if (btn) { btn.textContent = 'Added!'; setTimeout(function(){ btn.textContent = 'Add to Cart'; }, 1200); }
+      }
+      function remove(id) {
+        items = items.filter(function(i){ return i.id !== id; });
+        save(); render();
+      }
+      function updateQty(id, delta) {
+        var item = items.find(function(i){ return i.id === id; });
+        if (!item) return;
+        item.qty += delta;
+        if (item.qty <= 0) items = items.filter(function(i){ return i.id !== id; });
+        save(); render();
+      }
+      function total() {
+        return items.reduce(function(s, i){ return s + i.price * i.qty; }, 0);
+      }
+      function render() {
+        var el = document.getElementById('cd-items');
+        var empty = document.getElementById('cd-empty');
+        var footer = document.getElementById('cd-footer');
+        var count = document.getElementById('cart-count');
+        var totalEl = document.getElementById('cd-total');
+        var totalItems = items.reduce(function(s,i){ return s + i.qty; }, 0);
 
-      el.innerHTML = items.map(function(item) {
-        return '<div class="cd-item">' +
-          '<img class="cd-item-thumb" src="' + item.thumb + '" alt="">' +
-          '<div class="cd-item-info">' +
-            '<div class="cd-item-name">Stillness on the Fjord</div>' +
-            '<div class="cd-item-opts">' + item.opts + '</div>' +
-            '<div class="cd-item-price">$' + (item.price * item.qty).toFixed(2).replace(/\.00$/,'') + '</div>' +
-            '<div class="cd-qty">' +
-              '<button class="cd-qty-btn" onclick="Cart.updateQty(\'' + item.id + '\',-1)">−</button>' +
-              '<span class="cd-qty-num">' + item.qty + '</span>' +
-              '<button class="cd-qty-btn" onclick="Cart.updateQty(\'' + item.id + '\',1)">+</button>' +
-            '</div>' +
-            '<button class="cd-item-remove" onclick="Cart.remove(\'' + item.id + '\')">Remove</button>' +
-          '</div>' +
-        '</div>';
-      }).join('');
-    }
-    function open() {
-      document.getElementById('cart-drawer').classList.add('open');
-      document.getElementById('cart-overlay').classList.add('open');
-    }
-    function close() {
-      document.getElementById('cart-drawer').classList.remove('open');
-      document.getElementById('cart-overlay').classList.remove('open');
-    }
-    function toggleDropdown() {
-      var d = document.getElementById('cart-drawer');
-      if (d.classList.contains('open')) { close(); } else { open(); }
-    }
-    function checkout() {
-      if (items.length === 0) return;
-      // Build Shopify cart URL with all items
-      var VARIANTS = {
-        'print': {
-          '8 \u00d7 12 in':  '47891626492118',
-          '12 \u00d7 18 in': '47891626623190',
-          '16 \u00d7 24 in': '47891626754262',
-          '24 \u00d7 36 in': '47891626885334'
-        },
-        'metal': {
-          '8 \u00d7 12 in':  '47891626590422',
-          '12 \u00d7 18 in': '47891626721494',
-          '16 \u00d7 24 in': '47891626852566',
-          '24 \u00d7 36 in': '47891626983638'
+        count.textContent = totalItems;
+        count.className = totalItems > 0 ? 'has-items' : '';
+
+        if (totalEl) totalEl.textContent = '$' + total().toFixed(2).replace(/\.00$/, '');
+
+        if (items.length === 0) {
+          el.innerHTML = '';
+          empty.style.display = 'flex';
+          if (footer) footer.style.display = 'none';
+          return;
         }
-      };
-      var parts = items.map(function(item) {
-        return item.variantId + ':' + item.qty;
-      }).join(',');
-      var url = 'https://checkout.ryanmuratore.com/cart/' + parts;
-      window.location.href = url;
-    }
+        empty.style.display = 'none';
+        if (footer) footer.style.display = 'block';
 
-    load();
-    return { add: add, remove: remove, updateQty: updateQty, open: open, close: close, toggleDropdown: toggleDropdown, checkout: checkout, render: render };
-  })();
-  // Init cart on load
-  window.addEventListener('DOMContentLoaded', function(){ Cart.render(); });
-</script>
+        el.innerHTML = items.map(function(item) {
+          return '<div class="cd-item">' +
+            '<img class="cd-item-thumb" src="' + item.thumb + '" alt="">' +
+            '<div class="cd-item-info">' +
+              '<div class="cd-item-name">' + item.name + '</div>' +
+              '<div class="cd-item-opts">' + item.opts + '</div>' +
+              '<div class="cd-item-price">$' + (item.price * item.qty).toFixed(2).replace(/\.00$/,'') + '</div>' +
+              '<div class="cd-qty">' +
+                '<button class="cd-qty-btn" onclick="Cart.updateQty(\'' + item.id + '\',-1)">−</button>' +
+                '<span class="cd-qty-num">' + item.qty + '</span>' +
+                '<button class="cd-qty-btn" onclick="Cart.updateQty(\'' + item.id + '\',1)">+</button>' +
+              '</div>' +
+              '<button class="cd-item-remove" onclick="Cart.remove(\'' + item.id + '\')">Remove</button>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+      }
+      function open() {
+        document.getElementById('cart-drawer').classList.add('open');
+        document.getElementById('cart-overlay').classList.add('open');
+      }
+      function close() {
+        document.getElementById('cart-drawer').classList.remove('open');
+        document.getElementById('cart-overlay').classList.remove('open');
+      }
+      function toggleDropdown() {
+        var d = document.getElementById('cart-drawer');
+        if (d.classList.contains('open')) { close(); } else { open(); }
+      }
+      function checkout() {
+        if (items.length === 0) return;
+        var parts = items.map(function(item) {
+          return item.variantId + ':' + item.qty;
+        }).join(',');
+        var url = 'https://checkout.ryanmuratore.com/cart/' + parts;
+        window.location.href = url;
+      }
+
+      load();
+      return { add: add, remove: remove, updateQty: updateQty, open: open, close: close, toggleDropdown: toggleDropdown, checkout: checkout, render: render };
+    })();
+    window.addEventListener('DOMContentLoaded', function(){ Cart.render(); });
+  </script>
 </body>
 </html>
