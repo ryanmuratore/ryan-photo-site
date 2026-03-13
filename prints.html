@@ -100,18 +100,43 @@
 
     .mobile-top-right { display: none; }
     @media (max-width: 768px) {
+
+      /* Nav */
+      nav { padding: 0.9rem 1.2rem; }
       .mobile-top-right { display: flex; align-items: center; gap: 1rem; }
-      .hamburger { display: flex; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 0.3rem; z-index: 1000; }
+      .hamburger { display: flex; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 0.4rem; z-index: 1000; }
       .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--earth); transition: all 0.3s; }
       .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
       .hamburger.open span:nth-child(2) { opacity: 0; }
       .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-      nav { padding: 1rem 1.4rem; justify-content: space-between; }
-      .nav-logo { font-size: 1rem !important; white-space: nowrap; }
-      .nav-links { display: none; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--warm-white); z-index: 998; justify-content: center; align-items: center; gap: 2.5rem; }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(250,246,240,0.99); z-index: 997; border-top: 1px solid var(--sand); }
       .nav-links.open { display: flex; }
-      .nav-links a { font-size: 1rem !important; letter-spacing: 0.2em; color: var(--earth) !important; white-space: nowrap; }
+      .nav-links li { display: block; }
       .nav-links li.cart-dropdown-wrap { display: none !important; }
+      .nav-links a { display: block; padding: 0.9rem 1.4rem; border-bottom: 1px solid var(--linen); font-size: 0.62rem; }
+
+      /* Page header */
+      .page-header { padding: 5rem 1.4rem 2rem; }
+      .page-header h1 { font-size: clamp(1.8rem, 7vw, 2.6rem); }
+
+      /* Filter pills: horizontally scrollable row */
+      .filter-bar { padding: 0 1.2rem 1rem; overflow-x: auto; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; }
+      .filter-bar::-webkit-scrollbar { display: none; }
+      .fp { white-space: nowrap; flex-shrink: 0; }
+
+      /* Prints grid: 2 columns */
+      .prints-wrap { padding: 0 1rem 4rem; }
+      .prints-grid { grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+
+      /* Cards: proportional image height, tighter text */
+      .print-img-wrap { height: 46vw; }
+      .print-info { padding: 0.75rem 0.7rem 0.9rem; }
+      .print-title { font-size: 0.75rem; margin-bottom: 0.2rem; }
+      .print-loc { font-size: 0.55rem; margin-bottom: 0.5rem; }
+      .print-from { font-size: 0.6rem; }
+
+      footer { flex-direction: column; align-items: flex-start; gap: 0.4rem; padding: 1.2rem 1.4rem; }
     }
 
     .hamburger { display: none; }

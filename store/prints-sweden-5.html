@@ -248,24 +248,7 @@
     footer { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 3rem; font-size: 0.63rem; color: var(--clay); }
     .fl { font-family: 'Playfair Display', serif; font-size: 0.9rem; color: var(--bark); text-decoration: none; font-weight: 300; }
 
-    @media (max-width: 1024px) {
-      .shell { display: block; }
-      .viewer { position: relative; top: 0; height: 75vw; min-height: 260px; max-height: 500px; }
-      .d-inner { padding: 2rem 1.4rem 3rem; }
-      nav { padding: 1rem 1.4rem; }
-      .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(250,246,240,0.98); border-top: 1px solid var(--sand); z-index: 999; }
-      .nav-links.open { display: flex; }
-      .nav-links li { display: block; }
-      .nav-links li.cdw { display: none !important; }
-      .nav-links a { display: block; padding: 0.8rem 1.4rem; border-bottom: 1px solid var(--linen); }
-      .mob-right { display: flex; }
-      .burger { display: flex; }
-      .specs { grid-template-columns: 1fr; }
-      .sp { border-right: none; border-bottom: 1px solid var(--linen); padding: 1.1rem 0; }
-      .sp:last-child { border-bottom: none; padding-left: 0; }
-      .sp:nth-child(2) { padding-left: 0; }
-      footer { flex-direction: column; align-items: flex-start; gap: 0.4rem; padding: 1.2rem 1.4rem; }
-    }
+    
   
     /* Mockup panels */
     .p-mock { background: #f0ebe4; }
@@ -282,6 +265,121 @@
     .img-dot-icon { width: 28px; height: 28px; border-radius: 3px; cursor: pointer; border: 2px solid transparent; transition: opacity 0.2s, border-color 0.2s; opacity: 0.55; display: flex; align-items: center; justify-content: center; background: var(--sand); }
     .img-dot-icon.active { border-color: var(--bark); opacity: 1; }
     .img-dot-icon svg { width: 14px; height: 14px; stroke: var(--earth); fill: none; stroke-width: 1.5; }
+
+
+    /* ════════════════════════════════════════
+       MOBILE  (≤ 768px)
+       Photo hero → scrollable details below
+       Sticky "Add to Cart" bar at bottom
+    ════════════════════════════════════════ */
+    @media (max-width: 768px) {
+
+      /* Nav */
+      nav { padding: 0.9rem 1.2rem; }
+      .mob-right { display: flex; }
+      .burger { display: flex; }
+      .nav-links { display: none; flex-direction: column; position: absolute;
+        top: 100%; left: 0; right: 0; background: rgba(250,246,240,0.99);
+        border-top: 1px solid var(--sand); z-index: 999; }
+      .nav-links.open { display: flex; }
+      .nav-links li { display: block; }
+      .nav-links li.cdw { display: none !important; }
+      .nav-links a { display: block; padding: 0.9rem 1.4rem; border-bottom: 1px solid var(--linen); font-size: 0.62rem; }
+
+      /* Shell: single column, full scroll */
+      .shell { display: block; padding-top: 50px; padding-bottom: 80px; }
+
+      /* Viewer: tall photo hero, NOT sticky */
+      .viewer { position: relative; top: 0; height: 88vw; min-height: 300px; max-height: 520px; }
+
+      /* Thumbnail dots: slightly larger, easier to tap */
+      .img-dots { padding: 0.7rem 0; gap: 0.7rem; }
+      .img-dot, .img-dot-icon { width: 34px; height: 34px; }
+
+      /* Details pane */
+      .details { overflow-y: visible; }
+      .d-inner { padding: 1.8rem 1.4rem 1.6rem; }
+
+      /* Back link */
+      .back { margin-bottom: 1.4rem; }
+
+      /* Title */
+      .title { font-size: 1.9rem; }
+
+      /* Meta row: stack to 2 cols */
+      .meta { flex-wrap: wrap; gap: 0.8rem 0; margin-bottom: 1.4rem; }
+      .m-item { flex: 0 0 50%; }
+      .m-item + .m-item { border-left: none; padding-left: 0; }
+      .m-item:nth-child(2n) { border-left: 1px solid var(--linen); padding-left: 1rem; }
+
+      /* Format cards: stay 2-col but full width */
+      .fmt-grid { gap: 0.5rem; }
+      .fmt-card { padding: 0.9rem 0.8rem; }
+
+      /* Size grid: 2-col, bigger tap targets */
+      .size-grid { gap: 0.5rem; }
+      .sz { padding: 1rem 0.5rem; }
+      .sz-d { font-size: 0.75rem; }
+
+      /* Frame extras */
+      .fex-body { gap: 1.2rem; }
+      .sb { padding: 0.85rem 0.5rem; font-size: 0.55rem; }
+
+      /* Specs: single column */
+      .specs { grid-template-columns: 1fr; margin-top: 1.8rem; }
+      .sp { border-right: none; border-bottom: 1px solid var(--linen); padding: 1rem 0; }
+      .sp:last-child { border-bottom: none; padding-left: 0; }
+      .sp:nth-child(2) { padding-left: 0; }
+
+      /* Price: smaller on mobile */
+      .price-num { font-size: 2.2rem; }
+      .price-block { padding-top: 1.2rem; margin-top: 1rem; }
+
+      /* Hide the inline Add to Cart — replaced by sticky bar */
+      .btn-add { display: none; }
+      .trust { display: none; }
+
+      /* ── Sticky bottom bar ── */
+      .mob-atc-bar {
+        display: flex !important;
+        position: fixed;
+        bottom: 0; left: 0; right: 0;
+        z-index: 300;
+        background: var(--w);
+        border-top: 1px solid var(--sand);
+        padding: 0.75rem 1.2rem;
+        gap: 0.8rem;
+        align-items: center;
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.07);
+      }
+      .mob-atc-price {
+        flex-shrink: 0;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.5rem;
+        font-weight: 300;
+        color: var(--earth);
+        line-height: 1;
+      }
+      .mob-atc-btn {
+        flex: 1;
+        padding: 0.95rem 1rem;
+        background: var(--earth);
+        color: var(--w);
+        border: none;
+        font-family: 'Tenor Sans', sans-serif;
+        font-size: 0.6rem;
+        letter-spacing: 0.34em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .mob-atc-btn:hover { background: var(--bark); }
+
+      footer { flex-direction: column; align-items: flex-start; gap: 0.4rem; padding: 1.2rem 1.4rem; }
+    }
+
+    /* Hide sticky bar on desktop */
+    .mob-atc-bar { display: none; }
 
   </style>
 </head>
@@ -684,6 +782,18 @@
 
 <script>
   // ── CART ──
+
+  // Keep mobile sticky bar price in sync
+  function updateMobPrice() {
+    var el = document.getElementById('mob-atc-price');
+    var btn = document.getElementById('mob-atc-btn');
+    if (el) el.textContent = '$' + price();
+    if (btn) btn.textContent = 'Add to Cart';
+  }
+  var _origUpdateUI = updateUI;
+  updateUI = function() { _origUpdateUI(); updateMobPrice(); };
+  updateMobPrice();
+
   var Cart = (function() {
     var items = [];
 
@@ -835,5 +945,12 @@
   // Init cart on load
   window.addEventListener('DOMContentLoaded', function(){ Cart.render(); });
 </script>
+
+<!-- MOBILE STICKY ADD-TO-CART BAR -->
+<div class="mob-atc-bar" id="mob-atc-bar">
+  <div class="mob-atc-price" id="mob-atc-price">$100</div>
+  <button class="mob-atc-btn" id="mob-atc-btn" onclick="addToCart()">Add to Cart</button>
+</div>
+
 </body>
 </html>
