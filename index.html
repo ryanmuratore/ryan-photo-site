@@ -211,30 +211,33 @@
     /* ── PORTFOLIO ── */
     #portfolio { background: var(--warm-white); }
 
-    /* ── GALLERY GRID — matches prints.html ── */
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 27%);
-      column-gap: 9.5%;
-      row-gap: 80px;
-      padding: 2rem 217px 0;
-      align-items: center;
-    }
-    .gallery-item {
-      display: block;
-      text-decoration: none;
-      color: inherit;
-      text-align: center;
-    }
-    .gallery-item img {
-      display: inline-block;
-      max-width: 100%;
-      height: auto;
-      max-height: 420px;
-      width: auto;
-      transition: opacity 0.3s ease;
-    }
-    .gallery-item:hover img { opacity: 0.88; }
+    /* ── WORLD MAP FILTER ── */
+    .map-filter-wrap { margin-bottom: 3.5rem; position: relative; }
+    .map-label { font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--clay); margin-bottom: 1rem; display: block; }
+    #world-map-container { width: 65%; margin: 0 auto; background: var(--linen); border: 1px solid var(--sand); overflow: hidden; position: relative; }
+    #world-map-container svg { width: 100%; height: auto; display: block; }
+    .country-path { fill: var(--sand); stroke: var(--warm-white); stroke-width: 0.4; transition: fill 0.25s; cursor: default; }
+    .country-path.visited { fill: var(--clay); cursor: pointer; }
+    .country-path.visited:hover { fill: var(--bark); }
+    .country-path.map-active { fill: var(--earth) !important; }
+    .map-tooltip { position: fixed; background: var(--earth); color: var(--warm-white); font-family: 'Tenor Sans', sans-serif; font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.4rem 0.9rem; pointer-events: none; opacity: 0; transition: opacity 0.15s; white-space: nowrap; z-index: 999; }
+    .map-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.2rem; }
+    .map-pill { padding: 0.35rem 1rem; font-family: 'Tenor Sans', sans-serif; font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; border: 1px solid var(--sand); background: none; color: var(--tan); cursor: pointer; transition: all 0.25s; }
+    .map-pill.active, .map-pill:hover { background: var(--earth); border-color: var(--earth); color: var(--warm-white); }
+    .wildlife-pill { border-color: var(--bark); color: var(--bark); }
+    .wildlife-pill.active, .wildlife-pill:hover { background: var(--bark); border-color: var(--bark); color: var(--warm-white); }
+    .map-loading { padding: 3rem; text-align: center; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--tan); }
+
+    /* ── GALLERY GRID ── */
+    .gallery-grid { display: flex; gap: 8px; align-items: flex-start; }
+    .gallery-col { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+    .gallery-item { position: relative; overflow: hidden; cursor: pointer; width: 100%; transition: opacity 0.4s; }
+    .gallery-item img { width: 100%; height: auto; display: block; transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .gallery-item:hover img { transform: scale(1.04); }
+    .gallery-hover { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,18,8,0.82) 0%, rgba(26,18,8,0.1) 50%, transparent 100%); opacity: 0; transition: opacity 0.4s; display: flex; flex-direction: column; justify-content: flex-end; padding: 1.4rem; }
+    .gallery-item:hover .gallery-hover { opacity: 1; }
+    .gallery-hover-title { display: none; }
+    .gallery-hover-location { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--warm-white); transform: translateY(6px); transition: transform 0.4s; }
 
     /* ── FULL PORTFOLIO BUTTON ── */
     .btn-portfolio {
@@ -262,21 +265,22 @@
     }
     .shop-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: end; margin-bottom: 4rem; }
     .shop-note-text { font-size: 0.88rem; line-height: 1.9; color: var(--tan); border-left: 1px solid var(--clay); padding-left: 1.5rem; }
-    .prints-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.8rem; }
-    .print-card { background: var(--warm-white); border: 1px solid var(--sand); overflow: hidden; transition: transform 0.4s, box-shadow 0.4s; }
-    .print-card:hover { transform: translateY(-5px); box-shadow: 0 18px 45px rgba(78,56,32,0.1); }
-    .print-img-wrap { height: 280px; position: relative; overflow: hidden; }
-    .print-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
-    .print-card:hover img { transform: scale(1.04); }
-    .print-badge { position: absolute; top: 1rem; left: 1rem; background: var(--bark); color: var(--warm-white); font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; padding: 0.28rem 0.7rem; }
-    .print-info { padding: 1.4rem; }
-    .print-name { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 300; color: var(--earth); margin-bottom: 0.25rem; }
-    .print-location { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay); margin-bottom: 1rem; }
-    .print-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 1rem; border-top: 1px solid var(--linen); }
-    .print-price { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--bark); }
-    .btn-add { padding: 0.5rem 1.2rem; font-family: 'Tenor Sans', sans-serif; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; background: var(--earth); color: var(--warm-white); border: none; cursor: pointer; transition: background 0.25s; }
-    .btn-add:hover { background: var(--bark); }
-    .print-sizes { font-size: 0.62rem; color: var(--sand); letter-spacing: 0.1em; margin-bottom: 0.8rem; }
+    /* prints.html style grid */
+    .prints-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 27%);
+      column-gap: 9.5%;
+      row-gap: 80px;
+      padding: 2rem 217px 0;
+      align-items: center;
+    }
+    .print-item { display: block; text-decoration: none; color: inherit; text-align: center; }
+    .print-img-wrap { width: 100%; margin-bottom: 18px; text-align: center; }
+    .print-img-wrap img { display: inline-block; max-width: 100%; height: auto; max-height: 420px; width: auto; transition: opacity 0.3s ease; }
+    .print-item:hover .print-img-wrap img { opacity: 0.88; }
+    .print-meta { text-align: center; }
+    .print-name { font-size: 13px; letter-spacing: 3.5px; text-transform: uppercase; color: var(--earth); margin-bottom: 8px; font-family: 'Tenor Sans', sans-serif; }
+    .print-price { font-family: 'Tenor Sans', sans-serif; font-size: 13px; letter-spacing: 1px; color: var(--tan); }
 
     /* ── WALLPAPERS ── */
     #wallpapers { background: var(--warm-white); }
@@ -445,17 +449,18 @@
       .hero-cta { justify-content: flex-start; flex-wrap: wrap; }
       .btn { font-size: 0.58rem; padding: 0.7rem 1.5rem; }
       .section-wrap { padding: 4rem 1.5rem; }
-      /* Gallery mobile: 2 columns */
-      .gallery-grid {
+      /* ── GALLERY MOBILE FIXES ── */
+      .gallery-grid { gap: 6px; align-items: flex-start !important; width: 100% !important; }
+      .gallery-col { gap: 6px; flex: 1 1 0 !important; min-width: 0 !important; width: 50% !important; }
+      #world-map-container { width: 100% !important; margin: 0 !important; }
+      .shop-intro { grid-template-columns: 1fr; gap: 2rem; }
+      .prints-grid {
         grid-template-columns: repeat(2, 1fr) !important;
         column-gap: 20px !important;
         row-gap: 40px !important;
         padding: 1rem 20px 0 !important;
       }
-      .gallery-item img { max-height: 280px !important; }
-      .shop-intro { grid-template-columns: 1fr; gap: 2rem; }
-      .prints-grid { grid-template-columns: 1fr 1fr !important; gap: 0.9rem !important; }
-      .print-img-wrap { height: 46vw; }
+      .print-img-wrap img { max-height: 280px !important; }
       .wp2-hero { grid-template-columns: 1fr; gap: 1.5rem; }
       .journals-grid { grid-template-columns: 1fr; }
       .about-grid { grid-template-columns: 1fr; gap: 3rem; }
@@ -564,26 +569,30 @@
       </div>
     </div>
     <div class="prints-grid reveal">
-      <div class="print-card">
-        <a href="store/prints-norway.html" style="display:block; text-decoration:none;"><div class="print-img-wrap"><img src="images/norway-1.jpg" alt="Stillness on the Fjord"><span class="print-badge">Best Seller</span></div></a>
-        <div class="print-info"><p class="print-name">Stillness on the Fjord</p><p class="print-location">Norway</p><p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p><div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-norway.html" class="btn-add" style="text-decoration:none;">Order Print</a></div></div>
-      </div>
-      <div class="print-card">
-        <a href="store/prints-unitedstates-1.html" style="display:block; text-decoration:none;"><div class="print-img-wrap"><img src="images/unitedstates-1.jpg" alt="Open Water"></div></a>
-        <div class="print-info"><p class="print-name">Open Water</p><p class="print-location">United States</p><p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p><div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-unitedstates-1.html" class="btn-add" style="text-decoration:none;">Order Print</a></div></div>
-      </div>
-      <div class="print-card">
-        <a href="store/prints-sweden.html" style="display:block; text-decoration:none;"><div class="print-img-wrap"><img src="images/sweden-1.jpg" alt="A Place Kept"><span class="print-badge">New</span></div></a>
-        <div class="print-info"><p class="print-name">A Place Kept</p><p class="print-location">Sweden</p><p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p><div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-sweden.html" class="btn-add" style="text-decoration:none;">Order Print</a></div></div>
-      </div>
-      <div class="print-card">
-        <a href="store/prints-ireland-1.html" style="display:block; text-decoration:none;"><div class="print-img-wrap"><img src="images/ireland-1.jpg" alt="The Edge"></div></a>
-        <div class="print-info"><p class="print-name">The Edge</p><p class="print-location">Ireland</p><p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p><div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-ireland-1.html" class="btn-add" style="text-decoration:none;">Order Print</a></div></div>
-      </div>
-      <div class="print-card">
-        <a href="store/prints-wildlife2.html" style="display:block; text-decoration:none;"><div class="print-img-wrap"><img src="images/wildlife-1.jpg" alt="Emerald Hover"><span class="print-badge">New</span></div></a>
-        <div class="print-info"><p class="print-name">Emerald Hover</p><p class="print-location">Wildlife</p><p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p><div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-wildlife2.html" class="btn-add" style="text-decoration:none;">Order Print</a></div></div>
-      </div>
+      <a href="store/prints-norway.html" class="print-item">
+        <div class="print-img-wrap"><img src="images/norway-1.jpg" alt="Stillness on the Fjord"></div>
+        <div class="print-meta"><p class="print-name">Stillness on the Fjord</p><p class="print-price">from $75</p></div>
+      </a>
+      <a href="store/prints-sweden.html" class="print-item">
+        <div class="print-img-wrap"><img src="images/sweden-1.jpg" alt="A Place Kept"></div>
+        <div class="print-meta"><p class="print-name">A Place Kept</p><p class="print-price">from $75</p></div>
+      </a>
+      <a href="store/prints-ireland-1.html" class="print-item">
+        <div class="print-img-wrap"><img src="images/ireland-1.jpg" alt="The Edge"></div>
+        <div class="print-meta"><p class="print-name">The Edge</p><p class="print-price">from $75</p></div>
+      </a>
+      <a href="store/prints-costarica-2.html" class="print-item">
+        <div class="print-img-wrap"><img src="images/costarica-2.jpg" alt="Hidden Cascade"></div>
+        <div class="print-meta"><p class="print-name">Hidden Cascade</p><p class="print-price">from $75</p></div>
+      </a>
+      <a href="store/prints-wildlife2.html" class="print-item">
+        <div class="print-img-wrap"><img src="images/wildlife-1.jpg" alt="Emerald Hover"></div>
+        <div class="print-meta"><p class="print-name">Emerald Hover</p><p class="print-price">from $75</p></div>
+      </a>
+      <a href="store/prints-unitedstates-1.html" class="print-item">
+        <div class="print-img-wrap"><img src="images/unitedstates-1.jpg" alt="Open Water"></div>
+        <div class="print-meta"><p class="print-name">Open Water</p><p class="print-price">from $75</p></div>
+      </a>
     </div>
     <div style="text-align: center; margin-top: 3rem;">
       <a href="prints.html" class="btn-portfolio">View All 22 Prints</a>
@@ -653,32 +662,69 @@
 
   <div class="divider"></div>
 
-  <!-- PORTFOLIO — prints.html style grid -->
+  <!-- PORTFOLIO — original with map + masonry -->
   <section id="portfolio" class="section-wrap">
     <div class="reveal">
       <p class="section-label">Selected Work</p>
       <h2 class="section-title">Landscapes &amp; <em>Wildlife</em></h2>
       <div class="section-rule"></div>
     </div>
-    <div class="gallery-grid reveal">
-      <a href="store/prints-norway.html" class="gallery-item">
+    <div class="map-filter-wrap">
+      <span class="map-label">Filter by destination or category</span>
+      <div id="map-tooltip" class="map-tooltip"></div>
+      <div id="world-map-container">
+        <div class="map-loading" id="map-loading">Loading map...</div>
+      </div>
+      <div class="map-pills">
+        <button class="map-pill active" data-filter="all">All</button>
+        <button class="map-pill wildlife-pill" data-filter="wildlife">Wildlife</button>
+        <button class="map-pill" data-filter="Costa Rica">Costa Rica</button>
+        <button class="map-pill" data-filter="Denmark">Denmark</button>
+        <button class="map-pill" data-filter="Iceland">Iceland</button>
+        <button class="map-pill" data-filter="Ireland">Ireland</button>
+        <button class="map-pill" data-filter="Norway">Norway</button>
+        <button class="map-pill" data-filter="Portugal">Portugal</button>
+        <button class="map-pill" data-filter="Sweden">Sweden</button>
+        <button class="map-pill" data-filter="United States">United States</button>
+      </div>
+    </div>
+    <div class="gallery-grid" id="gallery-grid">
+      <div class="gallery-item" data-type="landscape" data-country="Norway" data-index="0">
         <img src="images/norway-1.jpg" alt="Norway">
-      </a>
-      <a href="store/prints-sweden.html" class="gallery-item">
-        <img src="images/sweden-1.jpg" alt="Sweden">
-      </a>
-      <a href="store/prints-ireland-1.html" class="gallery-item">
+        <div class="gallery-hover"><div class="gallery-hover-location">Norway</div></div>
+      </div>
+      <div class="gallery-item" data-type="landscape" data-country="Portugal" data-index="1">
+        <img src="images/portugal-1.jpg" alt="Portugal">
+        <div class="gallery-hover"><div class="gallery-hover-location">Portugal</div></div>
+      </div>
+      <div class="gallery-item" data-type="landscape" data-country="Ireland" data-index="2">
         <img src="images/ireland-1.jpg" alt="Ireland">
-      </a>
-      <a href="store/prints-costarica-2.html" class="gallery-item">
-        <img src="images/costarica-2.jpg" alt="Costa Rica">
-      </a>
-      <a href="store/prints-wildlife2.html" class="gallery-item">
-        <img src="images/wildlife-1.jpg" alt="Wildlife">
-      </a>
-      <a href="store/prints-unitedstates-1.html" class="gallery-item">
+        <div class="gallery-hover"><div class="gallery-hover-location">Ireland</div></div>
+      </div>
+      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="3">
+        <img src="images/unitedstates-7.jpg" alt="United States">
+        <div class="gallery-hover"><div class="gallery-hover-location">United States</div></div>
+      </div>
+      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="4">
+        <img src="images/unitedstates-5.jpg" alt="United States">
+        <div class="gallery-hover"><div class="gallery-hover-location">United States</div></div>
+      </div>
+      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="5">
         <img src="images/unitedstates-1.jpg" alt="United States">
-      </a>
+        <div class="gallery-hover"><div class="gallery-hover-location">United States</div></div>
+      </div>
+      <div class="gallery-item" data-type="landscape" data-country="Costa Rica" data-index="6">
+        <img src="images/costarica-4.jpg" alt="Costa Rica">
+        <div class="gallery-hover"><div class="gallery-hover-location">Costa Rica</div></div>
+      </div>
+      <div class="gallery-item" data-type="landscape" data-country="Sweden" data-index="7">
+        <img src="images/sweden-2.jpg" alt="Sweden">
+        <div class="gallery-hover"><div class="gallery-hover-location">Sweden</div></div>
+      </div>
+      <div class="gallery-item" data-type="wildlife" data-index="8">
+        <img src="images/wildlife-2.jpg" alt="Wildlife">
+        <div class="gallery-hover"><div class="gallery-hover-location">Wildlife</div></div>
+      </div>
     </div>
     <div style="text-align: center; margin-top: 3rem;">
       <a href="portfolio.html" class="btn-portfolio">View Full Portfolio</a>
@@ -721,7 +767,7 @@
         <div class="section-rule"></div>
         <h3>Custom orders &amp; commissions welcome</h3>
         <p>Looking for a specific size, a print not listed, or want to discuss a custom commission? Send a message and I'll get back to you within 48 hours.</p>
-        <div class="contact-detail"><div class="contact-icon">✉</div><span>ryan@ryanmuratore.com</span></div>
+        <div class="contact-detail"><div class="contact-icon">✉</div><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e19398808fa19398808f8c949380958e9384cf828e8c">[email&#160;protected]</a></span></div>
         <div class="contact-detail"><div class="contact-icon">📍</div><span>New York City</span></div>
         <div class="social-links">
           <a href="#" class="social-link">TikTok</a>
@@ -754,7 +800,7 @@
     <p>© 2025 Ryan Muratore — All rights reserved. Do not reproduce without permission.</p>
   </footer>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     const now = new Date();
     const month = now.getMonth();
     const year = now.getFullYear();
@@ -764,6 +810,112 @@
 
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); });
+
+    // ── MAP SETUP ──
+    const visited = {
+      "United States": "840", "Canada": "124", "Iceland": "352",
+      "Ireland": "372", "Norway": "578", "Sweden": "752",
+      "Denmark": "208", "Costa Rica": "188", "Portugal": "620"
+    };
+    const visitedByCode = {};
+    Object.entries(visited).forEach(([name, code]) => visitedByCode[code] = name);
+    const tooltip = document.getElementById('map-tooltip');
+
+    function loadScript(src) {
+      return new Promise((resolve, reject) => {
+        const s = document.createElement('script');
+        s.src = src; s.onload = resolve; s.onerror = reject;
+        document.head.appendChild(s);
+      });
+    }
+
+    Promise.all([
+      loadScript('https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js'),
+      loadScript('https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js')
+    ]).then(() => fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json'))
+    .then(r => r.json()).then(world => {
+      document.getElementById('map-loading').remove();
+      const container = document.getElementById('world-map-container');
+      const W = container.offsetWidth;
+      const H = Math.round(W * 0.52);
+      const svg = d3.select('#world-map-container').append('svg')
+        .attr('viewBox', `0 0 ${W} ${H}`).attr('preserveAspectRatio', 'xMidYMid meet');
+      svg.append('rect').attr('width', W).attr('height', H).attr('fill', 'var(--linen)');
+      const projection = d3.geoNaturalEarth1().scale(W / 6.5).translate([W / 2, H / 2]);
+      const path = d3.geoPath().projection(projection);
+      const countries = topojson.feature(world, world.objects.countries);
+      svg.selectAll('path').data(countries.features).enter().append('path')
+        .attr('d', path)
+        .attr('class', d => 'country-path' + (visitedByCode[d.id] ? ' visited' : ''))
+        .attr('data-name', d => visitedByCode[d.id] || '')
+        .on('click', function(event, d) {
+          const name = visitedByCode[d.id];
+          if (!name) return;
+          const current = document.querySelector('.map-pill.active')?.dataset.filter;
+          filterGallery(current === name ? 'all' : name);
+        })
+        .on('mousemove', function(event, d) {
+          const name = visitedByCode[d.id];
+          if (!name) return;
+          tooltip.textContent = name;
+          tooltip.style.opacity = '1';
+          tooltip.style.left = (event.clientX + 14) + 'px';
+          tooltip.style.top = (event.clientY - 32) + 'px';
+        })
+        .on('mouseleave', () => { tooltip.style.opacity = '0'; });
+      svg.append('path')
+        .datum(topojson.mesh(world, world.objects.countries, (a, b) => a !== b))
+        .attr('d', path).attr('fill', 'none')
+        .attr('stroke', 'var(--warm-white)').attr('stroke-width', '0.4');
+    }).catch(() => {
+      document.getElementById('map-loading').textContent = 'Use the buttons below to filter by location.';
+    });
+
+    // ── GALLERY MASONRY + FILTER ──
+    let allGalleryItems = [];
+    function getColCount() { return window.innerWidth <= 768 ? 2 : 3; }
+    function distributeItems(items, highlightSet) {
+      const grid = document.getElementById('gallery-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      const cols = getColCount();
+      const columns = [];
+      for (let i = 0; i < cols; i++) {
+        const col = document.createElement('div');
+        col.className = 'gallery-col';
+        grid.appendChild(col);
+        columns.push(col);
+      }
+      items.forEach((item, i) => {
+        const isHighlighted = !highlightSet || highlightSet.has(item);
+        item.style.opacity = isHighlighted ? '1' : '0.15';
+        item.style.pointerEvents = isHighlighted ? 'auto' : 'none';
+        columns[i % cols].appendChild(item);
+      });
+    }
+    function filterGallery(filter) {
+      if (!allGalleryItems.length) return;
+      if (filter === 'all') {
+        const sorted = allGalleryItems.slice().sort((a, b) => parseInt(a.dataset.index) - parseInt(b.dataset.index));
+        distributeItems(sorted, null);
+      } else {
+        const matching = filter === 'wildlife'
+          ? allGalleryItems.filter(i => i.dataset.type === 'wildlife')
+          : allGalleryItems.filter(i => i.dataset.country === filter);
+        const nonMatching = allGalleryItems.filter(i => !matching.includes(i));
+        distributeItems([...matching, ...nonMatching], new Set(matching));
+      }
+      document.querySelectorAll('.country-path').forEach(el => {
+        el.classList.toggle('map-active', el.dataset.name === filter);
+      });
+      document.querySelectorAll('.map-pill').forEach(p => {
+        p.classList.toggle('active', p.dataset.filter === filter);
+      });
+    }
+    window.addEventListener('resize', () => {
+      const active = document.querySelector('.map-pill.active');
+      filterGallery(active ? active.dataset.filter : 'all');
+    });
 
     let wp2Idx = 0, wp2Group = 'desktop';
     const WP2_TOTAL = 20;
@@ -801,12 +953,25 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+      // Gallery masonry init
+      const grid = document.getElementById('gallery-grid');
+      if (grid) {
+        allGalleryItems = Array.from(grid.querySelectorAll('.gallery-item'));
+        allGalleryItems.sort((a, b) => parseInt(a.dataset.index) - parseInt(b.dataset.index));
+        allGalleryItems.forEach(item => item.remove());
+        distributeItems(allGalleryItems, null);
+      }
+      // Pill listeners
+      document.querySelectorAll('.map-pill').forEach(pill => {
+        pill.addEventListener('click', () => filterGallery(pill.dataset.filter));
+      });
+      // Scroll reveals
       const reveals = document.querySelectorAll('.reveal');
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
       }, { threshold: 0.1 });
       reveals.forEach(el => observer.observe(el));
-
+      // Nav close on link click
       document.querySelectorAll('#nav-links a').forEach(a => {
         a.addEventListener('click', () => {
           document.getElementById('nav-links').classList.remove('open');
@@ -861,10 +1026,4 @@
         window.location.href = 'https://checkout.ryanmuratore.com/cart/' + parts;
       }
       load();
-      return { add: add, remove: remove, updateQty: updateQty, open: open, close: close, toggleDropdown: toggleDropdown, checkout: checkout, render: render };
-    })();
-    window.addEventListener('DOMContentLoaded', function(){ Cart.render(); });
-  </script>
-
-</body>
-</html>
+      return { add: add, remove: remove, upda
