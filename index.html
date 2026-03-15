@@ -101,24 +101,6 @@
       object-fit: cover;
       display: block;
     }
-    .hero-bg:not(:has(img))::before {
-      content: '';
-      position: absolute; inset: 2.5rem;
-      border: 1px dashed rgba(255,255,255,0.2);
-      pointer-events: none;
-    }
-    .hero-bg:not(:has(img))::after {
-      content: 'Add hero.jpg to your images folder';
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      font-family: 'Tenor Sans', sans-serif;
-      font-size: 0.62rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.3);
-      white-space: nowrap;
-    }
     @keyframes heroZoom {
       from { transform: scale(1.08); }
       to   { transform: scale(1.0); }
@@ -136,7 +118,6 @@
       justify-content: space-between;
       gap: 2rem;
     }
-    .hero-text {}
     .hero-eyebrow {
       font-size: 0.62rem;
       letter-spacing: 0.35em;
@@ -229,124 +210,31 @@
 
     /* ── PORTFOLIO ── */
     #portfolio { background: var(--warm-white); }
-    .portfolio-header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 4rem;
-      flex-wrap: wrap;
-      gap: 2rem;
-    }
 
-    /* ── WORLD MAP FILTER ── */
-    .map-filter-wrap { margin-bottom: 3.5rem; position: relative; }
-    .map-label {
-      font-size: 0.58rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--clay);
-      margin-bottom: 1rem;
-      display: block;
-    }
-    #world-map-container {
-      width: 65%;
-      margin: 0 auto;
-      background: var(--linen);
-      border: 1px solid var(--sand);
-      overflow: hidden;
-      position: relative;
-    }
-    #world-map-container svg { width: 100%; height: auto; display: block; }
-    .country-path {
-      fill: var(--sand);
-      stroke: var(--warm-white);
-      stroke-width: 0.4;
-      transition: fill 0.25s;
-      cursor: default;
-    }
-    .country-path.visited { fill: var(--clay); cursor: pointer; }
-    .country-path.visited:hover { fill: var(--bark); }
-    .country-path.map-active { fill: var(--earth) !important; }
-    .map-tooltip {
-      position: fixed;
-      background: var(--earth);
-      color: var(--warm-white);
-      font-family: 'Tenor Sans', sans-serif;
-      font-size: 0.6rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      padding: 0.4rem 0.9rem;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.15s;
-      white-space: nowrap;
-      z-index: 999;
-    }
-    .map-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.2rem; }
-    .map-pill {
-      padding: 0.35rem 1rem;
-      font-family: 'Tenor Sans', sans-serif;
-      font-size: 0.58rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      border: 1px solid var(--sand);
-      background: none;
-      color: var(--tan);
-      cursor: pointer;
-      transition: all 0.25s;
-    }
-    .map-pill.active, .map-pill:hover { background: var(--earth); border-color: var(--earth); color: var(--warm-white); }
-    .wildlife-pill { border-color: var(--bark); color: var(--bark); }
-    .wildlife-pill.active, .wildlife-pill:hover { background: var(--bark); border-color: var(--bark); color: var(--warm-white); }
-    .map-loading {
-      padding: 3rem;
-      text-align: center;
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--tan);
-    }
-
-    /* ── GALLERY GRID ── */
+    /* ── GALLERY GRID — matches prints.html ── */
     .gallery-grid {
-      display: flex;
-      gap: 8px;
-      align-items: flex-start;
-    }
-    .gallery-col {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+      display: grid;
+      grid-template-columns: repeat(3, 27%);
+      column-gap: 9.5%;
+      row-gap: 80px;
+      padding: 2rem 217px 0;
+      align-items: center;
     }
     .gallery-item {
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-      width: 100%;
-      transition: opacity 0.4s;
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      text-align: center;
     }
     .gallery-item img {
-      width: 100%;
+      display: inline-block;
+      max-width: 100%;
       height: auto;
-      display: block;
-      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      max-height: 420px;
+      width: auto;
+      transition: opacity 0.3s ease;
     }
-    .gallery-item:hover img { transform: scale(1.04); }
-
-    .gallery-hover {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(26,18,8,0.82) 0%, rgba(26,18,8,0.1) 50%, transparent 100%);
-      opacity: 0;
-      transition: opacity 0.4s;
-      display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 1.4rem;
-    }
-    .gallery-item:hover .gallery-hover { opacity: 1; }
-    .gallery-hover-title { display: none; }
-    .gallery-hover-location { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--warm-white); transform: translateY(6px); transition: transform 0.4s; }
-    .gallery-item:hover .gallery-hover-title,
-    .gallery-item:hover .gallery-hover-location { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--warm-white); transform: translateY(6px); transition: transform 0.4s; }
+    .gallery-item:hover img { opacity: 0.88; }
 
     /* ── FULL PORTFOLIO BUTTON ── */
     .btn-portfolio {
@@ -363,7 +251,7 @@
     }
     .btn-portfolio:hover { background: var(--earth); color: var(--warm-white); }
 
-    /* ── SHOP COLLECTION LABEL ── */
+    /* ── SHOP ── */
     .shop-note-wrap { display: flex; flex-direction: column; gap: 1rem; }
     .shop-collection-label {
       font-family: 'Playfair Display', serif;
@@ -372,94 +260,14 @@
       color: var(--bark);
       letter-spacing: 0.05em;
     }
-
-    /* ── WALLPAPERS ── */
-    #wallpapers { background: var(--warm-white); }
-    .wallpaper-card {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2.5rem;
-      align-items: start;
-      max-width: 860px;
-      margin: 0 auto;
-    }
-    .wallpaper-preview { overflow: hidden; position: relative; border-radius: 4px; }
-    .wallpaper-ph { width: 100%; height: 100%; }
-    .wph1 { background: linear-gradient(160deg, #8090a8 0%, #304050 100%); }
-    .wallpaper-preview img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .wallpaper-info { display: flex; flex-direction: column; gap: 1.2rem; }
-    .wallpaper-name { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 300; color: var(--earth); }
-    .wallpaper-desc { font-size: 0.8rem; line-height: 1.8; color: var(--tan); }
-    .wallpaper-toggle { display: flex; gap: 0; border: 1px solid var(--sand); width: fit-content; }
-    .wallpaper-type-btn {
-      padding: 0.5rem 1.4rem;
-      font-family: 'Tenor Sans', sans-serif;
-      font-size: 0.58rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      background: none;
-      color: var(--tan);
-      border: none;
-      cursor: pointer;
-      transition: all 0.25s;
-    }
-    .wallpaper-type-btn.active { background: var(--earth); color: var(--warm-white); }
-    .wallpaper-specs { font-size: 0.65rem; letter-spacing: 0.1em; color: var(--clay); }
-    .wallpaper-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 1.2rem; border-top: 1px solid var(--sand); }
-    .wallpaper-price { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--bark); }
-
-    /* ── FIELD JOURNALS ── */
-    #journals { background: var(--linen); }
-    .journals-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.8rem;
-    }
-    .journal-card { background: var(--linen); border: 1px solid var(--sand); overflow: hidden; transition: transform 0.4s, box-shadow 0.4s; }
-    .journal-card:hover { transform: translateY(-5px); box-shadow: 0 18px 45px rgba(78,56,32,0.1); }
-    .journal-img-wrap { height: 320px; position: relative; overflow: hidden; }
-    .journal-ph { width: 100%; height: 100%; transition: transform 0.6s ease; }
-    .journal-card:hover .journal-ph { transform: scale(1.04); }
-    .journal-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
-    .journal-card:hover img { transform: scale(1.04); }
-    .jph1 { background: linear-gradient(160deg, #c0d0d8 0%, #7090a0 100%); }
-    .jph2 { background: linear-gradient(160deg, #a0b8a0 0%, #507060 100%); }
-    .jph3 { background: linear-gradient(160deg, #b0c890 0%, #608050 100%); }
-    .jph4 { background: linear-gradient(160deg, #c8b870 0%, #887830 100%); }
-    .jph5 { background: linear-gradient(160deg, #d0b8a0 0%, #907060 100%); }
-    .journal-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(26,18,8,0.7) 0%, transparent 50%);
-      display: flex; align-items: flex-end; padding: 1.2rem;
-    }
-    .journal-location {
-      font-size: 0.58rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.8);
-    }
-    .journal-info { padding: 1.4rem; }
-    .journal-name { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 300; color: var(--earth); margin-bottom: 0.5rem; }
-    .journal-desc { font-size: 0.8rem; line-height: 1.7; color: var(--tan); margin-bottom: 1.2rem; }
-    .journal-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 1rem; border-top: 1px solid var(--sand); }
-    .journal-price { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--bark); }
-
-    /* ── SHOP ── */
-    #shop { background: var(--linen); }
     .shop-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: end; margin-bottom: 4rem; }
     .shop-note-text { font-size: 0.88rem; line-height: 1.9; color: var(--tan); border-left: 1px solid var(--clay); padding-left: 1.5rem; }
     .prints-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.8rem; }
     .print-card { background: var(--warm-white); border: 1px solid var(--sand); overflow: hidden; transition: transform 0.4s, box-shadow 0.4s; }
     .print-card:hover { transform: translateY(-5px); box-shadow: 0 18px 45px rgba(78,56,32,0.1); }
     .print-img-wrap { height: 280px; position: relative; overflow: hidden; }
-    .print-ph { width: 100%; height: 100%; transition: transform 0.6s ease; }
-    .print-card:hover .print-ph { transform: scale(1.04); }
     .print-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
     .print-card:hover img { transform: scale(1.04); }
-    .pph1 { background: linear-gradient(160deg, #c8b898 0%, #9a7a50 100%); }
-    .pph2 { background: linear-gradient(160deg, #a8b888 0%, #688048 100%); }
-    .pph3 { background: linear-gradient(160deg, #d0b898 0%, #a07840 100%); }
-    .pph4 { background: linear-gradient(160deg, #b8c098 0%, #788848 100%); }
     .print-badge { position: absolute; top: 1rem; left: 1rem; background: var(--bark); color: var(--warm-white); font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; padding: 0.28rem 0.7rem; }
     .print-info { padding: 1.4rem; }
     .print-name { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 300; color: var(--earth); margin-bottom: 0.25rem; }
@@ -470,6 +278,52 @@
     .btn-add:hover { background: var(--bark); }
     .print-sizes { font-size: 0.62rem; color: var(--sand); letter-spacing: 0.1em; margin-bottom: 0.8rem; }
 
+    /* ── WALLPAPERS ── */
+    #wallpapers { background: var(--warm-white); }
+    .wp2-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
+    .wp2-carousel { position: relative; overflow: hidden; background: var(--linen); border-radius: 4px; aspect-ratio: 16/9; }
+    .wp2-carousel.mobile-mode { aspect-ratio: 9/16; max-width: 260px; }
+    .wp2-slide { position: absolute; top:0; left:0; width:100%; height:100%; }
+    .wp2-slide img { width:100%; height:100%; object-fit:cover; display:block; }
+    .wp2-details { display: flex; flex-direction: column; gap: 1.4rem; }
+    .wp2-details .product-name { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 300; color: var(--earth); }
+    .wp2-details .product-desc { font-size: 0.82rem; line-height: 1.9; color: var(--tan); }
+    .wp2-details .option-label { font-size: 0.58rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.7rem; display: block; }
+    .wp2-details .toggle-row { display: flex; }
+    .wp2-details .toggle-btn { padding: 0.6rem 1.6rem; border: 1px solid var(--sand); background: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--tan); cursor: pointer; transition: all 0.25s; }
+    .wp2-details .toggle-btn.active { background: var(--earth); color: var(--warm-white); border-color: var(--earth); }
+    .wp2-details .specs-box { padding: 1.2rem; background: var(--linen); border: 1px solid var(--sand); font-size: 0.78rem; line-height: 2; color: var(--tan); }
+    .wp2-details .specs-box span { color: var(--earth); font-weight: 500; }
+    .wp2-details .price-display { font-family: 'Playfair Display', serif; font-size: 2.4rem; color: var(--bark); margin: 0; }
+    .wp2-details .btn-order { display: block; width: 100%; padding: 1.1rem; background: var(--earth); color: var(--warm-white); border: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; cursor: pointer; transition: background 0.3s; text-align: center; }
+    .wp2-details .btn-order:hover { background: var(--bark); }
+    .wp2-carousel .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(250,246,240,0.85); border: none; cursor: pointer; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10; transition: background 0.2s; backdrop-filter: blur(4px); }
+    .wp2-carousel .carousel-btn:hover { background: rgba(250,246,240,1); }
+    .wp2-carousel .carousel-btn.prev { left: 12px; }
+    .wp2-carousel .carousel-btn.next { right: 12px; }
+    .wp2-carousel .carousel-btn svg { width: 16px; height: 16px; stroke: var(--earth); stroke-width: 2; fill: none; }
+    .wp2-carousel .carousel-counter { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.4); color: #fff; font-family: 'Tenor Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.15em; padding: 0.25rem 0.7rem; border-radius: 20px; pointer-events: none; }
+
+    /* ── FIELD JOURNALS ── */
+    #journals { background: var(--linen); }
+    .journals-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.8rem; }
+    .journal-card { background: var(--linen); border: 1px solid var(--sand); overflow: hidden; transition: transform 0.4s, box-shadow 0.4s; }
+    .journal-card:hover { transform: translateY(-5px); box-shadow: 0 18px 45px rgba(78,56,32,0.1); }
+    .journal-img-wrap { height: 320px; position: relative; overflow: hidden; }
+    .journal-ph { width: 100%; height: 100%; }
+    .jph1 { background: linear-gradient(160deg, #c0d0d8 0%, #7090a0 100%); }
+    .jph2 { background: linear-gradient(160deg, #a0b8a0 0%, #507060 100%); }
+    .jph3 { background: linear-gradient(160deg, #b0c890 0%, #608050 100%); }
+    .jph4 { background: linear-gradient(160deg, #c8b870 0%, #887830 100%); }
+    .jph5 { background: linear-gradient(160deg, #d0b8a0 0%, #907060 100%); }
+    .journal-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,18,8,0.7) 0%, transparent 50%); display: flex; align-items: flex-end; padding: 1.2rem; }
+    .journal-location { font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.8); }
+    .journal-info { padding: 1.4rem; }
+    .journal-name { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 300; color: var(--earth); margin-bottom: 0.5rem; }
+    .journal-desc { font-size: 0.8rem; line-height: 1.7; color: var(--tan); margin-bottom: 1.2rem; }
+    .journal-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 1rem; border-top: 1px solid var(--sand); }
+    .journal-price { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--bark); }
+
     /* ── ABOUT ── */
     #about { background: var(--warm-white); }
     .about-grid { display: grid; grid-template-columns: 5fr 4fr; gap: 6rem; align-items: center; }
@@ -479,7 +333,6 @@
     .about-accent { position: absolute; top: -1.5rem; right: -1.5rem; width: 60%; height: 60%; border: 1px solid var(--sand); z-index: -1; }
     .about-tag { position: absolute; bottom: 2rem; left: -2rem; background: var(--earth); color: var(--warm-white); padding: 1.2rem 1.5rem; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; line-height: 1.8; }
     .about-tag strong { display: block; font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 300; font-style: italic; letter-spacing: 0; text-transform: none; margin-bottom: 0.3rem; color: var(--clay); }
-    .about-text .section-title { margin-bottom: 0; }
     .about-body { margin-top: 1.5rem; font-size: 0.92rem; line-height: 2; color: var(--tan); }
     .about-body p + p { margin-top: 1rem; }
     .about-gear { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--sand); display: flex; gap: 2.5rem; }
@@ -522,240 +375,19 @@
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ── CART ── */
-    #cart-btn {
-      display: flex; align-items: center; gap: 0.6rem;
-      background: none; border: none; cursor: pointer;
-      font-family: 'Tenor Sans', sans-serif;
-      font-size: 0.62rem; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--tan);
-      position: relative; transition: color 0.3s;
-      padding: 0.3rem 0;
-    }
+    #cart-btn { display: flex; align-items: center; gap: 0.6rem; background: none; border: none; cursor: pointer; font-family: 'Tenor Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--tan); position: relative; transition: color 0.3s; padding: 0.3rem 0; }
     #cart-btn:hover { color: var(--bark); }
     #cart-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.5; }
-    #cart-count {
-      display: none; align-items: center; justify-content: center;
-      position: absolute; top: -6px; right: -8px;
-      background: var(--bark); color: var(--warm-white);
-      font-size: 0.5rem; width: 16px; height: 16px;
-      border-radius: 50%; font-family: 'Tenor Sans', sans-serif;
-    }
+    #cart-count { display: none; align-items: center; justify-content: center; position: absolute; top: -6px; right: -8px; background: var(--bark); color: var(--warm-white); font-size: 0.5rem; width: 16px; height: 16px; border-radius: 50%; font-family: 'Tenor Sans', sans-serif; }
     #cart-total { color: var(--bark); font-size: 0.62rem; letter-spacing: 0.1em; }
-    .cart-flash { animation: cartFlash 0.6s ease; }
-    @keyframes cartFlash { 0%,100% { color: var(--tan); } 50% { color: var(--bark); } }
     .cart-dropdown-wrap { position: relative; }
-    #cart-dropdown {
-      display: none; position: absolute; top: calc(100% + 1.2rem);
-      right: 0; width: 320px;
-      background: var(--warm-white); border: 1px solid var(--sand);
-      box-shadow: 0 12px 40px rgba(78,56,32,0.12);
-      z-index: 300; padding: 1.2rem;
-    }
-    #cart-dropdown.open { display: block; }
-    .cart-empty { font-size: 0.72rem; color: var(--tan); letter-spacing: 0.1em; text-align: center; padding: 1rem 0; }
-    .cart-items { display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 1rem; max-height: 300px; overflow-y: auto; }
-    .cart-item { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--linen); }
-    .cart-item-name { font-size: 0.78rem; color: var(--earth); font-family: 'Playfair Display', serif; margin-bottom: 0.2rem; }
-    .cart-item-opts { font-size: 0.62rem; color: var(--clay); letter-spacing: 0.08em; }
-    .cart-item-right { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
-    .cart-item-price { font-size: 0.82rem; color: var(--bark); font-family: 'Playfair Display', serif; white-space: nowrap; }
-    .cart-remove { background: none; border: none; cursor: pointer; color: var(--sand); font-size: 0.65rem; padding: 0.2rem; transition: color 0.2s; }
-    .cart-remove:hover { color: var(--bark); }
-    .cart-footer { padding-top: 1rem; border-top: 1px solid var(--sand); }
-    .cart-subtotal { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--earth); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; }
-    .cart-subtotal span:last-child { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--bark); }
-    .cart-checkout-btn { width: 100%; padding: 0.9rem; background: var(--earth); color: var(--warm-white); border: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; cursor: not-allowed; opacity: 0.6; }
 
     /* ── MOBILE NAV ── */
     .hamburger { display: none; }
     .mobile-top-right { display: none; }
-
-    #cart-btn-mobile {
-      display: none;
-      align-items: center;
-      gap: 0.5rem;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-family: 'Tenor Sans', sans-serif;
-      font-size: 0.62rem;
-      letter-spacing: 0.18em;
-      color: var(--tan);
-      position: relative;
-    }
+    #cart-btn-mobile { display: none; align-items: center; gap: 0.5rem; background: none; border: none; cursor: pointer; font-family: 'Tenor Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.18em; color: var(--tan); position: relative; }
     #cart-btn-mobile svg { stroke: currentColor; }
     #cart-total-mobile { color: var(--bark); font-size: 0.62rem; }
-
-    .wallpaper-carousel-wrap {
-      position: relative;
-      overflow: hidden;
-      background: var(--linen);
-      width: 100%;
-      aspect-ratio: 16/9;
-      border-radius: 4px;
-    }
-    .wallpaper-carousel-wrap.mobile-active {
-      aspect-ratio: 9/16;
-      max-width: 260px;
-      margin: 0 auto;
-    }
-    .wallpaper-carousel-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .wp-btn {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      background: rgba(250,246,240,0.8); border: none; cursor: pointer;
-      width: 36px; height: 36px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      z-index: 5; backdrop-filter: blur(4px);
-    }
-    .wp-btn svg { width: 14px; height: 14px; stroke: var(--earth); stroke-width: 2; fill: none; }
-    .wp-btn.prev { left: 10px; }
-    .wp-btn.next { right: 10px; }
-    .wp-counter {
-      position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
-      background: rgba(0,0,0,0.4); color: #fff;
-      font-family: 'Tenor Sans', sans-serif; font-size: 0.58rem;
-      letter-spacing: 0.12em; padding: 0.2rem 0.6rem; border-radius: 20px;
-    }
-
-    /* Wallpaper section */
-    .wp2-hero {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2.5rem;
-      align-items: start;
-    }
-    .wp2-carousel {
-      position: relative;
-      overflow: hidden;
-      background: var(--linen);
-      border-radius: 4px;
-      aspect-ratio: 16/9;
-    }
-    .wp2-carousel.mobile-mode { aspect-ratio: 9/16; max-width: 260px; }
-    .wp2-slide { position: absolute; top:0; left:0; width:100%; height:100%; }
-    .wp2-slide img { width:100%; height:100%; object-fit:cover; display:block; }
-    .wp2-details { display: flex; flex-direction: column; gap: 1.4rem; }
-    .wp2-details .product-name { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 300; color: var(--earth); }
-    .wp2-details .product-desc { font-size: 0.82rem; line-height: 1.9; color: var(--tan); }
-    .wp2-details .option-label { font-size: 0.58rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.7rem; display: block; }
-    .wp2-details .toggle-row { display: flex; }
-    .wp2-details .toggle-btn { padding: 0.6rem 1.6rem; border: 1px solid var(--sand); background: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--tan); cursor: pointer; transition: all 0.25s; }
-    .wp2-details .toggle-btn.active { background: var(--earth); color: var(--warm-white); border-color: var(--earth); }
-    .wp2-details .specs-box { padding: 1.2rem; background: var(--linen); border: 1px solid var(--sand); font-size: 0.78rem; line-height: 2; color: var(--tan); }
-    .wp2-details .specs-box span { color: var(--earth); font-weight: 500; }
-    .wp2-details .price-display { font-family: 'Playfair Display', serif; font-size: 2.4rem; color: var(--bark); margin: 0; }
-    .wp2-details .btn-order { display: block; width: 100%; padding: 1.1rem; background: var(--earth); color: var(--warm-white); border: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; cursor: pointer; transition: background 0.3s; text-align: center; }
-    .wp2-details .btn-order:hover { background: var(--bark); }
-    .wp2-carousel .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(250,246,240,0.85); border: none; cursor: pointer; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10; transition: background 0.2s; backdrop-filter: blur(4px); }
-    .wp2-carousel .carousel-btn:hover { background: rgba(250,246,240,1); }
-    .wp2-carousel .carousel-btn.prev { left: 12px; }
-    .wp2-carousel .carousel-btn.next { right: 12px; }
-    .wp2-carousel .carousel-btn svg { width: 16px; height: 16px; stroke: var(--earth); stroke-width: 2; fill: none; }
-    .wp2-carousel .carousel-counter { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.4); color: #fff; font-family: 'Tenor Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.15em; padding: 0.25rem 0.7rem; border-radius: 20px; pointer-events: none; }
-
-    /* ── MOBILE ── */
-    @media (max-width: 768px) {
-      /* ── NAV ── */
-      nav {
-        padding: 1rem 1.4rem;
-        background: rgba(250,246,240,0.97) !important;
-        backdrop-filter: blur(8px);
-        box-shadow: 0 1px 0 var(--sand);
-        position: relative;
-      }
-      .nav-logo { color: var(--earth) !important; font-size: 1rem; white-space: nowrap; }
-      .mobile-top-right { display: flex !important; align-items: center; gap: 1rem; }
-      .hamburger {
-        display: flex !important;
-        flex-direction: column; gap: 5px;
-        background: none; border: none; cursor: pointer;
-        padding: 0.4rem; z-index: 1001;
-      }
-      .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--earth); transition: all 0.3s; }
-      .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-      .hamburger.open span:nth-child(2) { opacity: 0; }
-      .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0; right: 0;
-        background: rgba(250,246,240,0.98);
-        backdrop-filter: blur(10px);
-        z-index: 999;
-        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-        border-top: 1px solid var(--sand);
-      }
-      .nav-links.open { display: flex; }
-      .nav-links li { display: block; width: 100%; }
-      .nav-links li.cart-dropdown-wrap { display: none !important; }
-      .nav-links a {
-        font-size: 0.72rem !important;
-        letter-spacing: 0.18em;
-        color: var(--earth) !important;
-        display: block;
-        padding: 0.9rem 1.4rem;
-        border-bottom: 1px solid var(--linen);
-        text-transform: uppercase;
-      }
-      .nav-links li:last-child a { border-bottom: none; }
-
-      /* ── HERO ── */
-      #hero { height: 100svh; }
-      .hero-content { flex-direction: column; align-items: flex-start; padding: 0 1.5rem 5rem; gap: 1.5rem; }
-      .hero-title { font-size: 2.4rem; }
-      .hero-right { text-align: left; }
-      .hero-cta { justify-content: flex-start; flex-wrap: wrap; }
-      .btn { font-size: 0.58rem; padding: 0.7rem 1.5rem; }
-
-      /* ── SECTIONS ── */
-      .section-wrap { padding: 4rem 1.5rem; }
-      .portfolio-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; margin-bottom: 2rem; }
-
-      /* ── GALLERY MOBILE FIXES ── */
-      .gallery-grid { gap: 6px; align-items: flex-start !important; width: 100% !important; }
-      .gallery-col { gap: 6px; flex: 1 1 0 !important; min-width: 0 !important; width: 50% !important; }
-
-      #world-map-container { width: 100% !important; margin: 0 !important; }
-
-      /* ── SHOP / PRINTS ── */
-      .shop-intro { grid-template-columns: 1fr; gap: 2rem; }
-      .prints-grid { grid-template-columns: 1fr 1fr !important; display: grid !important; gap: 0.9rem !important; }
-      .print-card { display: block !important; opacity: 1 !important; visibility: visible !important; }
-      .print-img-wrap { height: 46vw; }
-
-      /* ── WALLPAPERS ── */
-      .wallpaper-card { grid-template-columns: 1fr; }
-      .wallpaper-preview { height: 260px; }
-      .wp2-hero { grid-template-columns: 1fr; gap: 1.5rem; }
-      .wp2-details .btn-order { display: block; }
-
-      /* ── JOURNALS ── */
-      .journals-grid { grid-template-columns: 1fr; }
-      .journal-card { display: block !important; }
-
-      /* ── ABOUT ── */
-      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .about-image-wrap { height: 300px; }
-      .about-accent { display: none; }
-      .about-tag { left: 1rem; bottom: 1rem; }
-      .about-gear { flex-direction: column; gap: 1.2rem; }
-
-      /* ── CONTACT ── */
-      .contact-grid { grid-template-columns: 1fr; gap: 3rem; margin-top: 2rem; }
-      .form-row { grid-template-columns: 1fr; }
-
-      /* ── FOOTER ── */
-      footer { flex-direction: column; align-items: flex-start; padding: 2rem 1.5rem; }
-      .divider { margin: 0 1.5rem; }
-      .wp2-details { display: flex !important; flex-direction: column; gap: 1rem; }
-    }
 
     /* CART DRAWER */
     #cart-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 400; }
@@ -789,8 +421,53 @@
     .cd-note { font-family: 'EB Garamond', serif; font-size: 0.78rem; color: var(--clay); margin-bottom: 1rem; font-style: italic; }
     .cd-checkout { width: 100%; padding: 1rem; background: var(--earth); color: var(--warm-white); border: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.58rem; letter-spacing: 0.34em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
     .cd-checkout:hover { background: var(--bark); }
-    #cart-count { font-size: 0.52rem; background: var(--earth); color: var(--warm-white); border-radius: 50%; width: 16px; height: 16px; display: none; align-items: center; justify-content: center; margin-left: 4px; }
     #cart-count.has-items { display: inline-flex; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.4rem; background: rgba(250,246,240,0.97) !important; backdrop-filter: blur(8px); box-shadow: 0 1px 0 var(--sand); position: relative; }
+      .nav-logo { color: var(--earth) !important; font-size: 1rem; white-space: nowrap; }
+      .mobile-top-right { display: flex !important; align-items: center; gap: 1rem; }
+      .hamburger { display: flex !important; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 0.4rem; z-index: 1001; }
+      .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--earth); transition: all 0.3s; }
+      .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+      .hamburger.open span:nth-child(2) { opacity: 0; }
+      .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(250,246,240,0.98); backdrop-filter: blur(10px); z-index: 999; box-shadow: 0 6px 20px rgba(0,0,0,0.1); border-top: 1px solid var(--sand); }
+      .nav-links.open { display: flex; }
+      .nav-links li { display: block; width: 100%; }
+      .nav-links li.cart-dropdown-wrap { display: none !important; }
+      .nav-links a { font-size: 0.72rem !important; letter-spacing: 0.18em; color: var(--earth) !important; display: block; padding: 0.9rem 1.4rem; border-bottom: 1px solid var(--linen); text-transform: uppercase; }
+      #hero { height: 100svh; }
+      .hero-content { flex-direction: column; align-items: flex-start; padding: 0 1.5rem 5rem; gap: 1.5rem; }
+      .hero-title { font-size: 2.4rem; }
+      .hero-right { text-align: left; }
+      .hero-cta { justify-content: flex-start; flex-wrap: wrap; }
+      .btn { font-size: 0.58rem; padding: 0.7rem 1.5rem; }
+      .section-wrap { padding: 4rem 1.5rem; }
+      /* Gallery mobile: 2 columns */
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        column-gap: 20px !important;
+        row-gap: 40px !important;
+        padding: 1rem 20px 0 !important;
+      }
+      .gallery-item img { max-height: 280px !important; }
+      .shop-intro { grid-template-columns: 1fr; gap: 2rem; }
+      .prints-grid { grid-template-columns: 1fr 1fr !important; gap: 0.9rem !important; }
+      .print-img-wrap { height: 46vw; }
+      .wp2-hero { grid-template-columns: 1fr; gap: 1.5rem; }
+      .journals-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-image-wrap { height: 300px; }
+      .about-accent { display: none; }
+      .about-tag { left: 1rem; bottom: 1rem; }
+      .about-gear { flex-direction: column; gap: 1.2rem; }
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; margin-top: 2rem; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { flex-direction: column; align-items: flex-start; padding: 2rem 1.5rem; }
+      .divider { margin: 0 1.5rem; }
+    }
   </style>
   <script src="cart.js"></script>
 </head>
@@ -822,7 +499,6 @@
           <span id="cart-total"></span>
           <span id="cart-count"></span>
         </button>
-        <div id="cart-dropdown"></div>
       </li>
     </ul>
   </nav>
@@ -838,10 +514,7 @@
     </div>
     <div id="cd-items"></div>
     <div id="cd-footer">
-      <div class="cd-subtotal">
-        <span>Subtotal</span>
-        <span id="cd-total">$0</span>
-      </div>
+      <div class="cd-subtotal"><span>Subtotal</span><span id="cd-total">$0</span></div>
       <div class="cd-note">Free worldwide shipping · Certificate included</div>
       <button class="cd-checkout" id="cd-checkout-btn" onclick="Cart.checkout()">Proceed to Checkout</button>
     </div>
@@ -860,9 +533,7 @@
     <div class="hero-content">
       <div class="hero-text">
         <p class="hero-eyebrow">Landscapes &amp; Wildlife Photography</p>
-        <h1 class="hero-title">
-          The world<br>through <em>my</em><br>lens
-        </h1>
+        <h1 class="hero-title">The world<br>through <em>my</em><br>lens</h1>
       </div>
       <div class="hero-right">
         <p class="hero-location">New York City — Worldwide</p>
@@ -889,69 +560,30 @@
       </div>
       <div class="shop-note-wrap">
         <p class="shop-collection-label" id="collection-month"></p>
-        <p class="shop-note-text">Each season a new collection of twenty-four prints is released exclusively. Past collections remain available for one year — archives close after one year, then they're gone for good. Every print is museum-quality, printed on 310gsm fine art paper with archival pigment inks. Shipped within 5–7 business days with a certificate of authenticity.</p>
+        <p class="shop-note-text">Each season a new collection of prints is released exclusively. Past collections remain available for one year — archives close after one year, then they're gone for good. Every print is museum-quality, printed on 310gsm fine art paper with archival pigment inks. Shipped within 5–7 business days with a certificate of authenticity.</p>
       </div>
     </div>
     <div class="prints-grid reveal">
       <div class="print-card">
-        <a href="store/prints-norway.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="images/norway-1.jpg" alt="Stillness on the Fjord">
-          <span class="print-badge">Best Seller</span>
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">Stillness on the Fjord</p>
-          <p class="print-location">Norway</p>
-          <p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-norway.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
-        </div>
+        <a href="store/prints-norway.html" style="display:block; text-decoration:none;"><div class="print-img-wrap"><img src="images/norway-1.jpg" alt="Stillness on the Fjord"><span class="print-badge">Best Seller</span></div></a>
+        <div class="print-info"><p class="print-name">Stillness on the Fjord</p><p class="print-location">Norway</p><p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p><div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-norway.html" class="btn-add" style="text-decoration:none;">Order Print</a></div></div>
       </div>
       <div class="print-card">
-        <a href="store/prints-unitedstates.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="images/unitedstates-1.jpg" alt="Open Water">
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">Open Water</p>
-          <p class="print-location">United States</p>
-          <p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-unitedstates.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
-        </div>
+        <a href="store/prints-unitedstates-1.html" style="display:block; text-decoration:none;"><div class="print-img-wrap"><img src="images/unitedstates-1.jpg" alt="Open Water"></div></a>
+        <div class="print-info"><p class="print-name">Open Water</p><p class="print-location">United States</p><p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p><div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-unitedstates-1.html" class="btn-add" style="text-decoration:none;">Order Print</a></div></div>
       </div>
       <div class="print-card">
-        <a href="store/prints-sweden.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="images/sweden-1.jpg" alt="A Place Kept">
-          <span class="print-badge">New</span>
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">A Place Kept</p>
-          <p class="print-location">Sweden</p>
-          <p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-sweden.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
-        </div>
+        <a href="store/prints-sweden.html" style="display:block; text-decoration:none;"><div class="print-img-wrap"><img src="images/sweden-1.jpg" alt="A Place Kept"><span class="print-badge">New</span></div></a>
+        <div class="print-info"><p class="print-name">A Place Kept</p><p class="print-location">Sweden</p><p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p><div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-sweden.html" class="btn-add" style="text-decoration:none;">Order Print</a></div></div>
       </div>
       <div class="print-card">
-        <a href="store/prints-ireland.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="images/ireland-1.jpg" alt="The Edge">
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">The Edge</p>
-          <p class="print-location">Ireland</p>
-          <p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-ireland.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
-        </div>
+        <a href="store/prints-ireland-1.html" style="display:block; text-decoration:none;"><div class="print-img-wrap"><img src="images/ireland-1.jpg" alt="The Edge"></div></a>
+        <div class="print-info"><p class="print-name">The Edge</p><p class="print-location">Ireland</p><p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p><div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-ireland-1.html" class="btn-add" style="text-decoration:none;">Order Print</a></div></div>
       </div>
       <div class="print-card">
-        <a href="store/prints-wildlife2.html" style="display:block; text-decoration:none;"><div class="print-img-wrap">
-          <img src="images/wildlife-1.jpg" alt="Emerald Hover">
-          <span class="print-badge">New</span>
-        </div></a>
-        <div class="print-info">
-          <p class="print-name">Emerald Hover</p>
-          <p class="print-location">Wildlife</p>
-          <p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p>
-          <div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-wildlife2.html" class="btn-add" style="text-decoration:none;">Order Print</a></div>
-        </div>
+        <a href="store/prints-wildlife2.html" style="display:block; text-decoration:none;"><div class="print-img-wrap"><img src="images/wildlife-1.jpg" alt="Emerald Hover"><span class="print-badge">New</span></div></a>
+        <div class="print-info"><p class="print-name">Emerald Hover</p><p class="print-location">Wildlife</p><p class="print-sizes">8×12 · 12×18 · 16×24 · 24×36</p><div class="print-footer"><span class="print-price">from $75</span><a href="store/prints-wildlife2.html" class="btn-add" style="text-decoration:none;">Order Print</a></div></div>
       </div>
-
     </div>
     <div style="text-align: center; margin-top: 3rem;">
       <a href="prints.html" class="btn-portfolio">View All 22 Prints</a>
@@ -972,49 +604,10 @@
           <div class="wp2-slide" data-group="desktop" style="display:block"><img src="wallpapers/desktop-1.jpg" alt="Desktop 1"></div>
           <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-2.jpg" alt="Desktop 2"></div>
           <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-3.jpg" alt="Desktop 3"></div>
-          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-4.jpg" alt="Desktop 4"></div>
-          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-5.jpg" alt="Desktop 5"></div>
-          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-6.jpg" alt="Desktop 6"></div>
-          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-7.jpg" alt="Desktop 7"></div>
-          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-8.jpg" alt="Desktop 8"></div>
-          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-9.jpg" alt="Desktop 9"></div>
-          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-10.jpg" alt="Desktop 10"></div>
-          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-11.jpg" alt="Desktop 11"></div>
-          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-12.jpg" alt="Desktop 12"></div>
-          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-13.jpg" alt="Desktop 13"></div>
-          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-14.jpg" alt="Desktop 14"></div>
-          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-15.jpg" alt="Desktop 15"></div>
-          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-16.jpg" alt="Desktop 16"></div>
-          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-17.jpg" alt="Desktop 17"></div>
-          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-18.jpg" alt="Desktop 18"></div>
-          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-19.jpg" alt="Desktop 19"></div>
-          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-20.jpg" alt="Desktop 20"></div>
           <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-1.jpg" alt="Mobile 1"></div>
           <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-2.jpg" alt="Mobile 2"></div>
-          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-3.jpg" alt="Mobile 3"></div>
-          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-4.jpg" alt="Mobile 4"></div>
-          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-5.jpg" alt="Mobile 5"></div>
-          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-6.jpg" alt="Mobile 6"></div>
-          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-7.jpg" alt="Mobile 7"></div>
-          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-8.jpg" alt="Mobile 8"></div>
-          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-9.jpg" alt="Mobile 9"></div>
-          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-10.jpg" alt="Mobile 10"></div>
-          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-11.jpg" alt="Mobile 11"></div>
-          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-12.jpg" alt="Mobile 12"></div>
-          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-13.jpg" alt="Mobile 13"></div>
-          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-14.jpg" alt="Mobile 14"></div>
-          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-15.jpg" alt="Mobile 15"></div>
-          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-16.jpg" alt="Mobile 16"></div>
-          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-17.jpg" alt="Mobile 17"></div>
-          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-18.jpg" alt="Mobile 18"></div>
-          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-19.jpg" alt="Mobile 19"></div>
-          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-20.jpg" alt="Mobile 20"></div>
-          <button class="carousel-btn prev" onclick="wp2Prev()">
-            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-          </button>
-          <button class="carousel-btn next" onclick="wp2Next()">
-            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-          </button>
+          <button class="carousel-btn prev" onclick="wp2Prev()"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+          <button class="carousel-btn next" onclick="wp2Next()"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
           <div class="carousel-counter" id="wp2-counter">1 / 20</div>
         </div>
         <div class="wp2-details">
@@ -1027,14 +620,7 @@
               <button class="toggle-btn" data-type="mobile" onclick="wp2SetType(this)">Mobile</button>
             </div>
           </div>
-          <div class="specs-box">
-            <p id="wp2-specs">
-              <span>Resolution</span> — 3840 × 2160px (4K)<br>
-              <span>Format</span> — JPEG, sRGB<br>
-              <span>Files</span> — 20 wallpapers<br>
-              <span>Delivery</span> — Instant download
-            </p>
-          </div>
+          <div class="specs-box"><p id="wp2-specs"><span>Resolution</span> — 3840 × 2160px (4K)<br><span>Format</span> — JPEG, sRGB<br><span>Files</span> — 20 wallpapers<br><span>Delivery</span> — Instant download</p></div>
           <p class="price-display">$10</p>
           <a href="store/wallpapers.html" class="btn-order" style="text-decoration:none; text-align:center;">Buy Pack</a>
         </div>
@@ -1051,79 +637,14 @@
         <h2 class="section-title">Stories from<br><em>the field</em></h2>
         <div class="section-rule"></div>
       </div>
-      <p class="shop-note-text">Each Field Journal is a curated collection of photographs from a single destination — the landscapes, the wildlife, the light. Printed on premium paper and bound to last. A piece of the journey, made to keep.</p>
+      <p class="shop-note-text">Each Field Journal is a curated collection of photographs from a single destination — the landscapes, the wildlife, the light. Printed on premium paper and bound to last.</p>
     </div>
     <div class="journals-grid reveal">
-      <div class="journal-card">
-        <a href="store/journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap">
-          <div class="journal-ph jph1"></div>
-          <div class="journal-overlay"><span class="journal-location">Iceland</span></div>
-        </div></a>
-        <div class="journal-info">
-          <p class="journal-name">Iceland Field Journal</p>
-          <p class="journal-desc">Glaciers, waterfalls, and volcanic landscapes — the raw edge of the north.</p>
-          <div class="journal-footer">
-            <span class="journal-price">$40</span>
-            <a href="store/journals.html" class="btn-add" style="text-decoration:none;">Order Journal</a>
-          </div>
-        </div>
-      </div>
-      <div class="journal-card">
-        <a href="store/journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap">
-          <div class="journal-ph jph2"></div>
-          <div class="journal-overlay"><span class="journal-location">Norway</span></div>
-        </div></a>
-        <div class="journal-info">
-          <p class="journal-name">Norway Field Journal</p>
-          <p class="journal-desc">Fjords, forests, and the endless Nordic light.</p>
-          <div class="journal-footer">
-            <span class="journal-price">$40</span>
-            <a href="store/journals.html" class="btn-add" style="text-decoration:none;">Order Journal</a>
-          </div>
-        </div>
-      </div>
-      <div class="journal-card">
-        <a href="store/journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap">
-          <div class="journal-ph jph3"></div>
-          <div class="journal-overlay"><span class="journal-location">Ireland</span></div>
-        </div></a>
-        <div class="journal-info">
-          <p class="journal-name">Ireland Field Journal</p>
-          <p class="journal-desc">Rolling green hills, dramatic coastlines, and ancient silence.</p>
-          <div class="journal-footer">
-            <span class="journal-price">$40</span>
-            <a href="store/journals.html" class="btn-add" style="text-decoration:none;">Order Journal</a>
-          </div>
-        </div>
-      </div>
-      <div class="journal-card">
-        <a href="store/journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap">
-          <div class="journal-ph jph4"></div>
-          <div class="journal-overlay"><span class="journal-location">Costa Rica</span></div>
-        </div></a>
-        <div class="journal-info">
-          <p class="journal-name">Costa Rica Field Journal</p>
-          <p class="journal-desc">Dense jungle, vibrant wildlife, and golden Pacific light.</p>
-          <div class="journal-footer">
-            <span class="journal-price">$40</span>
-            <a href="store/journals.html" class="btn-add" style="text-decoration:none;">Order Journal</a>
-          </div>
-        </div>
-      </div>
-      <div class="journal-card">
-        <a href="store/journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap">
-          <div class="journal-ph jph5"></div>
-          <div class="journal-overlay"><span class="journal-location">Sweden</span></div>
-        </div></a>
-        <div class="journal-info">
-          <p class="journal-name">Sweden Field Journal</p>
-          <p class="journal-desc">Quiet lakes, birch forests, and long summer evenings.</p>
-          <div class="journal-footer">
-            <span class="journal-price">$40</span>
-            <a href="store/journals.html" class="btn-add" style="text-decoration:none;">Order Journal</a>
-          </div>
-        </div>
-      </div>
+      <div class="journal-card"><a href="store/journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap"><div class="journal-ph jph1"></div><div class="journal-overlay"><span class="journal-location">Iceland</span></div></div></a><div class="journal-info"><p class="journal-name">Iceland Field Journal</p><p class="journal-desc">Glaciers, waterfalls, and volcanic landscapes — the raw edge of the north.</p><div class="journal-footer"><span class="journal-price">$40</span><a href="store/journals.html" class="btn-add" style="text-decoration:none;">Order Journal</a></div></div></div>
+      <div class="journal-card"><a href="store/journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap"><div class="journal-ph jph2"></div><div class="journal-overlay"><span class="journal-location">Norway</span></div></div></a><div class="journal-info"><p class="journal-name">Norway Field Journal</p><p class="journal-desc">Fjords, forests, and the endless Nordic light.</p><div class="journal-footer"><span class="journal-price">$40</span><a href="store/journals.html" class="btn-add" style="text-decoration:none;">Order Journal</a></div></div></div>
+      <div class="journal-card"><a href="store/journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap"><div class="journal-ph jph3"></div><div class="journal-overlay"><span class="journal-location">Ireland</span></div></div></a><div class="journal-info"><p class="journal-name">Ireland Field Journal</p><p class="journal-desc">Rolling green hills, dramatic coastlines, and ancient silence.</p><div class="journal-footer"><span class="journal-price">$40</span><a href="store/journals.html" class="btn-add" style="text-decoration:none;">Order Journal</a></div></div></div>
+      <div class="journal-card"><a href="store/journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap"><div class="journal-ph jph4"></div><div class="journal-overlay"><span class="journal-location">Costa Rica</span></div></div></a><div class="journal-info"><p class="journal-name">Costa Rica Field Journal</p><p class="journal-desc">Dense jungle, vibrant wildlife, and golden Pacific light.</p><div class="journal-footer"><span class="journal-price">$40</span><a href="store/journals.html" class="btn-add" style="text-decoration:none;">Order Journal</a></div></div></div>
+      <div class="journal-card"><a href="store/journals.html" style="display:block; text-decoration:none;"><div class="journal-img-wrap"><div class="journal-ph jph5"></div><div class="journal-overlay"><span class="journal-location">Sweden</span></div></div></a><div class="journal-info"><p class="journal-name">Sweden Field Journal</p><p class="journal-desc">Quiet lakes, birch forests, and long summer evenings.</p><div class="journal-footer"><span class="journal-price">$40</span><a href="store/journals.html" class="btn-add" style="text-decoration:none;">Order Journal</a></div></div></div>
     </div>
     <div style="text-align: center; margin-top: 3rem;">
       <a href="journals.html" class="btn-portfolio">View All Field Journals</a>
@@ -1132,68 +653,32 @@
 
   <div class="divider"></div>
 
+  <!-- PORTFOLIO — prints.html style grid -->
   <section id="portfolio" class="section-wrap">
     <div class="reveal">
       <p class="section-label">Selected Work</p>
       <h2 class="section-title">Landscapes &amp; <em>Wildlife</em></h2>
       <div class="section-rule"></div>
     </div>
-    <div class="map-filter-wrap">
-      <span class="map-label">Filter by destination or category</span>
-      <div id="map-tooltip" class="map-tooltip"></div>
-      <div id="world-map-container">
-        <div class="map-loading" id="map-loading">Loading map...</div>
-      </div>
-      <div class="map-pills">
-        <button class="map-pill active" data-filter="all">All</button>
-        <button class="map-pill wildlife-pill" data-filter="wildlife">Wildlife</button>
-        <button class="map-pill" data-filter="Costa Rica">Costa Rica</button>
-        <button class="map-pill" data-filter="Denmark">Denmark</button>
-        <button class="map-pill" data-filter="Iceland">Iceland</button>
-        <button class="map-pill" data-filter="Ireland">Ireland</button>
-        <button class="map-pill" data-filter="Norway">Norway</button>
-        <button class="map-pill" data-filter="Portugal">Portugal</button>
-        <button class="map-pill" data-filter="Sweden">Sweden</button>
-        <button class="map-pill" data-filter="United States">United States</button>
-      </div>
-    </div>
-    <div class="gallery-grid" id="gallery-grid">
-      <div class="gallery-item" data-type="landscape" data-country="Norway" data-index="0">
+    <div class="gallery-grid reveal">
+      <a href="store/prints-norway.html" class="gallery-item">
         <img src="images/norway-1.jpg" alt="Norway">
-        <div class="gallery-hover"><div class="gallery-hover-location">Norway</div></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Portugal" data-index="1">
-        <img src="images/portugal-1.jpg" alt="Portugal">
-        <div class="gallery-hover"><div class="gallery-hover-location">Portugal</div></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Ireland" data-index="2">
+      </a>
+      <a href="store/prints-sweden.html" class="gallery-item">
+        <img src="images/sweden-1.jpg" alt="Sweden">
+      </a>
+      <a href="store/prints-ireland-1.html" class="gallery-item">
         <img src="images/ireland-1.jpg" alt="Ireland">
-        <div class="gallery-hover"><div class="gallery-hover-location">Ireland</div></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="3">
-        <img src="images/unitedstates-7.jpg" alt="United States">
-        <div class="gallery-hover"><div class="gallery-hover-location">United States</div></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="4">
-        <img src="images/unitedstates-5.jpg" alt="United States">
-        <div class="gallery-hover"><div class="gallery-hover-location">United States</div></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="5">
+      </a>
+      <a href="store/prints-costarica-2.html" class="gallery-item">
+        <img src="images/costarica-2.jpg" alt="Costa Rica">
+      </a>
+      <a href="store/prints-wildlife2.html" class="gallery-item">
+        <img src="images/wildlife-1.jpg" alt="Wildlife">
+      </a>
+      <a href="store/prints-unitedstates-1.html" class="gallery-item">
         <img src="images/unitedstates-1.jpg" alt="United States">
-        <div class="gallery-hover"><div class="gallery-hover-location">United States</div></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Costa Rica" data-index="6">
-        <img src="images/costarica-4.jpg" alt="Costa Rica">
-        <div class="gallery-hover"><div class="gallery-hover-location">Costa Rica</div></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Sweden" data-index="7">
-        <img src="images/sweden-2.jpg" alt="Sweden">
-        <div class="gallery-hover"><div class="gallery-hover-location">Sweden</div></div>
-      </div>
-      <div class="gallery-item" data-type="wildlife" data-index="8">
-        <img src="images/wildlife-2.jpg" alt="Wildlife">
-        <div class="gallery-hover"><div class="gallery-hover-location">Wildlife</div></div>
-      </div>
+      </a>
     </div>
     <div style="text-align: center; margin-top: 3rem;">
       <a href="portfolio.html" class="btn-portfolio">View Full Portfolio</a>
@@ -1205,14 +690,9 @@
   <section id="about" class="section-wrap">
     <div class="about-grid">
       <div class="about-image-wrap reveal">
-        <div class="about-img">
-          <img src="images/about.jpg" alt="Ryan Muratore">
-        </div>
+        <div class="about-img"><img src="images/about.jpg" alt="Ryan Muratore"></div>
         <div class="about-accent"></div>
-        <div class="about-tag">
-          <strong>Ryan Muratore</strong>
-          Sony a7iv · Fujifilm XT30ii
-        </div>
+        <div class="about-tag"><strong>Ryan Muratore</strong>Sony a7iv · Fujifilm XT30ii</div>
       </div>
       <div class="about-text reveal">
         <p class="section-label">The Photographer</p>
@@ -1223,18 +703,9 @@
           <p>I'm drawn to the small stuff — the things you'd walk right past. I shoot landscapes and wildlife exactly as they are, so people who weren't there can feel like they were right alongside me.</p>
         </div>
         <div class="about-gear">
-          <div class="gear-item">
-            <p class="gear-label">Primary Camera</p>
-            <p class="gear-value">Sony a7iv</p>
-          </div>
-          <div class="gear-item">
-            <p class="gear-label">Secondary Camera</p>
-            <p class="gear-value">Fujifilm XT30ii</p>
-          </div>
-          <div class="gear-item">
-            <p class="gear-label">Based In</p>
-            <p class="gear-value">New York City</p>
-          </div>
+          <div class="gear-item"><p class="gear-label">Primary Camera</p><p class="gear-value">Sony a7iv</p></div>
+          <div class="gear-item"><p class="gear-label">Secondary Camera</p><p class="gear-value">Fujifilm XT30ii</p></div>
+          <div class="gear-item"><p class="gear-label">Based In</p><p class="gear-value">New York City</p></div>
         </div>
       </div>
     </div>
@@ -1250,14 +721,8 @@
         <div class="section-rule"></div>
         <h3>Custom orders &amp; commissions welcome</h3>
         <p>Looking for a specific size, a print not listed, or want to discuss a custom commission? Send a message and I'll get back to you within 48 hours.</p>
-        <div class="contact-detail">
-          <div class="contact-icon">✉</div>
-          <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c7a4a8a9b3a6a4b3eab5bea6a9aab2b5a6b3a8b5a287a0aaa6aeabe9a4a8aa">[email&#160;protected]</a></span>
-        </div>
-        <div class="contact-detail">
-          <div class="contact-icon">📍</div>
-          <span>New York City</span>
-        </div>
+        <div class="contact-detail"><div class="contact-icon">✉</div><span>ryan@ryanmuratore.com</span></div>
+        <div class="contact-detail"><div class="contact-icon">📍</div><span>New York City</span></div>
         <div class="social-links">
           <a href="#" class="social-link">TikTok</a>
           <a href="#" class="social-link">Instagram</a>
@@ -1265,14 +730,8 @@
       </div>
       <form class="contact-form reveal" action="https://formspree.io/f/mvzbvdzo" method="POST">
         <div class="form-row">
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" placeholder="Your name" required>
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="your@email.com" required>
-          </div>
+          <div class="form-group"><label for="name">Name</label><input type="text" id="name" name="name" placeholder="Your name" required></div>
+          <div class="form-group"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="your@email.com" required></div>
         </div>
         <div class="form-group">
           <label for="subject">Subject</label>
@@ -1284,157 +743,31 @@
             <option>General Question</option>
           </select>
         </div>
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" placeholder="Tell me what you're looking for..." required></textarea>
-        </div>
+        <div class="form-group"><label for="message">Message</label><textarea id="message" name="message" placeholder="Tell me what you're looking for..." required></textarea></div>
         <button type="submit" class="btn-submit">Send Message</button>
       </form>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <a href="#hero" class="footer-logo">Ryan Muratore Photography</a>
     <p>© 2025 Ryan Muratore — All rights reserved. Do not reproduce without permission.</p>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    // ── SEASON LABEL ──
+  <script>
     const now = new Date();
     const month = now.getMonth();
     const year = now.getFullYear();
-    const season = month >= 2 && month <= 4 ? 'Spring' :
-                   month >= 5 && month <= 7 ? 'Summer' :
-                   month >= 8 && month <= 10 ? 'Autumn' : 'Winter';
+    const season = month >= 2 && month <= 4 ? 'Spring' : month >= 5 && month <= 7 ? 'Summer' : month >= 8 && month <= 10 ? 'Autumn' : 'Winter';
     const collectionEl = document.getElementById('collection-month');
     if (collectionEl) collectionEl.textContent = season + ' ' + year + ' Collection';
 
-    // ── NAV SCROLL ──
     const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 60);
-    });
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); });
 
-    // ── MAP SETUP ──
-    const visited = {
-      "United States": "840", "Canada": "124", "Iceland": "352",
-      "Ireland": "372", "Norway": "578", "Sweden": "752",
-      "Denmark": "208", "Costa Rica": "188", "Portugal": "620"
-    };
-    const visitedByCode = {};
-    Object.entries(visited).forEach(([name, code]) => visitedByCode[code] = name);
-    const tooltip = document.getElementById('map-tooltip');
-
-    function loadScript(src) {
-      return new Promise((resolve, reject) => {
-        const s = document.createElement('script');
-        s.src = src; s.onload = resolve; s.onerror = reject;
-        document.head.appendChild(s);
-      });
-    }
-
-    Promise.all([
-      loadScript('https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js'),
-      loadScript('https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js')
-    ]).then(() => fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json'))
-    .then(r => r.json()).then(world => {
-      document.getElementById('map-loading').remove();
-      const container = document.getElementById('world-map-container');
-      const W = container.offsetWidth;
-      const H = Math.round(W * 0.52);
-      const svg = d3.select('#world-map-container').append('svg')
-        .attr('viewBox', `0 0 ${W} ${H}`).attr('preserveAspectRatio', 'xMidYMid meet');
-      svg.append('rect').attr('width', W).attr('height', H).attr('fill', 'var(--linen)');
-      const projection = d3.geoNaturalEarth1().scale(W / 6.5).translate([W / 2, H / 2]);
-      const path = d3.geoPath().projection(projection);
-      const countries = topojson.feature(world, world.objects.countries);
-      svg.selectAll('path').data(countries.features).enter().append('path')
-        .attr('d', path)
-        .attr('class', d => 'country-path' + (visitedByCode[d.id] ? ' visited' : ''))
-        .attr('data-name', d => visitedByCode[d.id] || '')
-        .on('click', function(event, d) {
-          const name = visitedByCode[d.id];
-          if (!name) return;
-          const current = document.querySelector('.map-pill.active')?.dataset.filter;
-          filterGallery(current === name ? 'all' : name);
-        })
-        .on('mousemove', function(event, d) {
-          const name = visitedByCode[d.id];
-          if (!name) return;
-          tooltip.textContent = name;
-          tooltip.style.opacity = '1';
-          tooltip.style.left = (event.clientX + 14) + 'px';
-          tooltip.style.top = (event.clientY - 32) + 'px';
-        })
-        .on('mouseleave', () => { tooltip.style.opacity = '0'; });
-      svg.append('path')
-        .datum(topojson.mesh(world, world.objects.countries, (a, b) => a !== b))
-        .attr('d', path).attr('fill', 'none')
-        .attr('stroke', 'var(--warm-white)').attr('stroke-width', '0.4');
-    }).catch(() => {
-      document.getElementById('map-loading').textContent = 'Use the buttons below to filter by location.';
-    });
-
-    // ── GALLERY MASONRY + FILTER ──
-    let allGalleryItems = [];
-
-    function getColCount() {
-      return window.innerWidth <= 768 ? 2 : 3;
-    }
-
-    function distributeItems(items, highlightSet) {
-      const grid = document.getElementById('gallery-grid');
-      if (!grid) return;
-      grid.innerHTML = '';
-      const cols = getColCount();
-      const columns = [];
-      for (let i = 0; i < cols; i++) {
-        const col = document.createElement('div');
-        col.className = 'gallery-col';
-        grid.appendChild(col);
-        columns.push(col);
-      }
-      items.forEach((item, i) => {
-        const isHighlighted = !highlightSet || highlightSet.has(item);
-        item.style.opacity = isHighlighted ? '1' : '0.15';
-        item.style.pointerEvents = isHighlighted ? 'auto' : 'none';
-        columns[i % cols].appendChild(item);
-      });
-    }
-
-    function filterGallery(filter) {
-      if (!allGalleryItems.length) return;
-      let matching;
-      if (filter === 'all') {
-        const sorted = allGalleryItems.slice().sort((a, b) => parseInt(a.dataset.index) - parseInt(b.dataset.index));
-        distributeItems(sorted, null);
-      } else {
-        matching = filter === 'wildlife'
-          ? allGalleryItems.filter(i => i.dataset.type === 'wildlife')
-          : allGalleryItems.filter(i => i.dataset.country === filter);
-        const nonMatching = allGalleryItems.filter(i => !matching.includes(i));
-        distributeItems([...matching, ...nonMatching], new Set(matching));
-      }
-      document.querySelectorAll('.country-path').forEach(el => {
-        el.classList.toggle('map-active', el.dataset.name === filter);
-      });
-      document.querySelectorAll('.map-pill').forEach(p => {
-        p.classList.toggle('active', p.dataset.filter === filter);
-      });
-    }
-
-    window.addEventListener('resize', () => {
-      const active = document.querySelector('.map-pill.active');
-      filterGallery(active ? active.dataset.filter : 'all');
-    });
-
-    // ── WALLPAPER SECTION CAROUSEL ──
     let wp2Idx = 0, wp2Group = 'desktop';
     const WP2_TOTAL = 20;
-    function wp2Slides() {
-      return Array.from(document.querySelectorAll('.wp2-slide[data-group="' + wp2Group + '"]'));
-    }
+    function wp2Slides() { return Array.from(document.querySelectorAll('.wp2-slide[data-group="' + wp2Group + '"]')); }
     function wp2Show(n) {
       wp2Idx = (n + WP2_TOTAL) % WP2_TOTAL;
       document.querySelectorAll('.wp2-slide').forEach(s => s.style.display = 'none');
@@ -1460,7 +793,6 @@
       }
     }
 
-    // ── NAV TOGGLE ──
     function toggleMenu() {
       const links = document.getElementById('nav-links');
       const burger = document.getElementById('hamburger');
@@ -1468,32 +800,13 @@
       burger.classList.toggle('open', links.classList.contains('open'));
     }
 
-    // ── INIT ON LOAD ──
     document.addEventListener('DOMContentLoaded', () => {
-      // Gallery
-      const grid = document.getElementById('gallery-grid');
-      if (grid) {
-        allGalleryItems = Array.from(grid.querySelectorAll('.gallery-item'));
-        allGalleryItems.sort((a, b) => parseInt(a.dataset.index) - parseInt(b.dataset.index));
-        allGalleryItems.forEach(item => item.remove());
-        distributeItems(allGalleryItems, null);
-      }
-
-      // Pill listeners
-      document.querySelectorAll('.map-pill').forEach(pill => {
-        pill.addEventListener('click', () => filterGallery(pill.dataset.filter));
-      });
-
-      // Scroll reveals
       const reveals = document.querySelectorAll('.reveal');
       const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) entry.target.classList.add('visible');
-        });
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
       }, { threshold: 0.1 });
       reveals.forEach(el => observer.observe(el));
 
-      // Nav close on link click
       document.querySelectorAll('#nav-links a').forEach(a => {
         a.addEventListener('click', () => {
           document.getElementById('nav-links').classList.remove('open');
@@ -1504,30 +817,16 @@
   </script>
   <script src="./protect.js"></script>
   <script>
-    // ── CART ──
     var Cart = (function() {
       var items = [];
-
-      function save() {
-        try { localStorage.setItem('rm_cart', JSON.stringify(items)); } catch(e) {}
-      }
-      function load() {
-        try { var d = localStorage.getItem('rm_cart'); if (d) items = JSON.parse(d); } catch(e) {}
-      }
+      function save() { try { localStorage.setItem('rm_cart', JSON.stringify(items)); } catch(e) {} }
+      function load() { try { var d = localStorage.getItem('rm_cart'); if (d) items = JSON.parse(d); } catch(e) {} }
       function add(item) {
         var existing = items.find(function(i){ return i.id === item.id; });
-        if (existing) { existing.qty++; }
-        else { item.qty = 1; items.push(item); }
-        save();
-        render();
-        open();
-        var btn = document.getElementById('atc-btn');
-        if (btn) { btn.textContent = 'Added!'; setTimeout(function(){ btn.textContent = 'Add to Cart'; }, 1200); }
+        if (existing) { existing.qty++; } else { item.qty = 1; items.push(item); }
+        save(); render(); open();
       }
-      function remove(id) {
-        items = items.filter(function(i){ return i.id !== id; });
-        save(); render();
-      }
+      function remove(id) { items = items.filter(function(i){ return i.id !== id; }); save(); render(); }
       function updateQty(id, delta) {
         var item = items.find(function(i){ return i.id === id; });
         if (!item) return;
@@ -1535,9 +834,7 @@
         if (item.qty <= 0) items = items.filter(function(i){ return i.id !== id; });
         save(); render();
       }
-      function total() {
-        return items.reduce(function(s, i){ return s + i.price * i.qty; }, 0);
-      }
+      function total() { return items.reduce(function(s, i){ return s + i.price * i.qty; }, 0); }
       function render() {
         var el = document.getElementById('cd-items');
         var empty = document.getElementById('cd-empty');
@@ -1545,58 +842,29 @@
         var count = document.getElementById('cart-count');
         var totalEl = document.getElementById('cd-total');
         var totalItems = items.reduce(function(s,i){ return s + i.qty; }, 0);
-
         count.textContent = totalItems;
         count.className = totalItems > 0 ? 'has-items' : '';
-
         if (totalEl) totalEl.textContent = '$' + total().toFixed(2).replace(/\.00$/, '');
-
-        if (items.length === 0) {
-          el.innerHTML = '';
-          empty.style.display = 'flex';
-          if (footer) footer.style.display = 'none';
-          return;
-        }
+        if (items.length === 0) { el.innerHTML = ''; empty.style.display = 'flex'; if (footer) footer.style.display = 'none'; return; }
         empty.style.display = 'none';
         if (footer) footer.style.display = 'block';
-
         el.innerHTML = items.map(function(item) {
-          return '<div class="cd-item">' +
-            '<img class="cd-item-thumb" src="' + item.thumb + '" alt="">' +
-            '<div class="cd-item-info">' +
-              '<div class="cd-item-name">' + item.name + '</div>' +
-              '<div class="cd-item-opts">' + item.opts + '</div>' +
-              '<div class="cd-item-price">$' + (item.price * item.qty).toFixed(2).replace(/\.00$/,'') + '</div>' +
-              '<div class="cd-qty">' +
-                '<button class="cd-qty-btn" onclick="Cart.updateQty(\'' + item.id + '\',-1)">−</button>' +
-                '<span class="cd-qty-num">' + item.qty + '</span>' +
-                '<button class="cd-qty-btn" onclick="Cart.updateQty(\'' + item.id + '\',1)">+</button>' +
-              '</div>' +
-              '<button class="cd-item-remove" onclick="Cart.remove(\'' + item.id + '\')">Remove</button>' +
-            '</div>' +
-          '</div>';
+          return '<div class="cd-item"><img class="cd-item-thumb" src="' + item.thumb + '" alt=""><div class="cd-item-info"><div class="cd-item-name">' + item.name + '</div><div class="cd-item-opts">' + item.opts + '</div><div class="cd-item-price">$' + (item.price * item.qty).toFixed(2).replace(/\.00$/,'') + '</div><div class="cd-qty"><button class="cd-qty-btn" onclick="Cart.updateQty(\'' + item.id + '\',-1)">−</button><span class="cd-qty-num">' + item.qty + '</span><button class="cd-qty-btn" onclick="Cart.updateQty(\'' + item.id + '\',1)">+</button></div><button class="cd-item-remove" onclick="Cart.remove(\'' + item.id + '\')">Remove</button></div></div>';
         }).join('');
       }
-      function open() {
-        document.getElementById('cart-drawer').classList.add('open');
-        document.getElementById('cart-overlay').classList.add('open');
-      }
-      function close() {
-        document.getElementById('cart-drawer').classList.remove('open');
-        document.getElementById('cart-overlay').classList.remove('open');
-      }
-      function toggleDropdown() {
-        var d = document.getElementById('cart-drawer');
-        if (d.classList.contains('open')) { close(); } else { open(); }
-      }
+      function open() { document.getElementById('cart-drawer').classList.add('open'); document.getElementById('cart-overlay').classList.add('open'); }
+      function close() { document.getElementById('cart-drawer').classList.remove('open'); document.getElementById('cart-overlay').classList.remove('open'); }
+      function toggleDropdown() { var d = document.getElementById('cart-drawer'); if (d.classList.contains('open')) { close(); } else { open(); } }
       function checkout() {
         if (items.length === 0) return;
-        var parts = items.map(function(item) {
-          return item.variantId + ':' + item.qty;
-        }).join(',');
-        var url = 'https://checkout.ryanmuratore.com/cart/' + parts;
-        window.location.href = url;
+        var parts = items.map(function(item) { return item.variantId + ':' + item.qty; }).join(',');
+        window.location.href = 'https://checkout.ryanmuratore.com/cart/' + parts;
       }
-
       load();
-      return { add: add, remove: re
+      return { add: add, remove: remove, updateQty: updateQty, open: open, close: close, toggleDropdown: toggleDropdown, checkout: checkout, render: render };
+    })();
+    window.addEventListener('DOMContentLoaded', function(){ Cart.render(); });
+  </script>
+
+</body>
+</html>
