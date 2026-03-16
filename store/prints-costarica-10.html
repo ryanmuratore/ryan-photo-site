@@ -8,28 +8,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&family=Tenor+Sans&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --w: #faf6f0;
-      --linen: #f0e9de;
-      --sand: #ddd0bc;
-      --clay: #c4a882;
-      --tan: #a8896a;
-      --bark: #7a5c3a;
-      --earth: #4e3820;
-      --ink: #2a1f12;
-    }
+    :root { --w: #faf6f0; --linen: #f0e9de; --sand: #ddd0bc; --clay: #c4a882; --tan: #a8896a; --bark: #7a5c3a; --earth: #4e3820; --ink: #2a1f12; }
     html { scroll-behavior: smooth; }
     body { background: var(--linen); color: var(--ink); font-family: 'Tenor Sans', sans-serif; overflow-x: hidden; }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.1rem 3rem;
-      background: rgba(250,246,240,0.97);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--sand);
-    }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 3rem; background: rgba(250,246,240,0.97); backdrop-filter: blur(16px); border-bottom: 1px solid var(--sand); }
     .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 300; letter-spacing: 0.14em; color: var(--earth); text-decoration: none; }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
     .nav-links a { font-size: 0.6rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--tan); text-decoration: none; transition: color 0.2s; }
@@ -47,136 +29,34 @@
     #cart-mob svg { width: 20px; height: 20px; stroke: var(--tan); fill: none; stroke-width: 1.5; }
     #cart-count { font-size: 0.52rem; background: var(--earth); color: var(--w); border-radius: 50%; width: 16px; height: 16px; display: none; align-items: center; justify-content: center; margin-left: 4px; }
     #cart-count.has-items { display: inline-flex; }
-
-    /* ── MAIN LAYOUT ── */
-    .shell {
-      display: grid;
-      grid-template-columns: 55% 45%;
-      min-height: 100vh;
-      padding-top: 57px;
-    }
-
-    /* ── IMAGE SIDE ── */
-    .img-side {
-      position: sticky;
-      top: 57px;
-      height: calc(100vh - 57px);
-      background: var(--linen);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 3rem;
-    }
-    .img-side img {
-      max-width: 100%;
-      max-height: 100%;
-      width: auto;
-      height: auto;
-      display: block;
-      object-fit: contain;
-      -webkit-user-drag: none;
-      pointer-events: none;
-    }
-    /* Watermark */
+    .shell { display: grid; grid-template-columns: 55% 45%; min-height: 100vh; padding-top: 57px; }
     .img-side { position: sticky; top: 57px; height: calc(100vh - 57px); background: var(--linen); display: flex; align-items: center; justify-content: center; padding: 3rem; overflow: hidden; }
     .img-wrap { position: relative; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
-    .wm {
-      position: absolute; inset: 0; z-index: 2; pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='140'%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dominant-baseline='middle' transform='rotate(-30 130 70)' font-family='Georgia,serif' font-size='11' fill='rgba(78,56,32,0.06)' letter-spacing='2'%3E%C2%A9 Ryan Muratore%3C/text%3E%3C/svg%3E");
-      background-repeat: repeat;
-    }
-
-    /* ── DETAILS SIDE ── */
-    .details-side {
-      background: var(--w);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 4rem 4rem 4rem 3.5rem;
-      min-height: calc(100vh - 57px);
-    }
-
-    .back {
-      display: inline-flex; align-items: center; gap: 0.45rem;
-      font-size: 0.56rem; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--clay); text-decoration: none; margin-bottom: 2.5rem;
-      transition: color 0.2s; width: fit-content;
-    }
+    .img-wrap img { max-width: 100%; max-height: 100%; width: auto; height: auto; display: block; object-fit: contain; -webkit-user-drag: none; pointer-events: none; }
+    .wm { position: absolute; inset: 0; z-index: 2; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='140'%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dominant-baseline='middle' transform='rotate(-30 130 70)' font-family='Georgia,serif' font-size='11' fill='rgba(78,56,32,0.06)' letter-spacing='2'%3E%C2%A9 Ryan Muratore%3C/text%3E%3C/svg%3E"); background-repeat: repeat; }
+    .details-side { background: var(--w); display: flex; flex-direction: column; justify-content: center; padding: 4rem 4rem 4rem 3.5rem; min-height: calc(100vh - 57px); }
+    .back { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.56rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--clay); text-decoration: none; margin-bottom: 2.5rem; transition: color 0.2s; width: fit-content; }
     .back:hover { color: var(--bark); }
     .back svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 2.5; }
-
     .eyebrow { font-size: 0.56rem; letter-spacing: 0.38em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.6rem; }
     .title { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 300; color: var(--earth); line-height: 1.1; margin-bottom: 0.4rem; }
     .title em { font-style: italic; color: var(--tan); }
     .subtitle { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--clay); margin-bottom: 2rem; }
-
     .rule { height: 1px; background: var(--linen); margin: 1.8rem 0; }
-
-    /* ── DROPDOWN ── */
-    .field-label {
-      font-size: 0.52rem; letter-spacing: 0.34em; text-transform: uppercase;
-      color: var(--clay); margin-bottom: 0.6rem; display: block;
-    }
+    .field-label { font-size: 0.52rem; letter-spacing: 0.34em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.6rem; display: block; }
     .select-wrap { position: relative; margin-bottom: 1.4rem; }
-    .select-wrap select {
-      width: 100%;
-      padding: 1rem 2.8rem 1rem 1.1rem;
-      background: var(--w);
-      border: 1px solid var(--sand);
-      font-family: 'Tenor Sans', sans-serif;
-      font-size: 0.78rem;
-      color: var(--earth);
-      appearance: none;
-      -webkit-appearance: none;
-      cursor: pointer;
-      outline: none;
-      transition: border-color 0.2s;
-      border-radius: 0;
-    }
+    .select-wrap select { width: 100%; padding: 1rem 2.8rem 1rem 1.1rem; background: var(--w); border: 1px solid var(--sand); font-family: 'Tenor Sans', sans-serif; font-size: 0.78rem; color: var(--earth); appearance: none; -webkit-appearance: none; cursor: pointer; outline: none; transition: border-color 0.2s; border-radius: 0; }
     .select-wrap select:focus { border-color: var(--clay); }
-    .select-arrow {
-      position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);
-      pointer-events: none; width: 14px; height: 14px; stroke: var(--tan); fill: none; stroke-width: 2;
-    }
-
-    /* ── DESCRIPTION ── */
-    .print-desc {
-      font-family: 'EB Garamond', serif;
-      font-size: 0.95rem;
-      line-height: 1.8;
-      color: var(--tan);
-      margin-bottom: 2rem;
-    }
-
-    /* ── PRICE ── */
+    .select-arrow { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); pointer-events: none; width: 14px; height: 14px; stroke: var(--tan); fill: none; stroke-width: 2; }
+    .print-desc { font-family: 'EB Garamond', serif; font-size: 0.95rem; line-height: 1.8; color: var(--tan); margin-bottom: 2rem; }
     .price-row { display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 0.35rem; }
     .price-num { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 300; color: var(--earth); line-height: 1; }
     .price-tax { font-family: 'EB Garamond', serif; font-size: 0.82rem; color: var(--clay); font-style: italic; }
-
-    /* ── ADD TO CART ── */
-    .btn-atc {
-      width: 100%;
-      padding: 1.1rem;
-      background: var(--earth);
-      color: var(--w);
-      border: none;
-      font-family: 'Tenor Sans', sans-serif;
-      font-size: 0.62rem;
-      letter-spacing: 0.38em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background 0.25s;
-      margin-top: 1.6rem;
-      margin-bottom: 1.8rem;
-    }
+    .btn-atc { width: 100%; padding: 1.1rem; background: var(--earth); color: var(--w); border: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.38em; text-transform: uppercase; cursor: pointer; transition: background 0.25s; margin-top: 1.6rem; margin-bottom: 1.8rem; }
     .btn-atc:hover { background: var(--bark); }
-
-    /* ── TRUST BADGES ── */
     .trust { display: flex; gap: 1.8rem; flex-wrap: wrap; }
     .ti { display: flex; align-items: center; gap: 0.4rem; font-size: 0.55rem; letter-spacing: 0.1em; color: var(--clay); }
     .ti svg { width: 11px; height: 11px; stroke: var(--clay); fill: none; stroke-width: 2; flex-shrink: 0; }
-
-    /* ── CART DRAWER ── */
     #cart-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 400; }
     #cart-overlay.open { display: block; }
     #cart-drawer { position: fixed; top: 0; right: -420px; width: 400px; max-width: 95vw; height: 100vh; background: var(--w); z-index: 500; display: flex; flex-direction: column; transition: right 0.35s cubic-bezier(0.4,0,0.2,1); border-left: 1px solid var(--sand); }
@@ -208,13 +88,9 @@
     .cd-note { font-family: 'EB Garamond', serif; font-size: 0.78rem; color: var(--clay); margin-bottom: 1rem; font-style: italic; }
     .cd-checkout { width: 100%; padding: 1rem; background: var(--earth); color: var(--w); border: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.58rem; letter-spacing: 0.34em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
     .cd-checkout:hover { background: var(--bark); }
-
-    /* ── FOOTER ── */
     hr.div { border: none; border-top: 1px solid var(--sand); }
     footer { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 3rem; font-size: 0.63rem; color: var(--clay); background: var(--w); }
     .fl { font-family: 'Playfair Display', serif; font-size: 0.9rem; color: var(--bark); text-decoration: none; font-weight: 300; }
-
-    /* ── MOBILE ── */
     @media (max-width: 768px) {
       nav { padding: 0.9rem 1.2rem; }
       .mob-right { display: flex; }
@@ -235,7 +111,6 @@
   </style>
 </head>
 <body>
-
 <nav>
   <a href="../index.html" class="nav-logo">Ryan Muratore</a>
   <ul class="nav-links" id="nav-links">
@@ -262,8 +137,6 @@
     </button>
   </div>
 </nav>
-
-<!-- CART DRAWER -->
 <div id="cart-overlay" onclick="Cart.close()"></div>
 <div id="cart-drawer">
   <div class="cd-head">
@@ -283,108 +156,75 @@
     <p>Your cart is empty</p>
   </div>
 </div>
-
 <div class="shell">
-
-  <!-- IMAGE -->
   <div class="img-side">
     <div class="img-wrap">
-      <img src="../images/costarica-10.jpg" alt="Where The Forest Breathes" id="main-img">
+      <img src="../images/costarica-10.jpg" alt="Where The Forest Breathes">
       <div class="wm"></div>
     </div>
   </div>
-
-  <!-- DETAILS -->
   <div class="details-side">
-
     <a class="back" href="../prints.html">
       <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
       All Prints
     </a>
-
     <p class="eyebrow">Fine Art Print</p>
     <h1 class="title">Where The<br><em>Forest Breathes</em></h1>
-    <p class="subtitle">Costa Rica &nbsp;·&nbsp; Fujifilm X-T30 II</p>
-
+    <p class="subtitle">Costa Rica &nbsp;&middot;&nbsp; Fujifilm X-T30 II</p>
     <div class="rule"></div>
-
     <label class="field-label" for="variant-select">Print options:</label>
     <div class="select-wrap">
       <select id="variant-select" onchange="onVariantChange()">
         <optgroup label="Fine Art Print">
-          <option value="print|8×12|75|47922977734870">8×12&quot; Fine Art Print</option>
-          <option value="print|12×18|100|47922977800406" selected>12×18&quot; Fine Art Print</option>
-          <option value="print|16×24|125|47922977865942">16×24&quot; Fine Art Print</option>
-          <option value="print|24×36|200|47922977931478">24×36&quot; Fine Art Print</option>
+          <option value="print|8&times;12|75|47922977734870">8&times;12&quot; Fine Art Print</option>
+          <option value="print|12&times;18|100|47922977800406" selected>12&times;18&quot; Fine Art Print</option>
+          <option value="print|16&times;24|125|47922977865942">16&times;24&quot; Fine Art Print</option>
+          <option value="print|24&times;36|200|47922977931478">24&times;36&quot; Fine Art Print</option>
         </optgroup>
         <optgroup label="Metal Print">
-          <option value="metal|8×12|215|47922977767638">8×12&quot; Metal Print</option>
-          <option value="metal|12×18|295|47922977833174">12×18&quot; Metal Print</option>
-          <option value="metal|16×24|430|47922977898710">16×24&quot; Metal Print</option>
-          <option value="metal|24×36|500|47922977964246">24×36&quot; Metal Print</option>
+          <option value="metal|8&times;12|215|47922977767638">8&times;12&quot; Metal Print</option>
+          <option value="metal|12&times;18|295|47922977833174">12&times;18&quot; Metal Print</option>
+          <option value="metal|16&times;24|430|47922977898710">16&times;24&quot; Metal Print</option>
+          <option value="metal|24&times;36|500|47922977964246">24&times;36&quot; Metal Print</option>
         </optgroup>
       </select>
       <svg class="select-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
-
     <p class="print-desc" id="print-desc">Printed on Hahnemühle Photo Rag (308gsm) — 100% cotton, museum-grade matte paper with archival pigment inks. Ships rolled in a protective tube within 5–7 business days. Certificate of authenticity included.</p>
-
     <div class="price-row">
       <span class="price-num" id="price-num">$100</span>
     </div>
     <p class="price-tax">Not including tax</p>
-
     <button class="btn-atc" id="atc-btn" onclick="addToCart()">Add to Cart</button>
-
     <div class="trust">
-      <div class="ti">
-        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        Free worldwide shipping
-      </div>
-      <div class="ti">
-        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        Certificate included
-      </div>
-      <div class="ti">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        Ships in 5–7 days
-      </div>
+      <div class="ti"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Free worldwide shipping</div>
+      <div class="ti"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Certificate included</div>
+      <div class="ti"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Ships in 5–7 days</div>
     </div>
-
-    <p style="margin-top:1.2rem; font-family:'EB Garamond',serif; font-size:0.82rem; color:var(--clay); text-align:left;">
+    <p style="margin-top:1.2rem; font-family:'EB Garamond',serif; font-size:0.82rem; color:var(--clay);">
       <a href="../shipping.html" style="color:var(--tan); text-decoration:underline; text-underline-offset:3px;">Shipping &amp; Returns Policy</a>
     </p>
-
   </div>
 </div>
-
 <hr class="div">
 <footer>
   <a href="../index.html" class="fl">Ryan Muratore Photography</a>
   <p>&copy; 2025 Ryan Muratore &mdash; All rights reserved.</p>
 </footer>
-
 <script>
-  // ── VARIANT DATA ──
   var DESCS = {
     print: 'Printed on Hahnemühle Photo Rag (308gsm) — 100% cotton, museum-grade matte paper with archival pigment inks. Ships rolled in a protective tube within 5–7 business days. Certificate of authenticity included.',
     metal: 'Printed on high-gloss aluminium with a float mount hanger included. Vivid, durable, and completely waterproof — arrives ready to hang within 5–7 business days. Certificate of authenticity included.'
   };
-
   function parseVariant() {
     var parts = document.getElementById('variant-select').value.split('|');
     return { fmt: parts[0], size: parts[1], price: parseInt(parts[2]), variantId: parts[3] };
   }
-
   function onVariantChange() {
     var v = parseVariant();
     document.getElementById('price-num').textContent = '$' + v.price;
     document.getElementById('print-desc').textContent = DESCS[v.fmt];
-    // Update mobile sticky price if present
-    var mob = document.getElementById('mob-price');
-    if (mob) mob.textContent = '$' + v.price;
   }
-
   function addToCart() {
     var v = parseVariant();
     var fmtLabel = v.fmt === 'print' ? 'Fine Art Print' : 'Metal Print';
@@ -400,17 +240,12 @@
     btn.textContent = 'Added!';
     setTimeout(function(){ btn.textContent = 'Add to Cart'; }, 1200);
   }
-
   function toggleMenu() {
     document.getElementById('nav-links').classList.toggle('open');
     document.getElementById('burger').classList.toggle('open');
   }
-
-  // Protect image
   document.addEventListener('contextmenu', function(e){ if (e.target.tagName === 'IMG') e.preventDefault(); });
   document.querySelectorAll('img').forEach(function(img){ img.addEventListener('dragstart', function(e){ e.preventDefault(); }); });
-
-  // ── CART ──
   var Cart = (function() {
     var items = [];
     function save() { try { localStorage.setItem('rm_cart', JSON.stringify(items)); } catch(e) {} }
@@ -470,9 +305,7 @@
     load();
     return { add: add, remove: remove, updateQty: updateQty, open: open, close: close, toggleDropdown: toggleDropdown, checkout: checkout, render: render };
   })();
-
   window.addEventListener('DOMContentLoaded', function(){ Cart.render(); onVariantChange(); });
 </script>
-
 </body>
 </html>
