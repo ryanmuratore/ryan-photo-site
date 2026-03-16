@@ -271,7 +271,7 @@
       column-gap: 9.5%;
       row-gap: 80px;
       padding: 2rem 217px 0;
-      align-items: end;
+      align-items: start;
     }
     .print-item { display: block; text-decoration: none; color: inherit; text-align: center; }
     .print-img-wrap { width: 100%; margin-bottom: 18px; }
@@ -459,15 +459,16 @@
       .gallery-col { gap: 6px; flex: 1 1 0 !important; min-width: 0 !important; width: 50% !important; }
       #world-map-container { width: 100% !important; margin: 0 !important; }
 
-      /* Prints grid — align-items: center so images center-align per row */
+      /* Prints grid — align-items: start so text sits right under each image, no offset */
       .shop-intro { grid-template-columns: 1fr; gap: 2rem; }
       .prints-grid {
         grid-template-columns: repeat(2, 1fr) !important;
         column-gap: 16px !important;
         row-gap: 32px !important;
         padding: 1rem 0 0 !important;
-        align-items: center !important;
+        align-items: start !important;
       }
+      .print-img-wrap { margin-bottom: 10px !important; }
       .print-img-wrap img { max-height: 180px !important; width: auto !important; max-width: 100% !important; }
       .print-meta { text-align: center; }
 
@@ -477,18 +478,28 @@
       /* Journals */
       .journals-grid { grid-template-columns: 1fr; }
 
-      /* About — fix tag covering face */
+      /* Portfolio — ensure no white box, full bleed columns */
+      #portfolio { background: var(--linen) !important; }
+      .gallery-grid { background: transparent !important; }
+      .gallery-col { background: transparent !important; }
+
+      /* About — tag as transparent overlay on image bottom, no brown box */
       .about-grid { grid-template-columns: 1fr; gap: 2rem; }
       .about-image-wrap { height: 320px; }
       .about-accent { display: none; }
       .about-tag {
-        position: static;
-        margin-top: 0.8rem;
-        padding: 0.8rem 1rem;
-        font-size: 0.6rem;
+        position: absolute;
+        bottom: 0.8rem;
+        left: 0.8rem;
+        background: none !important;
+        color: var(--warm-white) !important;
+        padding: 0;
+        font-size: 0.58rem;
         line-height: 1.6;
+        text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+        box-shadow: none !important;
       }
-      .about-tag strong { font-size: 0.95rem; margin-bottom: 0.15rem; }
+      .about-tag strong { color: var(--warm-white) !important; font-size: 0.88rem; display: block; margin-bottom: 0.1rem; }
       .about-gear { flex-direction: column; gap: 1.2rem; }
 
       /* Contact */
@@ -521,7 +532,7 @@
       <li><a href="portfolio.html">Full Portfolio</a></li>
       <li><a href="prints.html">Prints</a></li>
       <li><a href="store/wallpapers.html">Wallpapers</a></li>
-      <li><a href="journals.html">Field Journals</a></li>
+      <li style="display:none;"><a href="journals.html">Field Journals</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
       <li class="cart-dropdown-wrap">
@@ -665,7 +676,7 @@
 
   <div class="divider"></div>
 
-  <section id="journals" class="section-wrap">
+  <section id="journals" class="section-wrap" style="display:none;">
     <div class="shop-intro reveal">
       <div>
         <p class="section-label">Field Journals</p>
@@ -793,11 +804,11 @@
         <div class="section-rule"></div>
         <h3>Custom orders &amp; commissions welcome</h3>
         <p>Looking for a specific size, a print not listed, or want to discuss a custom commission? Send a message and I'll get back to you within 48 hours.</p>
-        <div class="contact-detail"><div class="contact-icon">✉</div><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e19398808fa19398808f8c949380958e9384cf828e8c">[email&#160;protected]</a></span></div>
+        <div class="contact-detail"><div class="contact-icon">✉</div><span><a href="mailto:contact.ryanmuratore@gmail.com" style="color:inherit;">contact.ryanmuratore@gmail.com</a></span></div>
         <div class="contact-detail"><div class="contact-icon">📍</div><span>New York City</span></div>
         <div class="social-links">
-          <a href="#" class="social-link">TikTok</a>
-          <a href="#" class="social-link">Instagram</a>
+          <a href="https://www.tiktok.com/@ryan.muratore" target="_blank" class="social-link">TikTok</a>
+          <a href="https://www.instagram.com/ryanmuratore/" target="_blank" class="social-link">Instagram</a>
         </div>
       </div>
       <form class="contact-form reveal" action="https://formspree.io/f/mvzbvdzo" method="POST">
