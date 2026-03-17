@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>A Flame in the Blue — Ryan Muratore Photography</title>
+  <title>Scarlet Rhythm — Ryan Muratore Photography</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&family=Tenor+Sans&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
   <style>
@@ -118,7 +118,6 @@
     <li><a href="../portfolio.html">Full Portfolio</a></li>
     <li><a href="../prints.html">Prints</a></li>
     <li><a href="wallpapers.html">Wallpapers</a></li>
-    <li><a href="../journals.html">Field Journals</a></li>
     <li><a href="../index.html#about">About</a></li>
     <li><a href="../index.html#contact">Contact</a></li>
     <li class="cdw">
@@ -159,7 +158,7 @@
 <div class="shell">
   <div class="img-side">
     <div class="img-wrap">
-      <img src="../images/costarica-3.jpg" alt="A Flame in the Blue">
+      <img src="../images/costarica-7.jpg" alt="Scarlet Rhythm">
       <div class="wm"></div>
     </div>
   </div>
@@ -169,31 +168,29 @@
       All Prints
     </a>
     <p class="eyebrow">Fine Art Print</p>
-    <h1 class="title">A Flame<br><em>in the Blue</em></h1>
-    <p class="subtitle">Costa Rica &nbsp;&middot;&nbsp; Fujifilm X-T30 II</p>
+    <h1 class="title">Scarlet<br><em>Rhythm</em></h1>
+    <p class="subtitle">Costa Rica &nbsp;&middot;&nbsp; Sony a7iv</p>
     <div class="rule"></div>
     <label class="field-label" for="variant-select">Print options:</label>
     <div class="select-wrap">
       <select id="variant-select" onchange="onVariantChange()">
         <optgroup label="Fine Art Print">
-          <option value="print|8&times;12|75|47922973147350">8&times;12&quot; Fine Art Print</option>
-          <option value="print|12&times;18|100|47922973212886" selected>12&times;18&quot; Fine Art Print</option>
-          <option value="print|16&times;24|125|47922973278422">16&times;24&quot; Fine Art Print</option>
-          <option value="print|24&times;36|200|47922973343958">24&times;36&quot; Fine Art Print</option>
+          <option value="print|8&times;12|75|47951837626582">8&times;12&quot; Fine Art Print</option>
+          <option value="print|12&times;18|100|47951837692118" selected>12&times;18&quot; Fine Art Print</option>
+          <option value="print|16&times;24|125|47951837757654">16&times;24&quot; Fine Art Print</option>
+          <option value="print|24&times;36|200|47951837823190">24&times;36&quot; Fine Art Print</option>
         </optgroup>
         <optgroup label="Metal Print">
-          <option value="metal|8&times;12|215|47922973180118">8&times;12&quot; Metal Print</option>
-          <option value="metal|12&times;18|295|47922973245654">12&times;18&quot; Metal Print</option>
-          <option value="metal|16&times;24|430|47922973311190">16&times;24&quot; Metal Print</option>
-          <option value="metal|24&times;36|500|47922973376726">24&times;36&quot; Metal Print</option>
+          <option value="metal|8&times;12|215|47951837659350">8&times;12&quot; Metal Print</option>
+          <option value="metal|12&times;18|295|47951837724886">12&times;18&quot; Metal Print</option>
+          <option value="metal|16&times;24|430|47951837790422">16&times;24&quot; Metal Print</option>
+          <option value="metal|24&times;36|500|47951837855958">24&times;36&quot; Metal Print</option>
         </optgroup>
       </select>
       <svg class="select-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
     <p class="print-desc" id="print-desc">Printed on Hahnemühle Photo Rag (308gsm) — 100% cotton, museum-grade matte paper with archival pigment inks. Ships rolled in a protective tube within 5–7 business days. Certificate of authenticity included.</p>
-    <div class="price-row">
-      <span class="price-num" id="price-num">$100</span>
-    </div>
+    <div class="price-row"><span class="price-num" id="price-num">$100</span></div>
     <p class="price-tax">Not including tax</p>
     <button class="btn-atc" id="atc-btn" onclick="addToCart()">Add to Cart</button>
     <div class="trust">
@@ -231,10 +228,10 @@
     Cart.add({
       id: v.fmt + '-' + v.size,
       variantId: v.variantId,
-      name: 'A Flame in the Blue',
+      name: 'Scarlet Rhythm',
       opts: fmtLabel + ' · ' + v.size + ' in',
       price: v.price,
-      thumb: '../images/costarica-3.jpg'
+      thumb: '../images/costarica-7.jpg'
     });
     var btn = document.getElementById('atc-btn');
     btn.textContent = 'Added!';
@@ -278,20 +275,7 @@
       empty.style.display = 'none';
       if (footer) footer.style.display = 'block';
       el.innerHTML = items.map(function(item) {
-        return '<div class="cd-item">' +
-          '<img class="cd-item-thumb" src="' + item.thumb + '" alt="">' +
-          '<div class="cd-item-info">' +
-            '<div class="cd-item-name">' + item.name + '</div>' +
-            '<div class="cd-item-opts">' + item.opts + '</div>' +
-            '<div class="cd-item-price">$' + (item.price * item.qty).toFixed(2).replace(/\.00$/,'') + '</div>' +
-            '<div class="cd-qty">' +
-              '<button class="cd-qty-btn" onclick="Cart.updateQty(\'' + item.id + '\',-1)">−</button>' +
-              '<span class="cd-qty-num">' + item.qty + '</span>' +
-              '<button class="cd-qty-btn" onclick="Cart.updateQty(\'' + item.id + '\',1)">+</button>' +
-            '</div>' +
-            '<button class="cd-item-remove" onclick="Cart.remove(\'' + item.id + '\')">Remove</button>' +
-          '</div>' +
-        '</div>';
+        return '<div class="cd-item"><img class="cd-item-thumb" src="' + item.thumb + '" alt=""><div class="cd-item-info"><div class="cd-item-name">' + item.name + '</div><div class="cd-item-opts">' + item.opts + '</div><div class="cd-item-price">$' + (item.price * item.qty).toFixed(2).replace(/\.00$/,'') + '</div><div class="cd-qty"><button class="cd-qty-btn" onclick="Cart.updateQty(\'' + item.id + '\',-1)">−</button><span class="cd-qty-num">' + item.qty + '</span><button class="cd-qty-btn" onclick="Cart.updateQty(\'' + item.id + '\',1)">+</button></div><button class="cd-item-remove" onclick="Cart.remove(\'' + item.id + '\')">Remove</button></div></div>';
       }).join('');
     }
     function open() { document.getElementById('cart-drawer').classList.add('open'); document.getElementById('cart-overlay').classList.add('open'); }
