@@ -208,7 +208,12 @@
   <script>
     function addWallpaperToCart() {
       const type = document.querySelector('.toggle-btn.active').dataset.type;
-      Cart.add({ id: 'wallpaper-' + type, name: 'Wallpaper Pack Vol. 1', options: type.charAt(0).toUpperCase() + type.slice(1) + ' · 20 photos', price: 10 });
+      const VARIANT_IDS = {
+        desktop: '47960329093334',
+        mobile:  '47960316412118'
+      };
+      const variantId = VARIANT_IDS[type];
+      window.location.href = 'https://checkout.ryanmuratore.com/cart/' + variantId + ':1';
     }
 
     // ── CAROUSEL — fully dynamic, never goes blank ──
