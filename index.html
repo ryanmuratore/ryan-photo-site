@@ -650,8 +650,43 @@
           <div class="wp2-slide" data-group="desktop" style="display:block"><img src="wallpapers/desktop-1.jpg" alt="Desktop 1"></div>
           <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-2.jpg" alt="Desktop 2"></div>
           <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-3.jpg" alt="Desktop 3"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-4.jpg" alt="Desktop 4"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-5.jpg" alt="Desktop 5"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-6.jpg" alt="Desktop 6"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-7.jpg" alt="Desktop 7"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-8.jpg" alt="Desktop 8"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-9.jpg" alt="Desktop 9"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-10.jpg" alt="Desktop 10"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-11.jpg" alt="Desktop 11"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-12.jpg" alt="Desktop 12"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-13.jpg" alt="Desktop 13"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-14.jpg" alt="Desktop 14"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-15.jpg" alt="Desktop 15"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-16.jpg" alt="Desktop 16"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-17.jpg" alt="Desktop 17"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-18.jpg" alt="Desktop 18"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-19.jpg" alt="Desktop 19"></div>
+          <div class="wp2-slide" data-group="desktop" style="display:none"><img src="wallpapers/desktop-20.jpg" alt="Desktop 20"></div>
           <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-1.jpg" alt="Mobile 1"></div>
           <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-2.jpg" alt="Mobile 2"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-3.jpg" alt="Mobile 3"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-4.jpg" alt="Mobile 4"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-5.jpg" alt="Mobile 5"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-6.jpg" alt="Mobile 6"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-7.jpg" alt="Mobile 7"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-8.jpg" alt="Mobile 8"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-9.jpg" alt="Mobile 9"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-10.jpg" alt="Mobile 10"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-11.jpg" alt="Mobile 11"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-12.jpg" alt="Mobile 12"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-13.jpg" alt="Mobile 13"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-14.jpg" alt="Mobile 14"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-15.jpg" alt="Mobile 15"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-16.jpg" alt="Mobile 16"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-17.jpg" alt="Mobile 17"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-18.jpg" alt="Mobile 18"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-19.jpg" alt="Mobile 19"></div>
+          <div class="wp2-slide" data-group="mobile" style="display:none"><img src="wallpapers/mobile-20.jpg" alt="Mobile 20"></div>
           <button class="carousel-btn prev" onclick="wp2Prev()"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
           <button class="carousel-btn next" onclick="wp2Next()"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
           <div class="carousel-counter" id="wp2-counter">1 / 20</div>
@@ -955,14 +990,15 @@
     });
 
     let wp2Idx = 0, wp2Group = 'desktop';
-    const WP2_TOTAL = 20;
     function wp2Slides() { return Array.from(document.querySelectorAll('.wp2-slide[data-group="' + wp2Group + '"]')); }
     function wp2Show(n) {
-      wp2Idx = (n + WP2_TOTAL) % WP2_TOTAL;
+      var slides = wp2Slides();
+      var total = slides.length;
+      if (total === 0) return;
+      wp2Idx = (n + total) % total;
       document.querySelectorAll('.wp2-slide').forEach(s => s.style.display = 'none');
-      const slides = wp2Slides();
-      if (slides[wp2Idx]) slides[wp2Idx].style.display = 'block';
-      document.getElementById('wp2-counter').textContent = (wp2Idx + 1) + ' / ' + WP2_TOTAL;
+      slides[wp2Idx].style.display = 'block';
+      document.getElementById('wp2-counter').textContent = (wp2Idx + 1) + ' / ' + total;
     }
     function wp2Next() { wp2Show(wp2Idx + 1); }
     function wp2Prev() { wp2Show(wp2Idx - 1); }

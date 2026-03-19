@@ -15,142 +15,59 @@
     .nav-links { display: flex; gap: 2.8rem; list-style: none; }
     .nav-links a { font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--tan); text-decoration: none; transition: color 0.3s; }
     .nav-links a:hover { color: var(--bark); }
-
     .page-header { padding: 10rem 3rem 4rem; background: var(--linen); }
     .section-label { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.8rem; }
     .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; line-height: 1.15; color: var(--earth); }
     .section-title em { font-style: italic; color: var(--tan); }
     .section-rule { width: 40px; height: 1px; background: var(--clay); margin: 1.8rem 0 0; }
-
     .store-wrap { padding: 4rem 3rem 7rem; max-width: 900px; margin: 0 auto; }
     .back-link { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--tan); text-decoration: none; margin-bottom: 3rem; transition: color 0.3s; }
     .back-link:hover { color: var(--bark); }
     .back-link::before { content: '←'; }
-
     .product-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; margin-bottom: 3rem; max-width: 860px; }
-    .product-img { overflow: hidden; border-radius: 4px; }
-    .wallpaper-ph-desktop { aspect-ratio: 16/9; background: linear-gradient(160deg, #304050 0%, #8090a8 100%); }
-    .wallpaper-ph-mobile { aspect-ratio: 9/19; background: linear-gradient(180deg, #304050 0%, #8090a8 100%); }
-    .product-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
     .product-details { display: flex; flex-direction: column; gap: 1.8rem; }
     .product-name { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 300; color: var(--earth); }
     .product-desc { font-size: 0.82rem; line-height: 1.9; color: var(--tan); }
-
     .option-label { font-size: 0.58rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.7rem; display: block; }
     .toggle-row { display: flex; gap: 0; border: 1px solid var(--sand); width: fit-content; }
     .toggle-btn { padding: 0.6rem 1.6rem; border: none; background: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--tan); cursor: pointer; transition: all 0.25s; }
     .toggle-btn.active { background: var(--earth); color: var(--warm-white); }
-
     .specs-box { padding: 1.2rem; background: var(--linen); border: 1px solid var(--sand); }
     .specs-box p { font-size: 0.72rem; color: var(--tan); line-height: 1.8; }
     .specs-box p span { color: var(--bark); font-family: 'Playfair Display', serif; }
-
     .price-display { font-family: 'Playfair Display', serif; font-size: 2.4rem; color: var(--bark); }
     .btn-order { width: 100%; padding: 1.1rem; background: var(--earth); color: var(--warm-white); border: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; cursor: pointer; transition: background 0.3s; }
     .btn-order:hover { background: var(--bark); }
-
     .product-info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; padding: 3rem 0; border-top: 1px solid var(--sand); border-bottom: 1px solid var(--sand); }
     .info-block p:first-child { font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.5rem; }
     .info-block p:last-child { font-size: 0.82rem; line-height: 1.7; color: var(--tan); }
-
     footer { background: var(--earth); color: rgba(250,246,240,0.4); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
     .footer-logo { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 300; font-style: italic; color: var(--clay); text-decoration: none; }
     footer p { font-size: 0.65rem; letter-spacing: 0.1em; }
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.9s ease, transform 0.9s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    /* ── CART ── */
-    #cart-btn {
-      display: flex; align-items: center; gap: 0.6rem;
-      background: none; border: none; cursor: pointer;
-      font-family: 'Tenor Sans', sans-serif;
-      font-size: 0.62rem; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--tan);
-      position: relative; transition: color 0.3s;
-      padding: 0.3rem 0;
-    }
+    #cart-btn { display: flex; align-items: center; gap: 0.6rem; background: none; border: none; cursor: pointer; font-family: 'Tenor Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--tan); position: relative; transition: color 0.3s; padding: 0.3rem 0; }
     #cart-btn:hover { color: var(--bark); }
     #cart-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.5; }
-    #cart-count {
-      display: none; align-items: center; justify-content: center;
-      position: absolute; top: -6px; right: -8px;
-      background: var(--bark); color: var(--warm-white);
-      font-size: 0.5rem; width: 16px; height: 16px;
-      border-radius: 50%; font-family: 'Tenor Sans', sans-serif;
-    }
-    #cart-total { color: var(--bark); font-size: 0.62rem; letter-spacing: 0.1em; }
-    .cart-flash { animation: cartFlash 0.6s ease; }
-    @keyframes cartFlash { 0%,100% { color: var(--tan); } 50% { color: var(--bark); } }
+    #cart-count { display: none; align-items: center; justify-content: center; position: absolute; top: -6px; right: -8px; background: var(--bark); color: var(--warm-white); font-size: 0.5rem; width: 16px; height: 16px; border-radius: 50%; }
+    #cart-count.has-items { display: inline-flex; }
     .cart-dropdown-wrap { position: relative; }
-    #cart-dropdown {
-      display: none; position: absolute; top: calc(100% + 1.2rem);
-      right: 0; width: 320px;
-      background: var(--warm-white); border: 1px solid var(--sand);
-      box-shadow: 0 12px 40px rgba(78,56,32,0.12);
-      z-index: 300; padding: 1.2rem;
-    }
+    #cart-dropdown { display: none; }
     #cart-dropdown.open { display: block; }
-    .cart-empty { font-size: 0.72rem; color: var(--tan); letter-spacing: 0.1em; text-align: center; padding: 1rem 0; }
-    .cart-items { display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 1rem; max-height: 300px; overflow-y: auto; }
-    .cart-item { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--linen); }
-    .cart-item-name { font-size: 0.78rem; color: var(--earth); font-family: 'Playfair Display', serif; margin-bottom: 0.2rem; }
-    .cart-item-opts { font-size: 0.62rem; color: var(--clay); letter-spacing: 0.08em; }
-    .cart-item-right { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
-    .cart-item-price { font-size: 0.82rem; color: var(--bark); font-family: 'Playfair Display', serif; white-space: nowrap; }
-    .cart-remove { background: none; border: none; cursor: pointer; color: var(--sand); font-size: 0.65rem; padding: 0.2rem; transition: color 0.2s; }
-    .cart-remove:hover { color: var(--bark); }
-    .cart-footer { padding-top: 1rem; border-top: 1px solid var(--sand); }
-    .cart-subtotal { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--earth); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; }
-    .cart-subtotal span:last-child { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--bark); }
-    .cart-checkout-btn { width: 100%; padding: 0.9rem; background: var(--earth); color: var(--warm-white); border: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; cursor: not-allowed; opacity: 0.6; }
-
-    .mobile-top-right { display: none; }
-    @media (max-width: 768px) {
-      .mobile-top-right { display: flex; align-items: center; gap: 1rem; }
-      .hamburger { display: flex; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 0.3rem; z-index: 1000; }
-      .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--earth); transition: all 0.3s; }
-      .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-      .hamburger.open span:nth-child(2) { opacity: 0; }
-      .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-      nav { padding: 1rem 1.4rem; justify-content: space-between; position: relative; z-index: 998; }
-      .nav-logo { font-size: 1rem !important; white-space: nowrap; }
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%; left: 0; right: 0;
-        background: rgba(250,246,240,0.98);
-        backdrop-filter: blur(10px);
-        z-index: 999;
-        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-        border-top: 1px solid var(--sand);
-      }
-      .nav-links.open { display: flex; }
-      .nav-links li { display: block; width: 100%; }
-      .nav-links li.cart-dropdown-wrap { display: none !important; }
-      .nav-links a {
-        font-size: 0.72rem !important;
-        letter-spacing: 0.18em;
-        color: var(--earth) !important;
-        display: block;
-        padding: 0.9rem 1.4rem;
-        border-bottom: 1px solid var(--linen);
-        text-transform: uppercase;
-        white-space: nowrap;
-      }
-      .nav-links li:last-child a { border-bottom: none; }
-
-      /* Product layout — stack vertically on mobile */
-      .product-hero { grid-template-columns: 1fr !important; gap: 2rem !important; }
-      .product-img { width: 100% !important; }
-      .product-img img { width: 100% !important; height: auto !important; display: block !important; }
-      .store-wrap { padding: 2rem 1.2rem !important; }
-    }
-
     .hamburger { display: none; }
     .mobile-top-right { display: none; }
+    #cart-btn-mobile { display: none; align-items: center; gap: 0.5rem; background: none; border: none; cursor: pointer; }
+    #cart-btn-mobile svg { stroke: var(--tan); fill: none; stroke-width: 1.5; }
+    .carousel-wrap { position: relative; overflow: hidden; background: var(--linen); width: 100%; aspect-ratio: 16/9; border-radius: 4px; }
+    .carousel-wrap.mobile-mode { aspect-ratio: 9/16; max-width: 260px; margin: 0 auto; }
+    .carousel-slide { position: absolute; top:0; left:0; width: 100%; height: 100%; }
+    .carousel-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(250,246,240,0.85); border: none; cursor: pointer; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10; transition: background 0.2s; backdrop-filter: blur(4px); }
+    .carousel-btn:hover { background: rgba(250,246,240,1); }
+    .carousel-btn.prev { left: 12px; }
+    .carousel-btn.next { right: 12px; }
+    .carousel-btn svg { width: 16px; height: 16px; stroke: var(--earth); stroke-width: 2; fill: none; }
+    .carousel-counter { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.4); color: #fff; font-family: 'Tenor Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.15em; padding: 0.25rem 0.7rem; border-radius: 20px; pointer-events: none; }
     @media (max-width: 768px) {
-      nav { padding: 1rem 1.4rem; background: rgba(250,246,240,0.97) !important; backdrop-filter: blur(8px); box-shadow: 0 1px 0 var(--sand); }
+      nav { padding: 1rem 1.4rem; background: rgba(250,246,240,0.97) !important; }
       .nav-logo { font-size: 1rem !important; white-space: nowrap; color: var(--earth) !important; }
       .mobile-top-right { display: flex !important; align-items: center; gap: 1rem; }
       .hamburger { display: flex !important; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 0.4rem; z-index: 1001; }
@@ -158,107 +75,37 @@
       .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
       .hamburger.open span:nth-child(2) { opacity: 0; }
       .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-      .nav-links { display: none; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--warm-white); z-index: 999; justify-content: center; align-items: center; gap: 2.2rem; overflow-y: auto; }
+      .nav-links { display: none; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--warm-white); z-index: 999; justify-content: center; align-items: center; gap: 2.2rem; }
       .nav-links.open { display: flex; }
       .nav-links li { display: block; text-align: center; }
       .nav-links li.cart-dropdown-wrap { display: none !important; }
       .nav-links a { font-size: 1.1rem !important; letter-spacing: 0.2em; color: var(--earth) !important; white-space: nowrap; }
-    }
-
-    #cart-btn-mobile {
-      display: none;
-      align-items: center;
-      gap: 0.5rem;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-family: 'Tenor Sans', sans-serif;
-      font-size: 0.62rem;
-      letter-spacing: 0.18em;
-      color: var(--tan);
-      position: relative;
-    }
-    #cart-btn-mobile svg { stroke: currentColor; }
-    #cart-total-mobile { color: var(--bark); font-size: 0.62rem; }
-    @media (max-width: 768px) {
       #cart-btn-mobile { display: flex !important; }
-    }
-
-    .carousel-wrap {
-      position: relative;
-      overflow: hidden;
-      background: var(--linen);
-      width: 100%;
-      aspect-ratio: 16/9;
-      border-radius: 4px;
-    }
-    .carousel-wrap.mobile-mode {
-      aspect-ratio: 9/16;
-      max-width: 260px;
-      margin: 0 auto;
-      background: transparent;
-    }
-    .carousel-slide {
-      position: absolute; top:0; left:0;
-      width: 100%; height: 100%;
-    }
-    .carousel-slide img {
-      width: 100% !important;
-      height: 100% !important;
-      object-fit: cover !important;
-      display: block !important;
-    }
-    .carousel-slide { position: absolute; top:0; left:0; width: 100%; height: 100%; }
-    .carousel-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .carousel-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(250,246,240,0.85);
-      border: none;
-      cursor: pointer;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 10;
-      transition: background 0.2s;
-      backdrop-filter: blur(4px);
-    }
-    .carousel-btn:hover { background: rgba(250,246,240,1); }
-    .carousel-btn.prev { left: 12px; }
-    .carousel-btn.next { right: 12px; }
-    .carousel-btn svg { width: 16px; height: 16px; stroke: var(--earth); stroke-width: 2; fill: none; }
-    .carousel-counter {
-      position: absolute;
-      bottom: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0,0,0,0.4);
-      color: #fff;
-      font-family: 'Tenor Sans', sans-serif;
-      font-size: 0.62rem;
-      letter-spacing: 0.15em;
-      padding: 0.25rem 0.7rem;
-      border-radius: 20px;
-      pointer-events: none;
+      .product-hero { grid-template-columns: 1fr !important; gap: 2rem !important; }
+      .store-wrap { padding: 2rem 1.2rem !important; }
+      .product-info-grid { grid-template-columns: 1fr; }
     }
   </style>
-  <script src="cart.js"></script>
+  <script src="../cart.js"></script>
 </head>
 <body>
   <nav>
-    <a href="index.html" class="nav-logo">Ryan Muratore</a>
+    <a href="../index.html" class="nav-logo">Ryan Muratore</a>
+    <div class="mobile-top-right">
+      <button id="cart-btn-mobile" onclick="Cart.toggleDropdown()">
+        <svg width="18" height="18" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      </button>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
     <ul class="nav-links" id="nav-links">
-      <li><a href="index.html#portfolio">Portfolio</a></li>
-      <li><a href="portfolio.html">Full Portfolio</a></li>
-      <li><a href="prints.html">Prints</a></li>
+      <li><a href="../index.html#portfolio">Portfolio</a></li>
+      <li><a href="../portfolio.html">Full Portfolio</a></li>
+      <li><a href="../prints.html">Prints</a></li>
       <li><a href="wallpapers.html">Wallpapers</a></li>
-      <li><a href="journals.html">Field Journals</a></li>
-      <li><a href="index.html#about">About</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
       <li class="cart-dropdown-wrap">
         <button id="cart-btn" onclick="Cart.toggleDropdown()">
           <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
@@ -277,144 +124,56 @@
   </div>
 
   <div class="store-wrap">
-    <a href="index.html#wallpapers" class="back-link">Back to wallpapers</a>
-
+    <a href="../index.html#wallpapers" class="back-link">Back to wallpapers</a>
     <div class="product-hero">
       <div class="carousel-wrap desktop-mode" id="wallpaper-carousel">
-        <div class="carousel-slide" data-group="desktop" style="display:block">
-  <img src="wallpapers/desktop-1.jpg" alt="Wallpaper 1">
-</div>
-<div class="carousel-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-2.jpg" alt="Wallpaper 2">
-</div>
-<div class="carousel-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-3.jpg" alt="Wallpaper 3">
-</div>
-<div class="carousel-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-4.jpg" alt="Wallpaper 4">
-</div>
-<div class="carousel-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-5.jpg" alt="Wallpaper 5">
-</div>
-<div class="carousel-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-6.jpg" alt="Wallpaper 6">
-</div>
-<div class="carousel-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-7.jpg" alt="Wallpaper 7">
-</div>
-<div class="carousel-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-8.jpg" alt="Wallpaper 8">
-</div>
-<div class="carousel-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-9.jpg" alt="Wallpaper 9">
-</div>
-<div class="carousel-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-10.jpg" alt="Wallpaper 10">
-</div>
-<div class="carousel-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-11.jpg" alt="Wallpaper 11">
-</div>
-<div class="carousel-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-12.jpg" alt="Wallpaper 12">
-</div>
-<div class="carousel-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-13.jpg" alt="Wallpaper 13">
-</div>
-<div class="carousel-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-14.jpg" alt="Wallpaper 14">
-</div>
-<div class="carousel-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-15.jpg" alt="Wallpaper 15">
-</div>
-<div class="carousel-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-16.jpg" alt="Wallpaper 16">
-</div>
-<div class="carousel-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-17.jpg" alt="Wallpaper 17">
-</div>
-<div class="carousel-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-18.jpg" alt="Wallpaper 18">
-</div>
-<div class="carousel-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-19.jpg" alt="Wallpaper 19">
-</div>
-<div class="carousel-slide" data-group="desktop" style="display:none">
-  <img src="wallpapers/desktop-20.jpg" alt="Wallpaper 20">
-</div>
-
-        <div class="carousel-slide" data-group="mobile" style="display:block">
-  <img src="wallpapers/mobile-1.jpg" alt="Wallpaper 1">
-</div>
-<div class="carousel-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-2.jpg" alt="Wallpaper 2">
-</div>
-<div class="carousel-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-3.jpg" alt="Wallpaper 3">
-</div>
-<div class="carousel-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-4.jpg" alt="Wallpaper 4">
-</div>
-<div class="carousel-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-5.jpg" alt="Wallpaper 5">
-</div>
-<div class="carousel-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-6.jpg" alt="Wallpaper 6">
-</div>
-<div class="carousel-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-7.jpg" alt="Wallpaper 7">
-</div>
-<div class="carousel-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-8.jpg" alt="Wallpaper 8">
-</div>
-<div class="carousel-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-9.jpg" alt="Wallpaper 9">
-</div>
-<div class="carousel-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-10.jpg" alt="Wallpaper 10">
-</div>
-<div class="carousel-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-11.jpg" alt="Wallpaper 11">
-</div>
-<div class="carousel-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-12.jpg" alt="Wallpaper 12">
-</div>
-<div class="carousel-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-13.jpg" alt="Wallpaper 13">
-</div>
-<div class="carousel-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-14.jpg" alt="Wallpaper 14">
-</div>
-<div class="carousel-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-15.jpg" alt="Wallpaper 15">
-</div>
-<div class="carousel-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-16.jpg" alt="Wallpaper 16">
-</div>
-<div class="carousel-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-17.jpg" alt="Wallpaper 17">
-</div>
-<div class="carousel-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-18.jpg" alt="Wallpaper 18">
-</div>
-<div class="carousel-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-19.jpg" alt="Wallpaper 19">
-</div>
-<div class="carousel-slide" data-group="mobile" style="display:none">
-  <img src="wallpapers/mobile-20.jpg" alt="Wallpaper 20">
-</div>
-
-        <button class="carousel-btn prev" onclick="carouselPrev()">
-          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-        <button class="carousel-btn next" onclick="carouselNext()">
-          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
+        <div class="carousel-slide" data-group="desktop" style="display:block"><img src="../wallpapers/desktop-1.jpg" alt="Desktop 1"></div>
+        <div class="carousel-slide" data-group="desktop" style="display:none"><img src="../wallpapers/desktop-2.jpg" alt="Desktop 2"></div>
+        <div class="carousel-slide" data-group="desktop" style="display:none"><img src="../wallpapers/desktop-3.jpg" alt="Desktop 3"></div>
+        <div class="carousel-slide" data-group="desktop" style="display:none"><img src="../wallpapers/desktop-4.jpg" alt="Desktop 4"></div>
+        <div class="carousel-slide" data-group="desktop" style="display:none"><img src="../wallpapers/desktop-5.jpg" alt="Desktop 5"></div>
+        <div class="carousel-slide" data-group="desktop" style="display:none"><img src="../wallpapers/desktop-6.jpg" alt="Desktop 6"></div>
+        <div class="carousel-slide" data-group="desktop" style="display:none"><img src="../wallpapers/desktop-7.jpg" alt="Desktop 7"></div>
+        <div class="carousel-slide" data-group="desktop" style="display:none"><img src="../wallpapers/desktop-8.jpg" alt="Desktop 8"></div>
+        <div class="carousel-slide" data-group="desktop" style="display:none"><img src="../wallpapers/desktop-9.jpg" alt="Desktop 9"></div>
+        <div class="carousel-slide" data-group="desktop" style="display:none"><img src="../wallpapers/desktop-10.jpg" alt="Desktop 10"></div>
+        <div class="carousel-slide" data-group="desktop" style="display:none"><img src="../wallpapers/desktop-11.jpg" alt="Desktop 11"></div>
+        <div class="carousel-slide" data-group="desktop" style="display:none"><img src="../wallpapers/desktop-12.jpg" alt="Desktop 12"></div>
+        <div class="carousel-slide" data-group="desktop" style="display:none"><img src="../wallpapers/desktop-13.jpg" alt="Desktop 13"></div>
+        <div class="carousel-slide" data-group="desktop" style="display:none"><img src="../wallpapers/desktop-14.jpg" alt="Desktop 14"></div>
+        <div class="carousel-slide" data-group="desktop" style="display:none"><img src="../wallpapers/desktop-15.jpg" alt="Desktop 15"></div>
+        <div class="carousel-slide" data-group="desktop" style="display:none"><img src="../wallpapers/desktop-16.jpg" alt="Desktop 16"></div>
+        <div class="carousel-slide" data-group="desktop" style="display:none"><img src="../wallpapers/desktop-17.jpg" alt="Desktop 17"></div>
+        <div class="carousel-slide" data-group="desktop" style="display:none"><img src="../wallpapers/desktop-18.jpg" alt="Desktop 18"></div>
+        <div class="carousel-slide" data-group="desktop" style="display:none"><img src="../wallpapers/desktop-19.jpg" alt="Desktop 19"></div>
+        <div class="carousel-slide" data-group="desktop" style="display:none"><img src="../wallpapers/desktop-20.jpg" alt="Desktop 20"></div>
+        <div class="carousel-slide" data-group="mobile" style="display:none"><img src="../wallpapers/mobile-1.jpg" alt="Mobile 1"></div>
+        <div class="carousel-slide" data-group="mobile" style="display:none"><img src="../wallpapers/mobile-2.jpg" alt="Mobile 2"></div>
+        <div class="carousel-slide" data-group="mobile" style="display:none"><img src="../wallpapers/mobile-3.jpg" alt="Mobile 3"></div>
+        <div class="carousel-slide" data-group="mobile" style="display:none"><img src="../wallpapers/mobile-4.jpg" alt="Mobile 4"></div>
+        <div class="carousel-slide" data-group="mobile" style="display:none"><img src="../wallpapers/mobile-5.jpg" alt="Mobile 5"></div>
+        <div class="carousel-slide" data-group="mobile" style="display:none"><img src="../wallpapers/mobile-6.jpg" alt="Mobile 6"></div>
+        <div class="carousel-slide" data-group="mobile" style="display:none"><img src="../wallpapers/mobile-7.jpg" alt="Mobile 7"></div>
+        <div class="carousel-slide" data-group="mobile" style="display:none"><img src="../wallpapers/mobile-8.jpg" alt="Mobile 8"></div>
+        <div class="carousel-slide" data-group="mobile" style="display:none"><img src="../wallpapers/mobile-9.jpg" alt="Mobile 9"></div>
+        <div class="carousel-slide" data-group="mobile" style="display:none"><img src="../wallpapers/mobile-10.jpg" alt="Mobile 10"></div>
+        <div class="carousel-slide" data-group="mobile" style="display:none"><img src="../wallpapers/mobile-11.jpg" alt="Mobile 11"></div>
+        <div class="carousel-slide" data-group="mobile" style="display:none"><img src="../wallpapers/mobile-12.jpg" alt="Mobile 12"></div>
+        <div class="carousel-slide" data-group="mobile" style="display:none"><img src="../wallpapers/mobile-13.jpg" alt="Mobile 13"></div>
+        <div class="carousel-slide" data-group="mobile" style="display:none"><img src="../wallpapers/mobile-14.jpg" alt="Mobile 14"></div>
+        <div class="carousel-slide" data-group="mobile" style="display:none"><img src="../wallpapers/mobile-15.jpg" alt="Mobile 15"></div>
+        <div class="carousel-slide" data-group="mobile" style="display:none"><img src="../wallpapers/mobile-16.jpg" alt="Mobile 16"></div>
+        <div class="carousel-slide" data-group="mobile" style="display:none"><img src="../wallpapers/mobile-17.jpg" alt="Mobile 17"></div>
+        <div class="carousel-slide" data-group="mobile" style="display:none"><img src="../wallpapers/mobile-18.jpg" alt="Mobile 18"></div>
+        <div class="carousel-slide" data-group="mobile" style="display:none"><img src="../wallpapers/mobile-19.jpg" alt="Mobile 19"></div>
+        <div class="carousel-slide" data-group="mobile" style="display:none"><img src="../wallpapers/mobile-20.jpg" alt="Mobile 20"></div>
+        <button class="carousel-btn prev" onclick="carouselPrev()"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <button class="carousel-btn next" onclick="carouselNext()"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
         <div class="carousel-counter" id="carousel-counter">1 / 20</div>
       </div>
       <div class="product-details">
         <p class="product-name">Wallpaper Pack Vol. 1</p>
         <p class="product-desc">20 hand-selected photographs from across Iceland, Norway, Ireland, Costa Rica and more. Shot on location, optimized for your screen, delivered instantly as a digital download.</p>
-
         <div>
           <span class="option-label">Select Format</span>
           <div class="toggle-row">
@@ -422,7 +181,6 @@
             <button class="toggle-btn" data-type="mobile" onclick="selectType(this)">Mobile</button>
           </div>
         </div>
-
         <div class="specs-box">
           <p id="wallpaper-specs-detail">
             <span>Resolution</span> — 3840 × 2160px (4K)<br>
@@ -431,12 +189,10 @@
             <span>Delivery</span> — Instant download
           </p>
         </div>
-
         <p class="price-display">$10</p>
         <button class="btn-order" onclick="addWallpaperToCart()">Add to Cart</button>
       </div>
     </div>
-
     <div class="product-info-grid">
       <div class="info-block"><p>Instant Download</p><p>Your pack is delivered immediately after purchase — no waiting, no shipping.</p></div>
       <div class="info-block"><p>20 Photos</p><p>Every pack includes 20 unique wallpapers curated from across all destinations.</p></div>
@@ -445,36 +201,32 @@
   </div>
 
   <footer>
-    <a href="index.html" class="footer-logo">Ryan Muratore Photography</a>
+    <a href="../index.html" class="footer-logo">Ryan Muratore Photography</a>
     <p>© 2025 Ryan Muratore — All rights reserved. Do not reproduce without permission.</p>
   </footer>
 
   <script>
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-    }, { threshold: 0.01, rootMargin: '0px 0px -20px 0px' });
-    reveals.forEach(el => observer.observe(el));
-  
     function addWallpaperToCart() {
       const type = document.querySelector('.toggle-btn.active').dataset.type;
       Cart.add({ id: 'wallpaper-' + type, name: 'Wallpaper Pack Vol. 1', options: type.charAt(0).toUpperCase() + type.slice(1) + ' · 20 photos', price: 10 });
     }
-let carouselIndex = 0;
+
+    // ── CAROUSEL — fully dynamic, never goes blank ──
+    let carouselIndex = 0;
     let carouselGroup = 'desktop';
-    const TOTAL = 20;
 
     function getSlides() {
-      return Array.from(document.querySelectorAll(`.carousel-slide[data-group="${carouselGroup}"]`));
+      return Array.from(document.querySelectorAll('.carousel-slide[data-group="' + carouselGroup + '"]'));
     }
 
     function showSlide(n) {
-      carouselIndex = (n + TOTAL) % TOTAL;
-      // Hide ALL slides regardless of group, then show only the target
-      document.querySelectorAll('.carousel-slide').forEach(s => s.style.display = 'none');
       const slides = getSlides();
-      if (slides[carouselIndex]) slides[carouselIndex].style.display = 'block';
-      document.getElementById('carousel-counter').textContent = (carouselIndex + 1) + ' / ' + TOTAL;
+      const total = slides.length;
+      if (total === 0) return;
+      carouselIndex = (n + total) % total;
+      document.querySelectorAll('.carousel-slide').forEach(s => s.style.display = 'none');
+      slides[carouselIndex].style.display = 'block';
+      document.getElementById('carousel-counter').textContent = (carouselIndex + 1) + ' / ' + total;
     }
 
     function carouselNext() { showSlide(carouselIndex + 1); }
@@ -484,17 +236,10 @@ let carouselIndex = 0;
       document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       carouselGroup = btn.dataset.type;
-      carouselIndex = 0;
-      // Show correct group
-      document.querySelectorAll('.carousel-slide').forEach(s => s.style.display = 'none');
-      const slides = getSlides();
-      if (slides[0]) slides[0].style.display = 'block';
-      document.getElementById('carousel-counter').textContent = '1 / ' + TOTAL;
-      // Toggle aspect ratio for mobile wallpapers
+      showSlide(0);
       const wrap = document.getElementById('wallpaper-carousel');
       wrap.classList.toggle('mobile-mode', carouselGroup === 'mobile');
       wrap.classList.toggle('desktop-mode', carouselGroup === 'desktop');
-      // Update specs
       const specs = document.getElementById('wallpaper-specs-detail');
       if (carouselGroup === 'desktop') {
         specs.innerHTML = '<span>Resolution</span> — 3840 × 2160px (4K)<br><span>Format</span> — JPEG, sRGB<br><span>Files</span> — 20 wallpapers<br><span>Delivery</span> — Instant download';
@@ -502,13 +247,14 @@ let carouselIndex = 0;
         specs.innerHTML = '<span>Resolution</span> — 1170 × 2532px<br><span>Format</span> — JPEG, sRGB<br><span>Files</span> — 20 wallpapers<br><span>Delivery</span> — Instant download';
       }
     }
-  
+
     function toggleMenu() {
       const links = document.getElementById('nav-links');
       const burger = document.getElementById('hamburger');
-      const isOpen = links.classList.toggle('open');
-      burger.classList.toggle('open', isOpen);
+      links.classList.toggle('open');
+      burger.classList.toggle('open', links.classList.contains('open'));
     }
+
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('#nav-links a').forEach(a => {
         a.addEventListener('click', () => {
