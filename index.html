@@ -456,7 +456,7 @@
 
       /* Gallery */
       .gallery-grid { gap: 6px; align-items: flex-start !important; width: 100% !important; }
-      .gallery-col { gap: 6px; flex: 1 1 0 !important; min-width: 0 !important; width: 50% !important; }
+      .gallery-col { gap: 6px; flex: 1 1 0 !important; min-width: 0 !important; width: 50% !important; align-self: flex-start; }
       #world-map-container { width: 100% !important; margin: 0 !important; }
 
       /* Prints grid — align-items: start so text sits right under each image, no offset */
@@ -950,9 +950,9 @@
       const grid = document.getElementById('gallery-grid');
       if (!grid) return;
       grid.innerHTML = '';
+      grid.style.flexWrap = '';
+      grid.style.alignItems = 'flex-start';
       const cols = getColCount();
-      const isMobile = cols === 2;
-      const isOdd = items.length % cols !== 0;
       const columns = [];
       for (let i = 0; i < cols; i++) {
         const col = document.createElement('div');
@@ -960,25 +960,13 @@
         grid.appendChild(col);
         columns.push(col);
       }
-      const mainItems = (isMobile && isOdd) ? items.slice(0, -1) : items;
-      const lastItem = (isMobile && isOdd) ? items[items.length - 1] : null;
-      mainItems.forEach((item, i) => {
+      items.forEach((item, i) => {
         const isHighlighted = !highlightSet || highlightSet.has(item);
         item.style.opacity = isHighlighted ? '1' : '0.15';
         item.style.pointerEvents = isHighlighted ? 'auto' : 'none';
         item.style.flex = '';
         columns[i % cols].appendChild(item);
       });
-      if (lastItem) {
-        const isHighlighted = !highlightSet || highlightSet.has(lastItem);
-        lastItem.style.opacity = isHighlighted ? '1' : '0.15';
-        lastItem.style.pointerEvents = isHighlighted ? 'auto' : 'none';
-        lastItem.style.flex = '0 0 100%';
-        grid.style.flexWrap = 'wrap';
-        grid.appendChild(lastItem);
-      } else {
-        grid.style.flexWrap = '';
-      }
     }
     function filterGallery(filter) {
       if (!allGalleryItems.length) return;
