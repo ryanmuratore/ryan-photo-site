@@ -382,20 +382,38 @@
         const isHighlighted = !highlightSet || highlightSet.has(item);
         item.style.opacity = isHighlighted ? '1' : '0.15';
         item.style.pointerEvents = isHighlighted ? 'auto' : 'none';
+        item.style.display = '';
         grid.appendChild(item);
       });
     }
 
     function filterGallery(filter) {
+      const grid = document.getElementById('gallery-grid');
+      if (!grid) return;
       if (filter === 'all') {
+        allGalleryItems.forEach(item => {
+          item.style.opacity = '1';
+          item.style.pointerEvents = 'auto';
+          item.style.display = '';
+        });
         const sorted = allGalleryItems.slice().sort((a, b) => parseInt(a.dataset.index) - parseInt(b.dataset.index));
-        distributeItems(sorted, null);
+        grid.innerHTML = '';
+        sorted.forEach(item => grid.appendChild(item));
       } else {
         const matching = filter === 'wildlife'
           ? allGalleryItems.filter(i => i.dataset.type === 'wildlife')
           : allGalleryItems.filter(i => i.dataset.country === filter);
         const nonMatching = allGalleryItems.filter(i => !matching.includes(i));
-        distributeItems([...matching, ...nonMatching], new Set(matching));
+        grid.innerHTML = '';
+        matching.forEach(item => {
+          item.style.opacity = '1';
+          item.style.pointerEvents = 'auto';
+          item.style.display = '';
+          grid.appendChild(item);
+        });
+        nonMatching.forEach(item => {
+          item.style.display = 'none';
+        });
       }
       document.querySelectorAll('.country-path').forEach(el => {
         el.classList.toggle('map-active', el.dataset.name === filter);
