@@ -39,8 +39,9 @@
     .wildlife-pill { border-color: var(--bark); color: var(--bark); }
     .wildlife-pill.active, .wildlife-pill:hover { background: var(--bark); border-color: var(--bark); color: var(--warm-white); }
     .map-loading { padding: 3rem; text-align: center; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--tan); }
-    .gallery-grid { display: flex; gap: 8px; align-items: flex-start; }
-    .gallery-col { flex: 1; display: flex; flex-direction: column; gap: 8px; align-self: flex-start; }
+    .gallery-grid { columns: 3; column-gap: 8px; }
+    .gallery-col { display: none; } /* cols created by JS, hide them */
+    .gallery-item { break-inside: avoid; margin-bottom: 8px; width: 100%; }
     .gallery-item { position: relative; overflow: hidden; cursor: pointer; width: 100%; transition: opacity 0.4s; }
     .gallery-item img { width: 100%; height: auto; display: block; transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
     .gallery-item:hover img { transform: scale(1.04); }
@@ -112,8 +113,8 @@
       .nav-links a { font-size: 0.85rem !important; letter-spacing: 0.15em; color: var(--earth) !important; white-space: nowrap; display: block; padding: 0.75rem 1.4rem; border-bottom: 1px solid var(--linen); }
       #cart-btn-mobile { display: flex !important; }
       #world-map-container { width: 100% !important; margin: 0 !important; min-height: 220px; }
-      .gallery-grid { gap: 6px !important; }
-      .gallery-col { gap: 6px !important; }
+      .gallery-grid { columns: 2 !important; column-gap: 6px !important; }
+      .gallery-item { margin-bottom: 6px !important; }
       .portfolio-wrap { padding: 0 0.5rem !important; }
     }
   </style>
@@ -377,19 +378,11 @@
       const grid = document.getElementById('gallery-grid');
       if (!grid) return;
       grid.innerHTML = '';
-      const cols = getColCount();
-      const columns = [];
-      for (let i = 0; i < cols; i++) {
-        const col = document.createElement('div');
-        col.className = 'gallery-col';
-        grid.appendChild(col);
-        columns.push(col);
-      }
-      items.forEach((item, i) => {
+      items.forEach((item) => {
         const isHighlighted = !highlightSet || highlightSet.has(item);
         item.style.opacity = isHighlighted ? '1' : '0.15';
         item.style.pointerEvents = isHighlighted ? 'auto' : 'none';
-        columns[i % cols].appendChild(item);
+        grid.appendChild(item);
       });
     }
 
