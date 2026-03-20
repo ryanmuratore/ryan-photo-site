@@ -8,30 +8,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&family=Tenor+Sans&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --warm-white: #faf6f0;
-      --linen:      #f0e9de;
-      --sand:       #ddd0bc;
-      --clay:       #c4a882;
-      --tan:        #a8896a;
-      --bark:       #7a5c3a;
-      --earth:      #4e3820;
-      --ink:        #2a1f12;
-    }
-
+    :root { --warm-white: #faf6f0; --linen: #f0e9de; --sand: #ddd0bc; --clay: #c4a882; --tan: #a8896a; --bark: #7a5c3a; --earth: #4e3820; --ink: #2a1f12; }
     html { scroll-behavior: smooth; }
     body { background: var(--warm-white); color: var(--ink); font-family: 'Tenor Sans', sans-serif; font-weight: 400; overflow-x: hidden; }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.4rem 3rem;
-      background: rgba(250,246,240,0.96);
-      backdrop-filter: blur(8px);
-      box-shadow: 0 1px 0 var(--sand);
-    }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 3rem; background: rgba(250,246,240,0.96); backdrop-filter: blur(8px); box-shadow: 0 1px 0 var(--sand); }
     .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 300; letter-spacing: 0.12em; color: var(--earth); text-decoration: none; }
     .nav-links { display: flex; gap: 2.8rem; list-style: none; }
     .nav-links a { font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--tan); text-decoration: none; transition: color 0.3s; position: relative; }
@@ -39,22 +19,14 @@
     .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 1px; background: var(--clay); transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease; }
     .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
     .nav-links a:hover { color: var(--bark); }
-
-    /* ── PAGE HEADER ── */
-    .page-header {
-      padding: 10rem 3rem 4rem;
-      background: var(--warm-white);
-    }
+    .page-header { padding: 10rem 3rem 4rem; background: var(--warm-white); }
     .page-header .section-label { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.8rem; }
     .page-header .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; line-height: 1.15; color: var(--earth); }
     .page-header .section-title em { font-style: italic; color: var(--tan); }
     .section-rule { width: 40px; height: 1px; background: var(--clay); margin: 1.8rem 0; }
-
-    /* ── MAP FILTER ── */
     .map-filter-wrap { padding: 0 3rem 2rem; }
     .map-label { font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--clay); margin-bottom: 1rem; display: block; }
-    #world-map-container { width: 65%;
-      margin: 0 auto; background: var(--linen); border: 1px solid var(--sand); overflow: hidden; position: relative; }
+    #world-map-container { width: 65%; margin: 0 auto; background: var(--linen); border: 1px solid var(--sand); overflow: hidden; position: relative; }
     #world-map-container svg { width: 100%; height: auto; display: block; }
     .country-path { fill: var(--sand); stroke: var(--warm-white); stroke-width: 0.4; transition: fill 0.25s; cursor: default; }
     .country-path.visited { fill: var(--clay); cursor: pointer; }
@@ -67,142 +39,63 @@
     .wildlife-pill { border-color: var(--bark); color: var(--bark); }
     .wildlife-pill.active, .wildlife-pill:hover { background: var(--bark); border-color: var(--bark); color: var(--warm-white); }
     .map-loading { padding: 3rem; text-align: center; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--tan); }
-
-    /* ── FULL PORTFOLIO GRID ── */
-            /* ── GALLERY GRID ── */
-    .gallery-grid {
-      display: flex;
-      gap: 8px;
-      align-items: flex-start;
-    }
-    .gallery-col {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .gallery-item {
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-      width: 100%;
-      transition: opacity 0.4s;
-    }
-    .gallery-item img {
-      width: 100%;
-      height: auto;
-      display: block;
-      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
+    .gallery-grid { display: flex; gap: 8px; align-items: flex-start; }
+    .gallery-col { flex: 1; display: flex; flex-direction: column; gap: 8px; align-self: flex-start; }
+    .gallery-item { position: relative; overflow: hidden; cursor: pointer; width: 100%; transition: opacity 0.4s; }
+    .gallery-item img { width: 100%; height: auto; display: block; transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
     .gallery-item:hover img { transform: scale(1.04); }
-
     .gallery-hover { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,18,8,0.82) 0%, rgba(26,18,8,0.1) 50%, transparent 100%); opacity: 0; transition: opacity 0.4s; display: flex; flex-direction: column; justify-content: flex-end; padding: 1.4rem; }
     .gallery-item:hover .gallery-hover { opacity: 1; }
     .gallery-hover-title { display: none; }
     .gallery-hover-location { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--warm-white); transform: translateY(6px); transition: transform 0.4s; }
     .gallery-item:hover .gallery-hover-location { transform: translateY(0); }
-
-    /* ── FOOTER ── */
     footer { background: var(--earth); color: rgba(250,246,240,0.4); padding: 2.5rem 3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
     .footer-logo { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 300; font-style: italic; color: var(--clay); text-decoration: none; }
     footer p { font-size: 0.65rem; letter-spacing: 0.1em; }
-
-    /* ── ANIMATIONS ── */
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.9s ease, transform 0.9s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    /* ── MOBILE ── */
-    /* ── CART ── */
-    #cart-btn {
-      display: flex; align-items: center; gap: 0.6rem;
-      background: none; border: none; cursor: pointer;
-      font-family: 'Tenor Sans', sans-serif;
-      font-size: 0.62rem; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--tan);
-      position: relative; transition: color 0.3s;
-      padding: 0.3rem 0;
-    }
+    #cart-btn { display: flex; align-items: center; gap: 0.6rem; background: none; border: none; cursor: pointer; font-family: 'Tenor Sans', sans-serif; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--tan); position: relative; transition: color 0.3s; padding: 0.3rem 0; }
     #cart-btn:hover { color: var(--bark); }
     #cart-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.5; }
-    #cart-count {
-      display: none; align-items: center; justify-content: center;
-      position: absolute; top: -6px; right: -8px;
-      background: var(--bark); color: var(--warm-white);
-      font-size: 0.5rem; width: 16px; height: 16px;
-      border-radius: 50%; font-family: 'Tenor Sans', sans-serif;
-    }
-    #cart-total { color: var(--bark); font-size: 0.62rem; letter-spacing: 0.1em; }
-    .cart-flash { animation: cartFlash 0.6s ease; }
-    @keyframes cartFlash { 0%,100% { color: var(--tan); } 50% { color: var(--bark); } }
+    #cart-count { display: none; align-items: center; justify-content: center; position: absolute; top: -6px; right: -8px; background: var(--bark); color: var(--warm-white); font-size: 0.5rem; width: 16px; height: 16px; border-radius: 50%; font-family: 'Tenor Sans', sans-serif; }
     .cart-dropdown-wrap { position: relative; }
-    #cart-dropdown {
-      display: none; position: absolute; top: calc(100% + 1.2rem);
-      right: 0; width: 320px;
-      background: var(--warm-white); border: 1px solid var(--sand);
-      box-shadow: 0 12px 40px rgba(78,56,32,0.12);
-      z-index: 300; padding: 1.2rem;
-    }
-    #cart-dropdown.open { display: block; }
-    .cart-empty { font-size: 0.72rem; color: var(--tan); letter-spacing: 0.1em; text-align: center; padding: 1rem 0; }
-    .cart-items { display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 1rem; max-height: 300px; overflow-y: auto; }
-    .cart-item { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--linen); }
-    .cart-item-name { font-size: 0.78rem; color: var(--earth); font-family: 'Playfair Display', serif; margin-bottom: 0.2rem; }
-    .cart-item-opts { font-size: 0.62rem; color: var(--clay); letter-spacing: 0.08em; }
-    .cart-item-right { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
-    .cart-item-price { font-size: 0.82rem; color: var(--bark); font-family: 'Playfair Display', serif; white-space: nowrap; }
-    .cart-remove { background: none; border: none; cursor: pointer; color: var(--sand); font-size: 0.65rem; padding: 0.2rem; transition: color 0.2s; }
-    .cart-remove:hover { color: var(--bark); }
-    .cart-footer { padding-top: 1rem; border-top: 1px solid var(--sand); }
-    .cart-subtotal { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--earth); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; }
-    .cart-subtotal span:last-child { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--bark); }
-    .cart-checkout-btn { width: 100%; padding: 0.9rem; background: var(--earth); color: var(--warm-white); border: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; cursor: not-allowed; opacity: 0.6; }
-
-    .mobile-top-right { display: none; }
-    @media (max-width: 768px) {
-      .mobile-top-right { display: flex; align-items: center; gap: 1rem; }
-      .hamburger { display: flex; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 0.3rem; z-index: 1000; }
-      .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--earth); transition: all 0.3s; }
-      .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-      .hamburger.open span:nth-child(2) { opacity: 0; }
-      .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-      nav { padding: 1rem 1.4rem; justify-content: space-between; position: relative; z-index: 998; }
-      .nav-logo { font-size: 1rem !important; white-space: nowrap; }
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%; left: 0; right: 0;
-        background: rgba(250,246,240,0.98);
-        backdrop-filter: blur(10px);
-        z-index: 999;
-        box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-        border-top: 1px solid var(--sand);
-      }
-      .nav-links.open { display: flex; }
-      .nav-links li { display: block; width: 100%; }
-      .nav-links li.cart-dropdown-wrap { display: none !important; }
-      .nav-links a {
-        font-size: 0.72rem !important;
-        letter-spacing: 0.18em;
-        color: var(--earth) !important;
-        display: block;
-        padding: 0.9rem 1.4rem;
-        border-bottom: 1px solid var(--linen);
-        text-transform: uppercase;
-        white-space: nowrap;
-      }
-      .nav-links li:last-child a { border-bottom: none; }
-    
-      /* ── MAP ── */
-      #world-map-container { width: 100% !important; margin: 0 !important; }
-      /* ── GALLERY GRID ── */
-      .gallery-grid { display: flex !important; gap: 6px !important; align-items: flex-start !important; width: 100% !important; }
-      .gallery-col { gap: 6px !important; flex: 1 1 0 !important; min-width: 0 !important; width: 50% !important; }
-      .portfolio-wrap { padding: 0 0.5rem !important; }
-    }
-
+    #cart-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 400; }
+    #cart-overlay.open { display: block; }
+    #cart-drawer { position: fixed; top: 0; right: -420px; width: 400px; max-width: 95vw; height: 100vh; background: var(--warm-white); z-index: 500; display: flex; flex-direction: column; transition: right 0.35s cubic-bezier(0.4,0,0.2,1); border-left: 1px solid var(--sand); }
+    #cart-drawer.open { right: 0; }
+    .cd-head { display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 1.6rem; border-bottom: 1px solid var(--sand); }
+    .cd-title { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--earth); }
+    .cd-close { background: none; border: none; cursor: pointer; color: var(--tan); padding: 0.2rem; transition: color 0.2s; }
+    .cd-close:hover { color: var(--earth); }
+    #cd-items { flex: 1; overflow-y: auto; padding: 0 1.6rem; }
+    #cd-empty { display: none; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; color: var(--clay); padding: 3rem 2rem; text-align: center; }
+    #cd-empty p { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--clay); }
+    #cd-empty svg { opacity: 0.4; }
+    .cd-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1.2rem 0; border-bottom: 1px solid var(--linen); }
+    .cd-item-thumb { width: 56px; height: 44px; object-fit: cover; flex-shrink: 0; }
+    .cd-item-info { flex: 1; }
+    .cd-item-name { font-size: 0.68rem; letter-spacing: 0.08em; color: var(--earth); margin-bottom: 0.2rem; text-transform: uppercase; }
+    .cd-item-opts { font-family: 'Playfair Display', serif; font-size: 0.88rem; color: var(--tan); }
+    .cd-item-price { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--bark); margin-top: 0.3rem; }
+    .cd-qty { display: flex; align-items: center; gap: 0.6rem; margin-top: 0.5rem; }
+    .cd-qty-btn { width: 22px; height: 22px; background: var(--linen); border: 1px solid var(--sand); cursor: pointer; font-size: 1rem; color: var(--bark); display: flex; align-items: center; justify-content: center; transition: background 0.2s; line-height: 1; }
+    .cd-qty-btn:hover { background: var(--sand); }
+    .cd-qty-num { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--ink); min-width: 20px; text-align: center; }
+    .cd-item-remove { background: none; border: none; cursor: pointer; color: var(--clay); font-size: 0.52rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 0; margin-top: 0.3rem; display: block; transition: color 0.2s; font-family: 'Tenor Sans', sans-serif; }
+    .cd-item-remove:hover { color: var(--earth); }
+    #cd-footer { padding: 1.4rem 1.6rem; border-top: 1px solid var(--sand); }
+    .cd-subtotal { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+    .cd-subtotal span:first-child { font-size: 0.56rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--clay); }
+    #cd-total { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--earth); }
+    .cd-note { font-family: 'Playfair Display', serif; font-size: 0.78rem; color: var(--clay); margin-bottom: 1rem; font-style: italic; }
+    .cd-checkout { width: 100%; padding: 1rem; background: var(--earth); color: var(--warm-white); border: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.58rem; letter-spacing: 0.34em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+    .cd-checkout:hover { background: var(--bark); }
+    #cart-count { font-size: 0.52rem; background: var(--earth); color: var(--warm-white); border-radius: 50%; width: 16px; height: 16px; display: none; align-items: center; justify-content: center; margin-left: 4px; }
+    #cart-count.has-items { display: inline-flex; }
     .hamburger { display: none; }
     .mobile-top-right { display: none; }
+    #cart-btn-mobile { display: none; align-items: center; gap: 0.5rem; background: none; border: none; cursor: pointer; color: var(--tan); position: relative; }
+    #cart-btn-mobile svg { stroke: currentColor; fill: none; stroke-width: 1.5; }
     @media (max-width: 768px) {
       nav { padding: 1rem 1.4rem; background: rgba(250,246,240,0.97) !important; backdrop-filter: blur(8px); box-shadow: 0 1px 0 var(--sand); }
       .nav-logo { font-size: 1rem !important; white-space: nowrap; color: var(--earth) !important; }
@@ -217,80 +110,21 @@
       .nav-links li { display: block; text-align: left; }
       .nav-links li.cart-dropdown-wrap { display: none !important; }
       .nav-links a { font-size: 0.85rem !important; letter-spacing: 0.15em; color: var(--earth) !important; white-space: nowrap; display: block; padding: 0.75rem 1.4rem; border-bottom: 1px solid var(--linen); }
-    }
-
-    #cart-btn-mobile {
-      display: none;
-      align-items: center;
-      gap: 0.5rem;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-family: 'Tenor Sans', sans-serif;
-      font-size: 0.62rem;
-      letter-spacing: 0.18em;
-      color: var(--tan);
-      position: relative;
-    }
-    #cart-btn-mobile svg { stroke: currentColor; }
-    #cart-total-mobile { color: var(--bark); font-size: 0.62rem; }
-    @media (max-width: 768px) {
       #cart-btn-mobile { display: flex !important; }
-      /* ── MAP ── */
       #world-map-container { width: 100% !important; margin: 0 !important; min-height: 220px; }
-      /* ── GALLERY GRID ── */
-      .gallery-grid { display: flex !important; gap: 6px !important; align-items: flex-start !important; width: 100% !important; }
-      .gallery-col { gap: 6px !important; flex: 1 1 0 !important; min-width: 0 !important; width: 50% !important; }
+      .gallery-grid { gap: 6px !important; }
+      .gallery-col { gap: 6px !important; }
       .portfolio-wrap { padding: 0 0.5rem !important; }
     }
-
-    
-      /* CART DRAWER */
-    #cart-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 400; }
-    #cart-overlay.open { display: block; }
-    #cart-drawer { position: fixed; top: 0; right: -420px; width: 400px; max-width: 95vw; height: 100vh; background: var(--warm-white); z-index: 500; display: flex; flex-direction: column; transition: right 0.35s cubic-bezier(0.4,0,0.2,1); border-left: 1px solid var(--sand); }
-    #cart-drawer.open { right: 0; }
-    .cd-head { display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 1.6rem; border-bottom: 1px solid var(--sand); }
-    .cd-title { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--earth); }
-    .cd-close { background: none; border: none; cursor: pointer; color: var(--tan); padding: 0.2rem; transition: color 0.2s; }
-    .cd-close:hover { color: var(--earth); }
-    #cd-items { flex: 1; overflow-y: auto; padding: 0 1.6rem; }
-    #cd-empty { display: none; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; color: var(--clay); padding: 3rem 2rem; text-align: center; }
-    #cd-empty p { font-family: 'EB Garamond', serif; font-size: 1rem; color: var(--clay); }
-    #cd-empty svg { opacity: 0.4; }
-    .cd-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1.2rem 0; border-bottom: 1px solid var(--linen); }
-    .cd-item-thumb { width: 56px; height: 44px; object-fit: cover; flex-shrink: 0; }
-    .cd-item-info { flex: 1; }
-    .cd-item-name { font-size: 0.68rem; letter-spacing: 0.08em; color: var(--earth); margin-bottom: 0.2rem; text-transform: uppercase; }
-    .cd-item-opts { font-family: 'EB Garamond', serif; font-size: 0.88rem; color: var(--tan); }
-    .cd-item-price { font-family: 'EB Garamond', serif; font-size: 1rem; color: var(--bark); margin-top: 0.3rem; }
-    .cd-qty { display: flex; align-items: center; gap: 0.6rem; margin-top: 0.5rem; }
-    .cd-qty-btn { width: 22px; height: 22px; background: var(--linen); border: 1px solid var(--sand); cursor: pointer; font-size: 1rem; color: var(--bark); display: flex; align-items: center; justify-content: center; transition: background 0.2s; line-height: 1; }
-    .cd-qty-btn:hover { background: var(--sand); }
-    .cd-qty-num { font-family: 'EB Garamond', serif; font-size: 0.95rem; color: var(--ink); min-width: 20px; text-align: center; }
-    .cd-item-remove { background: none; border: none; cursor: pointer; color: var(--clay); font-size: 0.52rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 0; margin-top: 0.3rem; display: block; transition: color 0.2s; font-family: 'Tenor Sans', sans-serif; }
-    .cd-item-remove:hover { color: var(--earth); }
-    #cd-footer { padding: 1.4rem 1.6rem; border-top: 1px solid var(--sand); }
-    .cd-subtotal { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
-    .cd-subtotal span:first-child { font-size: 0.56rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--clay); }
-    #cd-total { font-family: 'EB Garamond', serif; font-size: 1.2rem; color: var(--earth); }
-    .cd-note { font-family: 'EB Garamond', serif; font-size: 0.78rem; color: var(--clay); margin-bottom: 1rem; font-style: italic; }
-    .cd-checkout { width: 100%; padding: 1rem; background: var(--earth); color: var(--warm-white); border: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.58rem; letter-spacing: 0.34em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
-    .cd-checkout:hover { background: var(--bark); }
-    #cart-count { font-size: 0.52rem; background: var(--earth); color: var(--warm-white); border-radius: 50%; width: 16px; height: 16px; display: none; align-items: center; justify-content: center; margin-left: 4px; }
-    #cart-count.has-items { display: inline-flex; }
   </style>
-  <script src="cart.js"></script>
 </head>
 <body>
 
-  <!-- NAV -->
   <nav id="nav">
     <a href="index.html" class="nav-logo">Ryan Muratore</a>
     <div class="mobile-top-right">
       <button id="cart-btn-mobile" onclick="Cart.toggleDropdown()">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-        <span id="cart-total-mobile"></span>
+        <svg width="18" height="18" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
       </button>
       <button class="hamburger" id="hamburger" onclick="toggleMenu()">
         <span></span><span></span><span></span>
@@ -298,56 +132,46 @@
     </div>
     <ul class="nav-links" id="nav-links">
       <li><a href="index.html#portfolio">Portfolio</a></li>
-      <li><a href="portfolio.html">Full Portfolio</a></li>
+      <li><a href="portfolio.html" class="active">Full Portfolio</a></li>
       <li><a href="prints.html">Prints</a></li>
       <li><a href="store/wallpapers.html">Wallpapers</a></li>
-      <li><a href="journals.html">Field Journals</a></li>
       <li><a href="index.html#about">About</a></li>
       <li><a href="index.html#contact">Contact</a></li>
       <li class="cart-dropdown-wrap">
         <button id="cart-btn" onclick="Cart.toggleDropdown()">
           <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-          <span id="cart-total"></span>
           <span id="cart-count"></span>
         </button>
-        <div id="cart-dropdown"></div>
       </li>
     </ul>
   </nav>
 
-
-<!-- CART DRAWER -->
-<div id="cart-overlay" onclick="Cart.close()"></div>
-<div id="cart-drawer">
-  <div class="cd-head">
-    <span class="cd-title">Your Cart</span>
-    <button class="cd-close" onclick="Cart.close()">
-      <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
-  </div>
-  <div id="cd-items"></div>
-  <div id="cd-footer">
-    <div class="cd-subtotal">
-      <span>Subtotal</span>
-      <span id="cd-total">$0</span>
+  <div id="cart-overlay" onclick="Cart.close()"></div>
+  <div id="cart-drawer">
+    <div class="cd-head">
+      <span class="cd-title">Your Cart</span>
+      <button class="cd-close" onclick="Cart.close()">
+        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
     </div>
-    <div class="cd-note">Free worldwide shipping · Certificate included</div>
-    <button class="cd-checkout" id="cd-checkout-btn" onclick="Cart.checkout()">Proceed to Checkout</button>
+    <div id="cd-items"></div>
+    <div id="cd-footer">
+      <div class="cd-subtotal"><span>Subtotal</span><span id="cd-total">$0</span></div>
+      <div class="cd-note">Free worldwide shipping · Certificate included</div>
+      <button class="cd-checkout" onclick="Cart.checkout()">Proceed to Checkout</button>
+    </div>
+    <div id="cd-empty">
+      <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" fill="none" stroke-width="1"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <p>Your cart is empty</p>
+    </div>
   </div>
-  <div id="cd-empty">
-    <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" fill="none" stroke-width="1"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-    <p>Your cart is empty</p>
-  </div>
-</div>
 
-  <!-- PAGE HEADER -->
   <div class="page-header reveal">
     <p class="section-label">Complete Work</p>
     <h1 class="section-title">The full <em>collection</em></h1>
     <div class="section-rule"></div>
   </div>
 
-  <!-- MAP FILTER -->
   <div class="map-filter-wrap reveal">
     <span class="map-label">Filter by destination or category</span>
     <div id="map-tooltip" class="map-tooltip"></div>
@@ -366,683 +190,126 @@
       <button class="map-pill" data-filter="Sweden">Sweden</button>
       <button class="map-pill" data-filter="Canada">Canada</button>
       <button class="map-pill" data-filter="United States">United States</button>
-      
-      
-      
     </div>
   </div>
 
-  <!-- FULL GALLERY -->
   <div class="portfolio-wrap">
     <div class="gallery-grid" id="gallery-grid">
-
-      <div class="gallery-item" data-type="landscape" data-country="Iceland" data-index="0">
-        <img src="images/iceland-1.jpg" alt="At The Edge of The North">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Iceland</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Costa Rica" data-index="1">
-        <img src="images/costarica-1.jpg" alt="Descent">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Costa Rica</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="wildlife" data-index="2">
-        <img src="images/wildlife-1.jpg" alt="Stillness in Motion">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Wildlife</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Norway" data-index="3">
-        <img src="images/norway-3.jpg" alt="norway-3">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Norway</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="wildlife" data-index="4">
-        <img src="images/wildlife-2.jpg" alt="The Still Observer">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Wildlife</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Iceland" data-index="5">
-        <img src="images/iceland-2.jpg" alt="iceland-2">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Iceland</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Sweden" data-index="6">
-        <img src="images/sweden-1.jpg" alt="sweden-1">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Sweden</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="wildlife" data-index="7">
-        <img src="images/wildlife-3.jpg" alt="Built to Be Seen">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Wildlife</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Costa Rica" data-index="8">
-        <img src="images/costarica-2.jpg" alt="Emerald Passage">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Costa Rica</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Portugal" data-index="9">
-        <img src="images/portugal-1.jpg" alt="portugal-1">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Portugal</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="wildlife" data-index="10">
-        <img src="images/wildlife-4.jpg" alt="Hunger">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Wildlife</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Denmark" data-index="11">
-        <img src="images/denmark-1.jpg" alt="denmark-1">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Denmark</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Costa Rica" data-index="12">
-        <img src="images/costarica-3.jpg" alt="Bloom, Anyway">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Costa Rica</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="wildlife" data-index="13">
-        <img src="images/wildlife-5.jpg" alt="wildlife-5">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Wildlife</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Iceland" data-index="14">
-        <img src="images/iceland-3.jpg" alt="iceland-3">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Iceland</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Ireland" data-index="15">
-        <img src="images/ireland-1.jpg" alt="ireland-1">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Ireland</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="wildlife" data-index="16">
-        <img src="images/wildlife-6.jpg" alt="wildlife-6">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Wildlife</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Norway" data-index="17">
-        <img src="images/norway-1.jpg" alt="norway-1">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Norway</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="18">
-        <img src="images/unitedstates-1.jpg" alt="unitedstates-1">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">United States</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="wildlife" data-index="19">
-        <img src="images/wildlife-7.jpg" alt="wildlife-7">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Wildlife</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Sweden" data-index="20">
-        <img src="images/sweden-2.jpg" alt="sweden-2">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Sweden</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Costa Rica" data-index="21">
-        <img src="images/costarica-4.jpg" alt="costarica-4">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Costa Rica</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="wildlife" data-index="22">
-        <img src="images/wildlife-8.jpg" alt="wildlife-8">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Wildlife</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Portugal" data-index="23">
-        <img src="images/portugal-2.jpg" alt="portugal-2">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Portugal</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Denmark" data-index="24">
-        <img src="images/denmark-2.jpg" alt="denmark-2">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Denmark</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="wildlife" data-index="25">
-        <img src="images/wildlife-9.jpg" alt="wildlife-9">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Wildlife</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Ireland" data-index="26">
-        <img src="images/ireland-2.jpg" alt="ireland-2">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Ireland</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="27">
-        <img src="images/unitedstates-2.jpg" alt="unitedstates-2">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">United States</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="wildlife" data-index="28">
-        <img src="images/wildlife-10.jpg" alt="wildlife-10">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Wildlife</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Sweden" data-index="29">
-        <img src="images/sweden-3.jpg" alt="sweden-3">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Sweden</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Costa Rica" data-index="30">
-        <img src="images/costarica-5.jpg" alt="costarica-5">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Costa Rica</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="wildlife" data-index="31">
-        <img src="images/wildlife-11.jpg" alt="wildlife-11">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Wildlife</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Norway" data-index="32">
-        <img src="images/norway-2.jpg" alt="norway-2">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Norway</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Portugal" data-index="33">
-        <img src="images/portugal-3.jpg" alt="portugal-3">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Portugal</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="wildlife" data-index="34">
-        <img src="images/wildlife-12.jpg" alt="wildlife-12">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Wildlife</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="35">
-        <img src="images/unitedstates-3.jpg" alt="unitedstates-3">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">United States</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Sweden" data-index="36">
-        <img src="images/sweden-4.jpg" alt="sweden-4">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Sweden</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="wildlife" data-index="37">
-        <img src="images/wildlife-13.jpg" alt="wildlife-13">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Wildlife</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Iceland" data-index="38">
-        <img src="images/iceland-4.jpg" alt="iceland-4">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Iceland</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Costa Rica" data-index="39">
-        <img src="images/costarica-6.jpg" alt="costarica-6">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Costa Rica</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Denmark" data-index="40">
-        <img src="images/denmark-3.jpg" alt="denmark-3">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Denmark</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="41">
-        <img src="images/unitedstates-4.jpg" alt="unitedstates-4">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">United States</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Sweden" data-index="42">
-        <img src="images/sweden-5.jpg" alt="sweden-5">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Sweden</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Costa Rica" data-index="43">
-        <img src="images/costarica-7.jpg" alt="costarica-7">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Costa Rica</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="44">
-        <img src="images/unitedstates-5.jpg" alt="unitedstates-5">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">United States</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="45">
-        <img src="images/unitedstates-6.jpg" alt="unitedstates-6">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">United States</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Ireland" data-index="46">
-        <img src="images/ireland-3.jpg" alt="Ireland">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Ireland</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Ireland" data-index="47">
-        <img src="images/ireland-4.jpg" alt="Ireland">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Ireland</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Ireland" data-index="48">
-        <img src="images/ireland-5.jpg" alt="Ireland">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Ireland</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="49">
-        <img src="images/unitedstates-7.jpg" alt="United States">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">United States</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="wildlife" data-index="50">
-        <img src="images/wildlife-14.jpg" alt="Wildlife">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Wildlife</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Portugal" data-index="51">
-        <img src="images/portugal-1.jpg" alt="Portugal">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Portugal</div>
-        </div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Canada" data-index="52">
-        <img src="images/canada-1.jpg" alt="canada-1">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Canada</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Canada" data-index="53">
-        <img src="images/canada-2.jpg" alt="canada-2">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Canada</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Canada" data-index="54">
-        <img src="images/canada-3.jpg" alt="canada-3">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Canada</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Canada" data-index="55">
-        <img src="images/canada-4.jpg" alt="canada-4">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Canada</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Canada" data-index="56">
-        <img src="images/canada-5.jpg" alt="canada-5">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Canada</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Canada" data-index="57">
-        <img src="images/canada-6.jpg" alt="canada-6">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Canada</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Costa Rica" data-index="58">
-        <img src="images/costarica-8.jpg" alt="costarica-8">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Costa Rica</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Costa Rica" data-index="59">
-        <img src="images/costarica-9.jpg" alt="costarica-9">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Costa Rica</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Costa Rica" data-index="60">
-        <img src="images/costarica-10.jpg" alt="costarica-10">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Costa Rica</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Denmark" data-index="61">
-        <img src="images/denmark-4.jpg" alt="denmark-4">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Denmark</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Denmark" data-index="62">
-        <img src="images/denmark-5.jpg" alt="denmark-5">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Denmark</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Iceland" data-index="63">
-        <img src="images/iceland-5.jpg" alt="iceland-5">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Iceland</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Iceland" data-index="64">
-        <img src="images/iceland-6.jpg" alt="iceland-6">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Iceland</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Iceland" data-index="65">
-        <img src="images/iceland-7.jpg" alt="iceland-7">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Iceland</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Iceland" data-index="66">
-        <img src="images/iceland-8.jpg" alt="iceland-8">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Iceland</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Iceland" data-index="67">
-        <img src="images/iceland-9.jpg" alt="iceland-9">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Iceland</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Iceland" data-index="68">
-        <img src="images/iceland-10.jpg" alt="iceland-10">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Iceland</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Iceland" data-index="69">
-        <img src="images/iceland-11.jpg" alt="iceland-11">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Iceland</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Iceland" data-index="70">
-        <img src="images/iceland-12.jpg" alt="iceland-12">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Iceland</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Ireland" data-index="71">
-        <img src="images/ireland-6.jpg" alt="ireland-6">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Ireland</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Ireland" data-index="72">
-        <img src="images/ireland-7.jpg" alt="ireland-7">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Ireland</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Ireland" data-index="73">
-        <img src="images/ireland-8.jpg" alt="ireland-8">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Ireland</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Ireland" data-index="74">
-        <img src="images/ireland-9.jpg" alt="ireland-9">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Ireland</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Ireland" data-index="75">
-        <img src="images/ireland-10.jpg" alt="ireland-10">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Ireland</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Portugal" data-index="76">
-        <img src="images/portugal-4.jpg" alt="portugal-4">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Portugal</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Portugal" data-index="77">
-        <img src="images/portugal-5.jpg" alt="portugal-5">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Portugal</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Portugal" data-index="78">
-        <img src="images/portugal-6.jpg" alt="portugal-6">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Portugal</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Portugal" data-index="79">
-        <img src="images/portugal-7.jpg" alt="portugal-7">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Portugal</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Portugal" data-index="80">
-        <img src="images/portugal-8.jpg" alt="portugal-8">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Portugal</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Portugal" data-index="81">
-        <img src="images/portugal-9.jpg" alt="portugal-9">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Portugal</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Portugal" data-index="82">
-        <img src="images/portugal-10.jpg" alt="portugal-10">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Portugal</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Portugal" data-index="83">
-        <img src="images/portugal-11.jpg" alt="portugal-11">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Portugal</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Portugal" data-index="84">
-        <img src="images/portugal-12.jpg" alt="portugal-12">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Portugal</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Sweden" data-index="85">
-        <img src="images/sweden-6.jpg" alt="sweden-6">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Sweden</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="Sweden" data-index="86">
-        <img src="images/sweden-7.jpg" alt="sweden-7">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Sweden</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="87">
-        <img src="images/unitedstates-8.jpg" alt="unitedstates-8">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">United States</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="88">
-        <img src="images/unitedstates-9.jpg" alt="unitedstates-9">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">United States</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="89">
-        <img src="images/unitedstates-10.jpg" alt="unitedstates-10">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">United States</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="90">
-        <img src="images/unitedstates-11.jpg" alt="unitedstates-11">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">United States</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="91">
-        <img src="images/unitedstates-12.jpg" alt="unitedstates-12">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">United States</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="92">
-        <img src="images/unitedstates-13.jpg" alt="unitedstates-13">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">United States</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="93">
-        <img src="images/unitedstates-14.jpg" alt="unitedstates-14">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">United States</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="94">
-        <img src="images/unitedstates-15.jpg" alt="unitedstates-15">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">United States</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="wildlife" data-index="95">
-        <img src="images/wildlife-15.jpg" alt="wildlife-15">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Wildlife</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="wildlife" data-index="96">
-        <img src="images/wildlife-16.jpg" alt="wildlife-16">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Wildlife</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="wildlife" data-index="97">
-        <img src="images/wildlife-17.jpg" alt="wildlife-17">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Wildlife</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="wildlife" data-index="98">
-        <img src="images/wildlife-18.jpg" alt="wildlife-18">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Wildlife</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-      <div class="gallery-item" data-type="wildlife" data-index="99">
-        <img src="images/wildlife-19.jpg" alt="wildlife-19">
-        <div class="gallery-hover">
-          <div class="gallery-hover-location">Wildlife</div>
-        </div>
-        <div class="gallery-overlay"></div>
-      </div>
-
+      <div class="gallery-item" data-type="landscape" data-country="Iceland" data-index="0"><img src="images/iceland-1.jpg" alt="Iceland"><div class="gallery-hover"><div class="gallery-hover-location">Iceland</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Costa Rica" data-index="1"><img src="images/costarica-1.jpg" alt="Costa Rica"><div class="gallery-hover"><div class="gallery-hover-location">Costa Rica</div></div></div>
+      <div class="gallery-item" data-type="wildlife" data-index="2"><img src="images/wildlife-1.jpg" alt="Wildlife"><div class="gallery-hover"><div class="gallery-hover-location">Wildlife</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Norway" data-index="3"><img src="images/norway-3.jpg" alt="Norway"><div class="gallery-hover"><div class="gallery-hover-location">Norway</div></div></div>
+      <div class="gallery-item" data-type="wildlife" data-index="4"><img src="images/wildlife-2.jpg" alt="Wildlife"><div class="gallery-hover"><div class="gallery-hover-location">Wildlife</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Iceland" data-index="5"><img src="images/iceland-2.jpg" alt="Iceland"><div class="gallery-hover"><div class="gallery-hover-location">Iceland</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Sweden" data-index="6"><img src="images/sweden-1.jpg" alt="Sweden"><div class="gallery-hover"><div class="gallery-hover-location">Sweden</div></div></div>
+      <div class="gallery-item" data-type="wildlife" data-index="7"><img src="images/wildlife-3.jpg" alt="Wildlife"><div class="gallery-hover"><div class="gallery-hover-location">Wildlife</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Costa Rica" data-index="8"><img src="images/costarica-2.jpg" alt="Costa Rica"><div class="gallery-hover"><div class="gallery-hover-location">Costa Rica</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Portugal" data-index="9"><img src="images/portugal-1.jpg" alt="Portugal"><div class="gallery-hover"><div class="gallery-hover-location">Portugal</div></div></div>
+      <div class="gallery-item" data-type="wildlife" data-index="10"><img src="images/wildlife-4.jpg" alt="Wildlife"><div class="gallery-hover"><div class="gallery-hover-location">Wildlife</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Denmark" data-index="11"><img src="images/denmark-1.jpg" alt="Denmark"><div class="gallery-hover"><div class="gallery-hover-location">Denmark</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Costa Rica" data-index="12"><img src="images/costarica-3.jpg" alt="Costa Rica"><div class="gallery-hover"><div class="gallery-hover-location">Costa Rica</div></div></div>
+      <div class="gallery-item" data-type="wildlife" data-index="13"><img src="images/wildlife-5.jpg" alt="Wildlife"><div class="gallery-hover"><div class="gallery-hover-location">Wildlife</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Iceland" data-index="14"><img src="images/iceland-3.jpg" alt="Iceland"><div class="gallery-hover"><div class="gallery-hover-location">Iceland</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Ireland" data-index="15"><img src="images/ireland-1.jpg" alt="Ireland"><div class="gallery-hover"><div class="gallery-hover-location">Ireland</div></div></div>
+      <div class="gallery-item" data-type="wildlife" data-index="16"><img src="images/wildlife-6.jpg" alt="Wildlife"><div class="gallery-hover"><div class="gallery-hover-location">Wildlife</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Norway" data-index="17"><img src="images/norway-1.jpg" alt="Norway"><div class="gallery-hover"><div class="gallery-hover-location">Norway</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="18"><img src="images/unitedstates-1.jpg" alt="United States"><div class="gallery-hover"><div class="gallery-hover-location">United States</div></div></div>
+      <div class="gallery-item" data-type="wildlife" data-index="19"><img src="images/wildlife-7.jpg" alt="Wildlife"><div class="gallery-hover"><div class="gallery-hover-location">Wildlife</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Sweden" data-index="20"><img src="images/sweden-2.jpg" alt="Sweden"><div class="gallery-hover"><div class="gallery-hover-location">Sweden</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Costa Rica" data-index="21"><img src="images/costarica-4.jpg" alt="Costa Rica"><div class="gallery-hover"><div class="gallery-hover-location">Costa Rica</div></div></div>
+      <div class="gallery-item" data-type="wildlife" data-index="22"><img src="images/wildlife-8.jpg" alt="Wildlife"><div class="gallery-hover"><div class="gallery-hover-location">Wildlife</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Portugal" data-index="23"><img src="images/portugal-2.jpg" alt="Portugal"><div class="gallery-hover"><div class="gallery-hover-location">Portugal</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Denmark" data-index="24"><img src="images/denmark-2.jpg" alt="Denmark"><div class="gallery-hover"><div class="gallery-hover-location">Denmark</div></div></div>
+      <div class="gallery-item" data-type="wildlife" data-index="25"><img src="images/wildlife-9.jpg" alt="Wildlife"><div class="gallery-hover"><div class="gallery-hover-location">Wildlife</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Ireland" data-index="26"><img src="images/ireland-2.jpg" alt="Ireland"><div class="gallery-hover"><div class="gallery-hover-location">Ireland</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="27"><img src="images/unitedstates-2.jpg" alt="United States"><div class="gallery-hover"><div class="gallery-hover-location">United States</div></div></div>
+      <div class="gallery-item" data-type="wildlife" data-index="28"><img src="images/wildlife-10.jpg" alt="Wildlife"><div class="gallery-hover"><div class="gallery-hover-location">Wildlife</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Sweden" data-index="29"><img src="images/sweden-3.jpg" alt="Sweden"><div class="gallery-hover"><div class="gallery-hover-location">Sweden</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Costa Rica" data-index="30"><img src="images/costarica-5.jpg" alt="Costa Rica"><div class="gallery-hover"><div class="gallery-hover-location">Costa Rica</div></div></div>
+      <div class="gallery-item" data-type="wildlife" data-index="31"><img src="images/wildlife-11.jpg" alt="Wildlife"><div class="gallery-hover"><div class="gallery-hover-location">Wildlife</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Norway" data-index="32"><img src="images/norway-2.jpg" alt="Norway"><div class="gallery-hover"><div class="gallery-hover-location">Norway</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Portugal" data-index="33"><img src="images/portugal-3.jpg" alt="Portugal"><div class="gallery-hover"><div class="gallery-hover-location">Portugal</div></div></div>
+      <div class="gallery-item" data-type="wildlife" data-index="34"><img src="images/wildlife-12.jpg" alt="Wildlife"><div class="gallery-hover"><div class="gallery-hover-location">Wildlife</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="35"><img src="images/unitedstates-3.jpg" alt="United States"><div class="gallery-hover"><div class="gallery-hover-location">United States</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Sweden" data-index="36"><img src="images/sweden-4.jpg" alt="Sweden"><div class="gallery-hover"><div class="gallery-hover-location">Sweden</div></div></div>
+      <div class="gallery-item" data-type="wildlife" data-index="37"><img src="images/wildlife-13.jpg" alt="Wildlife"><div class="gallery-hover"><div class="gallery-hover-location">Wildlife</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Iceland" data-index="38"><img src="images/iceland-4.jpg" alt="Iceland"><div class="gallery-hover"><div class="gallery-hover-location">Iceland</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Costa Rica" data-index="39"><img src="images/costarica-6.jpg" alt="Costa Rica"><div class="gallery-hover"><div class="gallery-hover-location">Costa Rica</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Denmark" data-index="40"><img src="images/denmark-3.jpg" alt="Denmark"><div class="gallery-hover"><div class="gallery-hover-location">Denmark</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="41"><img src="images/unitedstates-4.jpg" alt="United States"><div class="gallery-hover"><div class="gallery-hover-location">United States</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Sweden" data-index="42"><img src="images/sweden-5.jpg" alt="Sweden"><div class="gallery-hover"><div class="gallery-hover-location">Sweden</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Costa Rica" data-index="43"><img src="images/costarica-7.jpg" alt="Costa Rica"><div class="gallery-hover"><div class="gallery-hover-location">Costa Rica</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="44"><img src="images/unitedstates-5.jpg" alt="United States"><div class="gallery-hover"><div class="gallery-hover-location">United States</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="45"><img src="images/unitedstates-6.jpg" alt="United States"><div class="gallery-hover"><div class="gallery-hover-location">United States</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Ireland" data-index="46"><img src="images/ireland-3.jpg" alt="Ireland"><div class="gallery-hover"><div class="gallery-hover-location">Ireland</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Ireland" data-index="47"><img src="images/ireland-4.jpg" alt="Ireland"><div class="gallery-hover"><div class="gallery-hover-location">Ireland</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Ireland" data-index="48"><img src="images/ireland-5.jpg" alt="Ireland"><div class="gallery-hover"><div class="gallery-hover-location">Ireland</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="49"><img src="images/unitedstates-7.jpg" alt="United States"><div class="gallery-hover"><div class="gallery-hover-location">United States</div></div></div>
+      <div class="gallery-item" data-type="wildlife" data-index="50"><img src="images/wildlife-14.jpg" alt="Wildlife"><div class="gallery-hover"><div class="gallery-hover-location">Wildlife</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Portugal" data-index="51"><img src="images/portugal-1.jpg" alt="Portugal"><div class="gallery-hover"><div class="gallery-hover-location">Portugal</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Canada" data-index="52"><img src="images/canada-1.jpg" alt="Canada"><div class="gallery-hover"><div class="gallery-hover-location">Canada</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Canada" data-index="53"><img src="images/canada-2.jpg" alt="Canada"><div class="gallery-hover"><div class="gallery-hover-location">Canada</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Canada" data-index="54"><img src="images/canada-3.jpg" alt="Canada"><div class="gallery-hover"><div class="gallery-hover-location">Canada</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Canada" data-index="55"><img src="images/canada-4.jpg" alt="Canada"><div class="gallery-hover"><div class="gallery-hover-location">Canada</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Canada" data-index="56"><img src="images/canada-5.jpg" alt="Canada"><div class="gallery-hover"><div class="gallery-hover-location">Canada</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Canada" data-index="57"><img src="images/canada-6.jpg" alt="Canada"><div class="gallery-hover"><div class="gallery-hover-location">Canada</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Costa Rica" data-index="58"><img src="images/costarica-8.jpg" alt="Costa Rica"><div class="gallery-hover"><div class="gallery-hover-location">Costa Rica</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Costa Rica" data-index="59"><img src="images/costarica-9.jpg" alt="Costa Rica"><div class="gallery-hover"><div class="gallery-hover-location">Costa Rica</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Costa Rica" data-index="60"><img src="images/costarica-10.jpg" alt="Costa Rica"><div class="gallery-hover"><div class="gallery-hover-location">Costa Rica</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Denmark" data-index="61"><img src="images/denmark-4.jpg" alt="Denmark"><div class="gallery-hover"><div class="gallery-hover-location">Denmark</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Denmark" data-index="62"><img src="images/denmark-5.jpg" alt="Denmark"><div class="gallery-hover"><div class="gallery-hover-location">Denmark</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Iceland" data-index="63"><img src="images/iceland-5.jpg" alt="Iceland"><div class="gallery-hover"><div class="gallery-hover-location">Iceland</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Iceland" data-index="64"><img src="images/iceland-6.jpg" alt="Iceland"><div class="gallery-hover"><div class="gallery-hover-location">Iceland</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Iceland" data-index="65"><img src="images/iceland-7.jpg" alt="Iceland"><div class="gallery-hover"><div class="gallery-hover-location">Iceland</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Iceland" data-index="66"><img src="images/iceland-8.jpg" alt="Iceland"><div class="gallery-hover"><div class="gallery-hover-location">Iceland</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Iceland" data-index="67"><img src="images/iceland-9.jpg" alt="Iceland"><div class="gallery-hover"><div class="gallery-hover-location">Iceland</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Iceland" data-index="68"><img src="images/iceland-10.jpg" alt="Iceland"><div class="gallery-hover"><div class="gallery-hover-location">Iceland</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Iceland" data-index="69"><img src="images/iceland-11.jpg" alt="Iceland"><div class="gallery-hover"><div class="gallery-hover-location">Iceland</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Iceland" data-index="70"><img src="images/iceland-12.jpg" alt="Iceland"><div class="gallery-hover"><div class="gallery-hover-location">Iceland</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Ireland" data-index="71"><img src="images/ireland-6.jpg" alt="Ireland"><div class="gallery-hover"><div class="gallery-hover-location">Ireland</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Ireland" data-index="72"><img src="images/ireland-7.jpg" alt="Ireland"><div class="gallery-hover"><div class="gallery-hover-location">Ireland</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Ireland" data-index="73"><img src="images/ireland-8.jpg" alt="Ireland"><div class="gallery-hover"><div class="gallery-hover-location">Ireland</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Ireland" data-index="74"><img src="images/ireland-9.jpg" alt="Ireland"><div class="gallery-hover"><div class="gallery-hover-location">Ireland</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Ireland" data-index="75"><img src="images/ireland-10.jpg" alt="Ireland"><div class="gallery-hover"><div class="gallery-hover-location">Ireland</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Portugal" data-index="76"><img src="images/portugal-4.jpg" alt="Portugal"><div class="gallery-hover"><div class="gallery-hover-location">Portugal</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Portugal" data-index="77"><img src="images/portugal-5.jpg" alt="Portugal"><div class="gallery-hover"><div class="gallery-hover-location">Portugal</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Portugal" data-index="78"><img src="images/portugal-6.jpg" alt="Portugal"><div class="gallery-hover"><div class="gallery-hover-location">Portugal</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Portugal" data-index="79"><img src="images/portugal-7.jpg" alt="Portugal"><div class="gallery-hover"><div class="gallery-hover-location">Portugal</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Portugal" data-index="80"><img src="images/portugal-8.jpg" alt="Portugal"><div class="gallery-hover"><div class="gallery-hover-location">Portugal</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Portugal" data-index="81"><img src="images/portugal-9.jpg" alt="Portugal"><div class="gallery-hover"><div class="gallery-hover-location">Portugal</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Portugal" data-index="82"><img src="images/portugal-10.jpg" alt="Portugal"><div class="gallery-hover"><div class="gallery-hover-location">Portugal</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Portugal" data-index="83"><img src="images/portugal-11.jpg" alt="Portugal"><div class="gallery-hover"><div class="gallery-hover-location">Portugal</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Portugal" data-index="84"><img src="images/portugal-12.jpg" alt="Portugal"><div class="gallery-hover"><div class="gallery-hover-location">Portugal</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Sweden" data-index="85"><img src="images/sweden-6.jpg" alt="Sweden"><div class="gallery-hover"><div class="gallery-hover-location">Sweden</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="Sweden" data-index="86"><img src="images/sweden-7.jpg" alt="Sweden"><div class="gallery-hover"><div class="gallery-hover-location">Sweden</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="87"><img src="images/unitedstates-8.jpg" alt="United States"><div class="gallery-hover"><div class="gallery-hover-location">United States</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="88"><img src="images/unitedstates-9.jpg" alt="United States"><div class="gallery-hover"><div class="gallery-hover-location">United States</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="89"><img src="images/unitedstates-10.jpg" alt="United States"><div class="gallery-hover"><div class="gallery-hover-location">United States</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="90"><img src="images/unitedstates-11.jpg" alt="United States"><div class="gallery-hover"><div class="gallery-hover-location">United States</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="91"><img src="images/unitedstates-12.jpg" alt="United States"><div class="gallery-hover"><div class="gallery-hover-location">United States</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="92"><img src="images/unitedstates-13.jpg" alt="United States"><div class="gallery-hover"><div class="gallery-hover-location">United States</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="93"><img src="images/unitedstates-14.jpg" alt="United States"><div class="gallery-hover"><div class="gallery-hover-location">United States</div></div></div>
+      <div class="gallery-item" data-type="landscape" data-country="United States" data-index="94"><img src="images/unitedstates-15.jpg" alt="United States"><div class="gallery-hover"><div class="gallery-hover-location">United States</div></div></div>
+      <div class="gallery-item" data-type="wildlife" data-index="95"><img src="images/wildlife-15.jpg" alt="Wildlife"><div class="gallery-hover"><div class="gallery-hover-location">Wildlife</div></div></div>
+      <div class="gallery-item" data-type="wildlife" data-index="96"><img src="images/wildlife-16.jpg" alt="Wildlife"><div class="gallery-hover"><div class="gallery-hover-location">Wildlife</div></div></div>
+      <div class="gallery-item" data-type="wildlife" data-index="97"><img src="images/wildlife-17.jpg" alt="Wildlife"><div class="gallery-hover"><div class="gallery-hover-location">Wildlife</div></div></div>
+      <div class="gallery-item" data-type="wildlife" data-index="98"><img src="images/wildlife-18.jpg" alt="Wildlife"><div class="gallery-hover"><div class="gallery-hover-location">Wildlife</div></div></div>
+      <div class="gallery-item" data-type="wildlife" data-index="99"><img src="images/wildlife-19.jpg" alt="Wildlife"><div class="gallery-hover"><div class="gallery-hover-location">Wildlife</div></div></div>
     </div>
+  </div>
 
-  <!-- FOOTER -->
   <footer>
     <a href="index.html" class="footer-logo">Ryan Muratore Photography</a>
     <p>© 2025 Ryan Muratore — All rights reserved. Do not reproduce without permission.</p>
   </footer>
 
   <script>
-
-    // Scroll reveal
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
     }, { threshold: 0.1 });
     reveals.forEach(el => observer.observe(el));
 
-    // ── WORLD MAP FILTER ──
     const visited = {
       "United States": "840", "Canada": "124", "Iceland": "352",
       "Ireland": "372", "Norway": "578", "Sweden": "752",
@@ -1050,11 +317,7 @@
     };
     const visitedByCode = {};
     Object.entries(visited).forEach(([name, code]) => visitedByCode[code] = name);
-
     const tooltip = document.getElementById('map-tooltip');
-    const galleryItems = document.querySelectorAll('.gallery-item[data-country]');
-
-    
 
     function loadScript(src) {
       return new Promise((resolve, reject) => {
@@ -1106,43 +369,44 @@
       document.getElementById('map-loading').textContent = 'Use the buttons below to filter by location.';
     });
 
-    // ── GALLERY MASONRY + FILTER ──
     let allGalleryItems = [];
 
-    function getColCount() {
-      return window.innerWidth <= 768 ? 2 : 3;
-    }
+    function getColCount() { return window.innerWidth <= 768 ? 2 : 3; }
 
     function distributeItems(items, highlightSet) {
       const grid = document.getElementById('gallery-grid');
       if (!grid) return;
       grid.innerHTML = '';
+      grid.style.alignItems = 'flex-start';
       const cols = getColCount();
-      const columns = [];
+      const columns = [], colHeights = [];
       for (let i = 0; i < cols; i++) {
         const col = document.createElement('div');
         col.className = 'gallery-col';
+        col.style.alignSelf = 'flex-start';
         grid.appendChild(col);
         columns.push(col);
+        colHeights.push(0);
       }
-      items.forEach((item, i) => {
+      items.forEach((item) => {
         const isHighlighted = !highlightSet || highlightSet.has(item);
         item.style.opacity = isHighlighted ? '1' : '0.15';
         item.style.pointerEvents = isHighlighted ? 'auto' : 'none';
-        columns[i % cols].appendChild(item);
+        const shortest = colHeights.indexOf(Math.min(...colHeights));
+        columns[shortest].appendChild(item);
+        colHeights[shortest] += item.getBoundingClientRect().height || 300;
       });
     }
 
     function filterGallery(filter) {
-      let matching, nonMatching;
       if (filter === 'all') {
         const sorted = allGalleryItems.slice().sort((a, b) => parseInt(a.dataset.index) - parseInt(b.dataset.index));
         distributeItems(sorted, null);
       } else {
-        matching = filter === 'wildlife'
+        const matching = filter === 'wildlife'
           ? allGalleryItems.filter(i => i.dataset.type === 'wildlife')
           : allGalleryItems.filter(i => i.dataset.country === filter);
-        nonMatching = allGalleryItems.filter(i => !matching.includes(i));
+        const nonMatching = allGalleryItems.filter(i => !matching.includes(i));
         distributeItems([...matching, ...nonMatching], new Set(matching));
       }
       document.querySelectorAll('.country-path').forEach(el => {
@@ -1185,127 +449,68 @@
       });
     });
   </script>
-<script src="./protect.js"></script>
-<script>
-  // ── CART ──
-  var Cart = (function() {
-    var items = [];
-
-    function save() {
-      try { localStorage.setItem('rm_cart', JSON.stringify(items)); } catch(e) {}
-    }
-    function load() {
-      try { var d = localStorage.getItem('rm_cart'); if (d) items = JSON.parse(d); } catch(e) {}
-    }
-    function add(item) {
-      // item: { id, name, opts, price, thumb }
-      var existing = items.find(function(i){ return i.id === item.id; });
-      if (existing) { existing.qty++; }
-      else { item.qty = 1; items.push(item); }
-      save();
-      render();
-      open();
-      // Flash the button
-      var btn = document.getElementById('atc-btn');
-      btn.textContent = 'Added!';
-      setTimeout(function(){ btn.textContent = 'Add to Cart'; }, 1200);
-    }
-    function remove(id) {
-      items = items.filter(function(i){ return i.id !== id; });
-      save(); render();
-    }
-    function updateQty(id, delta) {
-      var item = items.find(function(i){ return i.id === id; });
-      if (!item) return;
-      item.qty += delta;
-      if (item.qty <= 0) items = items.filter(function(i){ return i.id !== id; });
-      save(); render();
-    }
-    function total() {
-      return items.reduce(function(s, i){ return s + i.price * i.qty; }, 0);
-    }
-    function render() {
-      var el = document.getElementById('cd-items');
-      var empty = document.getElementById('cd-empty');
-      var footer = document.getElementById('cd-footer');
-      var count = document.getElementById('cart-count');
-      var totalEl = document.getElementById('cd-total');
-      var totalItems = items.reduce(function(s,i){ return s + i.qty; }, 0);
-
-      // Badge
-      count.textContent = totalItems;
-      count.className = totalItems > 0 ? 'has-items' : '';
-
-      // Total
-      if (totalEl) totalEl.textContent = '$' + total().toFixed(2).replace(/\.00$/, '');
-
-      if (items.length === 0) {
-        el.innerHTML = '';
-        empty.style.display = 'flex';
-        if (footer) footer.style.display = 'none';
-        return;
+  <script src="./protect.js"></script>
+  <script>
+    var Cart = (function() {
+      var items = [];
+      function save() { try { localStorage.setItem('rm_cart', JSON.stringify(items)); } catch(e) {} }
+      function load() { try { var d = localStorage.getItem('rm_cart'); if (d) items = JSON.parse(d); } catch(e) {} }
+      function add(item) {
+        var existing = items.find(function(i){ return i.id === item.id; });
+        if (existing) { existing.qty++; } else { item.qty = 1; items.push(item); }
+        save(); render(); open();
       }
-      empty.style.display = 'none';
-      if (footer) footer.style.display = 'block';
-
-      el.innerHTML = items.map(function(item) {
-        return '<div class="cd-item">' +
-          '<img class="cd-item-thumb" src="' + item.thumb + '" alt="">' +
-          '<div class="cd-item-info">' +
-            '<div class="cd-item-name">Stillness on the Fjord</div>' +
-            '<div class="cd-item-opts">' + item.opts + '</div>' +
-            '<div class="cd-item-price">$' + (item.price * item.qty).toFixed(2).replace(/\.00$/,'') + '</div>' +
-            '<div class="cd-qty">' +
-              '<button class="cd-qty-btn" onclick="Cart.updateQty(\'' + item.id + '\',-1)">−</button>' +
-              '<span class="cd-qty-num">' + item.qty + '</span>' +
-              '<button class="cd-qty-btn" onclick="Cart.updateQty(\'' + item.id + '\',1)">+</button>' +
+      function remove(id) { items = items.filter(function(i){ return i.id !== id; }); save(); render(); }
+      function updateQty(id, delta) {
+        var item = items.find(function(i){ return i.id === id; });
+        if (!item) return;
+        item.qty += delta;
+        if (item.qty <= 0) items = items.filter(function(i){ return i.id !== id; });
+        save(); render();
+      }
+      function total() { return items.reduce(function(s, i){ return s + i.price * i.qty; }, 0); }
+      function render() {
+        var el = document.getElementById('cd-items');
+        var empty = document.getElementById('cd-empty');
+        var footer = document.getElementById('cd-footer');
+        var count = document.getElementById('cart-count');
+        var totalEl = document.getElementById('cd-total');
+        var totalItems = items.reduce(function(s,i){ return s + i.qty; }, 0);
+        count.textContent = totalItems;
+        count.className = totalItems > 0 ? 'has-items' : '';
+        if (totalEl) totalEl.textContent = '$' + total().toFixed(2).replace(/\.00$/, '');
+        if (items.length === 0) { el.innerHTML = ''; empty.style.display = 'flex'; if (footer) footer.style.display = 'none'; return; }
+        empty.style.display = 'none';
+        if (footer) footer.style.display = 'block';
+        el.innerHTML = items.map(function(item) {
+          return '<div class="cd-item">' +
+            '<img class="cd-item-thumb" src="' + item.thumb + '" alt="">' +
+            '<div class="cd-item-info">' +
+              '<div class="cd-item-name">' + item.name + '</div>' +
+              '<div class="cd-item-opts">' + item.opts + '</div>' +
+              '<div class="cd-item-price">$' + (item.price * item.qty).toFixed(2).replace(/\.00$/,'') + '</div>' +
+              '<div class="cd-qty">' +
+                '<button class="cd-qty-btn" onclick="Cart.updateQty(\'' + item.id + '\',-1)">−</button>' +
+                '<span class="cd-qty-num">' + item.qty + '</span>' +
+                '<button class="cd-qty-btn" onclick="Cart.updateQty(\'' + item.id + '\',1)">+</button>' +
+              '</div>' +
+              '<button class="cd-item-remove" onclick="Cart.remove(\'' + item.id + '\')">Remove</button>' +
             '</div>' +
-            '<button class="cd-item-remove" onclick="Cart.remove(\'' + item.id + '\')">Remove</button>' +
-          '</div>' +
-        '</div>';
-      }).join('');
-    }
-    function open() {
-      document.getElementById('cart-drawer').classList.add('open');
-      document.getElementById('cart-overlay').classList.add('open');
-    }
-    function close() {
-      document.getElementById('cart-drawer').classList.remove('open');
-      document.getElementById('cart-overlay').classList.remove('open');
-    }
-    function toggleDropdown() {
-      var d = document.getElementById('cart-drawer');
-      if (d.classList.contains('open')) { close(); } else { open(); }
-    }
-    function checkout() {
-      if (items.length === 0) return;
-      // Build Shopify cart URL with all items
-      var VARIANTS = {
-        'print': {
-          '8 \u00d7 12 in':  '47891626492118',
-          '12 \u00d7 18 in': '47891626623190',
-          '16 \u00d7 24 in': '47891626754262',
-          '24 \u00d7 36 in': '47891626885334'
-        },
-        'metal': {
-          '8 \u00d7 12 in':  '47891626590422',
-          '12 \u00d7 18 in': '47891626721494',
-          '16 \u00d7 24 in': '47891626852566',
-          '24 \u00d7 36 in': '47891626983638'
-        }
-      };
-      var parts = items.map(function(item) {
-        return item.variantId + ':' + item.qty;
-      }).join(',');
-      var url = 'https://checkout.ryanmuratore.com/cart/' + parts;
-      window.location.href = url;
-    }
-
-    load();
-    return { add: add, remove: remove, updateQty: updateQty, open: open, close: close, toggleDropdown: toggleDropdown, checkout: checkout, render: render };
-  })();
-  // Init cart on load
-  window.addEventListener('DOMContentLoaded', function(){ Cart.render(); });
-</script>
+          '</div>';
+        }).join('');
+      }
+      function open() { document.getElementById('cart-drawer').classList.add('open'); document.getElementById('cart-overlay').classList.add('open'); }
+      function close() { document.getElementById('cart-drawer').classList.remove('open'); document.getElementById('cart-overlay').classList.remove('open'); }
+      function toggleDropdown() { var d = document.getElementById('cart-drawer'); if (d.classList.contains('open')) { close(); } else { open(); } }
+      function checkout() {
+        if (items.length === 0) return;
+        var parts = items.map(function(item) { return item.variantId + ':' + item.qty; }).join(',');
+        window.location.href = 'https://checkout.ryanmuratore.com/cart/' + parts;
+      }
+      load();
+      return { add: add, remove: remove, updateQty: updateQty, open: open, close: close, toggleDropdown: toggleDropdown, checkout: checkout, render: render };
+    })();
+    window.addEventListener('DOMContentLoaded', function(){ Cart.render(); });
+  </script>
 </body>
 </html>
