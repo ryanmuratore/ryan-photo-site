@@ -85,8 +85,43 @@
       .store-wrap { padding: 2rem 1.2rem !important; }
       .product-info-grid { grid-template-columns: 1fr; }
     }
+    #cart-btn { background: none; border: none; cursor: pointer; display: flex; align-items: center; color: var(--tan); padding: 0; transition: color 0.2s; }
+    #cart-btn:hover { color: var(--earth); }
+    #cart-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+    #cart-count { font-size: 0.52rem; background: var(--earth); color: var(--warm-white); border-radius: 50%; width: 16px; height: 16px; display: none; align-items: center; justify-content: center; margin-left: 4px; }
+    #cart-count.has-items { display: inline-flex; }
+    #cart-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 400; }
+    #cart-overlay.open { display: block; }
+    #cart-drawer { position: fixed; top: 0; right: -420px; width: 400px; max-width: 95vw; height: 100vh; background: var(--warm-white); z-index: 500; display: flex; flex-direction: column; transition: right 0.35s cubic-bezier(0.4,0,0.2,1); border-left: 1px solid var(--sand); }
+    #cart-drawer.open { right: 0; }
+    .cd-head { display: flex; align-items: center; justify-content: space-between; padding: 1.4rem 1.6rem; border-bottom: 1px solid var(--sand); }
+    .cd-title { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--earth); }
+    .cd-close { background: none; border: none; cursor: pointer; color: var(--tan); padding: 0.2rem; transition: color 0.2s; }
+    .cd-close:hover { color: var(--earth); }
+    #cd-items { flex: 1; overflow-y: auto; padding: 0 1.6rem; }
+    #cd-empty { display: none; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; color: var(--clay); padding: 3rem 2rem; text-align: center; }
+    #cd-empty p { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--clay); }
+    #cd-empty svg { opacity: 0.4; }
+    .cd-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1.2rem 0; border-bottom: 1px solid var(--linen); }
+    .cd-item-thumb { width: 56px; height: 44px; object-fit: cover; flex-shrink: 0; }
+    .cd-item-info { flex: 1; }
+    .cd-item-name { font-size: 0.68rem; letter-spacing: 0.08em; color: var(--earth); margin-bottom: 0.2rem; text-transform: uppercase; }
+    .cd-item-opts { font-family: 'Playfair Display', serif; font-size: 0.88rem; color: var(--tan); }
+    .cd-item-price { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--bark); margin-top: 0.3rem; }
+    .cd-qty { display: flex; align-items: center; gap: 0.6rem; margin-top: 0.5rem; }
+    .cd-qty-btn { width: 22px; height: 22px; background: var(--linen); border: 1px solid var(--sand); cursor: pointer; font-size: 1rem; color: var(--bark); display: flex; align-items: center; justify-content: center; transition: background 0.2s; line-height: 1; }
+    .cd-qty-btn:hover { background: var(--sand); }
+    .cd-qty-num { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--ink); min-width: 20px; text-align: center; }
+    .cd-item-remove { background: none; border: none; cursor: pointer; color: var(--clay); font-size: 0.52rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 0; margin-top: 0.3rem; display: block; transition: color 0.2s; font-family: 'Tenor Sans', sans-serif; }
+    .cd-item-remove:hover { color: var(--earth); }
+    #cd-footer { padding: 1.4rem 1.6rem; border-top: 1px solid var(--sand); }
+    .cd-subtotal { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+    .cd-subtotal span:first-child { font-size: 0.56rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--clay); }
+    #cd-total { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--earth); }
+    .cd-note { font-family: 'Playfair Display', serif; font-size: 0.78rem; color: var(--clay); margin-bottom: 1rem; font-style: italic; }
+    .cd-checkout { width: 100%; padding: 1rem; background: var(--earth); color: var(--warm-white); border: none; font-family: 'Tenor Sans', sans-serif; font-size: 0.58rem; letter-spacing: 0.34em; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+    .cd-checkout:hover { background: var(--bark); }
   </style>
-  <script src="../cart.js"></script>
 </head>
 <body>
   <nav>
@@ -106,16 +141,34 @@
       <li><a href="wallpapers.html">Wallpapers</a></li>
       <li><a href="../index.html#about">About</a></li>
       <li><a href="../index.html#contact">Contact</a></li>
-      <li class="cart-dropdown-wrap">
+    <li class="cdw">
         <button id="cart-btn" onclick="Cart.toggleDropdown()">
           <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-          <span id="cart-total"></span>
           <span id="cart-count"></span>
         </button>
-        <div id="cart-dropdown"></div>
       </li>
     </ul>
   </nav>
+
+  <div id="cart-overlay" onclick="Cart.close()"></div>
+  <div id="cart-drawer">
+    <div class="cd-head">
+      <span class="cd-title">Your Cart</span>
+      <button class="cd-close" onclick="Cart.close()">
+        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div id="cd-items"></div>
+    <div id="cd-footer">
+      <div class="cd-subtotal"><span>Subtotal</span><span id="cd-total">$0</span></div>
+      <div class="cd-note">Download link sent to your email after purchase</div>
+      <button class="cd-checkout" onclick="Cart.checkout()">Proceed to Checkout</button>
+    </div>
+    <div id="cd-empty">
+      <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" fill="none" stroke-width="1"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <p>Your cart is empty</p>
+    </div>
+  </div>
 
   <div class="page-header">
     <p class="section-label">Digital Downloads</p>
@@ -207,18 +260,15 @@
 
   <script>
     function addWallpaperToCart() {
-      const type = document.querySelector('.toggle-btn.active').dataset.type;
-      const VARIANT_IDS = {
-        desktop: '47960329093334',
-        mobile:  '47960316412118'
-      };
+      var type = document.querySelector('.toggle-btn.active').dataset.type;
+      var VARIANT_IDS = { desktop: '47960329093334', mobile: '47960316412118' };
       Cart.add({
         id: 'wallpaper-' + type,
         variantId: VARIANT_IDS[type],
         name: 'Wallpaper Pack Vol. 1',
-        options: type.charAt(0).toUpperCase() + type.slice(1) + ' · 20 photos',
+        opts: type.charAt(0).toUpperCase() + type.slice(1) + ' · 20 photos',
         price: 10,
-        qty: 1
+        thumb: '../wallpapers/desktop-1.jpg'
       });
     }
 
@@ -267,6 +317,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+      Cart.render();
       document.querySelectorAll('#nav-links a').forEach(a => {
         a.addEventListener('click', () => {
           document.getElementById('nav-links').classList.remove('open');
@@ -274,6 +325,68 @@
         });
       });
     });
+  </script>
+  <script>
+    var Cart = (function() {
+      var items = [];
+      function save() { try { localStorage.setItem('rm_cart', JSON.stringify(items)); } catch(e) {} }
+      function load() { try { var d = localStorage.getItem('rm_cart'); if (d) items = JSON.parse(d); } catch(e) {} }
+      function add(item) {
+        var existing = items.find(function(i){ return i.id === item.id; });
+        if (existing) { existing.qty++; } else { item.qty = 1; items.push(item); }
+        save(); render(); open();
+      }
+      function remove(id) { items = items.filter(function(i){ return i.id !== id; }); save(); render(); }
+      function updateQty(id, delta) {
+        var item = items.find(function(i){ return i.id === id; });
+        if (!item) return;
+        item.qty += delta;
+        if (item.qty <= 0) items = items.filter(function(i){ return i.id !== id; });
+        save(); render();
+      }
+      function total() { return items.reduce(function(s, i){ return s + i.price * i.qty; }, 0); }
+      function render() {
+        var el = document.getElementById('cd-items');
+        var empty = document.getElementById('cd-empty');
+        var footer = document.getElementById('cd-footer');
+        var count = document.getElementById('cart-count');
+        var totalEl = document.getElementById('cd-total');
+        var totalItems = items.reduce(function(s,i){ return s + i.qty; }, 0);
+        count.textContent = totalItems;
+        count.className = totalItems > 0 ? 'has-items' : '';
+        if (totalEl) totalEl.textContent = '$' + total().toFixed(2).replace(/\.00$/, '');
+        if (items.length === 0) { el.innerHTML = ''; empty.style.display = 'flex'; if (footer) footer.style.display = 'none'; return; }
+        empty.style.display = 'none';
+        if (footer) footer.style.display = 'block';
+        el.innerHTML = items.map(function(item) {
+          return '<div class="cd-item">' +
+            '<img class="cd-item-thumb" src="' + item.thumb + '" alt="">' +
+            '<div class="cd-item-info">' +
+              '<div class="cd-item-name">' + item.name + '</div>' +
+              '<div class="cd-item-opts">' + item.opts + '</div>' +
+              '<div class="cd-item-price">$' + (item.price * item.qty).toFixed(2).replace(/\.00$/,'') + '</div>' +
+              '<div class="cd-qty">' +
+                '<button class="cd-qty-btn" onclick="Cart.updateQty(\'' + item.id + '\',-1)">−</button>' +
+                '<span class="cd-qty-num">' + item.qty + '</span>' +
+                '<button class="cd-qty-btn" onclick="Cart.updateQty(\'' + item.id + '\',1)">+</button>' +
+              '</div>' +
+              '<button class="cd-item-remove" onclick="Cart.remove(\'' + item.id + '\')">Remove</button>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+      }
+      function open() { document.getElementById('cart-drawer').classList.add('open'); document.getElementById('cart-overlay').classList.add('open'); }
+      function close() { document.getElementById('cart-drawer').classList.remove('open'); document.getElementById('cart-overlay').classList.remove('open'); }
+      function toggleDropdown() { var d = document.getElementById('cart-drawer'); if (d.classList.contains('open')) { close(); } else { open(); } }
+      function checkout() {
+        if (items.length === 0) return;
+        var parts = items.map(function(item) { return item.variantId + ':' + item.qty; }).join(',');
+        window.location.href = 'https://checkout.ryanmuratore.com/cart/' + parts;
+      }
+      load();
+      return { add: add, remove: remove, updateQty: updateQty, open: open, close: close, toggleDropdown: toggleDropdown, checkout: checkout, render: render };
+    })();
+    window.addEventListener('DOMContentLoaded', function(){ Cart.render(); });
   </script>
 </body>
 </html>
